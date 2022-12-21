@@ -1,8 +1,9 @@
-import HelloWorld from './HelloWorld.js';
+import DareDriver from './DareDriver.js';
+import { GameLoop } from './GameLoop.js';
 
-const greeting = new HelloWorld();
-console.log(greeting.greet());
+const game = new DareDriver(document.getElementById('game') as HTMLCanvasElement);
+
+const gameLoop = new GameLoop(game);
 window.addEventListener('load', () => {
-  document.getElementById('content').innerText = greeting.greet();
-}
-);
+  gameLoop.start();
+});
