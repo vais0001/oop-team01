@@ -1,3 +1,4 @@
+import Bed from './Bed.js';
 import CanvasUtil from './CanvasUtil.js';
 import Computer from './Computer.js';
 import KeyListener from './KeyListener.js';
@@ -12,12 +13,15 @@ export default class Bedroom extends Scene {
 
   private computer: Computer;
 
+  private bed: Bed;
+
   public constructor(MaxX: number, MaxY: number) {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./placeholders/timmysroom.png');
     this.starting = false;
     this.player = new Player(window.innerWidth, window.innerHeight);
     this.computer = new Computer();
+    this.bed = new Bed();
   }
 
   public processInput(keyListener: KeyListener): void {
@@ -39,5 +43,6 @@ export default class Bedroom extends Scene {
     CanvasUtil.drawImage(canvas, this.image, 0, 0);
     this.player.render(canvas)
     this.computer.render(canvas)
+    this.bed.render(canvas)
   }
 }
