@@ -1,6 +1,8 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable import/prefer-default-export */
 
+import Scene from "./Scene.js";
+
 /**
  * Represents a basic Game Loop based on `requestAnimationFrame()`.
  *
@@ -16,7 +18,7 @@
 
 export abstract class Game {
   public abstract processInput(): void;
-  public abstract update(elapsed: number): boolean;
+  public abstract update(elapsed: number): Scene;
   public abstract render(): void;
 }
 
