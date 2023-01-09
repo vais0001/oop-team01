@@ -24,7 +24,7 @@ export default class StartScene extends Scene {
 
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
-    CanvasUtil.drawImage(canvas, this.image, 170, 70);
+    CanvasUtil.drawImage(canvas, this.image, 50, 0);
     CanvasUtil.writeTextToCanvas(canvas, 'press [S] to start', canvas.width / 2, canvas.height / 2 + 300, 'center', 'courier', 40, 'white');
   }
 }
