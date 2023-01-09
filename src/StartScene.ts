@@ -8,7 +8,7 @@ export default class StartScene extends Scene {
 
   public constructor(MaxX: number, MaxY: number) {
     super(MaxX, MaxY);
-    this.image = CanvasUtil.loadNewImage('./placeholders/start.png');
+    this.image = CanvasUtil.loadNewImage('./placeholders/start800.png');
     this.starting = false;
   }
 
