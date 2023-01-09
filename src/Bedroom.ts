@@ -42,7 +42,7 @@ export default class Bedroom extends Scene {
   }
 
   public update(elapsed: number): Scene {
-    if (this.webpageScene === true) return new Webpage(0, 0)
+    if (this.webpageScene === true) return new Webpage(0, 0);
     return null;
   }
 

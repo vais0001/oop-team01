@@ -1,6 +1,7 @@
 import Bedroom from './Bedroom.js';
 import CanvasUtil from './CanvasUtil.js';
 import KeyListener from './KeyListener.js';
+import LoadingScene from './LoadingScene.js';
 import Scene from './Scene.js';
 
 export default class StartScene extends Scene {
@@ -17,7 +18,7 @@ export default class StartScene extends Scene {
   }
 
   public update(elapsed: number): Scene {
-    if (this.starting) return new Bedroom(this.maxX, this.maxY);
+    if (this.starting) return new LoadingScene(this.maxX, this.maxY);
     return null;
   }
 
