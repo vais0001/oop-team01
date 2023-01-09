@@ -19,6 +19,7 @@ export default class StartScene extends Scene {
   public update(elapsed: number): Scene {
     if (this.starting) return new Bedroom(this.maxX, this.maxY);
     return null;
+    console.log('1');
   }
 
   public render(canvas: HTMLCanvasElement): void {
