@@ -24,6 +24,6 @@ export default abstract class Drawable {
   }
 
   public render(canvas: HTMLCanvasElement): void {
-    CanvasUtil.drawImage(canvas, this.image, this.posX, this.posY)
+    CanvasUtil.drawImage(canvas, this.image, this.posX, this.posY);
   }
 }
