@@ -50,9 +50,9 @@ export default class Bedroom extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, 0, 0);
+    this.bed.render(canvas)
     this.player.render(canvas)
     this.computer.render(canvas)
-    this.bed.render(canvas)
     if(this.player.collideWithitem(this.computer)) {
       CanvasUtil.drawImage(canvas, this.popUp, 1250, 120)
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', 300, 700, 'center', 'arial', 40, 'white')
