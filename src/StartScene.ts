@@ -40,7 +40,7 @@ export default class StartScene extends Scene {
     CanvasUtil.drawImage(canvas, this.image, 50, 0);
     CanvasUtil.drawImage(canvas, this.button, 460, 270);
     CanvasUtil.drawImage(canvas, this.button, 460, 400);
-    CanvasUtil.writeTextToCanvas(canvas, '[S] to start', canvas.width / 2, canvas.height / 2 - 35, 'center', 'Kongtext', 35, 'black');
-    CanvasUtil.writeTextToCanvas(canvas, '[C] for Credits', canvas.width / 2, canvas.height / 2 + 95, 'center', 'Kongtext', 35, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, '[S] to start', canvas.width / 2, canvas.height / 2 - 35, 'center', './fonts/kongtext.regular.ttf', 35, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, '[C] for Credits', canvas.width / 2, canvas.height / 2 + 95, 'center', './fonts/kongtext.regular.ttf', 35, 'black');
   }
 }
