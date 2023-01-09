@@ -2,7 +2,7 @@ import Drawable from './Drawable.js';
 import CanvasUtil from './CanvasUtil.js';
 
 export default class Computer extends Drawable {
-  public constructor () {
+  public constructor() {
     super();
     this.posX = 1200;
     this.posY = 100;
