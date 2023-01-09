@@ -1,8 +1,6 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable import/prefer-default-export */
 
-import Scene from "./Scene.js";
-
 /**
  * Represents a basic Game Loop based on `requestAnimationFrame()`.
  *
@@ -18,7 +16,7 @@ import Scene from "./Scene.js";
 
 export abstract class Game {
   public abstract processInput(): void;
-  public abstract update(elapsed: number): Scene;
+  public abstract update(elapsed: number): boolean;
   public abstract render(): void;
 }
 
@@ -141,7 +139,7 @@ export class GameLoop {
    *   `performance.now()`, indicating the point in time when `requestAnimationFrame()`
    *   starts to execute callback functions
    */
-  private step = (timestamp: number): void => {
+  private step = (timestamp: number) => {
     // Handle first animation frame
     if (this.isInState(GameLoop.STATE_STARTING)) {
       this.state = GameLoop.STATE_RUNNING;

@@ -1,7 +1,7 @@
-import NightmareStreet from './NightmareStreet.js';
+import Nightmare from './Nightmare.js';
 import { GameLoop } from './GameLoop.js';
 
-const game = new NightmareStreet(document.getElementById('game') as HTMLCanvasElement);
+const game = new Nightmare(document.getElementById('game') as HTMLCanvasElement);
 
 const gameLoop = new GameLoop(game);
 window.addEventListener('load', () => {

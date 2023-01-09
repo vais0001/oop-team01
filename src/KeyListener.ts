@@ -3,13 +3,9 @@
  * keys
  *
  * Some parts of this class are pretty complex, but the class itself is fairly
- * easy to use. You just instantiate one object in your game.
- * 
- * Use the method `isKeyDown()` to check if a specific key is currently pressed 
- * down by the user. Will always return `true` while the key is down.
- * 
- * Use the method `keyPressed()` to determine if the key is pressed down by the
- * user. Will only return `true` once until the key is pressed again.
+ * easy to use. You just instantiate one object in your game and us the method
+ * `isKeyDown()` to check if a specific key is currently pressed down by the
+ * user.
  *
  * NOTE: It is known that the MouseEvent.keyCode property is deprecated, which
  * means that there will be a moment that this class will not work anymore.
@@ -156,15 +152,6 @@ export default class KeyListener {
     return this.keyDown[keyCode] === true;
   }
 
-  /**
-   * Returns `true` if and only if the key is down, and if it has not 
-   * been queried before. 
-   * 
-   * Used for single key presses.
-   * 
-   * @param keyCode the keyCode to check
-   * @returns `true` if the specified key is down and not queried before
-   */
   public keyPressed(keyCode: string): boolean {
     if (this.keyPressedQueried[keyCode] === true) return false;
     if (this.keyDown[keyCode] === true) {

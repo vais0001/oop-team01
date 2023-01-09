@@ -1,7 +1,7 @@
 /**
- * Helper utlity class for working with the HTML Canvas Element.
+ * Helper utlity class for working with the HTML Canvas.
  *
- * @version 1.1.1
+ * @version 1.0.0
  * @author Frans Blauw
  */
 
@@ -91,31 +91,6 @@ export default class CanvasUtil {
     fontSize: number = 20,
     color: string = 'red',
   ): void {
-    // eslint-disable-next-line max-len
-    CanvasUtil.writeText(canvas, text, xCoordinate, yCoordinate, alignment, fontFamily, fontSize, color);
-  }
-
-  /**
-   *
-   * @param canvas Canvas to write to
-   * @param text Text to write
-   * @param xCoordinate x-coordinate of the text
-   * @param yCoordinate y-coordinate of the text
-   * @param alignment align of the text
-   * @param fontFamily font family to use when writing text
-   * @param fontSize font size in pixels
-   * @param color colour of text to write
-   */
-  public static writeText(
-    canvas: HTMLCanvasElement,
-    text: string,
-    xCoordinate: number,
-    yCoordinate: number,
-    alignment: CanvasTextAlign = 'center',
-    fontFamily: string = 'sans-serif',
-    fontSize: number = 20,
-    color: string = 'red',
-  ): void {
     const ctx: CanvasRenderingContext2D = CanvasUtil.getCanvasContext(canvas);
     ctx.font = `${fontSize}px ${fontFamily}`;
     ctx.fillStyle = color;
@@ -163,7 +138,7 @@ export default class CanvasUtil {
     width: number,
     height: number,
     color: string = 'red',
-  ): void {
+  ) {
     const ctx: CanvasRenderingContext2D = CanvasUtil.getCanvasContext(canvas);
     ctx.beginPath();
     ctx.strokeStyle = color;
@@ -211,7 +186,7 @@ export default class CanvasUtil {
     width: number,
     height: number,
     color: string = 'red',
-  ): void {
+  ) {
     const ctx: CanvasRenderingContext2D = CanvasUtil.getCanvasContext(canvas);
     ctx.beginPath();
     ctx.fillStyle = color;
