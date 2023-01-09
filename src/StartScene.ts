@@ -38,8 +38,8 @@ export default class StartScene extends Scene {
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, 50, 0);
-    CanvasUtil.drawImage(canvas, this.button, 460, 270);
-    CanvasUtil.drawImage(canvas, this.button, 460, 400);
+    CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 - 100);
+    CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 + 30);
     CanvasUtil.writeTextToCanvas(canvas, '[S] to start', canvas.width / 2, canvas.height / 2 - 35, 'center', 'Helvetica', 35, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[C] for Credits', canvas.width / 2, canvas.height / 2 + 95, 'center', 'Helvetica', 35, 'black');
   }
