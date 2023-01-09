@@ -22,7 +22,8 @@ export default class Bedroom extends Scene {
   }
 
   public render(canvas: HTMLCanvasElement): void {
+    CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
-    CanvasUtil.drawImage(canvas, this.background, 80, 70);
+    CanvasUtil.drawImage(canvas, this.background, 0, 0);
   }
 }
