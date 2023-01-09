@@ -1,3 +1,4 @@
+import Antagonist from './Antagonist.js';
 import Bed from './Bed.js';
 import CanvasUtil from './CanvasUtil.js';
 import Computer from './Computer.js';
@@ -21,7 +22,11 @@ export default class Bedroom extends Scene {
 
   private webpageScene: boolean;
 
-  public constructor(MaxX: number, MaxY: number) {
+  private level1: boolean;
+
+  private antagonist: Antagonist;
+
+  public constructor(MaxX: number, MaxY: number, level:number) {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./placeholders/timmysroom.png');
     this.starting = false;
@@ -30,6 +35,10 @@ export default class Bedroom extends Scene {
     this.bed = new Bed();
     this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png')
     this.webpageScene = false;
+    if(level === 1) {
+      this.antagonist = new Antagonist();
+      this.level1 = true;
+    }
   }
 
   public processInput(keyListener: KeyListener): any {
@@ -53,9 +62,13 @@ export default class Bedroom extends Scene {
     this.bed.render(canvas)
     this.player.render(canvas)
     this.computer.render(canvas)
-    if(this.player.collideWithitem(this.computer)) {
+    if (this.player.collideWithitem(this.computer)) {
       CanvasUtil.drawImage(canvas, this.popUp, 1250, 120)
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', 300, 700, 'center', 'arial', 40, 'white')
     }
+    if (this.level1 === true) {
+      this.antagonist.render(canvas)
+    }
+
   }
 }
