@@ -5,10 +5,11 @@ export default abstract class Scene {
 
   protected maxY: number;
 
+  protected image: HTMLImageElement;
+
   public constructor(maxX: number, maxY: number) {
     this.maxX = maxX;
     this.maxY = maxY;
-    
   }
 
   public abstract processInput(keyListener: KeyListener): void;
