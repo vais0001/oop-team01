@@ -1,3 +1,5 @@
+import CanvasUtil from "./CanvasUtil.js";
+
 export default abstract class Drawable {
   protected image: HTMLImageElement;
 
@@ -19,5 +21,9 @@ export default abstract class Drawable {
 
   public getHeight(): number {
     return this.image.height;
+  }
+
+  public render(canvas: HTMLCanvasElement): void {
+    CanvasUtil.drawImage(canvas, this.image, this.posX, this.posY)
   }
 }
