@@ -10,7 +10,7 @@ export default class StartScene extends Scene {
 
   public constructor(MaxX: number, MaxY: number) {
     super(MaxX, MaxY);
-    this.background = CanvasUtil.loadNewImage('./assets/start.png');
+    this.background = CanvasUtil.loadNewImage('./placeholders/start.png');
     this.starting = false;
   }
 

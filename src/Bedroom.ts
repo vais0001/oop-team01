@@ -9,7 +9,7 @@ export default class Bedroom extends Scene {
 
   public constructor(MaxX: number, MaxY: number) {
     super(MaxX, MaxY);
-    this.background = CanvasUtil.loadNewImage('./assets/timmysroom.png');
+    this.background = CanvasUtil.loadNewImage('./placeholders/timmysroom.png');
     this.starting = false;
   }
 
