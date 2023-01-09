@@ -5,7 +5,7 @@ import KeyListener from './KeyListener.js';
 import Scene from './Scene.js';
 import StartScene from './StartScene.js';
 
-export default class Krusher extends Game {
+export default class Nightmare extends Game {
   private canvas: HTMLCanvasElement;
 
   private keyListener: KeyListener;
