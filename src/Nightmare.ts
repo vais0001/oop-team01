@@ -47,6 +47,5 @@ export default class Nightmare extends Game {
   public render(): void {
     CanvasUtil.clearCanvas(this.canvas);
     this.currentScene.render(this.canvas);
-    console.log('yo');
   }
 }

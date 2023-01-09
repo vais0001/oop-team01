@@ -1,5 +1,6 @@
 import Drawable from "./Drawable.js";
 import CanvasUtil from "./CanvasUtil.js";
+import Computer from "./Computer.js";
 
 export default class Player extends Drawable {
 
@@ -27,5 +28,11 @@ export default class Player extends Drawable {
       this.posY += this.speed;
     }
   }
+  public collideWithitem(item: Computer): boolean{
+    return (this.posX < item.getPosX() + item.getWidth()
+    && this.posX + this.getWidth() > item.getPosX()
+    && this.getPosY() < item.getPosY() + item.getHeight()
+    && this.getHeight() + this.posY > item.getPosY());
+  }
 
 }
