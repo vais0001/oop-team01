@@ -7,6 +7,8 @@ export default abstract class Scene {
 
   protected image: HTMLImageElement;
 
+  protected image1: HTMLImageElement;
+
   public constructor(maxX: number, maxY: number) {
     this.maxX = maxX;
     this.maxY = maxY;

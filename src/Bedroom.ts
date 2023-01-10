@@ -39,15 +39,18 @@ export default class Bedroom extends Scene {
       this.antagonist = new Antagonist();
       this.level1 = true;
     }
+    this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png')
   }
 
   public processInput(keyListener: KeyListener): any {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
-    if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
-    if (keyListener.isKeyDown(KeyListener.KEY_UP)) this.player.move(1)
-    if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2)
-    if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3)
-    if (keyListener.keyPressed(KeyListener.KEY_SPACE) && this.player.collideWithitem(this.computer)) this.webpageScene = true;
+      if (!this.level1 === true) {
+      if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
+      if (keyListener.isKeyDown(KeyListener.KEY_UP)) this.player.move(1)
+      if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2)
+      if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3)
+      if (keyListener.keyPressed(KeyListener.KEY_SPACE) && this.player.collideWithitem(this.computer)) this.webpageScene = true;
+    }
   }
 
   public update(elapsed: number): Scene {
@@ -68,6 +71,7 @@ export default class Bedroom extends Scene {
     }
     if (this.level1 === true) {
       this.antagonist.render(canvas)
+      CanvasUtil.drawImage(canvas, this.image1, 300, 300)
     }
 
   }
