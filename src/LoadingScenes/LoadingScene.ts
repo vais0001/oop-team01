@@ -43,7 +43,7 @@ export default class LoadingScene extends Scene {
   }
 
   public render(canvas: HTMLCanvasElement): void {
-    CanvasUtil.fillCanvas(canvas, 'white');
+    CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     CanvasUtil.drawRectangle(canvas, this.dimensionsX + 100, this.dimensionsY + 100, 1220, 30, 'white');
     if (this.loadingBar === 1220) {
