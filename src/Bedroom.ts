@@ -76,6 +76,9 @@ export default class Bedroom extends Scene {
     if (this.level1 === true) {
       this.antagonist.render(canvas)
       CanvasUtil.drawImage(canvas, this.image1, 300, 100)
+      CanvasUtil.writeTextToCanvas(canvas, 'You downloaded game ilegally, unfortunately now you are infected', 515, 150, 'center', 'arial', 14, 'black');
+      CanvasUtil.writeTextToCanvas(canvas, ' with the viruses, so now you will have to fight them !', 510, 170, 'center', 'arial', 14, 'black')
+
     }
 
   }
