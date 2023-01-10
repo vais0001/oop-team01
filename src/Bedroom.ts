@@ -7,7 +7,7 @@ import Player from './Player.js';
 import Scene from './Scene.js';
 import StartScene from './StartScene.js';
 import Webpage from './Webpage.js';
-import ArrowThrower from './ArrowThrower/ArrowThrower.js'
+import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 
@@ -44,8 +44,8 @@ export default class Bedroom extends Scene {
 
   private trojanHead: HTMLImageElement;
 
-  public constructor(MaxX: number, MaxY: number, level: number) {
-    super(MaxX, MaxY);
+  public constructor(maxX: number, maxY: number, level: number) {
+    super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/room1.png');
     this.starting = false;
     if (level === 1) {
@@ -65,8 +65,8 @@ export default class Bedroom extends Scene {
     this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png');
     this.webpageScene = false;
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
-    this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmy_00000.png');
-    this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojan_00000.png');
+    this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmyHead.png');
+    this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojanHead.png');
     this.timeToText = 2000;
     this.cheatWhackamole = false;
     this.cheatArrow = false;
@@ -85,10 +85,10 @@ export default class Bedroom extends Scene {
         && this.player.collideWithitem(this.computer)) this.webpageScene = true;
     }
     if (this.scene === 1) {
-      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 2;
+      if (keyListener.keyPressed(KeyListener.KEY_N)) this.scene = 2;
     }
     if (this.scene === 2) {
-      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 3;
+      if (keyListener.keyPressed(KeyListener.KEY_N)) this.scene = 3;
     }
 
     if (keyListener.keyPressed(KeyListener.KEY_N)) this.nextText += 1;
@@ -144,14 +144,14 @@ export default class Bedroom extends Scene {
         CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
         CanvasUtil.writeTextToCanvas(canvas, 'pffff, what a terrible sleep I had.', this.dimensionsX + 700, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
         CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 400, this.dimensionsY + 600);
+        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 540, this.dimensionsY + 670);
       }
 
       if (this.nextText === 1) {
         CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
         CanvasUtil.writeTextToCanvas(canvas, 'Let me grab my phone and check out the latest game releases.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
         CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 400, this.dimensionsY + 600);
+        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 540, this.dimensionsY + 670);
       }
 
       if (this.nextText === 2) {
@@ -169,7 +169,7 @@ export default class Bedroom extends Scene {
         CanvasUtil.writeTextToCanvas(canvas, 'buy it for me unless I get high grades...', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 14, 'black');
         CanvasUtil.writeTextToCanvas(canvas, 'I want it now, but how….', this.dimensionsX + 720, this.dimensionsY + 690, 'center', 'arial', 14, 'black');
         CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 400, this.dimensionsY + 600);
+        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 540, this.dimensionsY + 670);
       }
 
       if (this.nextText === 4) {
@@ -182,13 +182,17 @@ export default class Bedroom extends Scene {
     }
 
     if (this.scene === 1 && this.timeToText <= 0) {
-      CanvasUtil.writeTextToCanvas(canvas, 'You downloaded game ilegally, unfortunately now you are infected', 515, 150, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, ' with the viruses, so now you will have to fight them !', 510, 170, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
+      CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+      CanvasUtil.writeTextToCanvas(canvas, 'You fell for my trap!', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
+      CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
+      CanvasUtil.drawImage(canvas, this.trojanHead, this.dimensionsX + 540, this.dimensionsY + 670);
     }
+
     if (this.scene === 2) {
-      CanvasUtil.writeTextToCanvas(canvas, 'fuck uuuuuuuuuuuuuuuuuuuuu', 515, 150, 'left', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to start fighting', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
+      CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+      CanvasUtil.writeTextToCanvas(canvas, 'Now you must take responsibility for your actions…', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
+      CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
+      CanvasUtil.drawImage(canvas, this.trojanHead, this.dimensionsX + 540, this.dimensionsY + 670);
     }
   }
 }
