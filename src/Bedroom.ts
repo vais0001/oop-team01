@@ -113,7 +113,7 @@ export default class Bedroom extends Scene {
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', 300, 700, 'center', 'arial', 40, 'white');
     }
     if (this.scene === 2) {
-      CanvasUtil.writeTextToCanvas(canvas, 'fuck uuuuuuuuuuuuuuuuuuuu', 515, 150, 'center', 'arial', 14, 'black');
+      CanvasUtil.writeTextToCanvas(canvas, 'fuck uuuuuuuuuuuuuuuuuuuuu', 515, 150, 'center', 'arial', 14, 'black');
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to start fighting', 300, 700, 'center', 'arial', 40, 'white');
     }
   }
