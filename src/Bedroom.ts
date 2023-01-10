@@ -8,6 +8,7 @@ import Scene from './Scene.js';
 import StartScene from './StartScene.js';
 import Webpage from './Webpage.js';
 import ArrowThrower from './ArrowThrower/ArrowThrower.js'
+import Whackamole from './Whackamole/Whackamole.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -29,6 +30,8 @@ export default class Bedroom extends Scene {
   private scene: number;
 
   private timeToText: number;
+
+  private cheatWhackamole: boolean;
 
   public constructor(MaxX: number, MaxY: number, level:number) {
     super(MaxX, MaxY);
@@ -52,6 +55,7 @@ export default class Bedroom extends Scene {
     this.webpageScene = false;
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.timeToText = 2000;
+    this.cheatWhackamole = false;
   }
 
   public processInput(keyListener: KeyListener): any {
@@ -70,9 +74,16 @@ export default class Bedroom extends Scene {
     if (this.scene === 2) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 3;
     }
+    // Cheat code to go to whackamole class
+    if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
   }
 
   public update(elapsed: number): Scene {
+    //cheat code to whackamole
+    if(this.cheatWhackamole === true) {
+      return new Whackamole(window.innerWidth, window.innerHeight)
+    }
+
     if (this.webpageScene === true) return new Webpage(0, 0);
     if (this.level1) {
       this.timeToText -= elapsed;
