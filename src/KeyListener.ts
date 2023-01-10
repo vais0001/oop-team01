@@ -117,6 +117,24 @@ export default class KeyListener {
 
   public static readonly KEY_Z = 'KeyZ';
 
+  public static readonly KEY_97 = 'Numpad1';
+
+  public static readonly KEY_98 = 'Numpad2';
+
+  public static readonly KEY_99 = 'Numpad3';
+
+  public static readonly KEY_100 = 'Numpad4';
+
+  public static readonly KEY_101 = 'Numpad5';
+
+  public static readonly KEY_102 = 'Numpad6';
+
+  public static readonly KEY_103 = 'Numpad7';
+
+  public static readonly KEY_104 = 'Numpad8';
+
+  public static readonly KEY_105 = 'Numpad9';
+
   /**
    * Record that holds a boolean for each keycode. The keycode is the index of
    * the array and the boolean is the state of that key (`true` means that
