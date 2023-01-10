@@ -38,7 +38,13 @@ export default class Bedroom extends Scene {
 
   private cheatLoadingScreen: boolean;
 
-  public constructor(MaxX: number, MaxY: number, level:number) {
+  private nextText: number;
+
+  private playerHead: HTMLImageElement;
+
+  private trojanHead: HTMLImageElement;
+
+  public constructor(MaxX: number, MaxY: number, level: number) {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./assets/room1.png');
     this.starting = false;
@@ -59,10 +65,13 @@ export default class Bedroom extends Scene {
     this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png');
     this.webpageScene = false;
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
+    this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmy_00000.png');
+    this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojan_00000.png');
     this.timeToText = 2000;
     this.cheatWhackamole = false;
     this.cheatArrow = false;
     this.cheatLoadingScreen = false;
+    this.nextText = 0;
   }
 
   public processInput(keyListener: KeyListener): any {
@@ -73,7 +82,7 @@ export default class Bedroom extends Scene {
       if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2);
       if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3);
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)
-      && this.player.collideWithitem(this.computer)) this.webpageScene = true;
+        && this.player.collideWithitem(this.computer)) this.webpageScene = true;
     }
     if (this.scene === 1) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 2;
@@ -81,6 +90,9 @@ export default class Bedroom extends Scene {
     if (this.scene === 2) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 3;
     }
+
+    if (keyListener.keyPressed(KeyListener.KEY_N)) this.nextText += 1;
+
     // Cheat code to go to whackamole class
     if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
     if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
@@ -96,7 +108,7 @@ export default class Bedroom extends Scene {
       return new ArrowThrower(window.innerWidth, window.innerHeight);
     }
 
-    if(this.cheatLoadingScreen === true) {
+    if (this.cheatLoadingScreen === true) {
       return new LoadingSceneAT(window.innerWidth, window.innerHeight)
     }
 
@@ -115,6 +127,7 @@ export default class Bedroom extends Scene {
     this.bed.render(canvas);
     this.player.render(canvas);
     this.computer.render(canvas);
+
     if (this.player.collideWithitem(this.computer)) {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
@@ -122,9 +135,52 @@ export default class Bedroom extends Scene {
     if (this.level1) {
       this.antagonist.render(canvas);
       if (this.timeToText <= 0) {
-        CanvasUtil.drawImage(canvas, this.image1, 300, 100);
+        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
       }
     }
+
+    if (!this.level1) {
+      if (this.nextText === 0) {
+        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+        CanvasUtil.writeTextToCanvas(canvas, 'pffff, what a terrible sleep I had.', this.dimensionsX + 700, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
+        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 400, this.dimensionsY + 600);
+      }
+
+      if (this.nextText === 1) {
+        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+        CanvasUtil.writeTextToCanvas(canvas, 'Let me grab my phone and check out the latest game releases.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
+        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 400, this.dimensionsY + 600);
+      }
+
+      if (this.nextText === 2) {
+        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+        CanvasUtil.writeTextToCanvas(canvas, 'Narrator: Timmy looks at his phone and sees that X game', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'he really wants has finally been released. Due to', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'inflation, the price of games has risen to very high amounts.', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
+      }
+
+      if (this.nextText === 3) {
+        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+        CanvasUtil.writeTextToCanvas(canvas, 'YES! Finally, it is released!', this.dimensionsX + 720, this.dimensionsY + 630, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'But oh no, it is too expensive. My parents will not', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'buy it for me unless I get high grades...', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'I want it now, but how….', this.dimensionsX + 720, this.dimensionsY + 690, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
+        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 400, this.dimensionsY + 600);
+      }
+
+      if (this.nextText === 4) {
+        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+        CanvasUtil.writeTextToCanvas(canvas, 'Narrator: Timmy browses on forums to see', this.dimensionsX + 720, this.dimensionsY + 630, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'how to access this game for free.', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'He comes across a site which promises a safe and free download.', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 14, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
+      }
+    }
+
     if (this.scene === 1 && this.timeToText <= 0) {
       CanvasUtil.writeTextToCanvas(canvas, 'You downloaded game ilegally, unfortunately now you are infected', 515, 150, 'center', 'arial', 14, 'black');
       CanvasUtil.writeTextToCanvas(canvas, ' with the viruses, so now you will have to fight them !', 510, 170, 'center', 'arial', 14, 'black');
