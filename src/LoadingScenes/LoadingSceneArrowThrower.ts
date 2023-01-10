@@ -19,14 +19,14 @@ export default class LoadingSceneAT extends Scene {
 
   public update(elapsed: number): Scene {
     this.loadingBar += elapsed * 0.05;
-    if (this.loadingBar > 300) return new ArrowThrower(this.dimensionsX, this.dimensionsY);
+    if (this.loadingBar > 300) return new ArrowThrower(window.innerWidth, window.innerHeight);
     return null;
   }
 
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
-    CanvasUtil.drawImage(canvas, this.image, 50, -20);
-    CanvasUtil.drawRectangle(canvas, 100, 100, 300, 30, 'white');
-    CanvasUtil.fillRectangle(canvas, 100, 100, this.loadingBar, 30, 'white');
+    CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
+    CanvasUtil.drawRectangle(canvas, this.dimensionsX + (this.backgroundWidth / 2) - 150, this.dimensionsY + 100, 300, 30, 'white');
+    CanvasUtil.fillRectangle(canvas, this.dimensionsX + (this.backgroundWidth / 2) - 150, this.dimensionsY + 100, this.loadingBar, 30, 'white');
   }
 }
