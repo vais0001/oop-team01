@@ -28,5 +28,6 @@ export default class CreditScene extends Scene {
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, 50, 0);
+    CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to go back', canvas.width/2 - 50, canvas.height/2 + 270, 'center', 'Helvetica', 30, 'black')
   }
 }

@@ -17,7 +17,7 @@ export default class LoadingScene extends Scene {
   }
 
   public update(elapsed: number): Scene {
-    this.loadingBar += elapsed * 0.15;
+    this.loadingBar += elapsed * 2.15;
     if (this.loadingBar > 300) return new Bedroom(this.maxX, this.maxY, 0);
     return null;
   }
