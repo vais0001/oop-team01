@@ -17,7 +17,7 @@ export default class Whackamole extends Scene {
   }
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas)
-    CanvasUtil.fillCanvas(canvas, 'darkgrey');
+    CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY)
   }
 
