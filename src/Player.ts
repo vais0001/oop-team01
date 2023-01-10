@@ -6,11 +6,11 @@ export default class Player extends Drawable {
 
   private speed: number;
 
-  constructor(maxX: number, maxY: number) {
+  constructor(posX: number, posY: number) {
     super();
     this.image = CanvasUtil.loadNewImage('./placeholders/timmy_00000.png')
-    this.posX = maxX  / 2;
-    this.posY = maxY / 2;
+    this.posX = posX;
+    this.posY = posY;
     this.speed = 5;
   }
 

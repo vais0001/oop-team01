@@ -30,13 +30,17 @@ export default class Bedroom extends Scene {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./placeholders/timmysroom.png');
     this.starting = false;
-    this.player = new Player(window.innerWidth, window.innerHeight);
+    if (!this.level1 === true) {
+      this.player = new Player(window.innerWidth / 2 , window.innerHeight / 2);
+    } else if (this.level1 === true) {
+        this.player = new Player (1200, 100)
+    }
     this.computer = new Computer();
     this.bed = new Bed();
     this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png')
     this.webpageScene = false;
     if(level === 1) {
-      this.antagonist = new Antagonist();
+      this.antagonist = new Antagonist(300, 300);
       this.level1 = true;
     }
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png')
@@ -71,7 +75,10 @@ export default class Bedroom extends Scene {
     }
     if (this.level1 === true) {
       this.antagonist.render(canvas)
-      CanvasUtil.drawImage(canvas, this.image1, 300, 300)
+      CanvasUtil.drawImage(canvas, this.image1, 300, 100)
+      CanvasUtil.writeTextToCanvas(canvas, 'You downloaded game ilegally, unfortunately now you are infected', 515, 150, 'center', 'arial', 14, 'black');
+      CanvasUtil.writeTextToCanvas(canvas, ' with the viruses, so now you will have to fight them !', 510, 170, 'center', 'arial', 14, 'black')
+
     }
 
   }
