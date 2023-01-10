@@ -2,7 +2,7 @@ import CanvasUtil from "../CanvasUtil.js";
 import KeyListener from "../KeyListener.js";
 import Scene from "../Scene.js";
 
-export default class WhackAmole extends Scene {
+export default class ArrowThrower extends Scene {
 
   public constructor (maxX: number, maxY: number) {
     super(maxX, maxY);
