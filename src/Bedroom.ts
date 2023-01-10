@@ -32,7 +32,7 @@ export default class Bedroom extends Scene {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./placeholders/timmysroom.png');
     this.starting = false;
-    this.scene = 0;
+    if (!this.level1 === true) this.scene = 0;
     if (!this.level1 === true) {
       this.player = new Player(window.innerWidth / 2 , window.innerHeight / 2);
     } else if (this.level1 === true) {
@@ -45,6 +45,7 @@ export default class Bedroom extends Scene {
     if(level === 1) {
       this.antagonist = new Antagonist(300, 300);
       this.level1 = true;
+      this.scene = 1;
     }
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png')
   }
@@ -58,13 +59,19 @@ export default class Bedroom extends Scene {
       if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3)
       if (keyListener.keyPressed(KeyListener.KEY_SPACE) && this.player.collideWithitem(this.computer)) this.webpageScene = true;
     }
-    if (this.scene = 1) {
+    if (this.scene === 1) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 2;
+    }
+    if (this.scene === 2) {
+      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 3;
     }
   }
 
   public update(elapsed: number): Scene {
     if (this.webpageScene === true) return new Webpage(0, 0);
+    if (this.scene === 3) {
+      
+    }
     return null;
   }
 
@@ -82,12 +89,15 @@ export default class Bedroom extends Scene {
     if (this.level1 === true) {
       this.antagonist.render(canvas)
       CanvasUtil.drawImage(canvas, this.image1, 300, 100)
-      this.scene = 1;
     }
     if (this.scene === 1) {
       CanvasUtil.writeTextToCanvas(canvas, 'You downloaded game ilegally, unfortunately now you are infected', 515, 150, 'center', 'arial', 14, 'black');
       CanvasUtil.writeTextToCanvas(canvas, ' with the viruses, so now you will have to fight them !', 510, 170, 'center', 'arial', 14, 'black')
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', 300, 700, 'center', 'arial', 40, 'white')
+    }
+    if (this.scene === 2) {
+      CanvasUtil.writeTextToCanvas(canvas, 'fuck uuuuuuuuuuuuuuuuuuuu', 515, 150, 'center', 'arial', 14, 'black');
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to start fighting', 300, 700, 'center', 'arial', 40, 'white')
     }
 
   }
