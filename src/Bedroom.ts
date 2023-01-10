@@ -71,20 +71,15 @@ export default class Bedroom extends Scene {
     }
   }
 
-  /**
-   *
-   * @param elapsed
-   */
   public update(elapsed: number): Scene {
     if (this.webpageScene === true) return new Webpage(0, 0);
+    if (this.level1) {
+      this.timeToText -= elapsed;
+    }
     if (this.scene === 3) return new ArrowThrower(this.maxX, this.maxY);
     return null;
   }
 
-  /**
-   *
-   * @param canvas
-   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
