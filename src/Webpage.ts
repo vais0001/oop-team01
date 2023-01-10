@@ -51,7 +51,7 @@ export default class Webpage extends Scene {
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
-    CanvasUtil.drawImage(canvas, this.image, 50, 0);
+    CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, 600, 301, 30, 'white');
     CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, 600, this.loadingBar, 30, 'green');
     if (!(this.downloading)) {
