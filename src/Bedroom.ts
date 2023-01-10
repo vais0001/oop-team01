@@ -49,7 +49,7 @@ export default class Bedroom extends Scene {
     if (!this.level1) {
       this.player = new Player(window.innerWidth / 2 - 550, window.innerHeight / 2);
     } if (this.level1 === true) {
-      this.player = new Player(1100, 100);
+      this.player = new Player(this.dimensionsX + 1050, this.dimensionsY + 150);
     }
     this.computer = new Computer();
     this.bed = new Bed();
@@ -84,11 +84,11 @@ export default class Bedroom extends Scene {
 
   public update(elapsed: number): Scene {
     //cheat code to whackamole
-    if(this.cheatWhackamole === true) {
-      return new Whackamole(window.innerWidth, window.innerHeight)
+    if (this.cheatWhackamole === true) {
+      return new Whackamole(window.innerWidth, window.innerHeight);
     }
-    if(this.cheatArrow === true) {
-      return new ArrowThrower(window.innerWidth, window.innerHeight)
+    if (this.cheatArrow === true) {
+      return new ArrowThrower(window.innerWidth, window.innerHeight);
     }
 
     if (this.webpageScene === true) return new Webpage(0, 0);
@@ -107,8 +107,8 @@ export default class Bedroom extends Scene {
     this.player.render(canvas);
     this.computer.render(canvas);
     if (this.player.collideWithitem(this.computer)) {
-      CanvasUtil.drawImage(canvas, this.popUp, 1250, 120);
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', 300, 700, 'center', 'arial', 40, 'white');
+      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
     }
     if (this.level1) {
       this.antagonist.render(canvas);
@@ -119,11 +119,11 @@ export default class Bedroom extends Scene {
     if (this.scene === 1 && this.timeToText <= 0) {
       CanvasUtil.writeTextToCanvas(canvas, 'You downloaded game ilegally, unfortunately now you are infected', 515, 150, 'center', 'arial', 14, 'black');
       CanvasUtil.writeTextToCanvas(canvas, ' with the viruses, so now you will have to fight them !', 510, 170, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', 300, 700, 'center', 'arial', 40, 'white');
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
     }
     if (this.scene === 2) {
-      CanvasUtil.writeTextToCanvas(canvas, 'fuck uuuuuuuuuuuuuuuuuuuuu', 515, 150, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to start fighting', 300, 700, 'center', 'arial', 40, 'white');
+      CanvasUtil.writeTextToCanvas(canvas, 'fuck uuuuuuuuuuuuuuuuuuuuu', 515, 150, 'left', 'arial', 14, 'black');
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to start fighting', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
     }
   }
 }
