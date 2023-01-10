@@ -52,7 +52,7 @@ export default class Webpage extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, 50, 0);
-    CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, 600, 300, 30, 'white');
+    CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, 600, 301, 30, 'white');
     CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, 600, this.loadingBar, 30, 'green');
     if (!(this.downloading)) {
       CanvasUtil.writeTextToCanvas(canvas, 'Press [ENTER] To Download The Game', canvas.width / 2, 700, 'center', 'arial', 40, 'white');
