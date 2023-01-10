@@ -84,11 +84,11 @@ export default class Bedroom extends Scene {
 
   public update(elapsed: number): Scene {
     //cheat code to whackamole
-    if(this.cheatWhackamole === true) {
-      return new Whackamole(window.innerWidth, window.innerHeight)
+    if (this.cheatWhackamole === true) {
+      return new Whackamole(window.innerWidth, window.innerHeight);
     }
-    if(this.cheatArrow === true) {
-      return new ArrowThrower(window.innerWidth, window.innerHeight)
+    if (this.cheatArrow === true) {
+      return new ArrowThrower(window.innerWidth, window.innerHeight);
     }
 
     if (this.webpageScene === true) return new Webpage(0, 0);
@@ -107,8 +107,8 @@ export default class Bedroom extends Scene {
     this.player.render(canvas);
     this.computer.render(canvas);
     if (this.player.collideWithitem(this.computer)) {
-      CanvasUtil.drawImage(canvas, this.popUp, 1250, 120);
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', 300, 700, 'center', 'arial', 40, 'white');
+      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
     }
     if (this.level1) {
       this.antagonist.render(canvas);
