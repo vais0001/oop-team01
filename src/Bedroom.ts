@@ -7,7 +7,7 @@ import Player from './Player.js';
 import Scene from './Scene.js';
 import StartScene from './StartScene.js';
 import Webpage from './Webpage.js';
-import WhackAmole from './WhackAmole/WhackAmole.js'
+import ArrowThrower from './ArrowThrower/ArrowThrower.js'
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -29,8 +29,6 @@ export default class Bedroom extends Scene {
   private scene: number;
 
   private timeToText: number;
-
-  private whackamoleScene: WhackAmole;
 
   public constructor(MaxX: number, MaxY: number, level:number) {
     super(MaxX, MaxY);
@@ -79,10 +77,7 @@ export default class Bedroom extends Scene {
    */
   public update(elapsed: number): Scene {
     if (this.webpageScene === true) return new Webpage(0, 0);
-    if (this.level1) {
-      this.timeToText -= elapsed;
-    }
-    if (this.scene === 3) return new WhackAmole(this.maxX, this.maxY);
+    if (this.scene === 3) return new ArrowThrower(this.maxX, this.maxY);
     return null;
   }
 
