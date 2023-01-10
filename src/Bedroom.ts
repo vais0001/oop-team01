@@ -28,21 +28,21 @@ export default class Bedroom extends Scene {
 
   private scene: number;
 
-  public constructor(MaxX: number, MaxY: number, level:number) {
+  public constructor(MaxX: number, MaxY: number, level: number) {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./placeholders/timmysroom.png');
     this.starting = false;
     if (!this.level1 === true) this.scene = 0;
     if (!this.level1 === true) {
-      this.player = new Player(window.innerWidth / 2 , window.innerHeight / 2);
+      this.player = new Player(window.innerWidth / 2, window.innerHeight / 2);
     } else if (this.level1 === true) {
-        this.player = new Player (1200, 100)
+      this.player = new Player(1200, 100)
     }
     this.computer = new Computer();
     this.bed = new Bed();
     this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png')
     this.webpageScene = false;
-    if(level === 1) {
+    if (level === 1) {
       this.antagonist = new Antagonist(300, 300);
       this.level1 = true;
       this.scene = 1;
@@ -52,7 +52,7 @@ export default class Bedroom extends Scene {
 
   public processInput(keyListener: KeyListener): any {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
-      if (!this.level1 === true) {
+    if (!this.level1 === true) {
       if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
       if (keyListener.isKeyDown(KeyListener.KEY_UP)) this.player.move(1)
       if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2)
@@ -70,7 +70,7 @@ export default class Bedroom extends Scene {
   public update(elapsed: number): Scene {
     if (this.webpageScene === true) return new Webpage(0, 0);
     if (this.scene === 3) {
-      
+
     }
     return null;
   }
