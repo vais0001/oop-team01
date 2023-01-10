@@ -52,14 +52,14 @@ export default class Webpage extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, 600, 300, 30, 'white');
-    CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, 600, this.loadingBar, 30, 'green');
+    CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 650, 301, 30, 'white');
+    CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 650, this.loadingBar, 30, 'green');
     if (!(this.downloading)) {
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [ENTER] To Download The Game', canvas.width / 2, 700, 'center', 'arial', 40, 'white');
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [ENTER] To Download The Game', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'white');
     } if (this.downloading && this.loadingBar < 300) {
-      CanvasUtil.writeTextToCanvas(canvas, 'DOWNLOADING', canvas.width / 2, 550, 'center', 'arial', 40, 'white');
+      CanvasUtil.writeTextToCanvas(canvas, 'DOWNLOADING', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'white');
     } if (this.loadingBar > 300) {
-      CanvasUtil.writeTextToCanvas(canvas, 'DOWNLOADED', canvas.width / 2, 550, 'center', 'arial', 40, 'red');
+      CanvasUtil.writeTextToCanvas(canvas, 'DOWNLOADED', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'red');
     }
   }
 }
