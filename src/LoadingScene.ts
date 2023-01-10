@@ -17,16 +17,15 @@ export default class LoadingScene extends Scene {
   }
 
   public update(elapsed: number): Scene {
-    this.loadingBar += elapsed * 2.15;
-    if (this.loadingBar > 300) return new Bedroom(this.maxX, this.maxY, 0);
+    this.loadingBar += elapsed * 0.15;
+    if (this.loadingBar > 500) return new Bedroom(this.maxX, this.maxY, 0);
     return null;
   }
 
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, 50, -20);
-    CanvasUtil.drawRectangle(canvas, 100, 100, 300, 30, 'white');
-    CanvasUtil.fillRectangle(canvas, 100, 100, this.loadingBar, 30, 'white');
+    CanvasUtil.drawRectangle(canvas, 100, 500, 300, 30, 'white');
+    CanvasUtil.fillRectangle(canvas, 100, 500, this.loadingBar, 30, 'white');
   }
 }
-
