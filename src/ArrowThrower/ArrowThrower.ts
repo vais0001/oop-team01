@@ -9,13 +9,13 @@ export default class ArrowThrower extends Scene {
 
   public constructor (maxX: number, maxY: number) {
     super(maxX, maxY);
-    console.log(maxX);
     this.image = CanvasUtil.loadNewImage('../../placeholders/arrow_thrower_scene.png');
-    this.player = new Player(1422, 800);
-    console.log(this.image.height);
+    this.player = new Player(this.backgroundWidth, this.backgroundHeight + this.dimensionsY);
   }
 
   public processInput(keyListener: KeyListener): void {
+    if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
+    if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(1);
     return null;
   }
 

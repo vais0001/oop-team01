@@ -7,6 +7,12 @@ export default abstract class Drawable {
 
   protected posY: number;
 
+  protected dimensionsX: number;
+
+  public constructor () {
+    this.dimensionsX = (window.innerWidth - 1422) / 2;
+  }
+
   public getPosX(): number {
     return this.posX;
   }
