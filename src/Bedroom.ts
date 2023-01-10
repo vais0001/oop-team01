@@ -33,6 +33,8 @@ export default class Bedroom extends Scene {
 
   private cheatWhackamole: boolean;
 
+  private cheatArrow: boolean;
+
   public constructor(MaxX: number, MaxY: number, level:number) {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./assets/room1.png');
@@ -56,6 +58,7 @@ export default class Bedroom extends Scene {
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.timeToText = 2000;
     this.cheatWhackamole = false;
+    this.cheatArrow = false;
   }
 
   public processInput(keyListener: KeyListener): any {
@@ -76,12 +79,16 @@ export default class Bedroom extends Scene {
     }
     // Cheat code to go to whackamole class
     if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
+    if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
   }
 
   public update(elapsed: number): Scene {
     //cheat code to whackamole
     if(this.cheatWhackamole === true) {
       return new Whackamole(window.innerWidth, window.innerHeight)
+    }
+    if(this.cheatArrow === true) {
+      return new ArrowThrower(window.innerWidth, window.innerHeight)
     }
 
     if (this.webpageScene === true) return new Webpage(0, 0);
