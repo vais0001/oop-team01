@@ -6,7 +6,7 @@ export default class Whackamole extends Scene {
 
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
-    this.image = CanvasUtil.loadNewImage('./placeholders/Whackamole_00000.png')
+    this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg')
   }
 
   public processInput(keyListener: KeyListener): void {
