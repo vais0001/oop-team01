@@ -104,7 +104,7 @@ export default class Bedroom extends Scene {
     if (this.level1) {
       this.timeToText -= elapsed;
     }
-    if (this.scene === 3) return new ArrowThrower(this.maxX, this.maxY);
+    if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
     return null;
   }
 
