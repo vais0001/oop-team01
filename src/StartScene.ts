@@ -1,7 +1,7 @@
 import Bedroom from './Bedroom.js';
 import CanvasUtil from './CanvasUtil.js';
 import KeyListener from './KeyListener.js';
-import LoadingScene from './LoadingScene.js';
+import LoadingScene from './LoadingScenes/LoadingScene.js';
 import Scene from './Scene.js';
 import CreditScene from './CreditScene.js';
 

@@ -13,11 +13,11 @@ export default class Player extends Drawable {
   }
 
   public move (direction: number): void {
-      if (direction == 0) {
-        if (this.posX > this.dimensionsX) {
-          this.posX -= 5;
-        }
+    if (direction == 0) {
+      if (this.posX > this.dimensionsX) {
+        this.posX -= 5;
       }
+    }
 
     if (direction == 1)  {
       if (this.posX < (1422 + this.dimensionsX - this.image.width)) {

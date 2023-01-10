@@ -9,6 +9,7 @@ import StartScene from './StartScene.js';
 import Webpage from './Webpage.js';
 import ArrowThrower from './ArrowThrower/ArrowThrower.js'
 import Whackamole from './Whackamole/Whackamole.js';
+import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -35,6 +36,8 @@ export default class Bedroom extends Scene {
 
   private cheatArrow: boolean;
 
+  private cheatLoadingScreen: boolean;
+
   public constructor(MaxX: number, MaxY: number, level:number) {
     super(MaxX, MaxY);
     this.image = CanvasUtil.loadNewImage('./assets/room1.png');
@@ -59,6 +62,7 @@ export default class Bedroom extends Scene {
     this.timeToText = 2000;
     this.cheatWhackamole = false;
     this.cheatArrow = false;
+    this.cheatLoadingScreen = false;
   }
 
   public processInput(keyListener: KeyListener): any {
@@ -80,6 +84,7 @@ export default class Bedroom extends Scene {
     // Cheat code to go to whackamole class
     if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
     if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
+    if (keyListener.keyPressed(KeyListener.KEY_3)) this.cheatLoadingScreen = true;
   }
 
   public update(elapsed: number): Scene {
@@ -91,11 +96,15 @@ export default class Bedroom extends Scene {
       return new ArrowThrower(window.innerWidth, window.innerHeight);
     }
 
+    if(this.cheatLoadingScreen === true) {
+      return new LoadingSceneAT(window.innerWidth, window.innerHeight)
+    }
+
     if (this.webpageScene === true) return new Webpage(0, 0);
     if (this.level1) {
       this.timeToText -= elapsed;
     }
-    if (this.scene === 3) return new ArrowThrower(this.maxX, this.maxY);
+    if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
     return null;
   }
 
