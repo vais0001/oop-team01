@@ -6,8 +6,7 @@ export default class EnemyAD extends Drawable {
     super();
     this.image = CanvasUtil.loadNewImage('../../placeholders/AD.png');
     this.posX = this.dimensionsX;
-    this.posY = Math.random() * (maxY - (0 - this.dimensionsY)) + (0 - this.dimensionsY);
-
+    this.posY = Math.random() * (maxY - (this.dimensionsY)) + (this.dimensionsY);
   }
 
   public update(elapsed: number): void {

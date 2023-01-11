@@ -45,7 +45,7 @@ export default class ArrowThrower extends Scene {
   }
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
-    CanvasUtil.fillCanvas(canvas, 'black');
+    CanvasUtil.fillCanvas(canvas, 'white');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     this.player.render(canvas);
     this.ad.forEach((item: EnemyAD) => item.render(canvas));
