@@ -5,14 +5,13 @@ import EnemyAD from "./EnemyAD.js";
 import Player from "./Player.js";
 
 export default class ArrowThrower extends Scene {
-
   private player: Player;
 
   private ad: EnemyAD[] = [];
 
   private timeToNextAD: number;
 
-  public constructor (maxX: number, maxY: number) {
+  public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('../../placeholders/arrow_thrower_scene.png');
 
