@@ -1,7 +1,7 @@
 import CanvasUtil from "./CanvasUtil.js";
 
 export default abstract class Drawable {
-  protected image: HTMLImageElement;
+  public image: HTMLImageElement;
 
   protected posX: number;
 

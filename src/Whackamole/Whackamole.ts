@@ -22,12 +22,15 @@ export default class Whackamole extends Scene {
 
   private Antagonist: Antagonist;
 
+  private wormSmashed: number;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg');
     this.timeToNextVirus = 1000;
     this.enemiesLeft = 5;
     this.checkIfCorrect = 0;
+    this.wormSmashed = 200;
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(50, 250 + i))
     }
@@ -198,7 +201,12 @@ export default class Whackamole extends Scene {
       if (this.value === item.getValue()) {
         this.value = 0;
         this.enemiesLeft -= 1;
-        return false;
+        item.image = CanvasUtil.loadNewImage('./assets/wormsmashed.png');
+        this.wormSmashed -= elapsed;
+        if(this.wormSmashed <= 0) {
+          this.wormSmashed = 200;
+          return false;
+      } else return true
       } else return true;
     })
 

@@ -14,39 +14,42 @@ export default class Viruses extends Drawable {
     this.timeToDissapear = 2500;
     this.isDead = false;
     this.value = Math.floor(Math.random() * 9) + 1;
-    this.image = CanvasUtil.loadNewImage('./assets/worm1.png')
+    this.image = CanvasUtil.loadNewImage('./assets/wormsmall.png')
     if (this.value === 1) {
-      this.posX = 330 + this.dimensionsX;
-      this.posY = 450 + this.dimensionsY;
+      this.posX = 280 + this.dimensionsX;
+      this.posY = 500 + this.dimensionsY;
     } else if (this.value === 2) {
-      this.posX = 660 + this.dimensionsX;
-      this.posY = 450 + this.dimensionsY;
+      this.posX = 610 + this.dimensionsX;
+      this.posY = 500 + this.dimensionsY;
     } else if (this.value === 3) {
-      this.posX = 980 + this.dimensionsX;
-      this.posY = 450 + this.dimensionsY;
+      this.posX = 930 + this.dimensionsX;
+      this.posY = 500 + this.dimensionsY;
     } else if (this.value === 4) {
-      this.posX = 330 + this.dimensionsX;
-      this.posY = 300 + this.dimensionsY;
+      this.posX = 280 + this.dimensionsX;
+      this.posY = 330 + this.dimensionsY;
     } else if (this.value === 5) {
-      this.posX = 660 + this.dimensionsX;
-      this.posY = 300 + this.dimensionsY;
+      this.posX = 610 + this.dimensionsX;
+      this.posY = 330 + this.dimensionsY;
     } else if (this.value === 6) {
-      this.posX = 980 + this.dimensionsX;
-      this.posY = 300 + this.dimensionsY;
+      this.posX = 930 + this.dimensionsX;
+      this.posY = 330 + this.dimensionsY;
     } else if (this.value === 7) {
-      this.posX = 330 + this.dimensionsX;
-      this.posY = 150 + this.dimensionsY;
+      this.posX = 280 + this.dimensionsX;
+      this.posY = 180 + this.dimensionsY;
     } else if (this.value === 8) {
-      this.posX = 660 + this.dimensionsX;
-      this.posY = 150 + this.dimensionsY;
+      this.posX = 610 + this.dimensionsX;
+      this.posY = 180 + this.dimensionsY;
     } else if (this.value === 9) {
-      this.posX = 980 + this.dimensionsX;
-      this.posY = 150 + this.dimensionsY;
+      this.posX = 930 + this.dimensionsX;
+      this.posY = 180 + this.dimensionsY;
     }
   }
 
   public update(elapsed: number): boolean {
     this.timeToDissapear -= elapsed;
+    if (this.timeToDissapear < 1500) {
+      this.image = CanvasUtil.loadNewImage('./assets/wormbig.png')
+    }
     if(this.timeToDissapear <= 0) {
       this.isDead = true;
     }
