@@ -9,6 +9,7 @@ import Webpage from './Webpage.js';
 import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
+import Text from './Text.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -43,6 +44,8 @@ export default class Bedroom extends Scene {
 
   private trojanHead: HTMLImageElement;
 
+  private text: Text;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/room1.png');
@@ -71,6 +74,7 @@ export default class Bedroom extends Scene {
     this.cheatArrow = false;
     this.cheatLoadingScreen = false;
     this.nextText = 0;
+    this.text = new Text();
   }
 
   public processInput(keyListener: KeyListener): any {
@@ -136,73 +140,24 @@ export default class Bedroom extends Scene {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     if (!this.level1) {
-      if (this.nextText === 0) {
-        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-        CanvasUtil.writeTextToCanvas(canvas, 'pffff, what a terrible sleep I had.', this.dimensionsX + 700, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 540, this.dimensionsY + 670);
-      }
-
-      if (this.nextText === 1) {
-        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-        CanvasUtil.writeTextToCanvas(canvas, 'Let me grab my phone and check out the latest game releases.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 540, this.dimensionsY + 670);
-      }
-
-      if (this.nextText === 2) {
-        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-        CanvasUtil.writeTextToCanvas(canvas, 'Narrator: Timmy looks at his phone and sees that X game', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'he really wants has finally been released. Due to', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'inflation, the price of games has risen to very high amounts.', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-      }
-
-      if (this.nextText === 3) {
-        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-        CanvasUtil.writeTextToCanvas(canvas, 'YES! Finally, it is released!', this.dimensionsX + 720, this.dimensionsY + 630, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'But oh no, it is too expensive. My parents will not', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'buy it for me unless I get high grades...', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'I want it now, but how….', this.dimensionsX + 720, this.dimensionsY + 690, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-        CanvasUtil.drawImage(canvas, this.playerHead, this.dimensionsX + 540, this.dimensionsY + 670);
-      }
-
-      if (this.nextText === 4) {
-        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-        CanvasUtil.writeTextToCanvas(canvas, 'Narrator: Timmy browses on forums to see', this.dimensionsX + 720, this.dimensionsY + 630, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'how to access this game for free.', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'He comes across a site which promises a safe and free download.', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 14, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-      }
+      if (this.nextText === 0) this.text.textOne(canvas, this.image1, this.playerHead);
+      if (this.nextText === 1) this.text.textTwo(canvas, this.image1, this.playerHead);
+      if (this.nextText === 2) this.text.textThree(canvas, this.image1, null);
+      if (this.nextText === 3) this.text.textFour(canvas, this.image1, this.playerHead);
+      if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
     }
 
-    if (this.scene === 1 && this.timeToText <= 0) {
-      CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-      CanvasUtil.writeTextToCanvas(canvas, 'You fell for my trap!', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-      CanvasUtil.drawImage(canvas, this.trojanHead, this.dimensionsX + 540, this.dimensionsY + 670);
-    }
+    if (this.scene === 1 && this.timeToText <= 0) this.text.textSix(canvas, this.image1, this.trojanHead);
+    if (this.scene === 2) this.text.textSeven(canvas, this.image1, this.trojanHead);
 
-    if (this.scene === 2) {
-      CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-      CanvasUtil.writeTextToCanvas(canvas, 'Now you must take responsibility for your actions…', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
-      CanvasUtil.drawImage(canvas, this.trojanHead, this.dimensionsX + 540, this.dimensionsY + 670);
-    }
     this.bed.render(canvas);
     this.player.render(canvas);
     this.computer.render(canvas);
 
     if (this.player.collideWithitem(this.computer)) {
-      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
+      this.text.computerPrompt(canvas, this.popUp);
     }
-    if (this.level1) {
-      this.antagonist.render(canvas);
-      if (this.timeToText <= 0) {
-        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-      }
-    }
+
+    if (this.level1) this.antagonist.render(canvas);
   }
 }
