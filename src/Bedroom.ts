@@ -5,11 +5,12 @@ import Computer from './Computer.js';
 import KeyListener from './KeyListener.js';
 import Player from './Player.js';
 import Scene from './Scene.js';
-import StartScene from './StartScene.js';
 import Webpage from './Webpage.js';
-import ArrowThrower from './ArrowThrower/ArrowThrower.js'
+import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
+import Text from './Text.js';
+import { GameLoop } from './GameLoop.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -38,8 +39,16 @@ export default class Bedroom extends Scene {
 
   private cheatLoadingScreen: boolean;
 
-  public constructor(MaxX: number, MaxY: number, level:number) {
-    super(MaxX, MaxY);
+  private nextText: number;
+
+  private playerHead: HTMLImageElement;
+
+  private trojanHead: HTMLImageElement;
+
+  private text: Text;
+
+  public constructor(maxX: number, maxY: number, level: number) {
+    super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/room1.png');
     this.starting = false;
     if (level === 1) {
@@ -59,27 +68,48 @@ export default class Bedroom extends Scene {
     this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png');
     this.webpageScene = false;
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
-    this.timeToText = 2000;
+    this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmyHead.png');
+    this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojanHead.png');
+    if (!this.level1) {
+      this.timeToText = 1000;
+    } else {
+      this.timeToText = 1500;
+    }
     this.cheatWhackamole = false;
     this.cheatArrow = false;
     this.cheatLoadingScreen = false;
+    this.nextText = 0;
+    this.text = new Text();
   }
 
-  public processInput(keyListener: KeyListener): any {
+  public processInput(keyListener: KeyListener): void {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
-    if (!this.level1 === true) {
-      if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
-      if (keyListener.isKeyDown(KeyListener.KEY_UP)) this.player.move(1);
-      if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2);
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3);
-      if (keyListener.keyPressed(KeyListener.KEY_SPACE)
-      && this.player.collideWithitem(this.computer)) this.webpageScene = true;
+    if (!this.level1 && this.nextText > 4) {
+      if (this.player.getPosX() > this.dimensionsX + 5) {
+        if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) this.player.move(0);
+      }
+
+      if (this.player.getPosY() > this.dimensionsY + 5) {
+        if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1);
+      }
+
+      if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
+        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) this.player.move(2);
+      }
+
+      if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
+        if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3);
+      }
+
+      if (keyListener.isKeyDown(KeyListener.KEY_SPACE)
+        && this.player.collideWithitem(this.computer)) this.webpageScene = true;
     }
-    if (this.scene === 1) {
-      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 2;
+    if (this.timeToText <= 0) {
+      if (this.scene === 1 && (keyListener.keyPressed(KeyListener.KEY_SPACE))) this.scene = 2;
+      if (this.scene === 2 && (keyListener.keyPressed(KeyListener.KEY_SPACE))) this.scene = 3;
     }
-    if (this.scene === 2) {
-      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.scene = 3;
+    if (this.timeToText <= 0) {
+      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
     }
     // Cheat code to go to whackamole class
     if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
@@ -96,14 +126,12 @@ export default class Bedroom extends Scene {
       return new ArrowThrower(window.innerWidth, window.innerHeight);
     }
 
-    if(this.cheatLoadingScreen === true) {
+    if (this.cheatLoadingScreen === true) {
       return new LoadingSceneAT(window.innerWidth, window.innerHeight)
     }
 
     if (this.webpageScene === true) return new Webpage(0, 0);
-    if (this.level1) {
-      this.timeToText -= elapsed;
-    }
+    this.timeToText -= elapsed;
     if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
     return null;
   }
@@ -112,27 +140,27 @@ export default class Bedroom extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
+    if (!this.level1) {
+      if (this.nextText === 0) this.text.textOne(canvas, this.image1, this.playerHead);
+      if (this.nextText === 1) this.text.textTwo(canvas, this.image1, this.playerHead);
+      if (this.nextText === 2) this.text.textThree(canvas, this.image1, null);
+      if (this.nextText === 3) this.text.textFour(canvas, this.image1, this.playerHead);
+      if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
+    }
+
+    if (this.scene === 1 && this.timeToText <= 0) this.text.textSix(canvas, this.image1, this.trojanHead);
+    if (this.scene === 2) this.text.textSeven(canvas, this.image1, this.trojanHead);
+
     this.bed.render(canvas);
     this.player.render(canvas);
     this.computer.render(canvas);
-    if (this.player.collideWithitem(this.computer)) {
+
+    if (this.nextText > 4) {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
     }
-    if (this.level1) {
-      this.antagonist.render(canvas);
-      if (this.timeToText <= 0) {
-        CanvasUtil.drawImage(canvas, this.image1, 300, 100);
-      }
+    if (this.player.collideWithitem(this.computer)) {
+      this.text.computerPrompt(canvas, this.popUp);
     }
-    if (this.scene === 1 && this.timeToText <= 0) {
-      CanvasUtil.writeTextToCanvas(canvas, 'You downloaded game ilegally, unfortunately now you are infected', 515, 150, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, ' with the viruses, so now you will have to fight them !', 510, 170, 'center', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
-    }
-    if (this.scene === 2) {
-      CanvasUtil.writeTextToCanvas(canvas, 'fuck uuuuuuuuuuuuuuuuuuuuu', 515, 150, 'left', 'arial', 14, 'black');
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to start fighting', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
-    }
+    if (this.level1) this.antagonist.render(canvas);
   }
 }
