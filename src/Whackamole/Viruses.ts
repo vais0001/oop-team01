@@ -17,31 +17,31 @@ export default class Viruses extends Drawable {
     this.image = CanvasUtil.loadNewImage('./assets/worm1.png')
     if (this.value === 1) {
       this.posX = 330 + this.dimensionsX;
-      this.posY = 770 + this.dimensionsY;
+      this.posY = 450 + this.dimensionsY;
     } else if (this.value === 2) {
       this.posX = 660 + this.dimensionsX;
-      this.posY = 770 + this.dimensionsY;
+      this.posY = 450 + this.dimensionsY;
     } else if (this.value === 3) {
       this.posX = 980 + this.dimensionsX;
-      this.posY = 770 + this.dimensionsY;
+      this.posY = 450 + this.dimensionsY;
     } else if (this.value === 4) {
       this.posX = 330 + this.dimensionsX;
-      this.posY = 620 + this.dimensionsY;
+      this.posY = 300 + this.dimensionsY;
     } else if (this.value === 5) {
       this.posX = 660 + this.dimensionsX;
-      this.posY = 620 + this.dimensionsY;
+      this.posY = 300 + this.dimensionsY;
     } else if (this.value === 6) {
       this.posX = 980 + this.dimensionsX;
-      this.posY = 620 + this.dimensionsY;
+      this.posY = 300 + this.dimensionsY;
     } else if (this.value === 7) {
       this.posX = 330 + this.dimensionsX;
-      this.posY = 470 + this.dimensionsY;
+      this.posY = 150 + this.dimensionsY;
     } else if (this.value === 8) {
       this.posX = 660 + this.dimensionsX;
-      this.posY = 470 + this.dimensionsY;
+      this.posY = 150 + this.dimensionsY;
     } else if (this.value === 9) {
       this.posX = 980 + this.dimensionsX;
-      this.posY = 470 + this.dimensionsY;
+      this.posY = 150 + this.dimensionsY;
     }
   }
 
