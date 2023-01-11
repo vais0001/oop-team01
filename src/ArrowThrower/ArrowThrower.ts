@@ -18,10 +18,13 @@ export default class ArrowThrower extends Scene {
 
   private timeToNextAD: number;
 
+  private changingTime: number;
+
   private score: number;
 
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
+
     this.image = CanvasUtil.loadNewImage('../../placeholders/arrow_thrower_scene.png');
 
     this.player = new Player(this.backgroundWidth, this.backgroundHeight + this.dimensionsY);
@@ -29,6 +32,7 @@ export default class ArrowThrower extends Scene {
     this.bullet = new CursorBullet(-100, -100);
     this.timeToNextAD = 1500;
     this.score = 0;
+    this.changingTime = 1500;
 
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
@@ -55,15 +59,23 @@ export default class ArrowThrower extends Scene {
       this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
     }
 
-    this.timeToNextAD -= elapsed;
+    this.changingTime -= elapsed;
 
-    if (this.timeToNextAD < 0) {
+    if (this.changingTime < 0) {
       this.ad.push(new EnemyAD(this.backgroundHeight));
-      this.timeToNextAD = 1500;
+      if (this.timeToNextAD > 500) {
+        this.timeToNextAD -= 100; // change to 10 later
+      }
+      this.changingTime = this.timeToNextAD;
+      console.log(this.changingTime)
     }
 
     this.ad = this.ad.filter((item: EnemyAD) => {
-      return (item.getPosX() < this.backgroundWidth + this.dimensionsX);
+      if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
+        this.lives.pop()
+        return false;
+      }
+      return true;
     })
 
     this.ad = this.ad.filter((item: EnemyAD) => {
