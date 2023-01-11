@@ -2,6 +2,7 @@ import CanvasUtil from "../CanvasUtil.js";
 import Gameover from "../Gameover.js";
 import KeyListener from "../KeyListener.js";
 import Scene from "../Scene.js";
+import Lives from "../Whackamole/Lives.js";
 import CursorBullet from "./CursorBullet.js";
 import EnemyAD from "./EnemyAD.js";
 import Player from "./Player.js";
@@ -11,11 +12,11 @@ export default class ArrowThrower extends Scene {
 
   private ad: EnemyAD[] = [];
 
+  private lives: Lives[] = [];
+
   private bullet: CursorBullet;
 
   private timeToNextAD: number;
-
-  private adsHit: number;
 
   private score: number;
 
@@ -27,8 +28,11 @@ export default class ArrowThrower extends Scene {
     this.ad.push(new EnemyAD(this.backgroundHeight));
     this.bullet = new CursorBullet(-100, -100);
     this.timeToNextAD = 1500;
-    this.adsHit = 0;
     this.score = 0;
+
+    for (let i = 0; i < 150; i += 50) {
+      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
+    }
   }
 
   public processInput(keyListener: KeyListener): void {
@@ -73,15 +77,16 @@ export default class ArrowThrower extends Scene {
 
     this.ad = this.ad.filter((item: EnemyAD) => {
       if (this.player.isCollidingAD(item)) {
-        this.adsHit += 1;
+        this.lives.pop()
         return false;
       }
       return true;
     })
 
-    if (this.adsHit > 4) {
-      return new Gameover(this.maxX, this.maxY);
+    if (this.lives.length === 0) {
+      return new Gameover(0, 0)
     }
+
     return null;
   }
 
@@ -93,5 +98,8 @@ export default class ArrowThrower extends Scene {
     this.ad.forEach((item: EnemyAD) => item.render(canvas));
     this.bullet.render(canvas);
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
+    this.lives.forEach((item: Lives) => {
+      item.render(canvas)
+    })
   }
 }
