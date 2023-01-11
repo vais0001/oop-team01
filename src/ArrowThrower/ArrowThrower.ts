@@ -14,8 +14,8 @@ export default class ArrowThrower extends Scene {
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
-    if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(1);
+    if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) this.player.move(0);
+    if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) this.player.move(1);
     return null;
   }
 

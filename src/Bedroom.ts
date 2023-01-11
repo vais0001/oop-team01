@@ -66,44 +66,47 @@ export default class Bedroom extends Scene {
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojanHead.png');
-    this.timeToText = 2000;
+    if (!this.level1) {
+      this.timeToText = 1000;
+    } else {
+      this.timeToText = 1500;
+    }
     this.cheatWhackamole = false;
     this.cheatArrow = false;
     this.cheatLoadingScreen = false;
     this.nextText = 0;
   }
 
-  public processInput(keyListener: KeyListener): any {
+  public processInput(keyListener: KeyListener): void {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
-    if (!this.level1 === true) {
+    if (!this.level1) {
       if (this.player.getPosX() > this.dimensionsX + 5) {
-        if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
+        if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) this.player.move(0);
       }
 
       if (this.player.getPosY() > this.dimensionsY + 5) {
-        if (keyListener.isKeyDown(KeyListener.KEY_UP)) this.player.move(1);
+        if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1);
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
-        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2);
+        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) this.player.move(2);
       }
 
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
-        if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3);
+        if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3);
       }
 
-      if (keyListener.keyPressed(KeyListener.KEY_SPACE)
+      if (keyListener.isKeyDown(KeyListener.KEY_SPACE)
         && this.player.collideWithitem(this.computer)) this.webpageScene = true;
     }
-    if (this.scene === 1) {
-      if (keyListener.keyPressed(KeyListener.KEY_N)) this.scene = 2;
+    if (this.timeToText <= 0) {
+      if (this.scene === 1 && (keyListener.keyPressed(KeyListener.KEY_SPACE))) this.scene = 2;
+      if (this.scene === 2 && (keyListener.keyPressed(KeyListener.KEY_SPACE))) this.scene = 3;
     }
-    if (this.scene === 2) {
-      if (keyListener.keyPressed(KeyListener.KEY_N)) this.scene = 3;
+    if (this.timeToText <= 0) {
+      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
     }
-
-    if (keyListener.keyPressed(KeyListener.KEY_N)) this.nextText += 1;
-
+    console.log(this.nextText);
     // Cheat code to go to whackamole class
     if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
     if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
@@ -124,9 +127,8 @@ export default class Bedroom extends Scene {
     }
 
     if (this.webpageScene === true) return new Webpage(0, 0);
-    if (this.level1) {
-      this.timeToText -= elapsed;
-    }
+    this.timeToText -= elapsed;
+    console.log(this.timeToText);
     if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
     return null;
   }
