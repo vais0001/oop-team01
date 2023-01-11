@@ -180,5 +180,6 @@ export class GameLoop {
     this.frameEnd = now;
     this.gameTime = now - this.gameStart;
     this.frameCount += 1;
+    console.log(this.fps);
   };
 }

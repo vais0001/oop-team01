@@ -22,7 +22,7 @@ export default class Webpage extends Scene {
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (keyListener.keyPressed(KeyListener.KEY_ENTER)) {
+    if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
       this.downloading = true;
     }
   }
@@ -55,7 +55,7 @@ export default class Webpage extends Scene {
     CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 650, 301, 30, 'white');
     CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 650, this.loadingBar, 30, 'green');
     if (!(this.downloading)) {
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [ENTER] To Download The Game', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'white');
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] To Download The Game', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'white');
     } if (this.downloading && this.loadingBar < 300) {
       CanvasUtil.writeTextToCanvas(canvas, 'DOWNLOADING', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'white');
     } if (this.loadingBar > 300) {
