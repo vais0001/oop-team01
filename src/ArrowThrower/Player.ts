@@ -1,5 +1,6 @@
 import CanvasUtil from "../CanvasUtil.js";
 import Drawable from "../Drawable.js";
+import EnemyAD from "./EnemyAD.js";
 
 export default class Player extends Drawable {
 
@@ -12,7 +13,6 @@ export default class Player extends Drawable {
 
   public move (direction: number): void {
     if (direction == 0) {
-      console.log((this.dimensionsY))
       if (this.posY > this.dimensionsY + 15) {
         this.posY -= 5;
       }
@@ -24,4 +24,11 @@ export default class Player extends Drawable {
       }
     }
   }
+
+  public isCollidingAD(ad: EnemyAD): boolean {
+    return (this.posX < ad.getPosX() + ad.getWidth()
+    && this.posX + this.getWidth() > ad.getPosX()
+    && this.getPosY() < ad.getPosY() + ad.getHeight()
+    && this.getHeight() + this.posY > ad.getPosY());
+  }
 }
