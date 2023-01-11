@@ -17,7 +17,7 @@ export default abstract class Drawable {
 
   public constructor() {
     this.dimensionsX = (window.innerWidth - 1422) / 2;
-    this.dimensionsY = (window.innerHeight - 1422) / 2;
+    this.dimensionsY = (window.innerHeight - 800) / 2;
 
     this.backgroundHeight = 800;
     this.backgroundWidth = 1422;
