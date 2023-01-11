@@ -5,7 +5,6 @@ import Computer from './Computer.js';
 import KeyListener from './KeyListener.js';
 import Player from './Player.js';
 import Scene from './Scene.js';
-import StartScene from './StartScene.js';
 import Webpage from './Webpage.js';
 import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
@@ -77,10 +76,22 @@ export default class Bedroom extends Scene {
   public processInput(keyListener: KeyListener): any {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
     if (!this.level1 === true) {
-      if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
-      if (keyListener.isKeyDown(KeyListener.KEY_UP)) this.player.move(1);
-      if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2);
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3);
+      if (this.player.getPosX() > this.dimensionsX + 5) {
+        if (keyListener.isKeyDown(KeyListener.KEY_LEFT)) this.player.move(0);
+      }
+
+      if (this.player.getPosY() > this.dimensionsY + 5) {
+        if (keyListener.isKeyDown(KeyListener.KEY_UP)) this.player.move(1);
+      }
+
+      if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
+        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT)) this.player.move(2);
+      }
+
+      if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
+        if (keyListener.isKeyDown(KeyListener.KEY_DOWN)) this.player.move(3);
+      }
+
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)
         && this.player.collideWithitem(this.computer)) this.webpageScene = true;
     }
@@ -124,21 +135,6 @@ export default class Bedroom extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    this.bed.render(canvas);
-    this.player.render(canvas);
-    this.computer.render(canvas);
-
-    if (this.player.collideWithitem(this.computer)) {
-      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
-      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
-    }
-    if (this.level1) {
-      this.antagonist.render(canvas);
-      if (this.timeToText <= 0) {
-        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
-      }
-    }
-
     if (!this.level1) {
       if (this.nextText === 0) {
         CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
@@ -193,6 +189,20 @@ export default class Bedroom extends Scene {
       CanvasUtil.writeTextToCanvas(canvas, 'Now you must take responsibility for your actions…', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 14, 'black');
       CanvasUtil.writeTextToCanvas(canvas, '[N] next', this.dimensionsX + 850, this.dimensionsY + 710, 'center', 'arial', 14, 'black');
       CanvasUtil.drawImage(canvas, this.trojanHead, this.dimensionsX + 540, this.dimensionsY + 670);
+    }
+    this.bed.render(canvas);
+    this.player.render(canvas);
+    this.computer.render(canvas);
+
+    if (this.player.collideWithitem(this.computer)) {
+      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
+      CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
+    }
+    if (this.level1) {
+      this.antagonist.render(canvas);
+      if (this.timeToText <= 0) {
+        CanvasUtil.drawImage(canvas, this.image1, this.dimensionsX + 500, this.dimensionsY + 600);
+      }
     }
   }
 }
