@@ -4,8 +4,8 @@ import CanvasUtil from './CanvasUtil.js';
 export default class Antagonist extends Drawable {
   public constructor(posX: number, posY: number) {
     super();
-    this.posX = this.dimensionsX + 200;
-    this.posY = this.dimensionsY + 600;
+    this.posX = posX + this.dimensionsX;
+    this.posY = posY + this.dimensionsY;
     this.image = CanvasUtil.loadNewImage('./placeholders/trojan_00000.png')
   }
 }

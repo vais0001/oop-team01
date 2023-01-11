@@ -4,6 +4,7 @@ import KeyListener from "../KeyListener.js";
 import Scene from "../Scene.js";
 import Lives from "./Lives.js";
 import Viruses from "./Viruses.js";
+import Antagonist from "../Antagonist.js";
 
 export default class Whackamole extends Scene {
 
@@ -19,12 +20,13 @@ export default class Whackamole extends Scene {
 
   private checkIfCorrect: number;
 
+  private Antagonist: Antagonist;
 
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg');
     this.timeToNextVirus = 1000;
-    this.enemiesLeft = 50;
+    this.enemiesLeft = 5;
     this.checkIfCorrect = 0;
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(50, 250 + i))
@@ -203,10 +205,12 @@ export default class Whackamole extends Scene {
     this.timeToNextVirus -= elapsed;
     if (this.timeToNextVirus <= 0 && this.holes.length < 4 && this.enemiesLeft > 0) {
       this.holes.push(new Viruses());
+      this.timeToNextVirus = 1500;
       if (this.enemiesLeft < 40 && this.enemiesLeft > 30) this.timeToNextVirus = 1300;
       if (this.enemiesLeft < 30 && this.enemiesLeft > 15) this.timeToNextVirus = 1000;
       if (this.enemiesLeft < 15) this.timeToNextVirus = 800;
     }
+
     return null;
   }
 
@@ -222,6 +226,11 @@ export default class Whackamole extends Scene {
     this.lives.forEach((item: Lives) => {
       item.render(canvas)
     })
+    if(this.enemiesLeft === 0) {
+      this.Antagonist = new Antagonist(500, 300)
+      this.Antagonist.render(canvas)
+    }
+
   }
 
 }
