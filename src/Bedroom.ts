@@ -9,6 +9,7 @@ import Webpage from './Webpage.js';
 import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
+import { GameLoop } from './GameLoop.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -79,7 +80,7 @@ export default class Bedroom extends Scene {
 
   public processInput(keyListener: KeyListener): void {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
-    if (!this.level1) {
+    if (!this.level1 && this.nextText > 4) {
       if (this.player.getPosX() > this.dimensionsX + 5) {
         if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) this.player.move(0);
       }
@@ -106,7 +107,6 @@ export default class Bedroom extends Scene {
     if (this.timeToText <= 0) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
     }
-    console.log(this.nextText);
     // Cheat code to go to whackamole class
     if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
     if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
@@ -128,7 +128,6 @@ export default class Bedroom extends Scene {
 
     if (this.webpageScene === true) return new Webpage(0, 0);
     this.timeToText -= elapsed;
-    console.log(this.timeToText);
     if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
     return null;
   }
@@ -196,8 +195,10 @@ export default class Bedroom extends Scene {
     this.player.render(canvas);
     this.computer.render(canvas);
 
-    if (this.player.collideWithitem(this.computer)) {
+    if (this.nextText > 4) {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
+    }
+    if (this.player.collideWithitem(this.computer)) {
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 10, this.dimensionsY + 700, 'left', 'arial', 40, 'white');
     }
     if (this.level1) {
