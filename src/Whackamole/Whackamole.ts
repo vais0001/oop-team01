@@ -15,7 +15,7 @@ export default class Whackamole extends Scene {
 
   private lives: Lives[] = [];
 
-  private score: number;
+  private enemiesLeft: number;
 
   private checkIfCorrect: number;
 
@@ -24,7 +24,7 @@ export default class Whackamole extends Scene {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg');
     this.timeToNextVirus = 1000;
-    this.score = 0;
+    this.enemiesLeft = 100;
     this.checkIfCorrect = 0;
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(50, 250 + i))
@@ -195,7 +195,7 @@ export default class Whackamole extends Scene {
     this.holes = this.holes.filter((item: Viruses) => {
       if (this.value === item.getValue()) {
         this.value = 0;
-        this.score += 1;
+        this.enemiesLeft -= 1;
         return false;
       } else return true;
     })
@@ -203,9 +203,9 @@ export default class Whackamole extends Scene {
     this.timeToNextVirus -= elapsed;
     if (this.timeToNextVirus <= 0 && this.holes.length < 4) {
       this.holes.push(new Viruses());
-      if (this.score < 10) this.timeToNextVirus = 1000;
-      if (this.score > 10 && this.score < 21) this.timeToNextVirus = 800;
-      if (this.score > 20) this.timeToNextVirus = 500;
+      if (this.enemiesLeft > 85 && this.enemiesLeft < 50) this.timeToNextVirus = 1300;
+      if (this.enemiesLeft > 50 && this.enemiesLeft < 30) this.timeToNextVirus = 1000;
+      if (this.enemiesLeft > 30) this.timeToNextVirus = 800;
     }
     return null;
   }
@@ -215,7 +215,7 @@ export default class Whackamole extends Scene {
     CanvasUtil.clearCanvas(canvas)
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    CanvasUtil.writeTextToCanvas(canvas, `score: ${this.score}`, 10, 50, 'left', 'arial', 22, 'white')
+    CanvasUtil.writeTextToCanvas(canvas, `Enemies Left: ${this.enemiesLeft}`, 10, 50, 'left', 'arial', 22, 'white')
     this.holes.forEach((item: Viruses) => {
       item.render(canvas)
     })
