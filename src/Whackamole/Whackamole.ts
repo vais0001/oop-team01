@@ -19,7 +19,6 @@ export default class Whackamole extends Scene {
 
   private checkIfCorrect: number;
 
-  private timeToDissapear: number;
 
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
@@ -27,7 +26,6 @@ export default class Whackamole extends Scene {
     this.timeToNextVirus = 1000;
     this.score = 0;
     this.checkIfCorrect = 0;
-    this.timeToDissapear = 3000;
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(50, 250 + i))
     }
@@ -182,7 +180,13 @@ export default class Whackamole extends Scene {
 
   public update(elapsed: number): Scene {
 
-    this.timeToDissapear -= elapsed;
+    this.holes = this.holes.filter((item: Viruses) => {
+      item.update(elapsed)
+      if (item.isItDead() === true) {
+        this.lives.pop()
+        return false;
+      } else return true;
+    })
 
     if (this.lives.length === 0) {
       return new Gameover(0, 0)

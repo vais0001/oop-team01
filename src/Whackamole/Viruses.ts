@@ -5,8 +5,14 @@ export default class Viruses extends Drawable {
 
   private value: number;
 
+  private timeToDissapear: number;
+
+  private isDead: boolean;
+
   public constructor() {
     super();
+    this.timeToDissapear = 2500;
+    this.isDead = false;
     this.value = Math.floor(Math.random() * 9) + 1;
     this.image = CanvasUtil.loadNewImage('./assets/worm1.png')
     if (this.value === 1) {
@@ -38,7 +44,20 @@ export default class Viruses extends Drawable {
       this.posY = 470 + this.dimensionsY;
     }
   }
+
+  public update(elapsed: number): boolean {
+    this.timeToDissapear -= elapsed;
+    if(this.timeToDissapear <= 0) {
+      this.isDead = true;
+    }
+    return null;
+  }
+
   public getValue() {
     return this.value;
+  }
+
+  public isItDead() {
+    return this.isDead;
   }
 }
