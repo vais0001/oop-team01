@@ -156,7 +156,7 @@ export default class Bedroom extends Scene {
     this.computer.render(canvas);
 
     if (this.nextText > 4) {
-      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
+      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 672);
     }
     if (this.player.collideWithitem(this.computer)) {
       this.text.computerPrompt(canvas, this.popUp);
