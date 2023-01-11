@@ -12,13 +12,14 @@ export default class Player extends Drawable {
 
   public move (direction: number): void {
     if (direction == 0) {
-      if (this.posY > (0 - this.dimensionsY)) {
+      console.log((this.dimensionsY))
+      if (this.posY > this.dimensionsY + 15) {
         this.posY -= 5;
       }
     }
 
     if (direction == 1)  {
-      if (this.posY < (this.backgroundHeight + (0 - this.dimensionsY) - this.image.height)) {
+      if (this.posY < this.dimensionsY + this.backgroundHeight - 140) {
         this.posY += 5;
       }
     }

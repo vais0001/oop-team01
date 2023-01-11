@@ -59,7 +59,7 @@ export default class Bedroom extends Scene {
     }
     if (!this.level1 === true) this.scene = 0;
     if (!this.level1) {
-      this.player = new Player(window.innerWidth / 2 - 550, window.innerHeight / 2);
+      this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 350);
     } if (this.level1 === true) {
       this.player = new Player(this.dimensionsX + 1050, this.dimensionsY + 150);
     }
@@ -156,7 +156,7 @@ export default class Bedroom extends Scene {
     this.computer.render(canvas);
 
     if (this.nextText > 4) {
-      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1205, this.dimensionsY + 50);
+      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1245, this.dimensionsY + 22);
     }
     if (this.player.collideWithitem(this.computer)) {
       this.text.computerPrompt(canvas, this.popUp);
