@@ -42,7 +42,7 @@ export default class ArrowThrower extends Scene {
   public processInput(keyListener: KeyListener): void {
     if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
     if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
-    if (keyListener.keyPressed(KeyListener.KEY_F)) {
+    if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
       if (this.bullet.getPosX() < this.dimensionsX) {
           this.bullet = new CursorBullet(this.player.getPosX(), this.player.getPosY() + (this.player.getHeight() / 2) - 5);
       }
