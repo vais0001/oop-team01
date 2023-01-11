@@ -32,7 +32,6 @@ export default class LoadingScene extends Scene {
     }
     if (this.loadingBar > randomPause) {
       this.realisticPause -= elapsed;
-      console.log(this.realisticPause);
     }
     if (this.loadingBar > 1220) {
       this.loadingBar = 1220;
