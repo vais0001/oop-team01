@@ -52,7 +52,7 @@ export default class ArrowThrower extends Scene {
   }
 
   public update(elapsed: number): Scene {
-    this.ad.forEach((item: EnemyAD1) => item.update(elapsed));
+    this.ad.forEach((item: EnemyAD) => item.update(elapsed));
 
     if (this.bullet.getPosX() > this.dimensionsX) {
       this.bullet.update(elapsed);
@@ -68,13 +68,14 @@ export default class ArrowThrower extends Scene {
       } else {
         this.ad.push(new EnemyAD2(this.backgroundHeight));
       }
+
       if (this.timeToNextAD > 500) {
         this.timeToNextAD -= 100; // change to 10 later
       }
       this.changingTime = this.timeToNextAD;
     }
 
-    this.ad = this.ad.filter((item: EnemyAD1) => {
+    this.ad = this.ad.filter((item: EnemyAD) => {
       if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
         this.lives.pop()
         return false;
@@ -82,7 +83,7 @@ export default class ArrowThrower extends Scene {
       return true;
     })
 
-    this.ad = this.ad.filter((item: EnemyAD1) => {
+    this.ad = this.ad.filter((item: EnemyAD) => {
       if (this.bullet.isCollidingAD(item)) {
         this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
         this.score += 5;
@@ -91,7 +92,7 @@ export default class ArrowThrower extends Scene {
       return true;
     })
 
-    this.ad = this.ad.filter((item: EnemyAD1) => {
+    this.ad = this.ad.filter((item: EnemyAD) => {
       if (this.player.isCollidingAD(item)) {
         this.lives.pop()
         return false;
@@ -111,7 +112,7 @@ export default class ArrowThrower extends Scene {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     this.player.render(canvas);
-    this.ad.forEach((item: EnemyAD1) => item.render(canvas));
+    this.ad.forEach((item: EnemyAD) => item.render(canvas));
     this.bullet.render(canvas);
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => {
