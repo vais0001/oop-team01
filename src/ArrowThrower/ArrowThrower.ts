@@ -8,6 +8,7 @@ import CursorBullet from "./CursorBullet.js";
 import EnemyAD from "./EnemyAD.js";
 import EnemyAD1 from "./EnemyAD1.js";
 import EnemyAD2 from "./EnemyAD2.js";
+import HeartPowerup from "./HeartPowerup.js";
 import Player from "./Player.js";
 
 export default class ArrowThrower extends Scene {
@@ -16,6 +17,8 @@ export default class ArrowThrower extends Scene {
   private ad: EnemyAD[] = [];
 
   private lives: Lives[] = [];
+
+  private heartPowerup: HeartPowerup[] = [];
 
   private bullet: CursorBullet;
 
@@ -37,7 +40,7 @@ export default class ArrowThrower extends Scene {
     this.changingTime = 1500;
 
     for (let i = 0; i < 150; i += 50) {
-      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
+      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
     }
   }
 
@@ -46,17 +49,15 @@ export default class ArrowThrower extends Scene {
     if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
     if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
       if (this.bullet.getPosX() < this.dimensionsX) {
-          this.bullet = new CursorBullet(this.player.getPosX(), this.player.getPosY() + (this.player.getHeight() / 2) - 5);
+        this.bullet = new CursorBullet(this.player.getPosX(), this.player.getPosY() + (this.player.getHeight() / 2) - 5);
       }
     }
     return null;
   }
 
   public update(elapsed: number): Scene {
-
-    this.ad.forEach((item: EnemyAD) => {
-      item.update(elapsed);
-    })
+    this.heartPowerup.forEach((heartPowerup: HeartPowerup) => heartPowerup.update(elapsed));
+    this.ad.forEach((item: EnemyAD) => item.update(elapsed));
 
     if (this.bullet.getPosX() > this.dimensionsX) {
       this.bullet.update(elapsed);
@@ -74,18 +75,34 @@ export default class ArrowThrower extends Scene {
       }
 
       if (this.timeToNextAD > 500) {
-        this.timeToNextAD -= 100; // change to 10 later
+        this.timeToNextAD -= 10; // change to 10 later
       }
       this.changingTime = this.timeToNextAD;
     }
 
+    if (this.lives.length < 3) {
+      if (Math.random() > 0.9985) {
+        this.heartPowerup.push(new HeartPowerup());
+      }
+    }
+
+    this.heartPowerup = this.heartPowerup.filter((heartPowerup: HeartPowerup) => {
+      if (this.player.isCollidingHeart(heartPowerup)) {
+        if (this.lives.length === 2) this.lives.push(new Lives(this.dimensionsX - 40, 350 + this.dimensionsY));
+        if (this.lives.length === 1) this.lives.push(new Lives(this.dimensionsX - 40, 300 + this.dimensionsY));
+        return false;
+      }
+
+      return true;
+    });
+
     this.ad = this.ad.filter((item: EnemyAD) => {
       if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
-        this.lives.pop()
+        this.lives.pop();
         return false;
       }
       return true;
-    })
+    });
 
     this.ad = this.ad.filter((item: EnemyAD) => {
       if (this.bullet.isCollidingAD(item)) {
@@ -94,18 +111,18 @@ export default class ArrowThrower extends Scene {
         return false;
       }
       return true;
-    })
+    });
 
     this.ad = this.ad.filter((item: EnemyAD) => {
       if (this.player.isCollidingAD(item)) {
-        this.lives.pop()
+        this.lives.pop();
         return false;
       }
       return true;
-    })
+    });
 
     if (this.lives.length === 0) {
-      return new Gameover(0, 0)
+      return new Gameover(0, 0);
     }
 
     return null;
@@ -117,10 +134,11 @@ export default class ArrowThrower extends Scene {
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     this.player.render(canvas);
     this.ad.forEach((item: EnemyAD) => item.render(canvas));
+    this.heartPowerup.forEach((heartpowerup: HeartPowerup) => heartpowerup.render(canvas));
     this.bullet.render(canvas);
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => {
-      item.render(canvas)
+      item.render(canvas);
     })
   }
 }
