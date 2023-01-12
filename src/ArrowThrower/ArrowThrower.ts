@@ -3,6 +3,7 @@ import Gameover from "../Gameover.js";
 import KeyListener from "../KeyListener.js";
 import Scene from "../Scene.js";
 import Lives from "../Whackamole/Lives.js";
+import ADbullet from "./ADbullet.js";
 import CursorBullet from "./CursorBullet.js";
 import EnemyAD from "./EnemyAD.js";
 import EnemyAD1 from "./EnemyAD1.js";
@@ -52,7 +53,10 @@ export default class ArrowThrower extends Scene {
   }
 
   public update(elapsed: number): Scene {
-    this.ad.forEach((item: EnemyAD) => item.update(elapsed));
+
+    this.ad.forEach((item: EnemyAD) => {
+      item.update(elapsed);
+    })
 
     if (this.bullet.getPosX() > this.dimensionsX) {
       this.bullet.update(elapsed);
@@ -63,7 +67,7 @@ export default class ArrowThrower extends Scene {
     this.changingTime -= elapsed;
 
     if (this.changingTime < 0) {
-      if (Math.random() > 0.3) {
+      if (Math.random() > 0.1) {
         this.ad.push(new EnemyAD1(this.backgroundHeight));
       } else {
         this.ad.push(new EnemyAD2(this.backgroundHeight));
