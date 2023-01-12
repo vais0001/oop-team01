@@ -30,7 +30,7 @@ export default class Whackamole extends Scene {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg');
     this.timeToNextVirus = 1000;
-    this.enemiesLeft = 5;
+    this.enemiesLeft = 50;
     this.checkIfCorrect = 0;
     this.wormSmashedTimer = 200;
     for (let i = 0; i < 150; i += 50) {
@@ -203,14 +203,15 @@ export default class Whackamole extends Scene {
       if (this.value === item.getValue()) {
         this.deadWormArray.push(new Viruses(this.value))
         this.value = 0;
-          this.enemiesLeft -= 1;
-          return false;
+        this.enemiesLeft -= 1;
+        return false;
       } else return true;
     })
 
     for (let i = 0; i < this.deadWormArray.length; i++) {
-      this.deadWormArray[i].image = CanvasUtil.loadNewImage('./assets/wormsmashed.png')
+      this.deadWormArray[i].setImage('./assets/wormsmashed.png');
     }
+    
     if (this.deadWormArray.length > 0) {
       for (let i = 0; i < this.deadWormArray.length; i++) {
         this.wormSmashedTimer -= elapsed;
@@ -245,7 +246,7 @@ export default class Whackamole extends Scene {
     this.lives.forEach((item: Lives) => {
       item.render(canvas)
     })
-    if(this.enemiesLeft === 0) {
+    if (this.enemiesLeft === 0) {
       this.Antagonist = new Antagonist(500, 300)
       this.Antagonist.render(canvas)
     }

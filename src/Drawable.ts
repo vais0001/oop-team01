@@ -1,7 +1,7 @@
 import CanvasUtil from "./CanvasUtil.js";
 
 export default abstract class Drawable {
-  public image: HTMLImageElement;
+  protected image: HTMLImageElement;
 
   protected posX: number;
 
@@ -40,5 +40,13 @@ export default abstract class Drawable {
 
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.drawImage(canvas, this.image, this.posX, this.posY);
+  }
+
+  public setImage(image: string) {
+    this.image = CanvasUtil.loadNewImage(image)
+  }
+
+  public minusPosY(posY: number) {
+    this.posY -= posY;
   }
 }
