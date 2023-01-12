@@ -5,6 +5,8 @@ import Scene from "../Scene.js";
 import Lives from "../Whackamole/Lives.js";
 import CursorBullet from "./CursorBullet.js";
 import EnemyAD from "./EnemyAD.js";
+import EnemyAD1 from "./EnemyAD1.js";
+import EnemyAD2 from "./EnemyAD2.js";
 import Player from "./Player.js";
 
 export default class ArrowThrower extends Scene {
@@ -28,7 +30,6 @@ export default class ArrowThrower extends Scene {
     this.image = CanvasUtil.loadNewImage('../../placeholders/arrow_thrower_scene.png');
 
     this.player = new Player(this.backgroundWidth, this.backgroundHeight + this.dimensionsY);
-    this.ad.push(new EnemyAD(this.backgroundHeight));
     this.bullet = new CursorBullet(-100, -100);
     this.timeToNextAD = 1500;
     this.score = 0;
@@ -62,12 +63,16 @@ export default class ArrowThrower extends Scene {
     this.changingTime -= elapsed;
 
     if (this.changingTime < 0) {
-      this.ad.push(new EnemyAD(this.backgroundHeight));
+      if (Math.random() > 0.3) {
+        this.ad.push(new EnemyAD1(this.backgroundHeight));
+      } else {
+        this.ad.push(new EnemyAD2(this.backgroundHeight));
+      }
+
       if (this.timeToNextAD > 500) {
         this.timeToNextAD -= 100; // change to 10 later
       }
       this.changingTime = this.timeToNextAD;
-      console.log(this.changingTime)
     }
 
     this.ad = this.ad.filter((item: EnemyAD) => {
