@@ -85,12 +85,13 @@ export default class Whackamole extends Scene {
         this.value = 0;
         this.enemiesLeft -= 1;
         return false;
-      } return true;
+      } else return true;
     })
 
     for (let i = 0; i < this.deadWormArray.length; i++) {
-      this.deadWormArray[i].image = CanvasUtil.loadNewImage('./assets/wormsmashed.png')
+      this.deadWormArray[i].setImage('./assets/wormsmashed.png');
     }
+
     if (this.deadWormArray.length > 0) {
       for (let i = 0; i < this.deadWormArray.length; i++) {
         this.wormSmashedTimer -= elapsed;
@@ -124,12 +125,11 @@ export default class Whackamole extends Scene {
     });
 
     this.lives.forEach((item: Lives) => {
-      item.render(canvas);
-    });
-
+      item.render(canvas)
+    })
     if (this.enemiesLeft === 0) {
-      this.Antagonist = new Antagonist(500, 300);
-      this.Antagonist.render(canvas);
+      this.Antagonist = new Antagonist(500, 300)
+      this.Antagonist.render(canvas)
     }
 
     this.deadWormArray.forEach((item: Viruses) => {

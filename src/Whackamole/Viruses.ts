@@ -18,37 +18,40 @@ export default class Viruses extends Drawable {
     this.image = CanvasUtil.loadNewImage('./assets/wormsmall.png')
     if (this.value === 1) {
       this.posX = 280 + this.dimensionsX;
-      this.posY = 500 + this.dimensionsY;
+      this.posY = 620 + this.dimensionsY;
     } else if (this.value === 2) {
       this.posX = 610 + this.dimensionsX;
-      this.posY = 500 + this.dimensionsY;
+      this.posY = 620 + this.dimensionsY;
     } else if (this.value === 3) {
       this.posX = 930 + this.dimensionsX;
-      this.posY = 500 + this.dimensionsY;
+      this.posY = 620 + this.dimensionsY;
     } else if (this.value === 4) {
       this.posX = 280 + this.dimensionsX;
-      this.posY = 330 + this.dimensionsY;
+      this.posY = 430 + this.dimensionsY;
     } else if (this.value === 5) {
       this.posX = 610 + this.dimensionsX;
-      this.posY = 330 + this.dimensionsY;
+      this.posY = 430 + this.dimensionsY;
     } else if (this.value === 6) {
       this.posX = 930 + this.dimensionsX;
-      this.posY = 330 + this.dimensionsY;
+      this.posY = 430 + this.dimensionsY;
     } else if (this.value === 7) {
       this.posX = 280 + this.dimensionsX;
-      this.posY = 180 + this.dimensionsY;
+      this.posY = 270 + this.dimensionsY;
     } else if (this.value === 8) {
       this.posX = 610 + this.dimensionsX;
-      this.posY = 180 + this.dimensionsY;
+      this.posY = 270 + this.dimensionsY;
     } else if (this.value === 9) {
       this.posX = 930 + this.dimensionsX;
-      this.posY = 180 + this.dimensionsY;
+      this.posY = 270 + this.dimensionsY;
     }
   }
 
   public update(elapsed: number): boolean {
     this.timeToDissapear -= elapsed;
     if (this.timeToDissapear < 1500) {
+      if (this.posY === 620 + this.dimensionsY) this.posY = 520;
+      if (this.posY === 430 + this.dimensionsY) this.posY = 330;
+      if (this.posY === 270 + this.dimensionsY) this.posY = 170;
       this.image = CanvasUtil.loadNewImage('./assets/wormbig.png')
     }
     if(this.timeToDissapear <= 0) {
