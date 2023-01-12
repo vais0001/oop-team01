@@ -9,7 +9,7 @@ export default class EnemyAD1 extends EnemyAD {
     this.image = CanvasUtil.loadNewImage('../../placeholders/adshooter_00000.png');
   }
 
-  public update(elapsed: number): void {
+  public override update(elapsed: number): void {
     if (this.posX >= 200 + this.dimensionsX) {
       this.posX = 200 + this.dimensionsX;
     } else {
