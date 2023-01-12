@@ -49,9 +49,9 @@ export default class Viruses extends Drawable {
   public update(elapsed: number): boolean {
     this.timeToDissapear -= elapsed;
     if (this.timeToDissapear < 1500) {
-      if (this.posY === 620 + this.dimensionsY) this.posY = 520;
-      if (this.posY === 430 + this.dimensionsY) this.posY = 330;
-      if (this.posY === 270 + this.dimensionsY) this.posY = 170;
+      if (this.posY === 620 + this.dimensionsY) this.posY = 520 + this.dimensionsY;
+      if (this.posY === 430 + this.dimensionsY) this.posY = 330 + this.dimensionsY;
+      if (this.posY === 270 + this.dimensionsY) this.posY = 170 + this.dimensionsY;
       this.image = CanvasUtil.loadNewImage('./assets/wormbig.png')
     }
     if(this.timeToDissapear <= 0) {
