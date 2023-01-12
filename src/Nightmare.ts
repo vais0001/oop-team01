@@ -14,7 +14,6 @@ export default class Nightmare extends Game {
   public constructor(canvas: HTMLCanvasElement) {
     super();
     this.canvas = canvas;
-    this.canvas.style.cursor = 'none';
     this.canvas.height = window.innerHeight;
     this.canvas.width = window.innerWidth;
     this.keyListener = new KeyListener();
