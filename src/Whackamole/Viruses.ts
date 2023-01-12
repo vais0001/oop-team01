@@ -9,11 +9,12 @@ export default class Viruses extends Drawable {
 
   private isDead: boolean;
 
-  public constructor() {
+  public constructor(value: number) {
     super();
     this.timeToDissapear = 2500;
     this.isDead = false;
-    this.value = Math.floor(Math.random() * 9) + 1;
+    if (value === 0) this.value = Math.floor(Math.random() * 9) + 1;
+    if (value > 0) this.value = value;
     this.image = CanvasUtil.loadNewImage('./assets/wormsmall.png')
     if (this.value === 1) {
       this.posX = 280 + this.dimensionsX;

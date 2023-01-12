@@ -22,7 +22,9 @@ export default class Whackamole extends Scene {
 
   private Antagonist: Antagonist;
 
-  private wormSmashed: number;
+  private wormSmashedTimer: number;
+
+  private deadWormArray: Viruses[] = [];
 
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
@@ -30,7 +32,7 @@ export default class Whackamole extends Scene {
     this.timeToNextVirus = 1000;
     this.enemiesLeft = 5;
     this.checkIfCorrect = 0;
-    this.wormSmashed = 200;
+    this.wormSmashedTimer = 200;
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(50, 250 + i))
     }
@@ -199,20 +201,29 @@ export default class Whackamole extends Scene {
 
     this.holes = this.holes.filter((item: Viruses) => {
       if (this.value === item.getValue()) {
+        this.deadWormArray.push(new Viruses(this.value))
         this.value = 0;
-        this.enemiesLeft -= 1;
-        item.image = CanvasUtil.loadNewImage('./assets/wormsmashed.png');
-        this.wormSmashed -= elapsed;
-        if(this.wormSmashed <= 0) {
-          this.wormSmashed = 200;
+          this.enemiesLeft -= 1;
           return false;
-      } else return true
       } else return true;
     })
 
+    for (let i = 0; i < this.deadWormArray.length; i++) {
+      this.deadWormArray[i].image = CanvasUtil.loadNewImage('./assets/wormsmashed.png')
+    }
+    if (this.deadWormArray.length > 0) {
+      for (let i = 0; i < this.deadWormArray.length; i++) {
+        this.wormSmashedTimer -= elapsed;
+        if (this.wormSmashedTimer <= 0) {
+          this.wormSmashedTimer = 200;
+          this.deadWormArray.shift()
+        }
+      }
+    }
+
     this.timeToNextVirus -= elapsed;
     if (this.timeToNextVirus <= 0 && this.holes.length < 4 && this.enemiesLeft > 0) {
-      this.holes.push(new Viruses());
+      this.holes.push(new Viruses(0));
       this.timeToNextVirus = 1500;
       if (this.enemiesLeft < 40 && this.enemiesLeft > 30) this.timeToNextVirus = 1300;
       if (this.enemiesLeft < 30 && this.enemiesLeft > 15) this.timeToNextVirus = 1000;
@@ -238,6 +249,9 @@ export default class Whackamole extends Scene {
       this.Antagonist = new Antagonist(500, 300)
       this.Antagonist.render(canvas)
     }
+    this.deadWormArray.forEach((item: Viruses) => {
+      item.render(canvas)
+    })
 
   }
 
