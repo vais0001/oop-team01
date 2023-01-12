@@ -105,10 +105,10 @@ export default class Whackamole extends Scene {
     this.timeToNextVirus -= elapsed;
     if (this.timeToNextVirus <= 0 && this.holes.length < 4 && this.enemiesLeft > 0) {
       this.holes.push(new Viruses(0));
-      this.timeToNextVirus = 1500;
-      if (this.enemiesLeft < 40 && this.enemiesLeft > 30) this.timeToNextVirus = 1300;
-      if (this.enemiesLeft < 30 && this.enemiesLeft > 15) this.timeToNextVirus = 1000;
-      if (this.enemiesLeft < 15) this.timeToNextVirus = 800;
+      this.timeToNextVirus = 1000;
+      if (this.enemiesLeft < 40 && this.enemiesLeft > 30) this.timeToNextVirus = 800;
+      if (this.enemiesLeft < 30 && this.enemiesLeft > 15) this.timeToNextVirus = 500;
+      if (this.enemiesLeft < 15) this.timeToNextVirus = 300;
     }
 
     return null;
