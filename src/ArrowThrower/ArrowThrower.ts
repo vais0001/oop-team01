@@ -5,6 +5,8 @@ import Scene from "../Scene.js";
 import Lives from "../Whackamole/Lives.js";
 import CursorBullet from "./CursorBullet.js";
 import EnemyAD from "./EnemyAD.js";
+import EnemyAD1 from "./EnemyAD1.js";
+import EnemyAD2 from "./EnemyAD2.js";
 import Player from "./Player.js";
 
 export default class ArrowThrower extends Scene {
@@ -28,7 +30,6 @@ export default class ArrowThrower extends Scene {
     this.image = CanvasUtil.loadNewImage('../../placeholders/arrow_thrower_scene.png');
 
     this.player = new Player(this.backgroundWidth, this.backgroundHeight + this.dimensionsY);
-    this.ad.push(new EnemyAD(this.backgroundHeight));
     this.bullet = new CursorBullet(-100, -100);
     this.timeToNextAD = 1500;
     this.score = 0;
@@ -51,7 +52,7 @@ export default class ArrowThrower extends Scene {
   }
 
   public update(elapsed: number): Scene {
-    this.ad.forEach((item: EnemyAD) => item.update(elapsed));
+    this.ad.forEach((item: EnemyAD1) => item.update(elapsed));
 
     if (this.bullet.getPosX() > this.dimensionsX) {
       this.bullet.update(elapsed);
@@ -62,15 +63,18 @@ export default class ArrowThrower extends Scene {
     this.changingTime -= elapsed;
 
     if (this.changingTime < 0) {
-      this.ad.push(new EnemyAD(this.backgroundHeight));
+      if (Math.random() > 0.3) {
+        this.ad.push(new EnemyAD1(this.backgroundHeight));
+      } else {
+        this.ad.push(new EnemyAD2(this.backgroundHeight));
+      }
       if (this.timeToNextAD > 500) {
         this.timeToNextAD -= 100; // change to 10 later
       }
       this.changingTime = this.timeToNextAD;
-      console.log(this.changingTime)
     }
 
-    this.ad = this.ad.filter((item: EnemyAD) => {
+    this.ad = this.ad.filter((item: EnemyAD1) => {
       if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
         this.lives.pop()
         return false;
@@ -78,7 +82,7 @@ export default class ArrowThrower extends Scene {
       return true;
     })
 
-    this.ad = this.ad.filter((item: EnemyAD) => {
+    this.ad = this.ad.filter((item: EnemyAD1) => {
       if (this.bullet.isCollidingAD(item)) {
         this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
         this.score += 5;
@@ -87,7 +91,7 @@ export default class ArrowThrower extends Scene {
       return true;
     })
 
-    this.ad = this.ad.filter((item: EnemyAD) => {
+    this.ad = this.ad.filter((item: EnemyAD1) => {
       if (this.player.isCollidingAD(item)) {
         this.lives.pop()
         return false;
@@ -107,7 +111,7 @@ export default class ArrowThrower extends Scene {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     this.player.render(canvas);
-    this.ad.forEach((item: EnemyAD) => item.render(canvas));
+    this.ad.forEach((item: EnemyAD1) => item.render(canvas));
     this.bullet.render(canvas);
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => {
