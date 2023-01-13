@@ -154,7 +154,10 @@ export default class Bedroom extends Scene {
       if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
     }
 
-    if (this.scene === 1 && this.timeToText <= 0) this.text.textSix(canvas, this.image1, this.trojanHead);
+    if (this.scene === 1 && this.timeToText <= 0) {
+      this.text.textSix(canvas, this.image1, this.trojanHead);
+      this.player.setNewPlayerImage('./assets/timmywalkingleft1.png')
+    }
     if (this.scene === 2) this.text.textSeven(canvas, this.image1, this.trojanHead);
 
     this.bed.render(canvas);

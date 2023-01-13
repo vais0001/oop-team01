@@ -6,19 +6,12 @@ export default class Player extends Drawable {
 
   private speed: number;
 
-  private moving: boolean;
-
-  private moovingTimer: number;
-
-
   constructor(posX: number, posY: number) {
     super();
     this.image = CanvasUtil.loadNewImage('./assets/playerstanding.png')
     this.posX = posX;
     this.posY = posY;
     this.speed = 3;
-    this.moving = false;
-    this.moovingTimer = 300;
   }
 
   public update(elapsed: number): void {
@@ -44,6 +37,10 @@ export default class Player extends Drawable {
       && this.posX + this.getWidth() > item.getPosX()
       && this.getPosY() < item.getPosY() + item.getHeight()
       && this.getHeight() + this.posY > item.getPosY());
+  }
+
+  public setNewPlayerImage(source: string) {
+    this.image = CanvasUtil.loadNewImage(source)
   }
 
   public playerMoving(direction: number) {
