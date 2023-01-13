@@ -6,6 +6,6 @@ export default class Antagonist extends Drawable {
     super();
     this.posX = posX + this.dimensionsX;
     this.posY = posY + this.dimensionsY;
-    this.image = CanvasUtil.loadNewImage('./placeholders/trojan_00000.png')
+    this.image = CanvasUtil.loadNewImage('./assets/trojanhorse.png')
   }
 }

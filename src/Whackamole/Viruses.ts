@@ -15,7 +15,7 @@ export default class Viruses extends Drawable {
     this.isDead = false;
     if (value === 0) this.value = Math.floor(Math.random() * 9) + 1;
     if (value > 0) this.value = value;
-    this.image = CanvasUtil.loadNewImage('./assets/wormsmall.png')
+    this.image = CanvasUtil.loadNewImage('./assets/wormsmall.png');
     if (this.value === 1) {
       this.posX = 280 + this.dimensionsX;
       this.posY = 620 + this.dimensionsY;
@@ -50,9 +50,9 @@ export default class Viruses extends Drawable {
     this.timeToDissapear -= elapsed;
 <<<<<<< Updated upstream
     if (this.timeToDissapear < 1500) {
-      if (this.posY === 620 + this.dimensionsY) this.posY = 520;
-      if (this.posY === 430 + this.dimensionsY) this.posY = 330;
-      if (this.posY === 270 + this.dimensionsY) this.posY = 170;
+      if (this.posY === 620 + this.dimensionsY) this.posY = 520 + this.dimensionsY;
+      if (this.posY === 430 + this.dimensionsY) this.posY = 330 + this.dimensionsY;
+      if (this.posY === 270 + this.dimensionsY) this.posY = 170 + this.dimensionsY;
 =======
     if (this.timeToDissapear < 2000) {
       if (this.posY === 620 + this.dimensionsY) this.posY = 520 + this.dimensionsY;

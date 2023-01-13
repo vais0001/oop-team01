@@ -49,13 +49,13 @@ export default class Bedroom extends Scene {
 
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
-    this.image = CanvasUtil.loadNewImage('./assets/room1.png');
+    this.image = CanvasUtil.loadNewImage('./assets/timmysroom1.jpg');
     this.starting = false;
     if (level === 1) {
       this.antagonist = new Antagonist(300, 300);
       this.level1 = true;
       this.scene = 1;
-      this.image = CanvasUtil.loadNewImage('./assets/room2.png');
+      this.image = CanvasUtil.loadNewImage('./assets/timmyroom1.jpg');
     }
     if (!this.level1 === true) this.scene = 0;
     if (!this.level1) {
