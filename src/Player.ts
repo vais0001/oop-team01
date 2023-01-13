@@ -47,27 +47,28 @@ export default class Player extends Drawable {
   }
 
   public playerMoving(direction: number) {
+    const imageSources = ['http://127.0.0.1:5500/assets/playerstanding.png', 'http://127.0.0.1:5500/assets/timmywalkingright1.png', 'http://127.0.0.1:5500/assets/timmywalkingright2.png', 'http://127.0.0.1:5500/assets/timmywalkingleft1.png', 'http://127.0.0.1:5500/assets/timmywalkingleft2.png']
     if (direction === 3) {
-      if (this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingright2.png' || this.image.src === 'http://127.0.0.1:5500/assets/playerstanding.png' || this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingleft2.png' || this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingleft1.png') {
-        setTimeout((image: HTMLImageElement) => {
-          this.image = CanvasUtil.loadNewImage('./assets/timmywalkingright1.png')
+      if (this.image.src === imageSources[2] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
+        setTimeout(() => {
+          this.image = CanvasUtil.loadNewImage(imageSources[1])
         }, 150)
       }
-      if (this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingright1.png' || this.image.src === 'http://127.0.0.1:5500/assets/playerstanding.png' || this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingleft2.png' || this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingleft1.png') {
-        setTimeout((image: HTMLImageElement) => {
-          this.image = CanvasUtil.loadNewImage('./assets/timmywalkingright2.png')
+      if (this.image.src === imageSources[1] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
+        setTimeout(() => {
+          this.image = CanvasUtil.loadNewImage(imageSources[2])
         }, 150)
       }
     }
     if (direction === 1) {
-      if (this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingright2.png' || this.image.src === 'http://127.0.0.1:5500/assets/playerstanding.png' || this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingleft2.png') {
-        setTimeout((image: HTMLImageElement) => {
-          this.image = CanvasUtil.loadNewImage('./assets/timmywalkingleft1.png')
+      if (this.image.src === imageSources[2] || this.image.src === imageSources[0] || this.image.src === imageSources[4]) {
+        setTimeout(() => {
+          this.image = CanvasUtil.loadNewImage(imageSources[3])
         }, 150)
       }
-      if (this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingright1.png' || this.image.src === 'http://127.0.0.1:5500/assets/playerstanding.png'|| this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingleft1.png') {
-        setTimeout((image: HTMLImageElement) => {
-          this.image = CanvasUtil.loadNewImage('./assets/timmywalkingleft2.png')
+      if (this.image.src === imageSources[1] || this.image.src === imageSources[0]|| this.image.src === imageSources[3]) {
+        setTimeout(() => {
+          this.image = CanvasUtil.loadNewImage(imageSources[4])
         }, 150)
       }
     }
