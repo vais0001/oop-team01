@@ -6,12 +6,23 @@ export default class Player extends Drawable {
 
   private speed: number;
 
+  private moving: boolean;
+
+  private moovingTimer: number;
+
+
   constructor(posX: number, posY: number) {
     super();
-    this.image = CanvasUtil.loadNewImage('./assets/timmy.png')
+    this.image = CanvasUtil.loadNewImage('./assets/playerstanding.png')
     this.posX = posX;
     this.posY = posY;
     this.speed = 5;
+    this.moving = false;
+    this.moovingTimer = 300;
+  }
+
+  public update(elapsed: number): void {
+
   }
 
   public move(direction: number): void {
@@ -34,5 +45,20 @@ export default class Player extends Drawable {
     && this.getPosY() < item.getPosY() + item.getHeight()
     && this.getHeight() + this.posY > item.getPosY());
   }
+
+  public playerMoving(direction: number) {
+
+    if (this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingright2.png' || this.image.src === 'http://127.0.0.1:5500/assets/playerstanding.png') {
+      setTimeout((image: HTMLImageElement) => {
+        this.image = CanvasUtil.loadNewImage('./assets/timmywalkingright1.png')
+      }, 150)
+    }
+    if (this.image.src === 'http://127.0.0.1:5500/assets/timmywalkingright1.png' || this.image.src === 'http://127.0.0.1:5500/assets/playerstanding.png') {
+      setTimeout((image: HTMLImageElement) => {
+        this.image = CanvasUtil.loadNewImage('./assets/timmywalkingright2.png')
+       }, 150)
+    }
+
+  }
 
 }

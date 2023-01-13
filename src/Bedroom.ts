@@ -94,8 +94,11 @@ export default class Bedroom extends Scene {
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
-        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) this.player.move(2);
+        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
+          this.player.move(2);
+          this.player.playerMoving(3)
       }
+    }
 
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
         if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3);
