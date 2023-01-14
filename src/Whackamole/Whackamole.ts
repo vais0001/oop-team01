@@ -131,8 +131,9 @@ export default class Whackamole extends Scene {
       item.render(canvas)
     })
     if (this.enemiesLeft === 0) {
-      this.Antagonist = new Antagonist(500, 300)
-      this.Antagonist.render(canvas)
+        this.Antagonist = new Antagonist(500, 300)
+        this.Antagonist.render(canvas)
+
     }
 
     this.deadWormArray.forEach((item: Viruses) => {
