@@ -10,7 +10,6 @@ import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
-import { GameLoop } from './GameLoop.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
