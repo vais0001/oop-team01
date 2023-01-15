@@ -10,6 +10,6 @@ export default class ADbullet extends Drawable {
   }
 
   public update(elapsed: number): void {
-    this.posX += elapsed * 0.2;
+    this.posX += elapsed;
   }
 }

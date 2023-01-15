@@ -17,6 +17,10 @@ export default class ArrowThrower extends Scene {
 
   private lives: Lives[] = [];
 
+  private adBullets: ADbullet[] = [];
+
+  private enemy2: EnemyAD2;
+
   private bullet: CursorBullet;
 
   private timeToNextAD: number;
@@ -24,6 +28,10 @@ export default class ArrowThrower extends Scene {
   private changingTime: number;
 
   private score: number;
+
+  private nextFire: number;
+
+  private fire: boolean;
 
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
@@ -35,6 +43,8 @@ export default class ArrowThrower extends Scene {
     this.timeToNextAD = 1500;
     this.score = 0;
     this.changingTime = 1500;
+    this.nextFire = 1000;
+    this.fire = false;
 
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
@@ -54,8 +64,20 @@ export default class ArrowThrower extends Scene {
 
   public update(elapsed: number): Scene {
 
+    this.nextFire -= elapsed;
+
     this.ad.forEach((item: EnemyAD) => {
       item.update(elapsed);
+      if (item.getPosX() >= 200 + this.dimensionsX) {
+        if (item instanceof EnemyAD2) {
+          item.stopAD(200 + this.dimensionsX);
+
+          if (this.nextFire < 0) {
+            this.nextFire = 1000;
+            this.fire = true
+          }
+        }
+      }
     })
 
     if (this.bullet.getPosX() > this.dimensionsX) {
@@ -67,7 +89,7 @@ export default class ArrowThrower extends Scene {
     this.changingTime -= elapsed;
 
     if (this.changingTime < 0) {
-      if (Math.random() > 0.1) {
+      if (Math.random() > 0.5) {
         this.ad.push(new EnemyAD1(this.backgroundHeight));
       } else {
         this.ad.push(new EnemyAD2(this.backgroundHeight));
@@ -78,6 +100,10 @@ export default class ArrowThrower extends Scene {
       }
       this.changingTime = this.timeToNextAD;
     }
+
+    this.adBullets.forEach((item: ADbullet) => {
+      item.update(elapsed);
+    })
 
     this.ad = this.ad.filter((item: EnemyAD) => {
       if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
@@ -121,6 +147,10 @@ export default class ArrowThrower extends Scene {
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => {
       item.render(canvas)
+    })
+
+    this.adBullets.forEach((item: ADbullet) => {
+      item.render(canvas);
     })
   }
 }
