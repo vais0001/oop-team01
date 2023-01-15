@@ -12,7 +12,11 @@ export default class EnemyAD2 extends EnemyAD {
     this.posY = (Math.random() * ((maxY - 100) - this.dimensionsY) + this.dimensionsY);
   }
 
-  public stopAD(position: number): void {
-    this.posX = position
+  public override update(elapsed: number): void {
+    if (this.posX >= 200 + this.dimensionsX) {
+      this.posX = 200 + this.dimensionsX;
+    } else {
+      this.posX += elapsed * 0.2;
+    }
   }
 }

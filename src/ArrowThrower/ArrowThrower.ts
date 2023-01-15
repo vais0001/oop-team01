@@ -66,20 +66,6 @@ export default class ArrowThrower extends Scene {
 
     this.nextFire -= elapsed;
 
-    this.ad.forEach((item: EnemyAD) => {
-      item.update(elapsed);
-      if (item.getPosX() >= 200 + this.dimensionsX) {
-        if (item instanceof EnemyAD2) {
-          item.stopAD(200 + this.dimensionsX);
-
-          if (this.nextFire < 0) {
-            this.nextFire = 1000;
-            this.fire = true
-          }
-        }
-      }
-    })
-
     if (this.bullet.getPosX() > this.dimensionsX) {
       this.bullet.update(elapsed);
     } else {
@@ -147,10 +133,6 @@ export default class ArrowThrower extends Scene {
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => {
       item.render(canvas)
-    })
-
-    this.adBullets.forEach((item: ADbullet) => {
-      item.render(canvas);
     })
   }
 }

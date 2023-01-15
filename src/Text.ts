@@ -23,7 +23,7 @@ export default class Text extends Drawable {
 
   public textThree(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, 'Narrator: Timmy looks at his phone and sees that X game', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Timmy looks at his phone and sees that X game', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'he really wants has finally been released. Due to', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'inflation, the price of games has risen to very high amounts.', this.dimensionsX + 730, this.dimensionsY + 690, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
@@ -41,7 +41,7 @@ export default class Text extends Drawable {
 
   public textFive(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, 'Narrator: Timmy browses on forums to see', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Timmy browses on forums to see', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'how to access this game for free.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'He comes across a site which', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'promises a safe and free download.', this.dimensionsX + 720, this.dimensionsY + 700, 'center', 'arial', 20, 'black');

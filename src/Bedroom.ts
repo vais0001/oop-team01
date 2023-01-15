@@ -10,7 +10,6 @@ import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
-import { GameLoop } from './GameLoop.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -49,13 +48,13 @@ export default class Bedroom extends Scene {
 
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
-    this.image = CanvasUtil.loadNewImage('./assets/room1.png');
+    this.image = CanvasUtil.loadNewImage('./assets/timmysroom1.jpg');
     this.starting = false;
     if (level === 1) {
       this.antagonist = new Antagonist(300, 300);
       this.level1 = true;
       this.scene = 1;
-      this.image = CanvasUtil.loadNewImage('./assets/room2.png');
+      this.image = CanvasUtil.loadNewImage('./assets/timmyroom1.jpg');
     }
     if (!this.level1 === true) this.scene = 0;
     if (!this.level1) {
@@ -86,7 +85,10 @@ export default class Bedroom extends Scene {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
     if (!this.level1 && this.nextText > 4) {
       if (this.player.getPosX() > this.dimensionsX + 5) {
-        if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) this.player.move(0);
+        if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
+          this.player.move(0);
+          this.player.playerMoving(1)
+        }
       }
 
       if (this.player.getPosY() > this.dimensionsY + 5) {
@@ -94,8 +96,11 @@ export default class Bedroom extends Scene {
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
-        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) this.player.move(2);
+        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
+          this.player.move(2);
+          this.player.playerMoving(3)
       }
+    }
 
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
         if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3);
@@ -148,7 +153,10 @@ export default class Bedroom extends Scene {
       if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
     }
 
-    if (this.scene === 1 && this.timeToText <= 0) this.text.textSix(canvas, this.image1, this.trojanHead);
+    if (this.scene === 1 && this.timeToText <= 0) {
+      this.text.textSix(canvas, this.image1, this.trojanHead);
+      this.player.setNewPlayerImage('./assets/timmywalkingleft1.png')
+    }
     if (this.scene === 2) this.text.textSeven(canvas, this.image1, this.trojanHead);
 
     this.bed.render(canvas);
