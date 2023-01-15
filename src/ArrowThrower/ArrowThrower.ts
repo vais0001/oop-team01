@@ -75,14 +75,14 @@ export default class ArrowThrower extends Scene {
     this.changingTime -= elapsed;
 
     if (this.changingTime < 0) {
-      if (Math.random() > 0.5) {
+      if (Math.random() > 0.1) {
         this.ad.push(new EnemyAD1(this.backgroundHeight));
       } else {
         this.ad.push(new EnemyAD2(this.backgroundHeight));
       }
 
       if (this.timeToNextAD > 500) {
-        this.timeToNextAD -= 100; // change to 10 later
+        this.timeToNextAD -= 10; // change to 10 later
       }
       this.changingTime = this.timeToNextAD;
     }
@@ -110,6 +110,14 @@ export default class ArrowThrower extends Scene {
 
     this.ad = this.ad.filter((item: EnemyAD) => {
       if (this.player.isCollidingAD(item)) {
+        this.lives.pop()
+        return false;
+      }
+      return true;
+    })
+
+    this.adBullets = this.adBullets.filter((item: ADbullet) => {
+      if (this.player.isCollidingBullet(item)) {
         this.lives.pop()
         return false;
       }

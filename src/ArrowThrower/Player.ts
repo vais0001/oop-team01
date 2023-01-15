@@ -1,5 +1,6 @@
 import CanvasUtil from "../CanvasUtil.js";
 import Drawable from "../Drawable.js";
+import ADbullet from "./ADbullet.js";
 import EnemyAD from "./EnemyAD.js";
 import HeartPowerup from "./HeartPowerup.js";
 
@@ -39,6 +40,12 @@ export default class Player extends Drawable {
       && this.getPosY() < heartpowerup.getPosY() + heartpowerup.getHeight()
       && this.getHeight() + this.posY > heartpowerup.getPosY()
     );
-    return null;
+  }
+
+  public isCollidingBullet(bullet: ADbullet): boolean {
+    return (this.posX < bullet.getPosX() + bullet.getWidth()
+      && this.posX + this.getWidth() > bullet.getPosX()
+      && this.getPosY() < bullet.getPosY() + bullet.getHeight()
+      && this.getHeight() + this.posY > bullet.getPosY());
   }
 }
