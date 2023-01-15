@@ -116,6 +116,18 @@ export default class ArrowThrower extends Scene {
       return true;
     })
 
+    this.ad.forEach((item: EnemyAD2) => {
+      item.update(elapsed);
+
+      if (item instanceof EnemyAD2) {
+        item.stopAD(item.getPosX());
+        if (item.willFire()) {
+          this.adBullets.push(item.fire());
+          console.log(this.adBullets)
+        }
+      }
+    })
+
     if (this.lives.length === 0) {
       return new Gameover(0, 0)
     }
@@ -133,6 +145,10 @@ export default class ArrowThrower extends Scene {
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => {
       item.render(canvas)
+    })
+
+    this.adBullets.forEach((item: ADbullet) => {
+      item.render(canvas);
     })
   }
 }

@@ -6,10 +6,10 @@ export default class ADbullet extends Drawable {
     super();
     this.image = CanvasUtil.loadNewImage('../../placeholders/cursor_00000.png');
     this.posX = startX;
-    this.posY = startY;
+    this.posY = startY - this.image.height / 2;
   }
 
   public update(elapsed: number): void {
-    this.posX += elapsed;
+    this.posX += elapsed * 0.3;
   }
 }

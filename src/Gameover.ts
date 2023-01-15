@@ -32,7 +32,6 @@ export default class Gameover extends Scene {
         this.timeToRemove = 900;
       }
     }
-    console.log(this.timeToRemove);
     if (this.continue) {
       return new StartScene(window.innerWidth, window.innerHeight);
     }

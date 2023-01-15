@@ -7,7 +7,7 @@ export default class EnemyAD1 extends EnemyAD {
     this.image = CanvasUtil.loadNewImage('../../placeholders/AD.png');
   }
 
-  public override update(elapsed: number): void {
+  public update(elapsed: number): void {
     this.posX += elapsed * 0.2;
   }
 }
