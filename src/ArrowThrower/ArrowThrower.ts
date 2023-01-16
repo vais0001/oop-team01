@@ -57,7 +57,7 @@ export default class ArrowThrower extends Scene {
     this.timeToNextAD = 1500;
     this.score = 0;
     this.changingTime = 1500;
-    this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmyHead.png');
+    this.playerHead = CanvasUtil.loadNewImage('./assets/timmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojanHead.png');
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.nextText = 0;
@@ -198,9 +198,11 @@ export default class ArrowThrower extends Scene {
       this.antagonist.cutsceneMovementAway(-20, 0);
       this.player.moveAway(-20, 0);
     }
+
     if (this.antagonist.getPosX() < this.backgroundWidth - 2000) {
       return new LoadingSceneWM(window.innerWidth, window.innerHeight);
     }
+
     return null;
   }
 

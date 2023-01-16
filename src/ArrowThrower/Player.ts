@@ -7,7 +7,7 @@ import HeartPowerup from "./HeartPowerup.js";
 export default class Player extends Drawable {
   public constructor(maxX: number, maxY: number) {
     super();
-    this.image = CanvasUtil.loadNewImage('../../placeholders/timmy_00000.png');
+    this.image = CanvasUtil.loadNewImage('../../assets/playerstandingleft.png');
     this.posX = maxX - this.image.width - 50;
     this.posY = maxY - 200;
   }
