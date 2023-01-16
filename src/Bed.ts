@@ -5,7 +5,7 @@ export default class Bed extends Drawable {
   public constructor() {
     super();
     this.posX = this.dimensionsX + 31;
-    this.posY = this.dimensionsY + 160;
+    this.posY = this.dimensionsY + 210;
     this.image = CanvasUtil.loadNewImage('./assets/bed.png');
   }
 }

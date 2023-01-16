@@ -49,6 +49,8 @@ export default class Bedroom extends Scene {
 
   private bossFightScene: boolean;
 
+  private buttonsPressed: number;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
@@ -72,7 +74,7 @@ export default class Bedroom extends Scene {
     this.webpageScene = false;
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmyHead.png');
-    this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojanHead.png');
+    this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     if (!this.level1) {
       this.timeToText = 1000;
     } else {
@@ -83,31 +85,38 @@ export default class Bedroom extends Scene {
     this.cheatLoadingScreen = false;
     this.nextText = 0;
     this.text = new Text();
+    this.buttonsPressed = 0;
   }
 
   public processInput(keyListener: KeyListener): void {
     if (keyListener.keyPressed(KeyListener.KEY_S)) this.starting = true;
     if (!this.level1 && this.nextText > 4) {
+      this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 5) {
         if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
-          this.player.move(0);
-          this.player.playerMoving(1, 150)
+          this.player.move(0, 150);
+          this.buttonsPressed += 1;
         }
       }
 
       if (this.player.getPosY() > this.dimensionsY + 5) {
-        if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1);
+        if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
+          this.player.move(1, 150);
+          this.buttonsPressed += 1;
+        }
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
         if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
-          this.player.move(2);
-          this.player.playerMoving(3, 150)
+          this.player.move(2, 150);
+          this.buttonsPressed += 1;
+        }
       }
-    }
-
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
-        if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3);
+        if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
+          this.buttonsPressed += 1;
+          this.player.move(3, 150);
+        }
       }
 
       if (keyListener.isKeyDown(KeyListener.KEY_SPACE)
@@ -128,6 +137,10 @@ export default class Bedroom extends Scene {
   }
 
   public update(elapsed: number): Scene {
+    if (this.buttonsPressed === 0) {
+      this.player.move(66, 150);
+    }
+    this.player.update(elapsed);
     //cheat code to whackamole
     if (this.bossFightScene === true) {
       return new BossFight(window.innerWidth, window.innerHeight, 0)
@@ -165,7 +178,7 @@ export default class Bedroom extends Scene {
     this.player.render(canvas);
     if (this.level1) this.antagonist.render(canvas);
     if (this.nextText > 4) {
-      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 22);
+      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 27);
     }
     if (this.player.collideWithitem(this.computer) && !this.level1) {
       this.text.computerPrompt(canvas, this.popUp);

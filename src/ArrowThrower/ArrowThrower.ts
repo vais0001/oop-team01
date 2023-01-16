@@ -58,7 +58,7 @@ export default class ArrowThrower extends Scene {
     this.score = 0;
     this.changingTime = 1500;
     this.playerHead = CanvasUtil.loadNewImage('./placeholders/timmyHead.png');
-    this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojanHead.png');
+    this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.nextText = 0;
 

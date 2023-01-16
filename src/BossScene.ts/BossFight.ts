@@ -31,26 +31,25 @@ export default class BossFight extends Scene {
   public processInput(keyListener: KeyListener): void {
     if (this.player.getPosX() > this.dimensionsX + 5) {
       if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
-        this.player.move(0);
-        this.player.playerMoving(1, 50)
+        this.player.move(0, 50);
       }
     }
 
     if (this.player.getPosY() > this.dimensionsY + 5) {
-      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1);
+      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1, 50);
     }
 
     if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
       if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
-        this.player.move(2);
-        this.player.playerMoving(3, 50)
+        this.player.move(2, 50);
       }
     }
 
     if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3);
+      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3, 50);
     }
   }
+
   public update(elapsed: number): Scene {
     if (this.abilityShoot === false) {
       setTimeout(() => {

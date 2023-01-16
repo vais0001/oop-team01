@@ -5,7 +5,7 @@ export default class Computer extends Drawable {
   public constructor() {
     super();
     this.posX = this.dimensionsX + 1050;
-    this.posY = this.dimensionsY + 122;
+    this.posY = this.dimensionsY + 172;
     this.image = CanvasUtil.loadNewImage('./assets/pc.png');
   }
 }
