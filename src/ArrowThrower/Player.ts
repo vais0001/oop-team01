@@ -8,7 +8,11 @@ export default class Player extends Drawable {
   public constructor(maxX: number, maxY: number) {
     super();
     this.image = CanvasUtil.loadNewImage('../../placeholders/timmy_00000.png');
+<<<<<<< Updated upstream
     this.posX = maxX - this.image.width - 50;
+=======
+    this.posX = maxX - 50;
+>>>>>>> Stashed changes
     this.posY = maxY - 200;
   }
 
@@ -42,8 +46,7 @@ export default class Player extends Drawable {
     return (this.posX < heartpowerup.getPosX() + heartpowerup.getWidth()
       && this.posX + this.getWidth() > heartpowerup.getPosX()
       && this.getPosY() < heartpowerup.getPosY() + heartpowerup.getHeight()
-      && this.getHeight() + this.posY > heartpowerup.getPosY()
-    );
+      && this.getHeight() + this.posY > heartpowerup.getPosY());
   }
 
   public isCollidingBullet(bullet: ADbullet): boolean {
