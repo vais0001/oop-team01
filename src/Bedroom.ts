@@ -55,7 +55,7 @@ export default class Bedroom extends Scene {
     this.starting = false;
     this.bossFightScene = false;
     if (level === 1) {
-      this.antagonist = new Antagonist(300, 300);
+      this.antagonist = new Antagonist(250, 250);
       this.level1 = true;
       this.scene = 1;
       this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
@@ -153,13 +153,7 @@ export default class Bedroom extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    if (!this.level1) {
-      if (this.nextText === 0) this.text.textOne(canvas, this.image1, this.playerHead);
-      if (this.nextText === 1) this.text.textTwo(canvas, this.image1, this.playerHead);
-      if (this.nextText === 2) this.text.textThree(canvas, this.image1, null);
-      if (this.nextText === 3) this.text.textFour(canvas, this.image1, this.playerHead);
-      if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
-    }
+
     this.computer.render(canvas);
     if (this.scene === 1 && this.timeToText <= 0) {
       this.text.textSix(canvas, this.image1, this.trojanHead);
@@ -169,12 +163,19 @@ export default class Bedroom extends Scene {
 
     this.bed.render(canvas);
     this.player.render(canvas);
+    if (this.level1) this.antagonist.render(canvas);
     if (this.nextText > 4) {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 22);
     }
     if (this.player.collideWithitem(this.computer) && !this.level1) {
       this.text.computerPrompt(canvas, this.popUp);
     }
-    if (this.level1) this.antagonist.render(canvas);
+    if (!this.level1) {
+      if (this.nextText === 0) this.text.textOne(canvas, this.image1, this.playerHead);
+      if (this.nextText === 1) this.text.textTwo(canvas, this.image1, this.playerHead);
+      if (this.nextText === 2) this.text.textThree(canvas, this.image1, null);
+      if (this.nextText === 3) this.text.textFour(canvas, this.image1, this.playerHead);
+      if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
+    }
   }
 }
