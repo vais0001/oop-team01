@@ -17,6 +17,11 @@ export default class ShootingAbility extends Drawable {
   }
 
   public update(elapsed: number) {
+    let randomDecimal = Math.random();
+    if (this.direction === 5) {
+      this.posX -= Math.random() * elapsed;
+      this.posY += randomDecimal * elapsed;
+    }
     if(this.direction === 0) {
       this.posX -= this.speed * elapsed;
     }
