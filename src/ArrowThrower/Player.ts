@@ -5,10 +5,11 @@ import EnemyAD from "./EnemyAD.js";
 import HeartPowerup from "./HeartPowerup.js";
 
 export default class Player extends Drawable {
+
   public constructor(maxX: number, maxY: number) {
     super();
     this.image = CanvasUtil.loadNewImage('../../assets/playerstandingleft.png');
-    this.posX = maxX - this.image.width - 50;
+    this.posX = maxX - 50;
     this.posY = maxY - 200;
   }
 
@@ -52,8 +53,12 @@ export default class Player extends Drawable {
       && this.getHeight() + this.posY > bullet.getPosY());
   }
 
-  public moveAway(speedX: number, speedY: number) {
+  public moveAway(speedX: number, speedY: number): void {
     this.posX += speedX;
     this.posY += speedY;
+  }
+
+  public changePositionX(): void {
+    this.posX = this.dimensionsX + this.backgroundWidth - 300
   }
 }

@@ -13,6 +13,7 @@ import ThrowerText from "./ThrowerText.js";
 import LoadingSceneWM from "../LoadingScenes/LoadingSceneWM.js";
 import HeartPowerup from "./HeartPowerup.js";
 import Antagonist from "../Antagonist.js";
+import ArrowThrowerComputer from "./ArrowThrowerComputer.js";
 
 export default class ArrowThrower extends Scene {
   private player: Player;
@@ -45,6 +46,10 @@ export default class ArrowThrower extends Scene {
 
   private nextText: number;
 
+  private spawnComputer: boolean;
+
+  private computer: ArrowThrowerComputer;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
 
@@ -61,6 +66,7 @@ export default class ArrowThrower extends Scene {
     this.trojanHead = CanvasUtil.loadNewImage('./placeholders/trojanHead.png');
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.nextText = 0;
+    this.spawnComputer = false;
 
     for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
@@ -97,6 +103,9 @@ export default class ArrowThrower extends Scene {
     }
 
     if (this.nextText > 3 && this.score < 105) {
+      this.spawnComputer = true;
+      this.computer = new ArrowThrowerComputer();
+      this.player.changePositionX();
       this.heartPowerup.forEach((heartPowerup: HeartPowerup) => heartPowerup.update(elapsed));
 
       if (this.bullet.getPosX() > this.dimensionsX) {
@@ -141,27 +150,29 @@ export default class ArrowThrower extends Scene {
       });
 
       this.ad = this.ad.filter((item: EnemyAD) => {
-        if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
-          this.lives.pop();
-          return false;
-        }
-        return true;
-      });
+        // if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
+        //   this.lives.pop();
+        //   return false;
+        // }
 
-      this.ad = this.ad.filter((item: EnemyAD) => {
         if (this.bullet.isCollidingAD(item)) {
           this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
           this.score += 5;
           return false;
         }
-        return true;
-      });
 
-      this.ad = this.ad.filter((item: EnemyAD) => {
-        if (this.player.isCollidingAD(item)) {
+        if (item.getPosX() <= this.player.getPosX()) {
+          if (this.player.isCollidingAD(item)) {
+            this.lives.pop();
+            return false;
+          }
+        }
+
+        if (this.computer.isCollidingAD(item)) {
           this.lives.pop();
           return false;
         }
+
         return true;
       });
 
@@ -180,6 +191,12 @@ export default class ArrowThrower extends Scene {
           item.stopAD(item.getPosX());
           if (item.willFire()) {
             this.adBullets.push(item.fire());
+          }
+        }
+
+        if (item instanceof EnemyAD1) {
+          if (item.getPosX() >= this.player.getPosX()) {
+            item.moveToComputer(this.computer.getPosX(), this.computer.getPosY());
           }
         }
       });
@@ -206,12 +223,13 @@ export default class ArrowThrower extends Scene {
 
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
-    CanvasUtil.fillCanvas(canvas, 'black');
+    CanvasUtil.fillCanvas(canvas, 'white');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     this.player.render(canvas);
     this.antagonist.render(canvas);
     this.ad.forEach((item: EnemyAD) => item.render(canvas));
     this.bullet.render(canvas);
+    if (this.spawnComputer) this.computer.render(canvas);
     CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => item.render(canvas));
     this.adBullets.forEach((item: ADbullet) => item.render(canvas));
