@@ -141,17 +141,10 @@ export default class ArrowThrower extends Scene {
         item.update(elapsed);
       });
 
-<<<<<<< Updated upstream
       this.ad = this.ad.filter((item: EnemyAD) => {
         if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
           this.lives.pop();
           return false;
-=======
-      if (item instanceof EnemyAD2) {
-        item.stopAD(item.getPosX());
-        if (item.willFire()) {
-          this.adBullets.push(item.fire());
->>>>>>> Stashed changes
         }
         return true;
       });
@@ -197,20 +190,6 @@ export default class ArrowThrower extends Scene {
         return new Gameover(0, 0);
       }
     }
-<<<<<<< Updated upstream
-
-    if (this.score === 100) {
-      this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
-      this.antagonist.moveToPlayer(this.player);
-    } else if (this.score === 105) {
-      this.antagonist.cutsceneMovementAway(-20, 0);
-      this.player.moveAway(-20, 0);
-    }
-    if (this.antagonist.getPosX() < this.backgroundWidth - 2000) {
-      return new LoadingSceneWM(window.innerWidth, window.innerHeight);
-    }
-=======
->>>>>>> Stashed changes
     return null;
   }
 

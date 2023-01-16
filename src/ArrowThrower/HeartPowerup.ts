@@ -5,7 +5,7 @@ export default class HeartPowerup extends Drawable {
   public constructor() {
     super();
     this.image = CanvasUtil.loadNewImage('./placeholders/heart.png');
-    this.posX = -50;
+    this.posX = this.dimensionsX;
     this.posY = (Math.random() * ((this.backgroundHeight - 100) - this.dimensionsY) + this.dimensionsY);
   }
 
