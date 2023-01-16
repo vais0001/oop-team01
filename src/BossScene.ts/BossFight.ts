@@ -62,10 +62,8 @@ export default class BossFight extends Scene {
 
     if (this.abilityShoot === true) {
       if (this.bulletsTimer <= 0) {
-        for (let i = 0; i < 4; i++) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, i, 0.3))
-        }
-        this.bulletsTimer = 200;
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0.3))
+        this.bulletsTimer = 500;
       }
     }
 
@@ -90,10 +88,6 @@ export default class BossFight extends Scene {
     this.antagonist.render(canvas)
     this.player.render(canvas)
 
-
-  }
-
-  public shootingBullets(startX: number, startY: number) {
 
   }
 

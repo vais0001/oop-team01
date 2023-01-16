@@ -9,7 +9,7 @@ export default class Antagonist extends Drawable {
     super();
     this.posX = posX + this.dimensionsX;
     this.posY = posY + this.dimensionsY;
-    this.image = CanvasUtil.loadNewImage('./assets/trojanhorse.png');
+    this.image = CanvasUtil.loadNewImage('./assets/trojanfinalright.png');
     this.cutsceneMoveTimer = 5000;
   }
 
