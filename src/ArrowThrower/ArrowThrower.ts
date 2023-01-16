@@ -81,7 +81,6 @@ export default class ArrowThrower extends Scene {
     if (this.antagonist.getCutsceneMoveTimer() < 0) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
         this.nextText += 1;
-        console.log(this.nextText);
       }
     }
     return null;
@@ -181,7 +180,6 @@ export default class ArrowThrower extends Scene {
           item.stopAD(item.getPosX());
           if (item.willFire()) {
             this.adBullets.push(item.fire());
-            console.log(this.adBullets);
           }
         }
       });
