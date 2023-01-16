@@ -10,6 +10,7 @@ import ArrowThrower from './ArrowThrower/ArrowThrower.js';
 import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
+import BossFight from './BossScene.ts/BossFight.js';
 
 export default class Bedroom extends Scene {
   private starting: boolean;
@@ -46,15 +47,18 @@ export default class Bedroom extends Scene {
 
   private text: Text;
 
+  private bossFightScene: boolean;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
-    this.image = CanvasUtil.loadNewImage('./assets/timmysroom1.jpg');
+    this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     this.starting = false;
+    this.bossFightScene = false;
     if (level === 1) {
       this.antagonist = new Antagonist(300, 300);
       this.level1 = true;
       this.scene = 1;
-      this.image = CanvasUtil.loadNewImage('./assets/timmyroom1.jpg');
+      this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     }
     if (!this.level1 === true) this.scene = 0;
     if (!this.level1) {
@@ -87,7 +91,7 @@ export default class Bedroom extends Scene {
       if (this.player.getPosX() > this.dimensionsX + 5) {
         if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
           this.player.move(0);
-          this.player.playerMoving(1)
+          this.player.playerMoving(1, 150)
         }
       }
 
@@ -98,7 +102,7 @@ export default class Bedroom extends Scene {
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
         if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
           this.player.move(2);
-          this.player.playerMoving(3)
+          this.player.playerMoving(3, 150)
       }
     }
 
@@ -119,11 +123,15 @@ export default class Bedroom extends Scene {
     // Cheat code to go to whackamole class
     if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
     if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
-    if (keyListener.keyPressed(KeyListener.KEY_3)) this.cheatLoadingScreen = true;
+    if (keyListener.keyPressed(KeyListener.KEY_3)) this.bossFightScene = true;
+    if (keyListener.keyPressed(KeyListener.KEY_4)) this.cheatLoadingScreen = true;
   }
 
   public update(elapsed: number): Scene {
     //cheat code to whackamole
+    if (this.bossFightScene === true) {
+      return new BossFight(window.innerWidth, window.innerHeight, 0)
+    }
     if (this.cheatWhackamole === true) {
       return new Whackamole(window.innerWidth, window.innerHeight);
     }

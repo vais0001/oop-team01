@@ -43,30 +43,34 @@ export default class Player extends Drawable {
     this.image = CanvasUtil.loadNewImage(source)
   }
 
-  public playerMoving(direction: number) {
+  public setSpeed(speed: number) {
+    this.speed = speed;
+  }
+
+  public playerMoving(direction: number, speed: number) {
     const imageSources = ['http://127.0.0.1:5500/assets/playerstanding.png', 'http://127.0.0.1:5500/assets/timmywalkingright1.png', 'http://127.0.0.1:5500/assets/timmywalkingright2.png', 'http://127.0.0.1:5500/assets/timmywalkingleft1.png', 'http://127.0.0.1:5500/assets/timmywalkingleft2.png']
     if (direction === 3) {
       if (this.image.src === imageSources[2] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
         setTimeout(() => {
           this.image = CanvasUtil.loadNewImage(imageSources[1])
-        }, 150)
+        }, speed)
       }
       if (this.image.src === imageSources[1] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
         setTimeout(() => {
           this.image = CanvasUtil.loadNewImage(imageSources[2])
-        }, 150)
+        }, speed)
       }
     }
     if (direction === 1) {
       if (this.image.src === imageSources[2] || this.image.src === imageSources[0] || this.image.src === imageSources[4]) {
         setTimeout(() => {
           this.image = CanvasUtil.loadNewImage(imageSources[3])
-        }, 150)
+        }, speed)
       }
       if (this.image.src === imageSources[1] || this.image.src === imageSources[0]|| this.image.src === imageSources[3]) {
         setTimeout(() => {
           this.image = CanvasUtil.loadNewImage(imageSources[4])
-        }, 150)
+        }, speed)
       }
     }
   }
