@@ -8,14 +8,14 @@ export default class WhackamoleText extends Drawable {
 
   public textOne(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, 'you managed to defend against my ads….', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'You managed to defend against my ads….', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
   }
 
   public textTwo(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, 'let us see how you defend against my worms…', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Let us see how you defend against my worms…', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
   }
