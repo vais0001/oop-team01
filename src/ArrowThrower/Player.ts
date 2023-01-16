@@ -8,7 +8,7 @@ export default class Player extends Drawable {
   public constructor(maxX: number, maxY: number) {
     super();
     this.image = CanvasUtil.loadNewImage('../../placeholders/timmy_00000.png');
-    this.posX = maxX - 50;
+    this.posX = maxX - 500;
     this.posY = maxY - 200;
   }
 

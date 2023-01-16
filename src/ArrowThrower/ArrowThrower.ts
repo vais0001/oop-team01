@@ -204,7 +204,7 @@ export default class ArrowThrower extends Scene {
 
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
-    CanvasUtil.fillCanvas(canvas, 'white');
+    CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
     this.player.render(canvas);
     this.antagonist.render(canvas);
