@@ -90,6 +90,7 @@ export default class Whackamole extends Scene {
 
     for (let i = 0; i < this.deadWormArray.length; i++) {
       this.deadWormArray[i].setImage('./assets/wormsmashed.png');
+      this.deadWormArray[i].subtractPosX();
     }
 
     if (this.deadWormArray.length > 0) {

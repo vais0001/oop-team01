@@ -17,32 +17,32 @@ export default class Viruses extends Drawable {
     if (value > 0) this.value = value;
     this.image = CanvasUtil.loadNewImage('./assets/wormsmall.png');
     if (this.value === 1) {
-      this.posX = 280 + this.dimensionsX;
-      this.posY = 620 + this.dimensionsY;
+      this.posX = 265 + this.dimensionsX;
+      this.posY = 530 + this.dimensionsY;
     } else if (this.value === 2) {
-      this.posX = 610 + this.dimensionsX;
-      this.posY = 620 + this.dimensionsY;
+      this.posX = 595 + this.dimensionsX;
+      this.posY = 530 + this.dimensionsY;
     } else if (this.value === 3) {
-      this.posX = 930 + this.dimensionsX;
-      this.posY = 620 + this.dimensionsY;
+      this.posX = 915 + this.dimensionsX;
+      this.posY = 530 + this.dimensionsY;
     } else if (this.value === 4) {
-      this.posX = 280 + this.dimensionsX;
-      this.posY = 430 + this.dimensionsY;
+      this.posX = 265 + this.dimensionsX;
+      this.posY = 360 + this.dimensionsY;
     } else if (this.value === 5) {
-      this.posX = 610 + this.dimensionsX;
-      this.posY = 430 + this.dimensionsY;
+      this.posX = 595 + this.dimensionsX;
+      this.posY = 360 + this.dimensionsY;
     } else if (this.value === 6) {
-      this.posX = 930 + this.dimensionsX;
-      this.posY = 430 + this.dimensionsY;
+      this.posX = 915 + this.dimensionsX;
+      this.posY = 360 + this.dimensionsY;
     } else if (this.value === 7) {
-      this.posX = 280 + this.dimensionsX;
-      this.posY = 270 + this.dimensionsY;
+      this.posX = 265 + this.dimensionsX;
+      this.posY = 190 + this.dimensionsY;
     } else if (this.value === 8) {
-      this.posX = 610 + this.dimensionsX;
-      this.posY = 270 + this.dimensionsY;
+      this.posX = 595 + this.dimensionsX;
+      this.posY = 190 + this.dimensionsY;
     } else if (this.value === 9) {
-      this.posX = 930 + this.dimensionsX;
-      this.posY = 270 + this.dimensionsY;
+      this.posX = 915 + this.dimensionsX;
+      this.posY = 190 + this.dimensionsY;
     }
   }
 
@@ -54,7 +54,7 @@ export default class Viruses extends Drawable {
       if (this.posY === 270 + this.dimensionsY) this.posY = 170 + this.dimensionsY;
       this.image = CanvasUtil.loadNewImage('./assets/wormbig.png')
     }
-    if(this.timeToDissapear <= 0) {
+    if (this.timeToDissapear <= 0) {
       this.isDead = true;
     }
     return null;
@@ -62,6 +62,18 @@ export default class Viruses extends Drawable {
 
   public getValue() {
     return this.value;
+  }
+
+  public subtractPosX() {
+    if (this.posX === 265 + this.dimensionsX) {
+      this.posX = 225 + this.dimensionsX;
+    }
+    if (this.posX === 595 + this.dimensionsX) {
+      this.posX = 555 + this.dimensionsX;
+    }
+    if (this.posX === 915 + this.dimensionsX) {
+      this.posX = 875 + this.dimensionsX;
+    }
   }
 
   public isItDead() {

@@ -10,7 +10,7 @@ export default class Text extends Drawable {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'pffff, what a terrible sleep I had.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
-    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
   public textTwo(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
@@ -18,7 +18,7 @@ export default class Text extends Drawable {
     CanvasUtil.writeTextToCanvas(canvas, 'Let me grab my phone and', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'check out the latest game releases.', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
-    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
   public textThree(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
@@ -36,7 +36,7 @@ export default class Text extends Drawable {
     CanvasUtil.writeTextToCanvas(canvas, 'buy it for me unless I get high grades...', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'I want it now, but how….', this.dimensionsX + 720, this.dimensionsY + 700, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
-    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
   public textFive(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
@@ -52,14 +52,14 @@ export default class Text extends Drawable {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'You fell for my trap!', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
-    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
   public textSeven(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'Now you must take responsibility for your actions…', this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
-    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
   public computerPrompt(canvas: HTMLCanvasElement, image: HTMLImageElement): void {

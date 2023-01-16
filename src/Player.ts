@@ -28,6 +28,7 @@ export default class Player extends Drawable {
 
   public setNewPlayerImage(source: string) {
     this.image = CanvasUtil.loadNewImage(source);
+    this.lookingRight = false;
   }
 
   public setSpeed(speed: number) {
