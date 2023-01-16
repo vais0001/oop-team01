@@ -152,21 +152,19 @@ export default class Bedroom extends Scene {
       if (this.nextText === 3) this.text.textFour(canvas, this.image1, this.playerHead);
       if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
     }
-
+    this.computer.render(canvas);
     if (this.scene === 1 && this.timeToText <= 0) {
       this.text.textSix(canvas, this.image1, this.trojanHead);
-      this.player.setNewPlayerImage('./assets/timmywalkingleft1.png')
+      this.player.setNewPlayerImage('./assets/playerstandingleft.png')
     }
     if (this.scene === 2) this.text.textSeven(canvas, this.image1, this.trojanHead);
 
     this.bed.render(canvas);
     this.player.render(canvas);
-    this.computer.render(canvas);
-
     if (this.nextText > 4) {
-      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1245, this.dimensionsY + 22);
+      CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 22);
     }
-    if (this.player.collideWithitem(this.computer)) {
+    if (this.player.collideWithitem(this.computer) && !this.level1) {
       this.text.computerPrompt(canvas, this.popUp);
     }
     if (this.level1) this.antagonist.render(canvas);

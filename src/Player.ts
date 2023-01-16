@@ -18,20 +18,6 @@ export default class Player extends Drawable {
 
   }
 
-  public move(direction: number): void {
-    if (direction == 0) {
-      this.posX -= this.speed;
-    }
-    if (direction == 1) {
-      this.posY -= this.speed;
-    }
-    if (direction == 2) {
-      this.posX += this.speed;
-    }
-    if (direction == 3) {
-      this.posY += this.speed;
-    }
-  }
   public collideWithitem(item: Computer): boolean {
     return (this.posX < item.getPosX() + item.getWidth()
       && this.posX + this.getWidth() > item.getPosX()
@@ -71,4 +57,18 @@ export default class Player extends Drawable {
     }
   }
 
+  public move(direction: number): void {
+    if (direction == 0) {
+      this.posX -= this.speed;
+    }
+    if (direction == 1) {
+      this.posY -= this.speed;
+    }
+    if (direction == 2) {
+      this.posX += this.speed;
+    }
+    if (direction == 3) {
+      this.posY += this.speed;
+    }
+  }
 }
