@@ -21,21 +21,6 @@ export default class EnemyAD2 extends EnemyAD {
   public update(elapsed: number): void {
     this.posX += elapsed * 0.2;
     this.nextFire -= elapsed;
-    // if (this.posX >= 200 + this.dimensionsX) {
-    //   this.posX = 200 + this.dimensionsX;
-    //   this.nextFire -= elapsed;
-    //   if (this.nextFire < 0) {
-    //     this.nextFire = 1500;
-    //     this.ADbullet.push(new ADbullet(this.posX, this.posY));
-    //     console.log(this.ADbullet);
-    //   }
-    // } else {
-    //   this.posX += elapsed * 0.2;
-    // }
-
-    // this.ADbullet.forEach((item: ADbullet) => {
-    //   item.update(elapsed);
-    // })
   }
 
   public stopAD(posX: number): void {
