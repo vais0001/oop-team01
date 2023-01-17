@@ -117,7 +117,7 @@ export default class ArrowThrower extends Scene {
       this.changingTime -= elapsed;
 
       if (this.changingTime < 0) {
-        if (Math.random() > 0.1) {
+        if (Math.random() > 0.3) {
           this.ad.push(new EnemyAD1(this.backgroundHeight));
         } else {
           this.ad.push(new EnemyAD2(this.backgroundHeight));

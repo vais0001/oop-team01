@@ -11,7 +11,7 @@ export default class EnemyAD2 extends EnemyAD {
   public constructor(maxY: number) {
     super(maxY);
     this.image = CanvasUtil.loadNewImage('../../placeholders/adshooter_00000.png');
-    this.nextFire = 2000;
+    this.nextFire = 1200;
   }
 
   public update(elapsed: number): void {
@@ -27,7 +27,7 @@ export default class EnemyAD2 extends EnemyAD {
 
   public willFire(): boolean {
     if (this.nextFire < 0) {
-      this.nextFire = 2000;
+      this.nextFire = 1200;
       return true;
     }
     return false;
