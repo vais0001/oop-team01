@@ -11,6 +11,7 @@ import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
 import BossFight from './BossScene.ts/BossFight.js';
+import BedroomEnd from './BedroomEnd.js';
 
 export default class Bedroom extends Scene {
   private player: Player;
@@ -32,6 +33,8 @@ export default class Bedroom extends Scene {
   private timeToText: number;
 
   private cheatWhackamole: boolean;
+
+  private finalScene: boolean;
 
   private cheatArrow: boolean;
 
@@ -80,6 +83,7 @@ export default class Bedroom extends Scene {
     this.cheatWhackamole = false;
     this.cheatArrow = false;
     this.cheatLoadingScreen = false;
+    this.finalScene = false;
     this.nextText = 0;
     this.text = new Text();
     this.buttonsPressed = 0;
@@ -135,6 +139,7 @@ export default class Bedroom extends Scene {
     if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
     if (keyListener.keyPressed(KeyListener.KEY_3)) this.bossFightScene = true;
     if (keyListener.keyPressed(KeyListener.KEY_4)) this.cheatLoadingScreen = true;
+    if (keyListener.keyPressed(KeyListener.KEY_5)) this.finalScene = true;
   }
 
   public update(elapsed: number): Scene {
@@ -155,6 +160,10 @@ export default class Bedroom extends Scene {
 
     if (this.cheatLoadingScreen === true) {
       return new LoadingSceneAT(window.innerWidth, window.innerHeight);
+    }
+
+    if (this.finalScene === true) {
+      return new BedroomEnd(window.innerWidth, window.innerHeight, 0);
     }
 
     if (this.webpageScene === true) return new Webpage(0, 0);
