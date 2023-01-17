@@ -31,8 +31,8 @@ export default class Antagonist extends Drawable {
     const distanceY: number = player.getPosY() - this.getPosY();
     const slope: number = distanceY / distanceX;
 
-    this.posX += Math.cos(slope);
-    this.posY += Math.sin(slope);
+    this.posX += Math.cos(slope) * 4;
+    this.posY += Math.sin(slope) * 4;
   }
 
   public cutsceneMovementAway(speedX: number, speedY: number): void {
