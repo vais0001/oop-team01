@@ -69,7 +69,7 @@ export default class ArrowThrower extends Scene {
     this.spawnComputer = false;
 
     for (let i = 0; i < 150; i += 50) {
-      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
+      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
     }
   }
 
