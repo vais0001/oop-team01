@@ -29,7 +29,7 @@ export default class LoadingSceneAT extends Scene {
   public update(elapsed: number): Scene {
     const randomPause: number = Math.floor(Math.random() * 1220) + 100;
     if (this.realisticPause === 50 || this.realisticPause < 0) {
-      this.loadingBar += elapsed * 5; //for final 0.3
+      this.loadingBar += elapsed * 8; //for final 0.3
     }
     if (this.loadingBar > randomPause) {
       this.realisticPause -= elapsed;

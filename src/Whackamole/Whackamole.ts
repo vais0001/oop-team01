@@ -195,7 +195,6 @@ export default class Whackamole extends Scene {
         this.player.moveAway(-2, 0);
       }
     }
-
     if (this.player.getPosX() <= this.dimensionsX - 2000) {
       return new LoadingSceneBF(window.innerWidth, window.innerHeight);
     }
@@ -206,7 +205,6 @@ export default class Whackamole extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    CanvasUtil.writeTextToCanvas(canvas, `Enemies Left: ${this.enemiesLeft}`, 10, 50, 'left', 'arial', 22, 'white');
     this.holes.forEach((item: Viruses) => {
       item.render(canvas);
     });
