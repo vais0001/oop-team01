@@ -42,7 +42,7 @@ export default class BossFight extends Scene {
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
     this.player.setSpeed(5);
-    this.antagonist = new Antagonist(this.backgroundWidth - 350, 90);
+    this.antagonist = new Antagonist(1050, 90);
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
@@ -55,7 +55,7 @@ export default class BossFight extends Scene {
     this.healthBar = 650;
     this.hit = false;
     for (let i = 0; i < 250; i += 50) {
-      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
+      this.lives.push(new Lives(this.dimensionsX + 40, 250 + i + this.dimensionsY));
     }
   }
 
@@ -217,7 +217,7 @@ export default class BossFight extends Scene {
     this.antagonist.render(canvas);
     this.player.render(canvas);
     this.lightsaber.render(canvas);
-    CanvasUtil.fillRectangle(canvas, this.backgroundWidth - 950, this.dimensionsY + 80, this.healthBar, 40, 'red');
-    CanvasUtil.drawRectangle(canvas, this.backgroundWidth - 950, this.dimensionsY + 80, 650, 40, 'black');
+    CanvasUtil.fillRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, this.healthBar, 40, 'red');
+    CanvasUtil.drawRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, 650, 40, 'black');
   }
 }
