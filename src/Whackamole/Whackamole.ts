@@ -55,7 +55,7 @@ export default class Whackamole extends Scene {
     this.enemiesLeft = 40;
     this.checkIfCorrect = 0;
     this.wormSmashedTimer = 200;
-    for (let i = 0; i < 150; i += 5) {
+    for (let i = 0; i < 150; i += 50) {
       this.lives.push(new Lives(50, 250 + i));
     }
     this.nextText = 0;
