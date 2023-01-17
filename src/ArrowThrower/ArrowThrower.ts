@@ -50,6 +50,10 @@ export default class ArrowThrower extends Scene {
 
   private computer: ArrowThrowerComputer;
 
+  private moveUp: boolean;
+
+  private moveDown: boolean;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
 
@@ -68,6 +72,9 @@ export default class ArrowThrower extends Scene {
     this.nextText = 0;
     this.spawnComputer = false;
 
+    this.moveDown = false;
+    this.moveUp = false;
+
     for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
     }
@@ -75,8 +82,20 @@ export default class ArrowThrower extends Scene {
 
   public processInput(keyListener: KeyListener): void {
     if (this.nextText > 3 && this.score < 205) {
-      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
+      // if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
+      // if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
+      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
+        this.moveUp = true
+      } else {
+        this.moveUp = false;
+      }
+
+      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
+        this.moveDown = true;
+      } else {
+        this.moveDown = false;
+      }
+
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
         if (this.bullet.getPosX() < this.dimensionsX) {
           this.bullet = new CursorBullet(this.player.getPosX(), this.player.getPosY() + (this.player.getHeight() / 2) - 5);
@@ -100,6 +119,14 @@ export default class ArrowThrower extends Scene {
       this.antagonist.cutsceneMovement(elapsed);
     } else if (this.score < 60) {
       this.antagonist.cutsceneMovementAway(0, -3);
+    }
+
+    if (this.moveDown) {
+      this.player.moveDown(elapsed);
+    }
+
+    if (this.moveUp) {
+      this.player.moveUp(elapsed);
     }
 
     if (this.nextText > 3 && this.score < 205) {
