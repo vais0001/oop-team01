@@ -59,9 +59,9 @@ export default class ArrowThrower extends Scene {
     this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
     this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
     this.bullet = new CursorBullet(-100, -100);
-    this.timeToNextAD = 1500;
+    this.timeToNextAD = 1000;
     this.score = 0;
-    this.changingTime = 1500;
+    this.changingTime = 1000;
     this.playerHead = CanvasUtil.loadNewImage('./assets/timmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
@@ -124,7 +124,9 @@ export default class ArrowThrower extends Scene {
         }
 
         if (this.timeToNextAD > 500) {
-          this.timeToNextAD -= 30; // change to 10 later
+          if (this.timeToNextAD > 700) {
+            this.timeToNextAD -= 20;
+          }
         }
         this.changingTime = this.timeToNextAD;
       }
