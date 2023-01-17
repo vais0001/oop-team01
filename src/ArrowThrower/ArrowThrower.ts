@@ -53,7 +53,7 @@ export default class ArrowThrower extends Scene {
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
 
-    this.image = CanvasUtil.loadNewImage('../../placeholders/arrow_thrower_scene.png');
+    this.image = CanvasUtil.loadNewImage('../assets/timmyroom1.jpg');
 
     // 3000 or 1500
     this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
@@ -99,7 +99,7 @@ export default class ArrowThrower extends Scene {
       }
       this.antagonist.cutsceneMovement(elapsed);
     } else if (this.score < 60) {
-      this.antagonist.cutsceneMovementAway(5, -3);
+      this.antagonist.cutsceneMovementAway(0, -3);
     }
 
     if (this.nextText > 3 && this.score < 105) {
@@ -203,9 +203,13 @@ export default class ArrowThrower extends Scene {
     }
 
     if (this.score === 100) {
-      this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
+      this.antagonist = new Antagonist(this.backgroundWidth - 800, this.backgroundHeight - 700);
+    } else if (this.score >= 105) {
       this.antagonist.moveToPlayer(this.player);
-    } else if (this.score === 105) {
+    }
+
+    if (this.antagonist.getPosX() > this.player.getPosX()) {
+      this.nextText = -10;
       this.antagonist.cutsceneMovementAway(-20, 0);
       this.player.moveAway(-20, 0);
     }

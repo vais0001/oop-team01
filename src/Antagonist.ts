@@ -27,8 +27,12 @@ export default class Antagonist extends Drawable {
   }
 
   public moveToPlayer(player: Player) {
-    this.posX += Math.sqrt(((player.getPosX() - this.getPosX()) ** 2));
-    this.posY += Math.sqrt(((player.getPosY() - this.getPosY()) ** 2));
+    const distanceX: number = player.getPosX() - this.getPosX();
+    const distanceY: number = player.getPosY() - this.getPosY();
+    const slope: number = distanceY / distanceX;
+
+    this.posX += Math.cos(slope);
+    this.posY += Math.sin(slope);
   }
 
   public cutsceneMovementAway(speedX: number, speedY: number): void {
@@ -43,5 +47,5 @@ export default class Antagonist extends Drawable {
   public changeImage(source: string){
     this.image = CanvasUtil.loadNewImage(source)
   }
- 
+
 }
