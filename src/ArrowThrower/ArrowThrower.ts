@@ -146,11 +146,10 @@ export default class ArrowThrower extends Scene {
       });
 
       this.adBullets.forEach((item: ADbullet) => {
-        item.update(elapsed);
+        item.update(this.player);
       });
 
       this.ad = this.ad.filter((item: EnemyAD) => {
-
         if (this.bullet.isCollidingAD(item)) {
           this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
           this.score += 5;
