@@ -34,7 +34,6 @@ export default class BossFight extends Scene {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
-    this.player.setSpeed(5)
     this.antagonist = new Antagonist(this.dimensionsX + 1100, this.dimensionsY + 30);
     this.abilityShoot = false;
     this.bulletsTimer = 200;

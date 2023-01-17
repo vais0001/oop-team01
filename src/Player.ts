@@ -4,8 +4,6 @@ import Computer from './Computer.js';
 import Bed from './Bed.js';
 
 export default class Player extends Drawable {
-  private speed: number;
-
   private lookingRight: boolean;
 
   public constructor(posX: number, posY: number) {
@@ -13,11 +11,7 @@ export default class Player extends Drawable {
     this.image = CanvasUtil.loadNewImage('./assets/playerstanding.png');
     this.posX = posX;
     this.posY = posY;
-    this.speed = 3;
     this.lookingRight = true;
-  }
-
-  public update(elapsed: number): void {
   }
 
   public collideWithitem(item: Computer): boolean {
@@ -32,22 +26,18 @@ export default class Player extends Drawable {
     this.lookingRight = false;
   }
 
-  public setSpeed(speed: number) {
-    this.speed = speed;
-  }
-
   public collidingComputer(computer: Computer): boolean {
     return (this.posX < computer.getPosX() + computer.getWidth()
-      && this.posX + this.getWidth() > computer.getPosX()
-      && this.getPosY() < computer.getPosY() + computer.getHeight() - 200
-      && this.getHeight() + this.posY > computer.getPosY()
+    && this.posX + this.getWidth() > computer.getPosX()
+    && this.getPosY() < computer.getPosY() + computer.getHeight() - 200
+    && this.getHeight() + this.posY > computer.getPosY()
     );
   }
 
   public collidingBed(bed: Bed): boolean {
     return (this.posX < bed.getPosX() + bed.getWidth()
       && this.posX + this.getWidth() > bed.getPosX()
-      && this.getPosY() < bed.getPosY() + bed.getHeight() - 200
+      && this.getPosY() < bed.getPosY() + bed.getHeight() - 223
       && this.getHeight() + this.posY > bed.getPosY()
     );
   }
@@ -86,19 +76,21 @@ export default class Player extends Drawable {
         }, speed);
       }
     }
-    if (direction === 0) {
-      this.posX -= this.speed;
-      this.lookingRight = false;
-    }
-    if (direction === 1) {
-      this.posY -= this.speed;
-    }
-    if (direction === 2) {
-      this.posX += this.speed;
-      this.lookingRight = true;
-    }
-    if (direction === 3) {
-      this.posY += this.speed;
-    }
   }
+
+  public moveUp(elapsed: number): void {
+    this.posY -= elapsed * 0.5;
+  }
+  public moveDown(elapsed: number): void {
+    this.posY += elapsed * 0.5;
+  }
+  public moveLeft(elapsed: number): void {
+    this.lookingRight = false;
+    this.posX -= elapsed * 0.5;
+  }
+  public moveRight(elapsed: number): void {
+    this.lookingRight = true;
+    this.posX += elapsed * 0.5;
+  }
+
 }
