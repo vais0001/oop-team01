@@ -50,6 +50,10 @@ export default class ArrowThrower extends Scene {
 
   private computer: ArrowThrowerComputer;
 
+  private moveUp: boolean;
+
+  private moveDown: boolean;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
 
@@ -68,15 +72,30 @@ export default class ArrowThrower extends Scene {
     this.nextText = 0;
     this.spawnComputer = false;
 
-    for (let i = 0; i < 150; i += 50) {
+    this.moveDown = false;
+    this.moveUp = false;
+
+    for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
     }
   }
 
   public processInput(keyListener: KeyListener): void {
     if (this.nextText > 3 && this.score < 205) {
-      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
+      // if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
+      // if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
+      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
+        this.moveUp = true
+      } else {
+        this.moveUp = false;
+      }
+
+      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
+        this.moveDown = true;
+      } else {
+        this.moveDown = false;
+      }
+
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
         if (this.bullet.getPosX() < this.dimensionsX) {
           this.bullet = new CursorBullet(this.player.getPosX(), this.player.getPosY() + (this.player.getHeight() / 2) - 5);
@@ -100,6 +119,14 @@ export default class ArrowThrower extends Scene {
       this.antagonist.cutsceneMovement(elapsed);
     } else if (this.score < 60) {
       this.antagonist.cutsceneMovementAway(0, -3);
+    }
+
+    if (this.moveDown) {
+      this.player.moveDown(elapsed);
+    }
+
+    if (this.moveUp) {
+      this.player.moveUp(elapsed);
     }
 
     if (this.nextText > 3 && this.score < 205) {
@@ -131,7 +158,7 @@ export default class ArrowThrower extends Scene {
         this.changingTime = this.timeToNextAD;
       }
 
-      if (this.lives.length < 3) {
+      if (this.lives.length < 5) {
         if (Math.random() > 0.9985) {
           this.heartPowerup.push(new HeartPowerup());
         }
@@ -139,6 +166,9 @@ export default class ArrowThrower extends Scene {
 
       this.heartPowerup = this.heartPowerup.filter((heartPowerup: HeartPowerup) => {
         if (this.player.isCollidingHeart(heartPowerup)) {
+          if (this.lives.length === 5) this.lives.push(new Lives(this.dimensionsX - 40, 500 + this.dimensionsY));
+          if (this.lives.length === 4) this.lives.push(new Lives(this.dimensionsX - 40, 450 + this.dimensionsY));
+          if (this.lives.length === 3) this.lives.push(new Lives(this.dimensionsX - 40, 400 + this.dimensionsY));
           if (this.lives.length === 2) this.lives.push(new Lives(this.dimensionsX - 40, 350 + this.dimensionsY));
           if (this.lives.length === 1) this.lives.push(new Lives(this.dimensionsX - 40, 300 + this.dimensionsY));
           return false;
