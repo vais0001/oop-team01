@@ -19,7 +19,7 @@ export default class ADbullet extends Drawable {
       this.posX += Math.cos(slope) * 0.2;
       this.posY += Math.sin(slope) * 0.2;
     } else {
-      this.posX += 2;
+      this.posX += 1;
     }
   }
 }

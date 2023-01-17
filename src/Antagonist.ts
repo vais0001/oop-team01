@@ -18,8 +18,8 @@ export default class Antagonist extends Drawable {
     if (this.cutsceneMoveTimer < 0) {
       this.posX -= 0;
     } else if (this.cutsceneMoveTimer < 2000) {
-      this.posX -= 2;
-      this.posY -= 1;
+      this.posX -= elapsed * 0.3;
+      this.posY -= elapsed * 0.1;
     } else if (this.cutsceneMoveTimer < 5000) {
       this.posY += elapsed * 0.2;
       this.posX += elapsed * 0.5;
@@ -31,8 +31,8 @@ export default class Antagonist extends Drawable {
     const distanceY: number = player.getPosY() - this.getPosY();
     const slope: number = distanceY / distanceX;
 
-    this.posX += Math.cos(slope) * 4;
-    this.posY += Math.sin(slope) * 4;
+    this.posX += Math.cos(slope) * 0.8;
+    this.posY += Math.sin(slope) * 0.8;
   }
 
   public cutsceneMovementAway(speedX: number, speedY: number): void {

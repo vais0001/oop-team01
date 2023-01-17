@@ -63,7 +63,7 @@ export default class ArrowThrower extends Scene {
     this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
     this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
     this.bullet = new CursorBullet(-100, -100);
-    this.timeToNextAD = 1000;
+    this.timeToNextAD = 1700;
     this.score = 0;
     this.changingTime = 1000;
     this.playerHead = CanvasUtil.loadNewImage('./assets/timmyHead.png');
@@ -82,8 +82,6 @@ export default class ArrowThrower extends Scene {
 
   public processInput(keyListener: KeyListener): void {
     if (this.nextText > 3 && this.score < 205) {
-      // if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
-      // if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
       if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
         this.moveUp = true
       } else {
@@ -117,7 +115,7 @@ export default class ArrowThrower extends Scene {
         this.player.cutsceneMovement(elapsed);
       }
       this.antagonist.cutsceneMovement(elapsed);
-    } else if (this.score < 60) {
+    } else if (this.score < 10) {
       this.antagonist.cutsceneMovementAway(0, -3);
     }
 
@@ -152,14 +150,14 @@ export default class ArrowThrower extends Scene {
 
         if (this.timeToNextAD > 500) {
           if (this.timeToNextAD > 700) {
-            this.timeToNextAD -= 20;
+            this.timeToNextAD -= 30;
           }
         }
         this.changingTime = this.timeToNextAD;
       }
 
       if (this.lives.length < 5) {
-        if (Math.random() > 0.9985) {
+        if (Math.random() > 0.9999) {
           this.heartPowerup.push(new HeartPowerup());
         }
       }
@@ -254,8 +252,8 @@ export default class ArrowThrower extends Scene {
 
     if (this.antagonist.getPosX() > this.player.getPosX()) {
       this.nextText = -10;
-      this.antagonist.cutsceneMovementAway(-20, 0);
-      this.player.moveAway(-20, 0);
+      this.antagonist.cutsceneMovementAway(-2, 0);
+      this.player.moveAway(-2, 0);
     }
 
     if (this.player.getPosX() < this.backgroundWidth - 2000) {
