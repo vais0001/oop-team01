@@ -1,4 +1,5 @@
 import Antagonist from "../Antagonist.js";
+import BedroomEnd from "../BedroomEnd.js";
 import CanvasUtil from "../CanvasUtil.js";
 import KeyListener from "../KeyListener.js";
 import Player from "../Player.js";
@@ -8,7 +9,6 @@ import Lightsaber from "./Lightsaber.js";
 import ShootingAbility from "./ShootingAbility.js";
 
 export default class BossFight extends Scene {
-
   private antagonist: Antagonist;
 
   private player: Player;
@@ -213,6 +213,8 @@ export default class BossFight extends Scene {
     ) {
       this.healthBar -= 0.1;
     }
+
+    if (this.healthBar < 600) return new BedroomEnd(this.backgroundWidth, this.backgroundHeight, 0);
 
     return null;
   }
