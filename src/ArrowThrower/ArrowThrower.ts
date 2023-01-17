@@ -68,13 +68,13 @@ export default class ArrowThrower extends Scene {
     this.nextText = 0;
     this.spawnComputer = false;
 
-    for (let i = 0; i < 150; i += 50) {
+    for (let i = 0; i < 11150; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
     }
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (this.nextText > 3 && this.score < 105) {
+    if (this.nextText > 3 && this.score < 205) {
       if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
       if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
