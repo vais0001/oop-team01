@@ -1,6 +1,7 @@
 import Drawable from './Drawable.js';
 import CanvasUtil from './CanvasUtil.js';
 import Computer from './Computer.js';
+import Bed from './Bed.js';
 
 export default class Player extends Drawable {
   private speed: number;
@@ -35,6 +36,22 @@ export default class Player extends Drawable {
     this.speed = speed;
   }
 
+  public collidingComputer(computer: Computer): boolean {
+    return (this.posX < computer.getPosX() + computer.getWidth()
+      && this.posX + this.getWidth() > computer.getPosX()
+      && this.getPosY() < computer.getPosY() + computer.getHeight() - 200
+      && this.getHeight() + this.posY > computer.getPosY()
+    );
+  }
+
+  public collidingBed(bed: Bed): boolean {
+    return (this.posX < bed.getPosX() + bed.getWidth()
+      && this.posX + this.getWidth() > bed.getPosX()
+      && this.getPosY() < bed.getPosY() + bed.getHeight() - 200
+      && this.getHeight() + this.posY > bed.getPosY()
+    );
+  }
+
   public move(direction: number, speed: number): void {
     const imageSources = ['http://127.0.0.1:5500/assets/playerstanding.png', 'http://127.0.0.1:5500/assets/timmywalkingright1.png', 'http://127.0.0.1:5500/assets/timmywalkingright2.png', 'http://127.0.0.1:5500/assets/timmywalkingleft1.png', 'http://127.0.0.1:5500/assets/timmywalkingleft2.png', 'http://127.0.0.1:5500/assets/playerstandingleft.png'];
     if (direction === 66) {
@@ -46,12 +63,12 @@ export default class Player extends Drawable {
     }
     if (this.lookingRight && direction !== 66) {
       if (this.lookingRight) {
-        if (this.image.src === imageSources[2] || this.image.src === imageSources[5] ||  this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
+        if (this.image.src === imageSources[2] || this.image.src === imageSources[5] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
           setTimeout(() => {
             this.image = CanvasUtil.loadNewImage(imageSources[1]);
           }, speed);
         }
-        if (this.image.src === imageSources[1] || this.image.src === imageSources[5] ||  this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
+        if (this.image.src === imageSources[1] || this.image.src === imageSources[5] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
           setTimeout(() => {
             this.image = CanvasUtil.loadNewImage(imageSources[2]);
           }, speed);
@@ -63,7 +80,7 @@ export default class Player extends Drawable {
           this.image = CanvasUtil.loadNewImage(imageSources[3]);
         }, speed);
       }
-      if (this.image.src === imageSources[1] || this.image.src === imageSources[5] ||  this.image.src === imageSources[0] || this.image.src === imageSources[3]) {
+      if (this.image.src === imageSources[1] || this.image.src === imageSources[5] || this.image.src === imageSources[0] || this.image.src === imageSources[3]) {
         setTimeout(() => {
           this.image = CanvasUtil.loadNewImage(imageSources[4]);
         }, speed);

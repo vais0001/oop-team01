@@ -43,7 +43,7 @@ export default abstract class Drawable {
   }
 
   public setImage(image: string) {
-    this.image = CanvasUtil.loadNewImage(image)
+    this.image = CanvasUtil.loadNewImage(image);
   }
 
   public minusPosY(posY: number) {
