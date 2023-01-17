@@ -57,7 +57,7 @@ export default class Bedroom extends Scene {
       this.antagonist = new Antagonist(250, 250);
       this.level1 = true;
       this.scene = 1;
-      this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
+      this.image = CanvasUtil.loadNewImage('./assets/timmyroomred.png');
     }
     if (!this.level1 === true) this.scene = 0;
     if (!this.level1) {

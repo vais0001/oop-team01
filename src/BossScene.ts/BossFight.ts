@@ -3,6 +3,7 @@ import CanvasUtil from "../CanvasUtil.js";
 import KeyListener from "../KeyListener.js";
 import Player from "../Player.js";
 import Scene from "../Scene.js";
+import Lightsaber from "./Lightsaber.js";
 import ShootingAbility from "./ShootingAbility.js";
 
 export default class BossFight extends Scene {
@@ -23,9 +24,13 @@ export default class BossFight extends Scene {
 
   private abilityCount: number;
 
+  private lightsaber: Lightsaber;
+
+  private lightsaberSide: number;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
-    this.image = CanvasUtil.loadNewImage('./placeholders/arrow_thrower_scene.png');
+    this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
     this.player.setSpeed(5)
     this.antagonist = new Antagonist(this.dimensionsX + 1100, this.dimensionsY + 30);
@@ -35,33 +40,59 @@ export default class BossFight extends Scene {
     this.levelTimer = 10000;
     this.level = 0;
     this.abilityCount = 0;
+    this.lightsaberSide = 0;
+    this.lightsaber = new Lightsaber(this.player.getPosX(), this.player.getPosY() + 80)
   }
 
   public processInput(keyListener: KeyListener): void {
     if (this.player.getPosX() > this.dimensionsX + 5) {
       if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
-        this.player.move(0, 150);
+        this.player.move(0, 50);
+        this.lightsaber.changeImage('./assets/lightsaber1.png')
+        this.lightsaberSide = 1;
       }
     }
 
     if (this.player.getPosY() > this.dimensionsY + 5) {
-      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1, 150);
+      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1, 50);
     }
 
     if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
       if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
-        this.player.move(2, 150);
+        this.player.move(2, 50);
+        this.lightsaber.changeImage('./assets/lightsaber.png')
+        this.lightsaberSide = 0;
       }
     }
 
     if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3, 150);
+      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3, 50);
+    }
+
+    if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+      this.lightsaberSide = 2;
     }
   }
 
   public update(elapsed: number): Scene {
     // functions for all levels
     this.levelTimer -= elapsed;
+    if (this.lightsaberSide === 0) {
+      this.lightsaber.changeImage('./assets/lightsaber.png')
+    this.lightsaber.update(elapsed, this.player.getPosX(), this.player.getPosY() + 80)
+    }
+    if (this.lightsaberSide === 1) {
+      this.lightsaber.changeImage('./assets/lightsaber1.png')
+      this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() + 80)
+    }
+    if (this.lightsaberSide === 2) {
+      this.lightsaber.slashImage(1)
+      this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() - 50)
+      setTimeout(() => {
+        this.lightsaberSide = 0;
+      }, 100)
+    }
+
     this.bullets.forEach((item: ShootingAbility) => {
       item.update(elapsed)
     })
@@ -132,5 +163,6 @@ export default class BossFight extends Scene {
       })
     this.antagonist.render(canvas)
     this.player.render(canvas)
+    this.lightsaber.render(canvas)
   }
 }
