@@ -11,11 +11,11 @@ export default class EnemyAD2 extends EnemyAD {
   public constructor(maxY: number) {
     super(maxY);
     this.image = CanvasUtil.loadNewImage('../../placeholders/adshooter_00000.png');
-    this.nextFire = 1500;
+    this.nextFire = 0;
   }
 
   public update(elapsed: number): void {
-    this.posX += elapsed * 0.2;
+    this.posX += elapsed * 0.3;
     this.nextFire -= elapsed;
   }
 
@@ -26,9 +26,12 @@ export default class EnemyAD2 extends EnemyAD {
   }
 
   public willFire(): boolean {
-    if (this.nextFire < 0) {
-      this.nextFire = 1500;
-      return true;
+    if (this.posX === 200 + this.dimensionsX) {
+      if (this.nextFire < 0) {
+        this.nextFire = 2000;
+        return true;
+      }
+      return false;
     }
     return false;
   }

@@ -40,6 +40,10 @@ export default class Whackamole extends Scene {
 
   private cutsceneTimer: number;
 
+  private lastValues: number[] = [];
+
+  private virusPushed: boolean;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
@@ -56,6 +60,8 @@ export default class Whackamole extends Scene {
     }
     this.nextText = 0;
     this.cutsceneTimer = 2000;
+    this.lastValues = [];
+    this.virusPushed = false;
   }
 
   public wormSmash(value: number) {
@@ -90,7 +96,6 @@ export default class Whackamole extends Scene {
 
     if (this.nextText <= 2 && this.antagonist.getCutsceneMoveTimer() < 0) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
-      console.log(this.nextText);
     }
   }
 
@@ -144,10 +149,29 @@ export default class Whackamole extends Scene {
           }
         }
       }
-
       this.timeToNextVirus -= elapsed;
       if (this.timeToNextVirus <= 0 && this.holes.length < 4 && this.enemiesLeft > 0 && this.enemiesLeft > 1) {
-        this.holes.push(new Viruses(0));
+        const newVirus: Viruses = new Viruses(0);
+        this.virusPushed = true;
+        if (this.lastValues.length === 0) {
+          this.holes.push(newVirus);
+          this.lastValues.unshift(newVirus.getValue());
+        } else {
+          for (let i = 0; i < this.lastValues.length; i++) {
+            if (this.lastValues[i] === newVirus.getValue()) {
+              this.virusPushed = false;
+            }
+          }
+          if (this.virusPushed) {
+            this.holes.push(newVirus);
+            if (this.lastValues.length === 3) {
+              this.lastValues.pop();
+              this.lastValues.unshift(newVirus.getValue());
+            } else {
+              this.lastValues.unshift(newVirus.getValue());
+            }
+          }
+        }
         this.timeToNextVirus = 3000;
         if (this.enemiesLeft < 40 && this.enemiesLeft > 30) this.timeToNextVirus = 800;
         if (this.enemiesLeft < 30 && this.enemiesLeft > 15) this.timeToNextVirus = 500;
@@ -167,8 +191,8 @@ export default class Whackamole extends Scene {
       this.enemiesLeft = -1;
       this.antagonist.moveToPlayer(this.player);
       if (this.antagonist.getPosX() >= this.player.getPosX()) {
-        this.antagonist.cutsceneMovementAway(-20, -5);
-        this.player.moveAway(-20, -5);
+        this.antagonist.cutsceneMovementAway(-2, 0);
+        this.player.moveAway(-2, 0);
       }
     }
 

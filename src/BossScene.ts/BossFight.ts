@@ -28,6 +28,8 @@ export default class BossFight extends Scene {
 
   private lightsaberSide: number;
 
+  private playerSide: number; // 1 left 0 right
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
@@ -41,6 +43,7 @@ export default class BossFight extends Scene {
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
+    this.playerSide = 0;
     this.lightsaber = new Lightsaber(this.player.getPosX(), this.player.getPosY() + 80)
   }
 
@@ -50,6 +53,7 @@ export default class BossFight extends Scene {
         this.player.move(0, 50);
         this.lightsaber.changeImage('./assets/lightsaber1.png')
         this.lightsaberSide = 1;
+        this.playerSide = 1;
       }
     }
 
@@ -62,6 +66,7 @@ export default class BossFight extends Scene {
         this.player.move(2, 50);
         this.lightsaber.changeImage('./assets/lightsaber.png')
         this.lightsaberSide = 0;
+        this.playerSide = 0;
       }
     }
 
@@ -86,12 +91,24 @@ export default class BossFight extends Scene {
       this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() + 80)
     }
     if (this.lightsaberSide === 2) {
+      if (this.playerSide === 0) {
       this.lightsaber.slashImage(1)
       this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() - 50)
       setTimeout(() => {
-        this.lightsaberSide = 0;
+        if (this.playerSide === 1) {
+          this.lightsaberSide = 1;
+        } else this.lightsaberSide = 0;
+      }, 100)
+    } else if (this.playerSide === 1) {
+      this.lightsaber.slashImage(0)
+      this.lightsaber.update(elapsed, this.player.getPosX() - 200, this.player.getPosY() - 50)
+      setTimeout(() => {
+        if (this.playerSide === 0) {
+          this.lightsaberSide = 0;
+        } else this.lightsaberSide = 1;
       }, 100)
     }
+  }
 
     this.bullets.forEach((item: ShootingAbility) => {
       item.update(elapsed)

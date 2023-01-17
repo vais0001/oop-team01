@@ -50,33 +50,50 @@ export default class ArrowThrower extends Scene {
 
   private computer: ArrowThrowerComputer;
 
+  private moveUp: boolean;
+
+  private moveDown: boolean;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
 
-    this.image = CanvasUtil.loadNewImage('../assets/timmyroom1.jpg');
+    this.image = CanvasUtil.loadNewImage('../assets/arrowthrower.png');
 
     // 3000 or 1500
     this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
     this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
     this.bullet = new CursorBullet(-100, -100);
-    this.timeToNextAD = 1500;
+    this.timeToNextAD = 1700;
     this.score = 0;
-    this.changingTime = 1500;
+    this.changingTime = 1000;
     this.playerHead = CanvasUtil.loadNewImage('./assets/timmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.nextText = 0;
     this.spawnComputer = false;
 
-    for (let i = 0; i < 150; i += 50) {
+    this.moveDown = false;
+    this.moveUp = false;
+
+    for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
     }
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (this.nextText > 3 && this.score < 105) {
-      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
+    if (this.nextText > 3 && this.score < 205) {
+      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
+        this.moveUp = true
+      } else {
+        this.moveUp = false;
+      }
+
+      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
+        this.moveDown = true;
+      } else {
+        this.moveDown = false;
+      }
+
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
         if (this.bullet.getPosX() < this.dimensionsX) {
           this.bullet = new CursorBullet(this.player.getPosX(), this.player.getPosY() + (this.player.getHeight() / 2) - 5);
@@ -98,8 +115,16 @@ export default class ArrowThrower extends Scene {
         this.player.cutsceneMovement(elapsed);
       }
       this.antagonist.cutsceneMovement(elapsed);
-    } else if (this.score < 60) {
+    } else if (this.score < 10) {
       this.antagonist.cutsceneMovementAway(0, -3);
+    }
+
+    if (this.moveDown) {
+      this.player.moveDown(elapsed);
+    }
+
+    if (this.moveUp) {
+      this.player.moveUp(elapsed);
     }
 
     if (this.nextText > 3 && this.score < 205) {
@@ -124,19 +149,24 @@ export default class ArrowThrower extends Scene {
         }
 
         if (this.timeToNextAD > 500) {
-          this.timeToNextAD -= 10; // change to 10 later
+          if (this.timeToNextAD > 700) {
+            this.timeToNextAD -= 30;
+          }
         }
         this.changingTime = this.timeToNextAD;
       }
 
-      if (this.lives.length < 3) {
-        if (Math.random() > 0.9985) {
+      if (this.lives.length < 5) {
+        if (Math.random() > 0.9999) {
           this.heartPowerup.push(new HeartPowerup());
         }
       }
 
       this.heartPowerup = this.heartPowerup.filter((heartPowerup: HeartPowerup) => {
         if (this.player.isCollidingHeart(heartPowerup)) {
+          if (this.lives.length === 5) this.lives.push(new Lives(this.dimensionsX - 40, 500 + this.dimensionsY));
+          if (this.lives.length === 4) this.lives.push(new Lives(this.dimensionsX - 40, 450 + this.dimensionsY));
+          if (this.lives.length === 3) this.lives.push(new Lives(this.dimensionsX - 40, 400 + this.dimensionsY));
           if (this.lives.length === 2) this.lives.push(new Lives(this.dimensionsX - 40, 350 + this.dimensionsY));
           if (this.lives.length === 1) this.lives.push(new Lives(this.dimensionsX - 40, 300 + this.dimensionsY));
           return false;
@@ -159,11 +189,10 @@ export default class ArrowThrower extends Scene {
       })
 
       this.adBullets.forEach((item: ADbullet) => {
-        item.update(elapsed);
+        item.update(this.player);
       });
 
       this.ad = this.ad.filter((item: EnemyAD) => {
-
         if (this.bullet.isCollidingAD(item)) {
           this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
           this.score += 5;
@@ -223,8 +252,8 @@ export default class ArrowThrower extends Scene {
 
     if (this.antagonist.getPosX() > this.player.getPosX()) {
       this.nextText = -10;
-      this.antagonist.cutsceneMovementAway(-20, 0);
-      this.player.moveAway(-20, 0);
+      this.antagonist.cutsceneMovementAway(-2, 0);
+      this.player.moveAway(-2, 0);
     }
 
     if (this.player.getPosX() < this.backgroundWidth - 2000) {
