@@ -121,7 +121,7 @@ export default class BedroomEnd extends Scene {
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
     }
-    this.player.update(elapsed);
+    // this.player.update(elapsed);
 
     if (this.webpageScene === true) return new Webpage(0, 0);
     this.timeToText -= elapsed;
