@@ -39,7 +39,7 @@ export default class BossFight extends Scene {
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
-    this.levelTimer = 10000;
+    this.levelTimer = 1000;
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
@@ -84,7 +84,7 @@ export default class BossFight extends Scene {
     this.levelTimer -= elapsed;
     if (this.lightsaberSide === 0) {
       this.lightsaber.changeImage('./assets/lightsaber.png')
-    this.lightsaber.update(elapsed, this.player.getPosX(), this.player.getPosY() + 80)
+      this.lightsaber.update(elapsed, this.player.getPosX(), this.player.getPosY() + 80)
     }
     if (this.lightsaberSide === 1) {
       this.lightsaber.changeImage('./assets/lightsaber1.png')
@@ -92,23 +92,23 @@ export default class BossFight extends Scene {
     }
     if (this.lightsaberSide === 2) {
       if (this.playerSide === 0) {
-      this.lightsaber.slashImage(1)
-      this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() - 50)
-      setTimeout(() => {
-        if (this.playerSide === 1) {
-          this.lightsaberSide = 1;
-        } else this.lightsaberSide = 0;
-      }, 100)
-    } else if (this.playerSide === 1) {
-      this.lightsaber.slashImage(0)
-      this.lightsaber.update(elapsed, this.player.getPosX() - 200, this.player.getPosY() - 50)
-      setTimeout(() => {
-        if (this.playerSide === 0) {
-          this.lightsaberSide = 0;
-        } else this.lightsaberSide = 1;
-      }, 100)
+        this.lightsaber.slashImage(1)
+        this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() - 50)
+        setTimeout(() => {
+          if (this.playerSide === 1) {
+            this.lightsaberSide = 1;
+          } else this.lightsaberSide = 0;
+        }, 100)
+      } else if (this.playerSide === 1) {
+        this.lightsaber.slashImage(0)
+        this.lightsaber.update(elapsed, this.player.getPosX() - 200, this.player.getPosY() - 50)
+        setTimeout(() => {
+          if (this.playerSide === 0) {
+            this.lightsaberSide = 0;
+          } else this.lightsaberSide = 1;
+        }, 100)
+      }
     }
-  }
 
     this.bullets.forEach((item: ShootingAbility) => {
       item.update(elapsed)
@@ -145,17 +145,17 @@ export default class BossFight extends Scene {
     if (this.level === 1) {
       this.bulletsTimer -= elapsed;
       if (this.antagonist.getPosX() > 100 && this.abilityCount === 0) {
-        this.antagonist.addOrSubPosX(1, 1)
+        this.antagonist.addOrSubPosX(0.2 * elapsed, 1)
         if (this.bulletsTimer <= 0) {
-        this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
-        this.bulletsTimer = 800;
-      }
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
+          this.bulletsTimer = 800;
+        }
       }
       if (this.antagonist.getPosX() < 101) {
         this.abilityCount = 1
       }
       if (this.abilityCount === 1) {
-        this.antagonist.addOrSubPosX(1, 0)
+        this.antagonist.addOrSubPosX(0.2 * elapsed, 0)
         this.antagonist.changeImage('./assets/trojanfinalright.png');
         if (this.bulletsTimer <= 0) {
           this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
@@ -165,13 +165,18 @@ export default class BossFight extends Scene {
       if (this.antagonist.getPosX() > this.dimensionsX + 1050 && this.abilityCount === 1) {
         this.abilityCount = 2;
         this.antagonist.changeImage('./assets/trojanfinal.png');
+        this.level = 2;
       }
-
-      // level 2
-      
-
     }
+    // level 2  ramming
+    if (this.level === 2) {
+      if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
+        this.antagonist.addOrSubPosY(0.2 * elapsed, 0)
+      }
+      if (this.antagonist.getPosY() >= 400) {
 
+      }
+    }
 
     return null;
   }
@@ -179,9 +184,9 @@ export default class BossFight extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black')
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-      this.bullets.forEach((item: ShootingAbility) => {
-        item.render(canvas)
-      })
+    this.bullets.forEach((item: ShootingAbility) => {
+      item.render(canvas)
+    })
     this.antagonist.render(canvas)
     this.player.render(canvas)
     this.lightsaber.render(canvas)
