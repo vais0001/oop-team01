@@ -68,7 +68,7 @@ export default class ArrowThrower extends Scene {
     this.nextText = 0;
     this.spawnComputer = false;
 
-    for (let i = 0; i < 150; i += 50) {
+    for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
     }
   }
@@ -129,10 +129,9 @@ export default class ArrowThrower extends Scene {
           }
         }
         this.changingTime = this.timeToNextAD;
-        console.log(this.changingTime)
       }
 
-      if (this.lives.length < 3) {
+      if (this.lives.length < 5) {
         if (Math.random() > 0.9985) {
           this.heartPowerup.push(new HeartPowerup());
         }
@@ -140,6 +139,9 @@ export default class ArrowThrower extends Scene {
 
       this.heartPowerup = this.heartPowerup.filter((heartPowerup: HeartPowerup) => {
         if (this.player.isCollidingHeart(heartPowerup)) {
+          if (this.lives.length === 5) this.lives.push(new Lives(this.dimensionsX - 40, 500 + this.dimensionsY));
+          if (this.lives.length === 4) this.lives.push(new Lives(this.dimensionsX - 40, 450 + this.dimensionsY));
+          if (this.lives.length === 3) this.lives.push(new Lives(this.dimensionsX - 40, 400 + this.dimensionsY));
           if (this.lives.length === 2) this.lives.push(new Lives(this.dimensionsX - 40, 350 + this.dimensionsY));
           if (this.lives.length === 1) this.lives.push(new Lives(this.dimensionsX - 40, 300 + this.dimensionsY));
           return false;
