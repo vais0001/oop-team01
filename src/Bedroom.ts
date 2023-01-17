@@ -52,6 +52,14 @@ export default class Bedroom extends Scene {
 
   private buttonsPressed: number;
 
+  private moveUp: boolean;
+
+  private moveRight: boolean;
+
+  private moveDown: boolean;
+
+  private moveLeft: boolean;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
@@ -87,6 +95,11 @@ export default class Bedroom extends Scene {
     this.nextText = 0;
     this.text = new Text();
     this.buttonsPressed = 0;
+    this.moveDown = false;
+    this.moveLeft = false;
+    this.moveRight = false;
+    this.moveUp = false;
+
   }
 
   public processInput(keyListener: KeyListener): void {
@@ -98,7 +111,12 @@ export default class Bedroom extends Scene {
         && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
           this.player.move(0, 150);
           this.buttonsPressed += 1;
+          this.moveLeft = true;
+        } else {
+          this.moveLeft = false;
         }
+      } else {
+        this.moveLeft = false;
       }
 
       if (this.player.getPosY() > this.dimensionsY + 120
@@ -109,6 +127,8 @@ export default class Bedroom extends Scene {
           this.player.move(1, 150);
           this.buttonsPressed += 1;
         }
+      } else {
+        this.moveUp = false;
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100
@@ -117,7 +137,12 @@ export default class Bedroom extends Scene {
         && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
           this.player.move(2, 150);
           this.buttonsPressed += 1;
+          this.moveRight = true;
+        } else {
+          this.moveRight = false;
         }
+      } else {
+        this.moveRight = false;
       }
 
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
@@ -125,7 +150,12 @@ export default class Bedroom extends Scene {
         && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
           this.buttonsPressed += 1;
           this.player.move(3, 150);
+          this.moveDown = true;
+        } else {
+          this.moveDown = false;
         }
+      } else {
+        this.moveDown = false;
       }
 
       if (keyListener.isKeyDown(KeyListener.KEY_SPACE)
@@ -150,7 +180,6 @@ export default class Bedroom extends Scene {
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
     }
-    this.player.update(elapsed);
     //cheat code to whackamole
     if (this.bossFightScene === true) {
       return new BossFight(window.innerWidth, window.innerHeight, 0);
@@ -173,6 +202,22 @@ export default class Bedroom extends Scene {
     if (this.webpageScene === true) return new Webpage(0, 0);
     this.timeToText -= elapsed;
     if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
+
+    if (this.moveUp) {
+      this.player.moveUp(elapsed);
+    }
+
+    if (this.moveDown) {
+      this.player.moveDown(elapsed);
+    }
+
+    if (this.moveRight) {
+      this.player.moveRight(elapsed);
+    }
+
+    if (this.moveLeft) {
+      this.player.moveLeft(elapsed);
+    }
     return null;
   }
 
