@@ -3,6 +3,7 @@ import CanvasUtil from "../CanvasUtil.js";
 import KeyListener from "../KeyListener.js";
 import Player from "../Player.js";
 import Scene from "../Scene.js";
+import Lives from "../Whackamole/Lives.js";
 import Lightsaber from "./Lightsaber.js";
 import ShootingAbility from "./ShootingAbility.js";
 
@@ -34,12 +35,14 @@ export default class BossFight extends Scene {
 
   private hit: boolean;
 
+  private lives: Lives[] = [];
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
     this.player.setSpeed(5);
-    this.antagonist = new Antagonist(this.dimensionsX + 1100, this.dimensionsY + 30);
+    this.antagonist = new Antagonist(this.backgroundWidth - 350, 90);
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
@@ -51,6 +54,9 @@ export default class BossFight extends Scene {
     this.lightsaber = new Lightsaber(this.player.getPosX(), this.player.getPosY() + 80);
     this.healthBar = 650;
     this.hit = false;
+    for (let i = 0; i < 250; i += 50) {
+      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
+    }
   }
 
   public processInput(keyListener: KeyListener): void {
@@ -195,9 +201,8 @@ export default class BossFight extends Scene {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    this.bullets.forEach((item: ShootingAbility) => {
-      item.render(canvas);
-    });
+    this.bullets.forEach((item: ShootingAbility) => item.render(canvas));
+    this.lives.forEach((lives: Lives) => lives.render(canvas));
     this.antagonist.render(canvas);
     this.player.render(canvas);
     this.lightsaber.render(canvas);
