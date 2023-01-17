@@ -37,6 +37,8 @@ export default class BossFight extends Scene {
 
   private lives: Lives[] = [];
 
+  private buttonsPressed: number;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
@@ -46,7 +48,7 @@ export default class BossFight extends Scene {
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
-    this.levelTimer = 1000;
+    this.levelTimer = 10000;
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
@@ -60,9 +62,11 @@ export default class BossFight extends Scene {
   }
 
   public processInput(keyListener: KeyListener): void {
+    this.buttonsPressed = 0;
     if (this.player.getPosX() > this.dimensionsX + 5) {
       if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
         this.player.move(0, 50);
+        this.buttonsPressed += 1;
         this.lightsaber.changeImage('./assets/lightsaber1.png');
         this.lightsaberSide = 1;
         this.playerSide = 1;
@@ -70,12 +74,16 @@ export default class BossFight extends Scene {
     }
 
     if (this.player.getPosY() > this.dimensionsY + 5) {
-      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(1, 50);
+      if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
+        this.player.move(1, 50);
+        this.buttonsPressed += 1;
+      }
     }
 
     if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
       if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
         this.player.move(2, 50);
+        this.buttonsPressed += 1;
         this.lightsaber.changeImage('./assets/lightsaber.png');
         this.lightsaberSide = 0;
         this.playerSide = 0;
@@ -83,7 +91,10 @@ export default class BossFight extends Scene {
     }
 
     if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
-      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(3, 50);
+      if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
+        this.player.move(3, 50);
+        this.buttonsPressed += 1;
+      }
     }
 
     if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
@@ -94,6 +105,10 @@ export default class BossFight extends Scene {
 
   public update(elapsed: number): Scene {
     // functions for all levels
+    if (this.buttonsPressed === 0) {
+      this.player.move(66, 150);
+    }
+    console.log(this.buttonsPressed);
     this.levelTimer -= elapsed;
     if (this.lightsaberSide === 0) {
       this.lightsaber.changeImage('./assets/lightsaber.png');
@@ -186,6 +201,7 @@ export default class BossFight extends Scene {
         this.abilityCount = 2;
         this.antagonist.changeImage('./assets/trojanfinal.png');
         this.level = 2;
+        this.levelTimer = 20000;
       }
     }
     // level 2  ramming
@@ -193,18 +209,29 @@ export default class BossFight extends Scene {
       this.bulletsTimer -= elapsed;
       if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
         this.antagonist.addOrSubPosY(0.2 * elapsed, 0)
+        if (this.bulletsTimer <= 0) {
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 1000;
+        }
       }
       if (this.antagonist.getPosY() >= 400) {
         this.abilityCount = 3;
         if (this.bulletsTimer <= 0 && this.abilityCount === 3) {
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
           this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
-          this.bulletsTimer = 1000;
-          if (this.bullets.length > 9) this.abilityCount = 4;
+          this.bulletsTimer = 600;
         }
+        if (this.abilityCount === 3 && this.antagonist.getPosY() <= 400) this.abilityCount = 4;
       }
       if (this.abilityCount === 4) {
-        this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
+        this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
+        if (this.bulletsTimer <= 0 && this.abilityCount === 4) {
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 600;
+        }
       }
+      if (this.abilityCount === 4 && this.antagonist.getPosY() <= 100) this.abilityCount = 5;
     }
 
     if (this.hit === true
