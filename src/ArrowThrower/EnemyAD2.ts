@@ -15,7 +15,7 @@ export default class EnemyAD2 extends EnemyAD {
   }
 
   public update(elapsed: number): void {
-    this.posX += elapsed * 0.4;
+    this.posX += elapsed * 0.3;
     this.nextFire -= elapsed;
   }
 
@@ -26,9 +26,9 @@ export default class EnemyAD2 extends EnemyAD {
   }
 
   public willFire(): boolean {
-    if (this.posX == 200 + this.dimensionsX) {
+    if (this.posX === 200 + this.dimensionsX) {
       if (this.nextFire < 0) {
-        this.nextFire = 1500;
+        this.nextFire = 2000;
         return true;
       }
       return false;

@@ -13,13 +13,13 @@ export default class LoadingScene extends Scene {
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.loadingBar = 0;
-    this.image = CanvasUtil.loadNewImage('./placeholders/loading_screen_controls.png');
+    this.image = CanvasUtil.loadNewImage('./assets/bedroomloading.png');
     this.realisticPause = 50;
     this.continue = false;
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (this.loadingBar === 1220 && keyListener.keyPressed('Space')) {
+    if (this.loadingBar === 1100 && keyListener.keyPressed('Space')) {
       this.continue = true;
     }
     return null;
@@ -28,13 +28,13 @@ export default class LoadingScene extends Scene {
   public update(elapsed: number): Scene {
     const randomPause: number = Math.floor(Math.random() * 1220) + 100;
     if (this.realisticPause === 50 || this.realisticPause < 0) {
-      this.loadingBar += elapsed * 5; //for final 0.3
+      this.loadingBar += elapsed * 8; //for final 0.3
     }
     if (this.loadingBar > randomPause) {
       this.realisticPause -= elapsed;
     }
-    if (this.loadingBar > 1220) {
-      this.loadingBar = 1220;
+    if (this.loadingBar > 1100) {
+      this.loadingBar = 1100;
     }
 
     if (this.continue) return new Bedroom(this.maxX, this.maxY, 0);
@@ -44,10 +44,11 @@ export default class LoadingScene extends Scene {
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    CanvasUtil.drawRectangle(canvas, this.dimensionsX + 100, this.dimensionsY + 100, 1220, 30, 'white');
-    if (this.loadingBar === 1220) {
+    CanvasUtil.drawRectangle(canvas, this.dimensionsX + 160, this.dimensionsY + 180, 1100, 30, 'white');
+    if (this.loadingBar === 1100) {
+      CanvasUtil.fillRectangle(canvas, this.dimensionsX + 450, this.dimensionsY + 550, 520, 90, 'black');
       CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', canvas.width / 2, this.dimensionsY + 600, 'center', 'Arial', 40, 'White');
     }
-    CanvasUtil.fillRectangle(canvas, this.dimensionsX + 100, this.dimensionsY + 100, this.loadingBar, 30, 'white');
+    CanvasUtil.fillRectangle(canvas, this.dimensionsX + 160, this.dimensionsY + 180, this.loadingBar, 30, 'white');
   }
 }

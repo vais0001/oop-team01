@@ -50,6 +50,7 @@ export default abstract class Drawable {
     this.posY -= posY;
   }
 
+
   public addOrSubPosX(posX: number, addOrSub: number) {
     // to add is 0, to sub is 1
     if (addOrSub === 0) {
@@ -57,6 +58,16 @@ export default abstract class Drawable {
     }
     if (addOrSub === 1) {
       this.posX -= posX;
+    }
+  }
+
+  public addOrSubPosY(posY: number, addOrSub: number) {
+    // to add is 0, to sub is 1
+    if (addOrSub === 0) {
+      this.posY += posY;
+    }
+    if (addOrSub === 1) {
+      this.posY -= posY;
     }
   }
 }

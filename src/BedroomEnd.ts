@@ -6,13 +6,10 @@ import KeyListener from './KeyListener.js';
 import Player from './Player.js';
 import Scene from './Scene.js';
 import Webpage from './Webpage.js';
-import ArrowThrower from './ArrowThrower/ArrowThrower.js';
-import Whackamole from './Whackamole/Whackamole.js';
-import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
-import Text from './Text.js';
-import BossFight from './BossScene.ts/BossFight.js';
+import BedroomEndText from './BedroomEndText.js';
+import CreditScene from './CreditScene.js';
 
-export default class Bedroom extends Scene {
+export default class BedroomEnd extends Scene {
   private player: Player;
 
   private computer: Computer;
@@ -31,36 +28,19 @@ export default class Bedroom extends Scene {
 
   private timeToText: number;
 
-  private cheatWhackamole: boolean;
-
-  private cheatArrow: boolean;
-
-  private cheatLoadingScreen: boolean;
-
   private nextText: number;
 
   private playerHead: HTMLImageElement;
 
   private trojanHead: HTMLImageElement;
 
-  private text: Text;
-
-  private bossFightScene: boolean;
+  private bedroomEndText: BedroomEndText;
 
   private buttonsPressed: number;
-
-  private moveUp: boolean;
-
-  private moveRight: boolean;
-
-  private moveDown: boolean;
-
-  private moveLeft: boolean;
 
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
-    this.bossFightScene = false;
     if (level === 1) {
       this.antagonist = new Antagonist(250, 250);
       this.level1 = true;
@@ -85,73 +65,44 @@ export default class Bedroom extends Scene {
     } else {
       this.timeToText = 1500;
     }
-    this.cheatWhackamole = false;
-    this.cheatArrow = false;
-    this.cheatLoadingScreen = false;
     this.nextText = 0;
-    this.text = new Text();
+    this.bedroomEndText = new BedroomEndText();
     this.buttonsPressed = 0;
-    this.moveDown = false;
-    this.moveLeft = false;
-    this.moveRight = false;
-    this.moveUp = false;
-
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (!this.level1 && this.nextText > 4) {
+    if (!this.level1 && this.nextText > 2) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 20
       && !(this.player.collidingBed(this.bed))) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
+        if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
           this.player.move(0, 150);
           this.buttonsPressed += 1;
-          this.moveLeft = true;
-        } else {
-          this.moveLeft = false;
         }
-      } else {
-        this.moveLeft = false;
       }
 
       if (this.player.getPosY() > this.dimensionsY + 120
       && !(this.player.collidingComputer(this.computer))
       && !(this.player.collidingBed(this.bed))) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
+        if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
           this.player.move(1, 150);
           this.buttonsPressed += 1;
         }
-      } else {
-        this.moveUp = false;
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100
       && !(this.player.collidingComputer(this.computer))) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
+        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
           this.player.move(2, 150);
           this.buttonsPressed += 1;
-          this.moveRight = true;
-        } else {
-          this.moveRight = false;
         }
-      } else {
-        this.moveRight = false;
       }
 
-      if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
+      if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 250) {
+        if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
           this.buttonsPressed += 1;
           this.player.move(3, 150);
-          this.moveDown = true;
-        } else {
-          this.moveDown = false;
         }
-      } else {
-        this.moveDown = false;
       }
 
       if (keyListener.isKeyDown(KeyListener.KEY_SPACE)
@@ -164,51 +115,17 @@ export default class Bedroom extends Scene {
     if (this.timeToText <= 0) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
     }
-    // Cheat code to go to whackamole class
-    if (keyListener.keyPressed(KeyListener.KEY_1)) this.cheatWhackamole = true;
-    if (keyListener.keyPressed(KeyListener.KEY_2)) this.cheatArrow = true;
-    if (keyListener.keyPressed(KeyListener.KEY_3)) this.bossFightScene = true;
-    if (keyListener.keyPressed(KeyListener.KEY_4)) this.cheatLoadingScreen = true;
   }
 
   public update(elapsed: number): Scene {
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
     }
-    //cheat code to whackamole
-    if (this.bossFightScene === true) {
-      return new BossFight(window.innerWidth, window.innerHeight, 0);
-    }
-    if (this.cheatWhackamole === true) {
-      return new Whackamole(window.innerWidth, window.innerHeight);
-    }
-    if (this.cheatArrow === true) {
-      return new ArrowThrower(window.innerWidth, window.innerHeight);
-    }
-
-    if (this.cheatLoadingScreen === true) {
-      return new LoadingSceneAT(window.innerWidth, window.innerHeight);
-    }
+    this.player.update(elapsed);
 
     if (this.webpageScene === true) return new Webpage(0, 0);
     this.timeToText -= elapsed;
-    if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
-
-    if (this.moveUp) {
-      this.player.moveUp(elapsed);
-    }
-
-    if (this.moveDown) {
-      this.player.moveDown(elapsed);
-    }
-
-    if (this.moveRight) {
-      this.player.moveRight(elapsed);
-    }
-
-    if (this.moveLeft) {
-      this.player.moveLeft(elapsed);
-    }
+    if (this.scene === 3) return new CreditScene(this.maxX, this.maxY);
     return null;
   }
 
@@ -219,10 +136,10 @@ export default class Bedroom extends Scene {
 
     this.computer.render(canvas);
     if (this.scene === 1 && this.timeToText <= 0) {
-      this.text.textSix(canvas, this.image1, this.trojanHead);
+      this.bedroomEndText.textSix(canvas, this.image1, this.trojanHead);
       this.player.setNewPlayerImage('./assets/playerstandingleft.png');
     }
-    if (this.scene === 2) this.text.textSeven(canvas, this.image1, this.trojanHead);
+    if (this.scene === 2) this.bedroomEndText.textSeven(canvas, this.image1, this.trojanHead);
 
     this.bed.render(canvas);
     this.player.render(canvas);
@@ -231,14 +148,11 @@ export default class Bedroom extends Scene {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 27);
     }
     if (this.player.collideWithitem(this.computer) && !this.level1) {
-      this.text.computerPrompt(canvas, this.popUp);
+      this.bedroomEndText.computerPrompt(canvas, this.popUp);
     }
     if (!this.level1) {
-      if (this.nextText === 0) this.text.textOne(canvas, this.image1, this.playerHead);
-      if (this.nextText === 1) this.text.textTwo(canvas, this.image1, this.playerHead);
-      if (this.nextText === 2) this.text.textThree(canvas, this.image1, null);
-      if (this.nextText === 3) this.text.textFour(canvas, this.image1, this.playerHead);
-      if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
+      if (this.nextText === 0) this.bedroomEndText.textOne(canvas, this.image1, this.playerHead);
+      if (this.nextText === 1) this.bedroomEndText.textTwo(canvas, this.image1, this.playerHead);
     }
   }
 }
