@@ -125,7 +125,7 @@ export default class ArrowThrower extends Scene {
 
         if (this.timeToNextAD > 500) {
           if (this.timeToNextAD > 700) {
-            this.timeToNextAD -= 20; // change to 10 later
+            this.timeToNextAD -= 20;
           }
         }
         this.changingTime = this.timeToNextAD;
