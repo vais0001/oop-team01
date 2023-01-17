@@ -102,7 +102,7 @@ export default class ArrowThrower extends Scene {
       this.antagonist.cutsceneMovementAway(0, -3);
     }
 
-    if (this.nextText > 3 && this.score < 105) {
+    if (this.nextText > 3 && this.score < 205) {
       this.spawnComputer = true;
       this.computer = new ArrowThrowerComputer();
       this.player.changePositionX();
@@ -117,7 +117,7 @@ export default class ArrowThrower extends Scene {
       this.changingTime -= elapsed;
 
       if (this.changingTime < 0) {
-        if (Math.random() > 0.3) {
+        if (Math.random() > 0.2) {
           this.ad.push(new EnemyAD1(this.backgroundHeight));
         } else {
           this.ad.push(new EnemyAD2(this.backgroundHeight));
@@ -215,9 +215,9 @@ export default class ArrowThrower extends Scene {
       }
     }
 
-    if (this.score === 100) {
+    if (this.score === 200) {
       this.antagonist = new Antagonist(this.backgroundWidth - 800, this.backgroundHeight - 700);
-    } else if (this.score >= 105) {
+    } else if (this.score >= 205) {
       this.antagonist.moveToPlayer(this.player);
     }
 
@@ -259,7 +259,7 @@ export default class ArrowThrower extends Scene {
       this.arrowThrowerText.textFive(canvas, this.bubble, this.trojanHead);
     } else if (this.score >= 50 && this.score < 65) {
       this.arrowThrowerText.textSix(canvas, this.bubble, this.trojanHead);
-    } else if (this.score >= 100) {
+    } else if (this.score >= 200) {
       this.arrowThrowerText.textSeven(canvas, this.bubble, this.trojanHead);
     }
   }

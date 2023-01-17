@@ -12,12 +12,4 @@ export default class ADbullet extends Drawable {
   public update(elapsed: number): void {
     this.posX += elapsed * 0.3;
   }
-
-  public moveToComputer(posX: number, posY: number): void {
-    const xDifference = posX - this.posX;
-    const yDifference = posY - this.posY;
-
-    this.posX += xDifference / 100;
-    this.posY += yDifference / 100;
-  }
 }
