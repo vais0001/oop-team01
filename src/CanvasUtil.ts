@@ -194,3 +194,4 @@ export default class CanvasUtil {
     ctx.fill();
   }
 }
+
