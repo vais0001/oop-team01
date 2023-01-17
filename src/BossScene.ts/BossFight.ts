@@ -151,7 +151,7 @@ export default class BossFight extends Scene {
       this.bulletsTimer -= elapsed;
       if (this.abilityShoot === true) {
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 0))
           this.bulletsTimer = 500;
         }
       }
@@ -167,7 +167,7 @@ export default class BossFight extends Scene {
       if (this.antagonist.getPosX() > 100 && this.abilityCount === 0) {
         this.antagonist.addOrSubPosX(0.2 * elapsed, 1)
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0))
           this.bulletsTimer = 800;
         }
       }
@@ -178,7 +178,7 @@ export default class BossFight extends Scene {
         this.antagonist.addOrSubPosX(0.2 * elapsed, 0)
         this.antagonist.changeImage('./assets/trojanfinalright.png');
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0))
           this.bulletsTimer = 800;
         }
       }
@@ -190,11 +190,20 @@ export default class BossFight extends Scene {
     }
     // level 2  ramming
     if (this.level === 2) {
+      this.bulletsTimer -= elapsed;
       if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
         this.antagonist.addOrSubPosY(0.2 * elapsed, 0)
       }
       if (this.antagonist.getPosY() >= 400) {
-
+        this.abilityCount = 3;
+        if (this.bulletsTimer <= 0 && this.abilityCount === 3) {
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 1000;
+          if (this.bullets.length > 9) this.abilityCount = 4;
+        }
+      }
+      if (this.abilityCount === 4) {
+        this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
       }
     }
 
