@@ -46,7 +46,7 @@ export default class BossFight extends Scene {
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
-    this.levelTimer = 10000;
+    this.levelTimer = 1000;
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
@@ -161,11 +161,11 @@ export default class BossFight extends Scene {
       this.levelTimer = 100000000;
     }
 
-    // level 1
+    // level 1 mooving and shooting level
     if (this.level === 1) {
       this.bulletsTimer -= elapsed;
       if (this.antagonist.getPosX() > 100 && this.abilityCount === 0) {
-        this.antagonist.addOrSubPosX(1, 1);
+        this.antagonist.addOrSubPosX(0.2 * elapsed, 1)
         if (this.bulletsTimer <= 0) {
           this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
           this.bulletsTimer = 800;
@@ -175,7 +175,7 @@ export default class BossFight extends Scene {
         this.abilityCount = 1;
       }
       if (this.abilityCount === 1) {
-        this.antagonist.addOrSubPosX(1, 0);
+        this.antagonist.addOrSubPosX(0.2 * elapsed, 0)
         this.antagonist.changeImage('./assets/trojanfinalright.png');
         if (this.bulletsTimer <= 0) {
           this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
@@ -185,6 +185,16 @@ export default class BossFight extends Scene {
       if (this.antagonist.getPosX() > this.dimensionsX + 1050 && this.abilityCount === 1) {
         this.abilityCount = 2;
         this.antagonist.changeImage('./assets/trojanfinal.png');
+        this.level = 2;
+      }
+    }
+    // level 2  ramming
+    if (this.level === 2) {
+      if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
+        this.antagonist.addOrSubPosY(0.2 * elapsed, 0)
+      }
+      if (this.antagonist.getPosY() >= 400) {
+
       }
     }
 
@@ -194,6 +204,7 @@ export default class BossFight extends Scene {
     ) {
       this.healthBar -= 0.1;
     }
+
     return null;
   }
 
