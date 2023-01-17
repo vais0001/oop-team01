@@ -124,7 +124,7 @@ export default class BossFight extends Scene {
       this.levelTimer = 100000000;
     }
 
-    // level 1
+    // level 1 mooving and shooting level
     if (this.level === 1) {
       this.bulletsTimer -= elapsed;
       if (this.antagonist.getPosX() > 100 && this.abilityCount === 0) {
@@ -149,6 +149,10 @@ export default class BossFight extends Scene {
         this.abilityCount = 2;
         this.antagonist.changeImage('./assets/trojanfinal.png');
       }
+
+      // level 2
+      
+
     }
 
 
