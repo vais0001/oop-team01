@@ -1,10 +1,7 @@
 import CanvasUtil from '../CanvasUtil.js';
-import Player from './Player.js';
 import EnemyAD from './EnemyAD.js';
 
 export default class EnemyAD1 extends EnemyAD {
-  private player: Player;
-
   private xDifference: number;
 
   private yDifference: number;
@@ -21,10 +18,10 @@ export default class EnemyAD1 extends EnemyAD {
   }
 
   public moveToComputer(posX: number, posY: number): void {
-      this.xDifference = posX - this.posX;
-      this.yDifference = posY - this.posY;
+    this.xDifference = posX - this.posX;
+    this.yDifference = posY - this.posY;
 
-      this.posX += this.xDifference / 100;
-      this.posY += this.yDifference / 100;
+    this.posX += this.xDifference / 100;
+    this.posY += this.yDifference / 100;
   }
 }
