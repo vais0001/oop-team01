@@ -74,7 +74,7 @@ export default class ArrowThrower extends Scene {
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (this.nextText > 3 && this.score < 105) {
+    if (this.nextText > 3 && this.score < 205) {
       if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) this.player.move(0);
       if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) this.player.move(1);
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
@@ -159,11 +159,10 @@ export default class ArrowThrower extends Scene {
       })
 
       this.adBullets.forEach((item: ADbullet) => {
-        item.update(elapsed);
+        item.update(this.player);
       });
 
       this.ad = this.ad.filter((item: EnemyAD) => {
-
         if (this.bullet.isCollidingAD(item)) {
           this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
           this.score += 5;
