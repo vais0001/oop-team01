@@ -46,7 +46,7 @@ export default class BossFight extends Scene {
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
-    this.levelTimer = 1000;
+    this.levelTimer = 10000;
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
@@ -186,6 +186,7 @@ export default class BossFight extends Scene {
         this.abilityCount = 2;
         this.antagonist.changeImage('./assets/trojanfinal.png');
         this.level = 2;
+        this.levelTimer = 20000;
       }
     }
     // level 2  ramming
@@ -193,18 +194,29 @@ export default class BossFight extends Scene {
       this.bulletsTimer -= elapsed;
       if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
         this.antagonist.addOrSubPosY(0.2 * elapsed, 0)
+        if (this.bulletsTimer <= 0) {
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 1000;
+        }
       }
       if (this.antagonist.getPosY() >= 400) {
         this.abilityCount = 3;
         if (this.bulletsTimer <= 0 && this.abilityCount === 3) {
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
           this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
-          this.bulletsTimer = 1000;
-          if (this.bullets.length > 9) this.abilityCount = 4;
+          this.bulletsTimer = 600;
         }
+        if (this.abilityCount === 3 && this.antagonist.getPosY() <= 400) this.abilityCount = 4;
       }
       if (this.abilityCount === 4) {
-        this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
+        this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
+        if (this.bulletsTimer <= 0 && this.abilityCount === 4) {
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 600;
+        }
       }
+      if (this.abilityCount === 4 && this.antagonist.getPosY() <= 100) this.abilityCount = 5;
     }
 
     if (this.hit === true
