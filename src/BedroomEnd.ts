@@ -153,6 +153,8 @@ export default class BedroomEnd extends Scene {
     if (!this.level1) {
       if (this.nextText === 0) this.bedroomEndText.textOne(canvas, this.image1, this.playerHead);
       if (this.nextText === 1) this.bedroomEndText.textTwo(canvas, this.image1, this.playerHead);
+      if (this.nextText === 2) this.bedroomEndText.textThree(canvas, this.image1, this.playerHead);
+      if (this.nextText === 3) this.bedroomEndText.textFour(canvas, this.image1, this.playerHead);
     }
   }
 }
