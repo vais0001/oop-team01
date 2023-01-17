@@ -17,7 +17,7 @@ export default class Player extends Drawable {
   public collideWithitem(item: Computer): boolean {
     return (this.posX < item.getPosX() + item.getWidth()
       && this.posX + this.getWidth() > item.getPosX()
-      && this.getPosY() < item.getPosY() + item.getHeight()
+      && this.getPosY() < item.getPosY() + item.getHeight() - 170
       && this.getHeight() + this.posY > item.getPosY());
   }
 
