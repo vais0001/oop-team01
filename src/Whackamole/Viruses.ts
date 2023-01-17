@@ -64,6 +64,10 @@ export default class Viruses extends Drawable {
     return this.value;
   }
 
+  public setvalue(value: number) {
+    this.value = value;
+  }
+
   public subtractPosX() {
     if (this.posX === 265 + this.dimensionsX) {
       this.posX = 225 + this.dimensionsX;
