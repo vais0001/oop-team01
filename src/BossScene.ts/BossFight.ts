@@ -1,7 +1,7 @@
 import Antagonist from "../Antagonist.js";
-import BedroomEnd from "../BedroomEnd.js";
 import CanvasUtil from "../CanvasUtil.js";
 import KeyListener from "../KeyListener.js";
+import LoadingSceneEnd from "../LoadingScenes/LoadingSceneEnd.js";
 import Player from "../Player.js";
 import Scene from "../Scene.js";
 import Lives from "../Whackamole/Lives.js";
@@ -240,7 +240,7 @@ export default class BossFight extends Scene {
       this.healthBar -= 0.1;
     }
 
-    if (this.healthBar < 600) return new BedroomEnd(this.backgroundWidth, this.backgroundHeight, 0);
+    if (this.healthBar < 600) return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
 
     return null;
   }

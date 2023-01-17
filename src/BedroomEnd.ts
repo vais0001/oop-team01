@@ -38,6 +38,14 @@ export default class BedroomEnd extends Scene {
 
   private buttonsPressed: number;
 
+  private moveUp: boolean;
+
+  private moveRight: boolean;
+
+  private moveDown: boolean;
+
+  private moveLeft: boolean;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
@@ -68,41 +76,69 @@ export default class BedroomEnd extends Scene {
     this.nextText = 0;
     this.bedroomEndText = new BedroomEndText();
     this.buttonsPressed = 0;
+    this.moveDown = false;
+    this.moveLeft = false;
+    this.moveRight = false;
+    this.moveUp = false;
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (!this.level1 && this.nextText > 2) {
+    if (!this.level1 && this.nextText > 4) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 20
       && !(this.player.collidingBed(this.bed))) {
-        if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))
+        && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
           this.player.move(0, 150);
           this.buttonsPressed += 1;
+          this.moveLeft = true;
+        } else {
+          this.moveLeft = false;
         }
+      } else {
+        this.moveLeft = false;
       }
 
       if (this.player.getPosY() > this.dimensionsY + 120
       && !(this.player.collidingComputer(this.computer))
       && !(this.player.collidingBed(this.bed))) {
-        if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))
+        && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
           this.player.move(1, 150);
           this.buttonsPressed += 1;
+          this.moveUp = true;
+        } else {
+          this.moveUp = false;
         }
+      } else {
+        this.moveUp = false;
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100
       && !(this.player.collidingComputer(this.computer))) {
-        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))
+        && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
           this.player.move(2, 150);
           this.buttonsPressed += 1;
+          this.moveRight = true;
+        } else {
+          this.moveRight = false;
         }
+      } else {
+        this.moveRight = false;
       }
 
-      if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 250) {
-        if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
+      if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))
+        && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
           this.buttonsPressed += 1;
           this.player.move(3, 150);
+          this.moveDown = true;
+        } else {
+          this.moveDown = false;
         }
+      } else {
+        this.moveDown = false;
       }
 
       if (keyListener.isKeyDown(KeyListener.KEY_SPACE)
@@ -117,15 +153,32 @@ export default class BedroomEnd extends Scene {
     }
   }
 
+
   public update(elapsed: number): Scene {
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
     }
-    // this.player.update(elapsed);
 
     if (this.webpageScene === true) return new Webpage(0, 0);
     this.timeToText -= elapsed;
     if (this.scene === 3) return new CreditScene(this.maxX, this.maxY);
+
+    if (this.moveUp) {
+      this.player.moveUp(elapsed);
+    }
+
+    if (this.moveDown) {
+      this.player.moveDown(elapsed);
+    }
+
+    if (this.moveRight) {
+      this.player.moveRight(elapsed);
+    }
+
+    if (this.moveLeft) {
+      this.player.moveLeft(elapsed);
+    }
+
     return null;
   }
 

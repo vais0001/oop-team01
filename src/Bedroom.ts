@@ -126,6 +126,9 @@ export default class Bedroom extends Scene {
         && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
           this.player.move(1, 150);
           this.buttonsPressed += 1;
+          this.moveUp = true;
+        } else {
+          this.moveUp = false;
         }
       } else {
         this.moveUp = false;
