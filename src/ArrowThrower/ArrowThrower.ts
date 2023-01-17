@@ -272,7 +272,6 @@ export default class ArrowThrower extends Scene {
     this.ad.forEach((item: EnemyAD) => item.render(canvas));
     this.bullet.render(canvas);
     if (this.spawnComputer) this.computer.render(canvas);
-    CanvasUtil.writeTextToCanvas(canvas, `Score: ${this.score}`, this.dimensionsX + 50, this.dimensionsY + 50, 'right', 'Arial', 20, 'white');
     this.lives.forEach((item: Lives) => item.render(canvas));
     this.adBullets.forEach((item: ADbullet) => item.render(canvas));
     this.heartPowerup.forEach((powerup: HeartPowerup) => powerup.render(canvas));
