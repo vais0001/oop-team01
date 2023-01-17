@@ -150,7 +150,7 @@ export default class Whackamole extends Scene {
         }
       }
       this.timeToNextVirus -= elapsed;
-      if (this.timeToNextVirus <= 0 && this.holes.length < 4 && this.enemiesLeft > 0 && this.enemiesLeft > 1) {
+      if (this.timeToNextVirus <= 0 && this.holes.length < 4 && this.enemiesLeft > 0) {
         const newVirus: Viruses = new Viruses(0);
         this.virusPushed = true;
         if (this.lastValues.length === 0) {

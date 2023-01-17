@@ -7,9 +7,10 @@ export default class ShootingAbility extends Drawable {
 
   private speed: number;
 
-  public constructor(startX: number, startY: number, direction: number, speed: number) {
+  public constructor(startX: number, startY: number, direction: number, speed: number, picture: number) {
     super();
-    this.image = CanvasUtil.loadNewImage('./placeholders/cursor_00000.png')
+    if (picture === 0) this.image = CanvasUtil.loadNewImage('./placeholders/cursor_00000.png');
+    if (picture === 1) this.image = CanvasUtil.loadNewImage('./assets/wormbig.png');
     this.posX = startX;
     this.posY = startY;
     this.direction = direction;

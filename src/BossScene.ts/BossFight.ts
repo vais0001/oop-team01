@@ -1,4 +1,5 @@
 import Antagonist from "../Antagonist.js";
+import BedroomEnd from "../BedroomEnd.js";
 import CanvasUtil from "../CanvasUtil.js";
 import KeyListener from "../KeyListener.js";
 import Player from "../Player.js";
@@ -8,7 +9,6 @@ import Lightsaber from "./Lightsaber.js";
 import ShootingAbility from "./ShootingAbility.js";
 
 export default class BossFight extends Scene {
-
   private antagonist: Antagonist;
 
   private player: Player;
@@ -46,7 +46,7 @@ export default class BossFight extends Scene {
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
-    this.levelTimer = 1000;
+    this.levelTimer = 10000;
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
@@ -151,7 +151,7 @@ export default class BossFight extends Scene {
       this.bulletsTimer -= elapsed;
       if (this.abilityShoot === true) {
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 0))
           this.bulletsTimer = 500;
         }
       }
@@ -167,7 +167,7 @@ export default class BossFight extends Scene {
       if (this.antagonist.getPosX() > 100 && this.abilityCount === 0) {
         this.antagonist.addOrSubPosX(0.2 * elapsed, 1)
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0))
           this.bulletsTimer = 800;
         }
       }
@@ -178,7 +178,7 @@ export default class BossFight extends Scene {
         this.antagonist.addOrSubPosX(0.2 * elapsed, 0)
         this.antagonist.changeImage('./assets/trojanfinalright.png');
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0))
           this.bulletsTimer = 800;
         }
       }
@@ -186,16 +186,37 @@ export default class BossFight extends Scene {
         this.abilityCount = 2;
         this.antagonist.changeImage('./assets/trojanfinal.png');
         this.level = 2;
+        this.levelTimer = 20000;
       }
     }
     // level 2  ramming
     if (this.level === 2) {
+      this.bulletsTimer -= elapsed;
       if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
         this.antagonist.addOrSubPosY(0.2 * elapsed, 0)
+        if (this.bulletsTimer <= 0) {
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 1000;
+        }
       }
       if (this.antagonist.getPosY() >= 400) {
-
+        this.abilityCount = 3;
+        if (this.bulletsTimer <= 0 && this.abilityCount === 3) {
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 600;
+        }
+        if (this.abilityCount === 3 && this.antagonist.getPosY() <= 400) this.abilityCount = 4;
       }
+      if (this.abilityCount === 4) {
+        this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
+        if (this.bulletsTimer <= 0 && this.abilityCount === 4) {
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bulletsTimer = 600;
+        }
+      }
+      if (this.abilityCount === 4 && this.antagonist.getPosY() <= 100) this.abilityCount = 5;
     }
 
     if (this.hit === true
@@ -204,6 +225,8 @@ export default class BossFight extends Scene {
     ) {
       this.healthBar -= 0.1;
     }
+
+    if (this.healthBar < 600) return new BedroomEnd(this.backgroundWidth, this.backgroundHeight, 0);
 
     return null;
   }
