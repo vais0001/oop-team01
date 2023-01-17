@@ -36,7 +36,7 @@ export default class ThrowerText extends Drawable {
 
   public textFive(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, 'having fun yet?', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Having fun yet?', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'arial', 20, 'black');
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
   }
 

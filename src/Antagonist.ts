@@ -39,4 +39,9 @@ export default class Antagonist extends Drawable {
   public getCutsceneMoveTimer(): number {
     return this.cutsceneMoveTimer;
   }
+
+  public changeImage(source: string){
+    this.image = CanvasUtil.loadNewImage(source)
+  }
+ 
 }

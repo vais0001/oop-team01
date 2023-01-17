@@ -150,10 +150,6 @@ export default class ArrowThrower extends Scene {
       });
 
       this.ad = this.ad.filter((item: EnemyAD) => {
-        // if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
-        //   this.lives.pop();
-        //   return false;
-        // }
 
         if (this.bullet.isCollidingAD(item)) {
           this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());

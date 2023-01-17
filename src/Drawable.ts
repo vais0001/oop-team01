@@ -49,4 +49,14 @@ export default abstract class Drawable {
   public minusPosY(posY: number) {
     this.posY -= posY;
   }
+
+  public addOrSubPosX(posX: number, addOrSub: number) {
+    // to add is 0, to sub is 1
+    if (addOrSub === 0) {
+      this.posX += posX;
+    }
+    if (addOrSub === 1) {
+      this.posX -= posX;
+    }
+  }
 }
