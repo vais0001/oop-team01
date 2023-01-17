@@ -39,6 +39,14 @@ export default class BossFight extends Scene {
 
   private buttonsPressed: number;
 
+  private moveUp: boolean;
+
+  private moveRight: boolean;
+
+  private moveDown: boolean;
+
+  private moveLeft: boolean;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
@@ -58,42 +66,66 @@ export default class BossFight extends Scene {
     for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX + 40, 250 + i + this.dimensionsY));
     }
+    this.moveDown = false;
+    this.moveLeft = false;
+    this.moveRight = false;
+    this.moveUp = false;
   }
 
   public processInput(keyListener: KeyListener): void {
     this.buttonsPressed = 0;
-    if (this.player.getPosX() > this.dimensionsX + 5) {
+    if (this.player.getPosX() > this.dimensionsX + 25) {
       if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
         this.player.move(0, 50);
         this.buttonsPressed += 1;
         this.lightsaber.changeImage('./assets/lightsaber1.png');
         this.lightsaberSide = 1;
         this.playerSide = 1;
+        this.moveLeft = true;
+      } else {
+        this.moveLeft = false;
       }
+    } else {
+      this.moveLeft = false;
     }
 
-    if (this.player.getPosY() > this.dimensionsY + 5) {
+    if (this.player.getPosY() > this.dimensionsY + 110) {
       if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
         this.player.move(1, 50);
         this.buttonsPressed += 1;
+        this.moveUp = true;
+      } else {
+        this.moveUp = false;
       }
+    } else {
+      this.moveUp = false;
     }
 
-    if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 115) {
+    if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 105) {
       if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
         this.player.move(2, 50);
         this.buttonsPressed += 1;
         this.lightsaber.changeImage('./assets/lightsaber.png');
         this.lightsaberSide = 0;
         this.playerSide = 0;
+        this.moveRight = true;
+      } else {
+        this.moveRight = false;
       }
+    } else {
+      this.moveRight = false;
     }
 
-    if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 140) {
+    if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
       if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
         this.player.move(3, 50);
         this.buttonsPressed += 1;
+        this.moveDown = true;
+      } else {
+        this.moveDown = false;
       }
+    } else {
+      this.moveDown = false;
     }
 
     if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
@@ -238,6 +270,22 @@ export default class BossFight extends Scene {
       && this.healthBar > 0
     ) {
       this.healthBar -= 0.1;
+    }
+
+    if (this.moveUp) {
+      this.player.moveUp(elapsed);
+    }
+
+    if (this.moveDown) {
+      this.player.moveDown(elapsed);
+    }
+
+    if (this.moveRight) {
+      this.player.moveRight(elapsed);
+    }
+
+    if (this.moveLeft) {
+      this.player.moveLeft(elapsed);
     }
 
     if (this.healthBar < 600) return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);

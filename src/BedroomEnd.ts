@@ -83,7 +83,7 @@ export default class BedroomEnd extends Scene {
   }
 
   public processInput(keyListener: KeyListener): void {
-    if (!this.level1 && this.nextText > 4) {
+    if (!this.level1 && this.nextText > 6) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 20
       && !(this.player.collidingBed(this.bed))) {
@@ -197,7 +197,7 @@ export default class BedroomEnd extends Scene {
     this.bed.render(canvas);
     this.player.render(canvas);
     if (this.level1) this.antagonist.render(canvas);
-    if (this.nextText > 4) {
+    if (this.nextText > 6) {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 27);
     }
     if (this.player.collideWithitem(this.computer) && !this.level1) {
