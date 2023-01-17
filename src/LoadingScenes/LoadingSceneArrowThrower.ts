@@ -14,7 +14,7 @@ export default class LoadingSceneAT extends Scene {
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.loadingBar = 0;
-    this.image = CanvasUtil.loadNewImage('./assets/loading_screen_controls.png');
+    this.image = CanvasUtil.loadNewImage('./placeholders/loading_screen_controls.png');
     this.realisticPause = 50;
     this.continue = false;
   }
