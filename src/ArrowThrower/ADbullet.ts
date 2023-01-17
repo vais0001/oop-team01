@@ -16,10 +16,10 @@ export default class ADbullet extends Drawable {
     const slope: number = distanceY / distanceX;
 
     if (this.posX < player.getPosX() - 300) {
-      this.posX += Math.cos(slope) * 2;
-      this.posY += Math.sin(slope) * 2;
+      this.posX += Math.cos(slope) * 0.2;
+      this.posY += Math.sin(slope) * 0.2;
     } else {
-      this.posX += 4;
+      this.posX += 1;
     }
   }
 }

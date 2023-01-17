@@ -13,17 +13,15 @@ export default class Player extends Drawable {
     this.posY = maxY - 200;
   }
 
-  public move(direction: number): void {
-    if (direction === 0) {
+  public moveUp(elapsed: number): void {
       if (this.posY > this.dimensionsY - 130) {
-        this.posY -= 5;
+        this.posY -= elapsed * 0.5;
       }
-    }
+  }
 
-    if (direction === 1) {
-      if (this.posY < this.dimensionsY + this.backgroundHeight - 140) {
-        this.posY += 5;
-      }
+  public moveDown(elapsed: number): void {
+    if (this.posY < this.dimensionsY + this.backgroundHeight - 140) {
+      this.posY += elapsed * 0.5;
     }
   }
 
