@@ -141,9 +141,22 @@ export default class ArrowThrower extends Scene {
           if (this.lives.length === 1) this.lives.push(new Lives(this.dimensionsX - 40, 300 + this.dimensionsY));
           return false;
         }
-
         return true;
       });
+
+      this.heartPowerup = this.heartPowerup.filter((heartPowerup: HeartPowerup) => {
+        if (heartPowerup.getPosX() > this.backgroundWidth + this.dimensionsX) {
+          return false;
+        }
+        return true;
+      });
+
+      this.adBullets = this.adBullets.filter((item: ADbullet) => {
+        if (item.getPosX() > this.backgroundWidth + this.dimensionsX) {
+          return false;
+        }
+        return true;
+      })
 
       this.adBullets.forEach((item: ADbullet) => {
         item.update(elapsed);
