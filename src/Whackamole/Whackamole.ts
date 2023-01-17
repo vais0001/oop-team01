@@ -100,7 +100,7 @@ export default class Whackamole extends Scene {
         this.player.cutsceneMovement(elapsed);
       }
       this.antagonist.cutsceneMovement(elapsed);
-    } else if (this.antagonist.getPosY() > this.dimensionsY - 300) {
+    } else if (this.enemiesLeft > 35) {
       this.antagonist.cutsceneMovementAway(5, -3);
     }
 
@@ -159,10 +159,14 @@ export default class Whackamole extends Scene {
     }
 
     if (this.enemiesLeft === 0) {
-      this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
-      this.antagonist.moveToPlayer(this.player);
+      this.antagonist = new Antagonist(this.backgroundWidth - 800, this.backgroundHeight - 700);
       this.cutsceneTimer -= elapsed;
-      if (this.cutsceneTimer < 0) {
+    }
+
+    if (this.cutsceneTimer < 0) {
+      this.enemiesLeft = -1;
+      this.antagonist.moveToPlayer(this.player);
+      if (this.antagonist.getPosX() >= this.player.getPosX()) {
         this.antagonist.cutsceneMovementAway(-20, -5);
         this.player.moveAway(-20, -5);
       }
