@@ -59,7 +59,7 @@ export default class BossFight extends Scene {
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
-    this.levelTimer = 10000;
+    this.levelTimer = 1000;
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
@@ -147,6 +147,13 @@ export default class BossFight extends Scene {
    * @returns true or false
    */
   public update(elapsed: number): Scene {
+
+    if (this.abilityCount > 3) {
+      if (this.player.getPosX() > 700) {
+        this.antagonist.setImage('./assets/trojanfinalright.png');
+      } else this.antagonist.setImage('./assets/trojanfinal.png');
+    }
+
     // colission for bullets
     this.bullets = this.bullets.filter((item: ShootingAbility) => {
       if (this.player.collideWithBullet(item)) {
@@ -269,34 +276,17 @@ export default class BossFight extends Scene {
           this.bulletsTimer = 1000;
         }
       }
-      if (this.antagonist.getPosY() >= 400) {
+      if (this.abilityCount === 2 && this.antagonist.getPosY() >= 395) {
         this.abilityCount = 3;
-        if (this.bulletsTimer <= 0 && this.abilityCount === 3) {
-          this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
-          this.bulletsTimer = 600;
-        }
-        if (this.abilityCount === 3 && this.antagonist.getPosY() <= 400) this.abilityCount = 4;
       }
-      if (this.abilityCount === 4) {
+      if (this.abilityCount === 3) {
         this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
-        if (this.bulletsTimer <= 0 && this.abilityCount === 4) {
-          this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
-          this.bulletsTimer = 1200;
-        }
+        this.antagonist.addOrSubPosX(0.4 * elapsed, 1);
       }
-      if (this.abilityCount === 4 && this.antagonist.getPosY() <= 100) {
-        this.abilityCount = 5;
-        this.levelTimer = 5000;
-      }
-      if (this.abilityCount === 5) {
-        if (this.levelTimer <= 0) {
-          this.abilityCount = 6;
-        }
+      if (this.antagonist.getPosY() <= 180 && this.abilityCount === 3) {
+        this.abilityCount = 4;
       }
     }
-
     if (this.hit === true
       && this.lightsaber.collidesWithAntagonist(this.antagonist)
       && this.healthBar > 0) {

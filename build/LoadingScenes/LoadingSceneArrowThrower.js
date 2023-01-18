@@ -8,12 +8,12 @@ export default class LoadingSceneAT extends Scene {
     constructor(maxX, maxY) {
         super(maxX, maxY);
         this.loadingBar = 0;
-        this.image = CanvasUtil.loadNewImage('./placeholders/loading_screen_controls.png');
+        this.image = CanvasUtil.loadNewImage('./assets/level_loading_screen2.png');
         this.realisticPause = 50;
         this.continue = false;
     }
     processInput(keyListener) {
-        if (this.loadingBar === 1220 && keyListener.keyPressed('Space')) {
+        if (this.loadingBar === 1100 && keyListener.keyPressed('Space')) {
             this.continue = true;
         }
         return null;
@@ -26,8 +26,8 @@ export default class LoadingSceneAT extends Scene {
         if (this.loadingBar > randomPause) {
             this.realisticPause -= elapsed;
         }
-        if (this.loadingBar > 1220) {
-            this.loadingBar = 1220;
+        if (this.loadingBar > 1100) {
+            this.loadingBar = 1100;
         }
         if (this.continue)
             return new ArrowThrower(window.innerWidth, window.innerHeight);
@@ -36,11 +36,13 @@ export default class LoadingSceneAT extends Scene {
     render(canvas) {
         CanvasUtil.fillCanvas(canvas, 'black');
         CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-        CanvasUtil.drawRectangle(canvas, this.dimensionsX + 100, this.dimensionsY + 100, 1220, 30, 'white');
-        if (this.loadingBar === 1220) {
-            CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to continue', canvas.width / 2, this.dimensionsY + 600, 'center', 'Arial', 40, 'White');
+        CanvasUtil.drawRectangle(canvas, this.dimensionsX + 160, this.dimensionsY + 180, 1100, 30, 'white');
+        if (this.loadingBar === 1100) {
+            CanvasUtil.fillRectangle(canvas, this.dimensionsX + 450, this.dimensionsY + 530, 520, 120, 'black');
+            CanvasUtil.writeTextToCanvas(canvas, 'Press         to continue', canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 40, 'White');
+            CanvasUtil.writeTextToCanvas(canvas, '      [SPACE]            ', canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 40, 'red');
         }
-        CanvasUtil.fillRectangle(canvas, this.dimensionsX + 100, this.dimensionsY + 100, this.loadingBar, 30, 'white');
+        CanvasUtil.fillRectangle(canvas, this.dimensionsX + 160, this.dimensionsY + 180, this.loadingBar, 30, 'white');
     }
 }
 //# sourceMappingURL=LoadingSceneArrowThrower.js.map
