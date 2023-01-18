@@ -87,7 +87,7 @@ export default class CanvasUtil {
     xCoordinate: number,
     yCoordinate: number,
     alignment: CanvasTextAlign = 'center',
-    fontFamily: string = 'sans-serif',
+    fontFamily: string = 'Kongtext',
     fontSize: number = 20,
     color: string = 'red',
   ): void {

@@ -8,7 +8,7 @@ export default class Text extends Drawable {
 
   public textOne(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, 'Pffff, what a terrible sleep I had.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Pffff, what a terrible sleep I had.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'Kongtext', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
