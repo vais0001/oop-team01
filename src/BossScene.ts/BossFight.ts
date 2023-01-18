@@ -48,6 +48,8 @@ export default class BossFight extends Scene {
 
   private moveLeft: boolean;
 
+  private circleRadius: number;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
@@ -63,6 +65,7 @@ export default class BossFight extends Scene {
     this.playerSide = 0;
     this.lightsaber = new Lightsaber(this.player.getPosX(), this.player.getPosY() + 80);
     this.healthBar = 650;
+    this.circleRadius = 0;
     this.hit = false;
     for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX + 40, 250 + i + this.dimensionsY));
@@ -311,7 +314,11 @@ export default class BossFight extends Scene {
     if (this.moveDown) this.player.moveDown(elapsed);
     if (this.moveRight) this.player.moveRight(elapsed);
     if (this.moveLeft) this.player.moveLeft(elapsed);
-    if (this.healthBar < 1) return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
+
+    if (this.healthBar < 0) {
+      this.circleRadius += elapsed * 0.6;
+      if (this.circleRadius > 1400) return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
+    }
 
     return null;
   }
@@ -330,5 +337,8 @@ export default class BossFight extends Scene {
     this.lightsaber.render(canvas);
     CanvasUtil.fillRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, this.healthBar, 40, 'red');
     CanvasUtil.drawRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, 650, 40, 'black');
+    if (this.healthBar < 600) {
+      CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
+    }
   }
 }
