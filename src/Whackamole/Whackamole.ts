@@ -1,13 +1,13 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Gameover from "../Gameover.js";
-import KeyListener from "../KeyListener.js";
-import Scene from "../Scene.js";
-import Lives from "./Lives.js";
-import Viruses from "./Viruses.js";
-import Antagonist from "../Antagonist.js";
-import Player from "../ArrowThrower/Player.js";
-import LoadingSceneBF from "../LoadingScenes/LoadingSceneBF.js";
-import WhackamoleText from "./WhackamoleText.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Gameover from '../Gameover.js';
+import KeyListener from '../KeyListener.js';
+import Scene from '../Scene.js';
+import Lives from './Lives.js';
+import Viruses from './Viruses.js';
+import Antagonist from '../Antagonist.js';
+import Player from '../ArrowThrower/Player.js';
+import LoadingSceneBF from '../LoadingScenes/LoadingSceneBF.js';
+import WhackamoleText from './WhackamoleText.js';
 
 export default class Whackamole extends Scene {
   private holes: Viruses[] = [];
@@ -64,6 +64,10 @@ export default class Whackamole extends Scene {
     this.virusPushed = false;
   }
 
+  /**
+   *
+   * @param value worm value
+   */
   public wormSmash(value: number) {
     this.value = value;
     for (let i = 0; i < this.holes.length; i++) {
@@ -71,7 +75,7 @@ export default class Whackamole extends Scene {
         if (item.getValue() === value) {
           this.checkIfCorrect = 1;
         }
-      })
+      });
       if (i === this.holes.length - 1 && this.checkIfCorrect === 0) {
         this.lives.pop();
       }
@@ -81,6 +85,10 @@ export default class Whackamole extends Scene {
     }
   }
 
+  /**
+   *
+   * @param keyListener is an input
+   */
   public processInput(keyListener: KeyListener): void {
     if (this.nextText >= 2) {
       if (keyListener.keyPressed(KeyListener.KEY_97)) this.wormSmash(1);
@@ -99,6 +107,11 @@ export default class Whackamole extends Scene {
     }
   }
 
+  /**
+   *
+   * @param elapsed is time
+   * @returns true or false
+   */
   public update(elapsed: number): Scene {
     if (this.nextText < 2) {
       if (this.player.getPosX() < this.dimensionsX + 1300) {
@@ -201,6 +214,10 @@ export default class Whackamole extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');

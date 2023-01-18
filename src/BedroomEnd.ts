@@ -82,6 +82,10 @@ export default class BedroomEnd extends Scene {
     this.moveUp = false;
   }
 
+  /**
+   *
+   * @param keyListener is an input
+   */
   public processInput(keyListener: KeyListener): void {
     if (!this.level1 && this.nextText > 6) {
       this.buttonsPressed = 0;
@@ -153,7 +157,11 @@ export default class BedroomEnd extends Scene {
     }
   }
 
-
+  /**
+   *
+   * @param elapsed is time
+   * @returns true or false
+   */
   public update(elapsed: number): Scene {
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
@@ -171,6 +179,10 @@ export default class BedroomEnd extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
@@ -192,13 +204,13 @@ export default class BedroomEnd extends Scene {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 27);
     }
     if (this.player.collideWithitem(this.computer) && !this.level1) {
-      this.bedroomEndText.computerPrompt(canvas, this.popUp);
+      this.bedroomEndText.computerPrompt(canvas);
     }
     if (!this.level1) {
       if (this.nextText === 0) this.bedroomEndText.textOne(canvas, this.image1, this.playerHead);
       if (this.nextText === 1) this.bedroomEndText.textTwo(canvas, this.image1, this.playerHead);
       if (this.nextText === 2) this.bedroomEndText.textThree(canvas, this.image1, this.playerHead);
-      if (this.nextText === 3) this.bedroomEndText.textFour(canvas, this.image1, this.playerHead);
+      if (this.nextText === 3) this.bedroomEndText.textFour(canvas, this.image1);
       if (this.nextText === 4) this.bedroomEndText.textFive(canvas, this.image1, this.playerHead);
       if (this.nextText === 5) this.bedroomEndText.textSix(canvas, this.image1, this.playerHead);
       if (this.nextText === 6) this.bedroomEndText.textSeven(canvas, this.image1, this.playerHead);

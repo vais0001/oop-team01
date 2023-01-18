@@ -1,12 +1,13 @@
-import Antagonist from "../Antagonist.js";
-import CanvasUtil from "../CanvasUtil.js";
-import KeyListener from "../KeyListener.js";
-import LoadingSceneEnd from "../LoadingScenes/LoadingSceneEnd.js";
-import Player from "../Player.js";
-import Scene from "../Scene.js";
-import Lives from "../Whackamole/Lives.js";
-import Lightsaber from "./Lightsaber.js";
-import ShootingAbility from "./ShootingAbility.js";
+/* eslint-disable max-len */
+import Antagonist from '../Antagonist.js';
+import CanvasUtil from '../CanvasUtil.js';
+import KeyListener from '../KeyListener.js';
+import LoadingSceneEnd from '../LoadingScenes/LoadingSceneEnd.js';
+import Player from '../Player.js';
+import Scene from '../Scene.js';
+import Lives from '../Whackamole/Lives.js';
+import Lightsaber from './Lightsaber.js';
+import ShootingAbility from './ShootingAbility.js';
 
 export default class BossFight extends Scene {
   private antagonist: Antagonist;
@@ -47,7 +48,7 @@ export default class BossFight extends Scene {
 
   private moveLeft: boolean;
 
-  public constructor(maxX: number, maxY: number, level: number) {
+  public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
@@ -72,6 +73,9 @@ export default class BossFight extends Scene {
     this.moveUp = false;
   }
 
+  /**
+   * @param keyListener input key
+   */
   public processInput(keyListener: KeyListener): void {
     this.buttonsPressed = 0;
     if (this.player.getPosX() > this.dimensionsX + 25) {
@@ -134,6 +138,10 @@ export default class BossFight extends Scene {
     }
   }
 
+  /**
+   * @param elapsed time elapsed
+   * @returns true or false
+   */
   public update(elapsed: number): Scene {
     // colission for bullets
     this.bullets = this.bullets.filter((item: ShootingAbility) => {
@@ -160,7 +168,7 @@ export default class BossFight extends Scene {
     if (this.lightsaberSide === 2) {
       if (this.playerSide === 0) {
         this.lightsaber.slashImage(1);
-        this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() - 50)
+        this.lightsaber.update(elapsed, this.player.getPosX() - 35, this.player.getPosY() - 50);
         setTimeout(() => {
           if (this.playerSide === 1) {
             this.lightsaberSide = 1;
@@ -171,7 +179,7 @@ export default class BossFight extends Scene {
         }, 100);
       } else if (this.playerSide === 1) {
         this.lightsaber.slashImage(0);
-        this.lightsaber.update(elapsed, this.player.getPosX() - 200, this.player.getPosY() - 50)
+        this.lightsaber.update(elapsed, this.player.getPosX() - 200, this.player.getPosY() - 50);
         setTimeout(() => {
           if (this.playerSide === 0) {
             this.lightsaberSide = 0;
@@ -205,7 +213,7 @@ export default class BossFight extends Scene {
       this.bulletsTimer -= elapsed;
       if (this.abilityShoot === true) {
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 0))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 0));
           this.bulletsTimer = 500;
         }
       }
@@ -219,9 +227,9 @@ export default class BossFight extends Scene {
     if (this.level === 1) {
       this.bulletsTimer -= elapsed;
       if (this.antagonist.getPosX() > 100 && this.abilityCount === 0) {
-        this.antagonist.addOrSubPosX(0.2 * elapsed, 1)
+        this.antagonist.addOrSubPosX(0.2 * elapsed, 1);
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0));
           this.bulletsTimer = 800;
         }
       }
@@ -229,10 +237,10 @@ export default class BossFight extends Scene {
         this.abilityCount = 1;
       }
       if (this.abilityCount === 1) {
-        this.antagonist.addOrSubPosX(0.2 * elapsed, 0)
+        this.antagonist.addOrSubPosX(0.2 * elapsed, 0);
         this.antagonist.changeImage('./assets/trojanfinalright.png');
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0));
           this.bulletsTimer = 800;
         }
       }
@@ -247,17 +255,17 @@ export default class BossFight extends Scene {
     if (this.level === 2) {
       this.bulletsTimer -= elapsed;
       if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
-        this.antagonist.addOrSubPosY(0.2 * elapsed, 0)
+        this.antagonist.addOrSubPosY(0.2 * elapsed, 0);
         if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
           this.bulletsTimer = 1000;
         }
       }
       if (this.antagonist.getPosY() >= 400) {
         this.abilityCount = 3;
         if (this.bulletsTimer <= 0 && this.abilityCount === 3) {
-          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
           this.bulletsTimer = 600;
         }
         if (this.abilityCount === 3 && this.antagonist.getPosY() <= 400) this.abilityCount = 4;
@@ -265,17 +273,17 @@ export default class BossFight extends Scene {
       if (this.abilityCount === 4) {
         this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
         if (this.bulletsTimer <= 0 && this.abilityCount === 4) {
-          this.antagonist.addOrSubPosY(0.2 * elapsed, 1)
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1))
+          this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
           this.bulletsTimer = 1200;
         }
       }
       if (this.abilityCount === 4 && this.antagonist.getPosY() <= 100) {
-         this.abilityCount = 5;
-          this.levelTimer = 5000;
-        }
+        this.abilityCount = 5;
+        this.levelTimer = 5000;
+      }
       if (this.abilityCount === 5) {
-          if (this.levelTimer <= 0) {
+        if (this.levelTimer <= 0) {
           this.abilityCount = 6;
           this.levelTimer = 15000;
         }
@@ -283,16 +291,13 @@ export default class BossFight extends Scene {
       if (this.abilityCount === 6) {
         this.bulletsTimer -= elapsed;
         if (this.bulletsTimer <= 0) {
-        this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 2))
-        this.bulletsTimer = 2000;
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 2));
+          this.bulletsTimer = 2000;
+        }
+        if (this.levelTimer <= 0) {
+          this.level = 0;
+        }
       }
-      if (this.levelTimer <= 0) {
-        this.level = 0;
-      }
-
-      }
-
-
     }
 
     if (this.hit === true
@@ -311,6 +316,9 @@ export default class BossFight extends Scene {
     return null;
   }
 
+  /**
+   * @param canvas render to canvas
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');

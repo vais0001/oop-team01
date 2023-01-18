@@ -1,8 +1,7 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Drawable from "../Drawable.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Drawable from '../Drawable.js';
 
 export default class Viruses extends Drawable {
-
   private value: number;
 
   private timeToDissapear: number;
@@ -46,13 +45,18 @@ export default class Viruses extends Drawable {
     }
   }
 
+  /**
+   *
+   * @param elapsed is time
+   * @returns true or false
+   */
   public update(elapsed: number): boolean {
     this.timeToDissapear -= elapsed;
     if (this.timeToDissapear < 2000) {
       if (this.posY === 620 + this.dimensionsY) this.posY = 520 + this.dimensionsY;
       if (this.posY === 430 + this.dimensionsY) this.posY = 330 + this.dimensionsY;
       if (this.posY === 270 + this.dimensionsY) this.posY = 170 + this.dimensionsY;
-      this.image = CanvasUtil.loadNewImage('./assets/wormbig.png')
+      this.image = CanvasUtil.loadNewImage('./assets/wormbig.png');
     }
     if (this.timeToDissapear <= 0) {
       this.isDead = true;
@@ -68,6 +72,9 @@ export default class Viruses extends Drawable {
     this.value = value;
   }
 
+  /**
+   *
+   */
   public subtractPosX() {
     if (this.posX === 265 + this.dimensionsX) {
       this.posX = 225 + this.dimensionsX;
@@ -80,6 +87,9 @@ export default class Viruses extends Drawable {
     }
   }
 
+  /**
+   * @returns that its dead
+   */
   public isItDead() {
     return this.isDead;
   }

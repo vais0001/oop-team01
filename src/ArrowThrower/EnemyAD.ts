@@ -1,7 +1,4 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Drawable from "../Drawable.js";
-import CursorBullet from "./CursorBullet.js";
-import EnemyAD2 from "./EnemyAD2.js";
+import Drawable from '../Drawable.js';
 
 export default class EnemyAD extends Drawable {
   public constructor(maxY: number) {

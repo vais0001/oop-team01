@@ -1,12 +1,12 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Drawable from "../Drawable.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Drawable from '../Drawable.js';
 
 export default class ShootingAbility extends Drawable {
-
   private direction: number;
 
   private speed: number;
 
+  // eslint-disable-next-line max-len
   public constructor(startX: number, startY: number, direction: number, speed: number, picture: number) {
     super();
     if (picture === 0) this.image = CanvasUtil.loadNewImage('./assets/littlebug.png');
@@ -17,17 +17,19 @@ export default class ShootingAbility extends Drawable {
     this.direction = direction;
     if (speed > 0) {
       this.speed = speed;
-    } else this.speed = Math.random()
-
+    } else this.speed = Math.random();
   }
 
+  /**
+   *
+   * @param elapsed elapsed time
+   */
   public update(elapsed: number) {
-    let randomDecimal = Math.random();
     if (this.direction === 5) {
       this.posX -= Math.random() * elapsed;
-      this.posY +=  this.speed * elapsed;
+      this.posY += this.speed * elapsed;
     }
-    if(this.direction === 0) {
+    if (this.direction === 0) {
       this.posX -= this.speed * elapsed;
     }
     if (this.direction === 1) {
@@ -40,6 +42,4 @@ export default class ShootingAbility extends Drawable {
       this.posY += this.speed * elapsed;
     }
   }
-
-
 }

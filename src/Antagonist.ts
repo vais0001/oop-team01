@@ -13,6 +13,10 @@ export default class Antagonist extends Drawable {
     this.cutsceneMoveTimer = 5000;
   }
 
+  /**
+   *
+   * @param elapsed is time
+   */
   public cutsceneMovement(elapsed: number): void {
     this.cutsceneMoveTimer -= elapsed;
     if (this.cutsceneMoveTimer < 0) {
@@ -26,6 +30,11 @@ export default class Antagonist extends Drawable {
     }
   }
 
+  /**
+   *
+   * @param player is player
+   * @param speed is speed
+   */
   public moveToPlayer(player: Player, speed: number) {
     const distanceX: number = player.getPosX() - this.getPosX();
     const distanceY: number = player.getPosY() - this.getPosY();
@@ -35,6 +44,11 @@ export default class Antagonist extends Drawable {
     this.posY += Math.sin(slope) * speed;
   }
 
+  /**
+   *
+   * @param speedX is speed of x
+   * @param speedY is speed of y
+   */
   public cutsceneMovementAway(speedX: number, speedY: number): void {
     this.posX += speedX;
     this.posY += speedY;
@@ -44,8 +58,11 @@ export default class Antagonist extends Drawable {
     return this.cutsceneMoveTimer;
   }
 
-  public changeImage(source: string){
-    this.image = CanvasUtil.loadNewImage(source)
+  /**
+   *
+   * @param source is a string of the image
+   */
+  public changeImage(source: string) {
+    this.image = CanvasUtil.loadNewImage(source);
   }
-
 }

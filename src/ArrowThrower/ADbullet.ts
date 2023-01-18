@@ -1,6 +1,6 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Drawable from "../Drawable.js";
-import Player from "./Player.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Drawable from '../Drawable.js';
+import Player from './Player.js';
 
 export default class ADbullet extends Drawable {
   public constructor(startX: number, startY: number) {
@@ -10,6 +10,10 @@ export default class ADbullet extends Drawable {
     this.posY = startY - this.image.height / 2;
   }
 
+  /**
+   *
+   * @param player is player timmy
+   */
   public update(player: Player) {
     const distanceX: number = player.getPosX() - this.getPosX();
     const distanceY: number = player.getPosY() - this.getPosY();

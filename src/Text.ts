@@ -1,11 +1,18 @@
-import CanvasUtil from "./CanvasUtil.js";
-import Drawable from "./Drawable.js";
+/* eslint-disable max-len */
+import CanvasUtil from './CanvasUtil.js';
+import Drawable from './Drawable.js';
 
 export default class Text extends Drawable {
   public constructor() {
     super();
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   * @param talker is the image of who talks
+   */
   public textOne(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'Pffff, what a terrible sleep I had.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
@@ -13,6 +20,12 @@ export default class Text extends Drawable {
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   * @param talker is the image of who talks
+   */
   public textTwo(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'Let me grab my phone and', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'DotGothic16', 20, 'black');
@@ -21,7 +34,12 @@ export default class Text extends Drawable {
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
-  public textThree(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   */
+  public textThree(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'Timmy looks at his phone.', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'DotGothic16', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'His favourite game is out, but because of', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'DotGothic16', 20, 'black');
@@ -29,6 +47,12 @@ export default class Text extends Drawable {
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   * @param talker is the image of who talks
+   */
   public textFour(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'YES! Finally, it is released!', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'DotGothic16', 20, 'black');
@@ -39,7 +63,12 @@ export default class Text extends Drawable {
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
-  public textFive(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   */
+  public textFive(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'Timmy browses on forums to see', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'DotGothic16', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'how to access this game for free.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
@@ -48,6 +77,12 @@ export default class Text extends Drawable {
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   * @param talker is the image of who talks
+   */
   public textSix(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'You fell for my trap!', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
@@ -55,6 +90,12 @@ export default class Text extends Drawable {
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   * @param talker is the image of who talks
+   */
   public textSeven(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'Now you must take', this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
@@ -63,7 +104,11 @@ export default class Text extends Drawable {
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
 
-  public computerPrompt(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
+  /**
+   *
+   * @param canvas is html canvas element
+   */
+  public computerPrompt(canvas: HTMLCanvasElement): void {
     CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 50, this.dimensionsY + 740, 'left', 'DotGothic16', 40, 'white');
   }
 }

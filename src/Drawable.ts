@@ -1,4 +1,4 @@
-import CanvasUtil from "./CanvasUtil.js";
+import CanvasUtil from './CanvasUtil.js';
 
 export default abstract class Drawable {
   protected image: HTMLImageElement;
@@ -38,6 +38,10 @@ export default abstract class Drawable {
     return this.image.height;
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.drawImage(canvas, this.image, this.posX, this.posY);
   }
@@ -46,11 +50,19 @@ export default abstract class Drawable {
     this.image = CanvasUtil.loadNewImage(image);
   }
 
+  /**
+   *
+   * @param posY is posY
+   */
   public minusPosY(posY: number) {
     this.posY -= posY;
   }
 
-
+  /**
+   *
+   * @param posX is posX
+   * @param addOrSub to add or to subtract 0 is to add 1 is to sub
+   */
   public addOrSubPosX(posX: number, addOrSub: number) {
     // to add is 0, to sub is 1
     if (addOrSub === 0) {
@@ -61,6 +73,11 @@ export default abstract class Drawable {
     }
   }
 
+  /**
+   *
+   * @param posY is posy
+   * @param addOrSub to add or to subtract 0 is to add 1 is to sub
+   */
   public addOrSubPosY(posY: number, addOrSub: number) {
     // to add is 0, to sub is 1
     if (addOrSub === 0) {

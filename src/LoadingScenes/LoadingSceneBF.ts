@@ -1,10 +1,7 @@
-import ArrowThrower from "../ArrowThrower/ArrowThrower.js";
-import Bedroom from "../Bedroom.js";
-import BossFight from "../BossScene.ts/BossFight.js";
-import CanvasUtil from "../CanvasUtil.js";
-import KeyListener from "../KeyListener.js";
-import Scene from "../Scene.js";
-import Whackamole from "../Whackamole/Whackamole.js";
+import BossFight from '../BossScene.ts/BossFight.js';
+import CanvasUtil from '../CanvasUtil.js';
+import KeyListener from '../KeyListener.js';
+import Scene from '../Scene.js';
 
 export default class LoadingSceneBF extends Scene {
   private loadingBar: number;
@@ -21,6 +18,11 @@ export default class LoadingSceneBF extends Scene {
     this.continue = false;
   }
 
+  /**
+   *
+   * @param keyListener input key
+   * @returns nothing
+   */
   public processInput(keyListener: KeyListener): void {
     if (this.loadingBar === 1220 && keyListener.keyPressed('Space')) {
       this.continue = true;
@@ -28,10 +30,15 @@ export default class LoadingSceneBF extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param elapsed elapsed time
+   * @returns true or false
+   */
   public update(elapsed: number): Scene {
     const randomPause: number = Math.floor(Math.random() * 1220) + 100;
     if (this.realisticPause === 50 || this.realisticPause < 0) {
-      this.loadingBar += elapsed * 5; //for final 0.3
+      this.loadingBar += elapsed * 5; // for final 0.3
     }
     if (this.loadingBar > randomPause) {
       this.realisticPause -= elapsed;
@@ -41,10 +48,14 @@ export default class LoadingSceneBF extends Scene {
       this.loadingBar = 1220;
     }
 
-    if (this.continue) return new BossFight(window.innerWidth, window.innerHeight, 0)
+    if (this.continue) return new BossFight(window.innerWidth, window.innerHeight);
     return null;
   }
 
+  /**
+   *
+   * @param canvas html canvas
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
