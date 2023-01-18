@@ -135,6 +135,15 @@ export default class BossFight extends Scene {
   }
 
   public update(elapsed: number): Scene {
+    // colission for bullets
+    this.bullets = this.bullets.filter((item: ShootingAbility) => {
+      if (this.player.collideWithitem(item)) {
+        this.lives.pop();
+        return false;
+      }
+      return true;
+    });
+
     // functions for all levels
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
@@ -276,7 +285,7 @@ export default class BossFight extends Scene {
     if (this.moveDown) this.player.moveDown(elapsed);
     if (this.moveRight) this.player.moveRight(elapsed);
     if (this.moveLeft) this.player.moveLeft(elapsed);
-    if (this.healthBar < 600) return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
+    if (this.healthBar < 1) return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
 
     return null;
   }
