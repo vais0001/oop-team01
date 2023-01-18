@@ -1,0 +1,1 @@
+{"version":3,"file":"EnemyADshooter.js","sourceRoot":"","sources":["../../src/ArrowThrower/EnemyADshooter.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,cAAc,CAAC;AAEnC,MAAM,CAAC,OAAO,OAAO,cAAe,SAAQ,OAAO;IACjD,YAAmB,IAAY;QAC7B,KAAK,CAAC,IAAI,CAAC,CAAC;IAEd,CAAC;CACF"}

@@ -92,5 +92,4 @@ export default class Player extends Drawable {
     this.lookingRight = true;
     this.posX += elapsed * 0.5;
   }
-
 }

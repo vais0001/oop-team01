@@ -105,10 +105,8 @@ export default class Bedroom extends Scene {
   public processInput(keyListener: KeyListener): void {
     if (!this.level1 && this.nextText > 4) {
       this.buttonsPressed = 0;
-      if (this.player.getPosX() > this.dimensionsX + 20
-      && !(this.player.collidingBed(this.bed))) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
+      if (this.player.getPosX() > this.dimensionsX + 20) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
           this.player.move(0, 150);
           this.buttonsPressed += 1;
           this.moveLeft = true;
@@ -119,11 +117,8 @@ export default class Bedroom extends Scene {
         this.moveLeft = false;
       }
 
-      if (this.player.getPosY() > this.dimensionsY + 120
-      && !(this.player.collidingComputer(this.computer))
-      && !(this.player.collidingBed(this.bed))) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
+      if (this.player.getPosY() > this.dimensionsY + 120) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))){
           this.player.move(1, 150);
           this.buttonsPressed += 1;
           this.moveUp = true;
@@ -134,10 +129,8 @@ export default class Bedroom extends Scene {
         this.moveUp = false;
       }
 
-      if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100
-      && !(this.player.collidingComputer(this.computer))) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
+      if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
           this.player.move(2, 150);
           this.buttonsPressed += 1;
           this.moveRight = true;
@@ -149,8 +142,7 @@ export default class Bedroom extends Scene {
       }
 
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
           this.buttonsPressed += 1;
           this.player.move(3, 150);
           this.moveDown = true;
