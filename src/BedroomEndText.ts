@@ -61,6 +61,15 @@ export default class BedroomEndText extends Drawable {
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
   }
 
+  public textEight(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+    CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
+    CanvasUtil.writeTextToCanvas(canvas, 'HAHAHAHAHAHAHAHAHAHAHAHAHAHA', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'HAHAHAHAHAHAHAHAHAHAHAHAHAHA', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'HAHAHAHAHAHAHAHAHAHAHAHAHAHA', this.dimensionsX + 720, this.dimensionsY + 700, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+  }
+
   public computerPrompt(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 50, this.dimensionsY + 740, 'left', 'DotGothic16', 40, 'white');
   }
