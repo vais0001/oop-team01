@@ -99,7 +99,6 @@ export default class Bedroom extends Scene {
     this.moveLeft = false;
     this.moveRight = false;
     this.moveUp = false;
-
   }
 
   public processInput(keyListener: KeyListener): void {
