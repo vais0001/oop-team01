@@ -7,6 +7,7 @@ import EnemyAD from './ArrowThrower/EnemyAD.js';
 import HeartPowerup from './ArrowThrower/HeartPowerup.js';
 import ADbullet from './ArrowThrower/ADbullet.js';
 import Antagonist from './Antagonist.js';
+import ShootingAbility from './BossScene.ts/ShootingAbility.js';
 
 export default class Player extends Drawable {
   private lookingRight: boolean;
@@ -60,6 +61,17 @@ export default class Player extends Drawable {
       && this.getPosY() < bed.getPosY() + bed.getHeight() - 223
       && this.getHeight() + this.posY > bed.getPosY()
     );
+  }
+
+  /**
+   *@param item is the Trojan horse bullets in final boss
+   *@returns true or false
+   */
+  public collideWithBullet(item: ShootingAbility): boolean {
+    return (this.posX < item.getPosX() + item.getWidth()
+      && this.posX + this.getWidth() > item.getPosX()
+      && this.getPosY() < item.getPosY() + item.getHeight()
+      && this.getHeight() + this.posY > item.getPosY());
   }
 
   /**

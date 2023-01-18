@@ -31,6 +31,12 @@ export default class Player extends Drawable {
             && this.getPosY() < bed.getPosY() + bed.getHeight() - 223
             && this.getHeight() + this.posY > bed.getPosY());
     }
+    collideWithBullet(item) {
+        return (this.posX < item.getPosX() + item.getWidth()
+            && this.posX + this.getWidth() > item.getPosX()
+            && this.getPosY() < item.getPosY() + item.getHeight()
+            && this.getHeight() + this.posY > item.getPosY());
+    }
     move(direction, speed) {
         const imageSources = ['http://127.0.0.1:5500/assets/playerstanding.png', 'http://127.0.0.1:5500/assets/timmywalkingright1.png', 'http://127.0.0.1:5500/assets/timmywalkingright2.png', 'http://127.0.0.1:5500/assets/timmywalkingleft1.png', 'http://127.0.0.1:5500/assets/timmywalkingleft2.png', 'http://127.0.0.1:5500/assets/playerstandingleft.png'];
         if (direction === 66) {

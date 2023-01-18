@@ -121,7 +121,7 @@ export default class BossFight extends Scene {
     }
     update(elapsed) {
         this.bullets = this.bullets.filter((item) => {
-            if (this.player.collideWithitem(item)) {
+            if (this.player.collideWithBullet(item)) {
                 this.lives.pop();
                 return false;
             }
