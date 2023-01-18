@@ -272,22 +272,10 @@ export default class BossFight extends Scene {
       this.healthBar -= 0.1;
     }
 
-    if (this.moveUp) {
-      this.player.moveUp(elapsed);
-    }
-
-    if (this.moveDown) {
-      this.player.moveDown(elapsed);
-    }
-
-    if (this.moveRight) {
-      this.player.moveRight(elapsed);
-    }
-
-    if (this.moveLeft) {
-      this.player.moveLeft(elapsed);
-    }
-
+    if (this.moveUp) this.player.moveUp(elapsed);
+    if (this.moveDown) this.player.moveDown(elapsed);
+    if (this.moveRight) this.player.moveRight(elapsed);
+    if (this.moveLeft) this.player.moveLeft(elapsed);
     if (this.healthBar < 600) return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
 
     return null;
