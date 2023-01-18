@@ -1,4 +1,3 @@
-import Bedroom from './Bedroom.js';
 import BedroomEnd from './BedroomEnd.js';
 import CanvasUtil from './CanvasUtil.js';
 import KeyListener from './KeyListener.js';
