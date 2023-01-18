@@ -49,7 +49,7 @@ export default class BossFight extends Scene {
 
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
-    this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
+    this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
     this.antagonist = new Antagonist(1050, 90);
     this.abilityShoot = false;
