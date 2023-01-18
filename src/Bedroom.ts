@@ -245,14 +245,14 @@ export default class Bedroom extends Scene {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 27);
     }
     if (this.player.collideWithitem(this.computer) && !this.level1) {
-      this.text.computerPrompt(canvas, this.popUp);
+      this.text.computerPrompt(canvas);
     }
     if (!this.level1) {
       if (this.nextText === 0) this.text.textOne(canvas, this.image1, this.playerHead);
       if (this.nextText === 1) this.text.textTwo(canvas, this.image1, this.playerHead);
-      if (this.nextText === 2) this.text.textThree(canvas, this.image1, null);
+      if (this.nextText === 2) this.text.textThree(canvas, this.image1);
       if (this.nextText === 3) this.text.textFour(canvas, this.image1, this.playerHead);
-      if (this.nextText === 4) this.text.textFive(canvas, this.image1, this.playerHead);
+      if (this.nextText === 4) this.text.textFive(canvas, this.image1);
     }
   }
 }
