@@ -13,7 +13,7 @@ export default class CreditScene extends Scene {
             this.continue = true;
         }
     }
-    update(elapsed) {
+    update() {
         if (this.continue) {
             return new StartScene(this.maxX, this.maxY);
         }

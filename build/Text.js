@@ -1,5 +1,5 @@
-import CanvasUtil from "./CanvasUtil.js";
-import Drawable from "./Drawable.js";
+import CanvasUtil from './CanvasUtil.js';
+import Drawable from './Drawable.js';
 export default class Text extends Drawable {
     constructor() {
         super();
@@ -17,7 +17,7 @@ export default class Text extends Drawable {
         CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
         CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
     }
-    textThree(canvas, image, talker) {
+    textThree(canvas, image) {
         CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
         CanvasUtil.writeTextToCanvas(canvas, 'Timmy looks at his phone.', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'DotGothic16', 20, 'black');
         CanvasUtil.writeTextToCanvas(canvas, 'His favourite game is out, but because of', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'DotGothic16', 20, 'black');
@@ -33,7 +33,7 @@ export default class Text extends Drawable {
         CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
         CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
     }
-    textFive(canvas, image, talker) {
+    textFive(canvas, image) {
         CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
         CanvasUtil.writeTextToCanvas(canvas, 'Timmy browses on forums to see', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'DotGothic16', 20, 'black');
         CanvasUtil.writeTextToCanvas(canvas, 'how to access this game for free.', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
@@ -54,7 +54,7 @@ export default class Text extends Drawable {
         CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
         CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
     }
-    computerPrompt(canvas, image) {
+    computerPrompt(canvas) {
         CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 50, this.dimensionsY + 740, 'left', 'DotGothic16', 40, 'white');
     }
 }

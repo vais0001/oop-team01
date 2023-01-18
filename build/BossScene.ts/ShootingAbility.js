@@ -1,5 +1,5 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Drawable from "../Drawable.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Drawable from '../Drawable.js';
 export default class ShootingAbility extends Drawable {
     direction;
     speed;
@@ -21,7 +21,6 @@ export default class ShootingAbility extends Drawable {
             this.speed = Math.random();
     }
     update(elapsed) {
-        let randomDecimal = Math.random();
         if (this.direction === 5) {
             this.posX -= Math.random() * elapsed;
             this.posY += this.speed * elapsed;

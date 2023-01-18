@@ -1,6 +1,6 @@
-import BedroomEnd from "../BedroomEnd.js";
-import CanvasUtil from "../CanvasUtil.js";
-import Scene from "../Scene.js";
+import BedroomEnd from '../BedroomEnd.js';
+import CanvasUtil from '../CanvasUtil.js';
+import Scene from '../Scene.js';
 export default class LoadingSceneEnd extends Scene {
     loadingBar;
     realisticPause;

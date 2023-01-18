@@ -1,6 +1,6 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Scene from "../Scene.js";
-import Whackamole from "../Whackamole/Whackamole.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Scene from '../Scene.js';
+import Whackamole from '../Whackamole/Whackamole.js';
 export default class LoadingSceneWM extends Scene {
     loadingBar;
     realisticPause;

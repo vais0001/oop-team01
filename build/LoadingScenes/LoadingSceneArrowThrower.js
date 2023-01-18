@@ -1,6 +1,6 @@
-import ArrowThrower from "../ArrowThrower/ArrowThrower.js";
-import CanvasUtil from "../CanvasUtil.js";
-import Scene from "../Scene.js";
+import ArrowThrower from '../ArrowThrower/ArrowThrower.js';
+import CanvasUtil from '../CanvasUtil.js';
+import Scene from '../Scene.js';
 export default class LoadingSceneAT extends Scene {
     loadingBar;
     realisticPause;

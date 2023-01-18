@@ -182,7 +182,7 @@ export default class BedroomEnd extends Scene {
             CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 27);
         }
         if (this.player.collideWithitem(this.computer) && !this.level1) {
-            this.bedroomEndText.computerPrompt(canvas, this.popUp);
+            this.bedroomEndText.computerPrompt(canvas);
         }
         if (!this.level1) {
             if (this.nextText === 0)
@@ -192,7 +192,7 @@ export default class BedroomEnd extends Scene {
             if (this.nextText === 2)
                 this.bedroomEndText.textThree(canvas, this.image1, this.playerHead);
             if (this.nextText === 3)
-                this.bedroomEndText.textFour(canvas, this.image1, this.playerHead);
+                this.bedroomEndText.textFour(canvas, this.image1);
             if (this.nextText === 4)
                 this.bedroomEndText.textFive(canvas, this.image1, this.playerHead);
             if (this.nextText === 5)

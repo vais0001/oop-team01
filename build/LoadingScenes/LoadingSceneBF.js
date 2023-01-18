@@ -1,6 +1,6 @@
-import BossFight from "../BossScene.ts/BossFight.js";
-import CanvasUtil from "../CanvasUtil.js";
-import Scene from "../Scene.js";
+import BossFight from '../BossScene.ts/BossFight.js';
+import CanvasUtil from '../CanvasUtil.js';
+import Scene from '../Scene.js';
 export default class LoadingSceneBF extends Scene {
     loadingBar;
     realisticPause;
@@ -31,7 +31,7 @@ export default class LoadingSceneBF extends Scene {
             this.loadingBar = 1220;
         }
         if (this.continue)
-            return new BossFight(window.innerWidth, window.innerHeight, 0);
+            return new BossFight(window.innerWidth, window.innerHeight);
         return null;
     }
     render(canvas) {

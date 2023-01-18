@@ -1,5 +1,5 @@
-import CanvasUtil from "./CanvasUtil.js";
-import Drawable from "./Drawable.js";
+import CanvasUtil from './CanvasUtil.js';
+import Drawable from './Drawable.js';
 export default class BedroomEndText extends Drawable {
     constructor() {
         super();
@@ -25,7 +25,7 @@ export default class BedroomEndText extends Drawable {
         CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
         CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
     }
-    textFour(canvas, image, talker) {
+    textFour(canvas, image) {
         CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
         CanvasUtil.writeTextToCanvas(canvas, 'Timmy checks his phone to see if', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
         CanvasUtil.writeTextToCanvas(canvas, 'the game he wanted is really released.', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'DotGothic16', 20, 'black');
@@ -60,7 +60,7 @@ export default class BedroomEndText extends Drawable {
         CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
         CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
     }
-    computerPrompt(canvas, image) {
+    computerPrompt(canvas) {
         CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 50, this.dimensionsY + 740, 'left', 'DotGothic16', 40, 'white');
     }
 }

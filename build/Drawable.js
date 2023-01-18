@@ -1,4 +1,4 @@
-import CanvasUtil from "./CanvasUtil.js";
+import CanvasUtil from './CanvasUtil.js';
 export default class Drawable {
     image;
     posX;

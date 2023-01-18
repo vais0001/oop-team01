@@ -1,8 +1,7 @@
-import CanvasUtil from "../CanvasUtil.js";
-import ADbullet from "./ADbullet.js";
-import EnemyAD from "./EnemyAD.js";
+import CanvasUtil from '../CanvasUtil.js';
+import ADbullet from './ADbullet.js';
+import EnemyAD from './EnemyAD.js';
 export default class EnemyAD2 extends EnemyAD {
-    ADbullet = [];
     nextFire;
     constructor(maxY) {
         super(maxY);

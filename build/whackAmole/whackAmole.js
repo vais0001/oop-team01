@@ -1,13 +1,13 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Gameover from "../Gameover.js";
-import KeyListener from "../KeyListener.js";
-import Scene from "../Scene.js";
-import Lives from "./Lives.js";
-import Viruses from "./Viruses.js";
-import Antagonist from "../Antagonist.js";
-import Player from "../ArrowThrower/Player.js";
-import LoadingSceneBF from "../LoadingScenes/LoadingSceneBF.js";
-import WhackamoleText from "./WhackamoleText.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Gameover from '../Gameover.js';
+import KeyListener from '../KeyListener.js';
+import Scene from '../Scene.js';
+import Lives from './Lives.js';
+import Viruses from './Viruses.js';
+import Antagonist from '../Antagonist.js';
+import Player from '../ArrowThrower/Player.js';
+import LoadingSceneBF from '../LoadingScenes/LoadingSceneBF.js';
+import WhackamoleText from './WhackamoleText.js';
 export default class Whackamole extends Scene {
     holes = [];
     timeToNextVirus;

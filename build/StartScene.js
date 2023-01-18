@@ -6,22 +6,22 @@ export default class StartScene extends Scene {
     starting;
     creditscene;
     button;
-    constructor(MaxX, MaxY) {
-        super(MaxX, MaxY);
+    constructor(maxX, maxY) {
+        super(maxX, maxY);
         this.image = CanvasUtil.loadNewImage('./placeholders/start800.png');
         this.starting = false;
         this.creditscene = false;
         this.button = CanvasUtil.loadNewImage('./placeholders/start_button.png');
     }
-    processInput(KeyListener) {
-        if (KeyListener.keyPressed('KeyS')) {
+    processInput(keyListener) {
+        if (keyListener.keyPressed('KeyS')) {
             this.starting = true;
         }
-        if (KeyListener.keyPressed('KeyC')) {
+        if (keyListener.keyPressed('KeyC')) {
             this.creditscene = true;
         }
     }
-    update(elapsed) {
+    update() {
         if (this.starting)
             return new LoadingScene(this.maxX, this.maxY);
         if (this.creditscene)

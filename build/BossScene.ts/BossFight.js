@@ -1,12 +1,12 @@
-import Antagonist from "../Antagonist.js";
-import CanvasUtil from "../CanvasUtil.js";
-import KeyListener from "../KeyListener.js";
-import LoadingSceneEnd from "../LoadingScenes/LoadingSceneEnd.js";
-import Player from "../Player.js";
-import Scene from "../Scene.js";
-import Lives from "../Whackamole/Lives.js";
-import Lightsaber from "./Lightsaber.js";
-import ShootingAbility from "./ShootingAbility.js";
+import Antagonist from '../Antagonist.js';
+import CanvasUtil from '../CanvasUtil.js';
+import KeyListener from '../KeyListener.js';
+import LoadingSceneEnd from '../LoadingScenes/LoadingSceneEnd.js';
+import Player from '../Player.js';
+import Scene from '../Scene.js';
+import Lives from '../Whackamole/Lives.js';
+import Lightsaber from './Lightsaber.js';
+import ShootingAbility from './ShootingAbility.js';
 export default class BossFight extends Scene {
     antagonist;
     player;
@@ -27,7 +27,7 @@ export default class BossFight extends Scene {
     moveRight;
     moveDown;
     moveLeft;
-    constructor(maxX, maxY, level) {
+    constructor(maxX, maxY) {
         super(maxX, maxY);
         this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
         this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);

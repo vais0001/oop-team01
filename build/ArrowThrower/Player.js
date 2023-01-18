@@ -1,5 +1,5 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Drawable from "../Drawable.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Drawable from '../Drawable.js';
 export default class Player extends Drawable {
     constructor(maxX, maxY) {
         super();

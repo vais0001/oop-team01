@@ -1,5 +1,5 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Drawable from "../Drawable.js";
+import CanvasUtil from '../CanvasUtil.js';
+import Drawable from '../Drawable.js';
 export default class ThrowerText extends Drawable {
     constructor() {
         super();
@@ -43,7 +43,7 @@ export default class ThrowerText extends Drawable {
         CanvasUtil.writeTextToCanvas(canvas, 'I have had enough!', this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
         CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
     }
-    computerPrompt(canvas, image) {
+    computerPrompt(canvas) {
         CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to open computer', this.dimensionsX + 50, this.dimensionsY + 740, 'left', 'DotGothic16', 40, 'white');
     }
 }

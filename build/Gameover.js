@@ -1,6 +1,6 @@
-import CanvasUtil from "./CanvasUtil.js";
-import Scene from "./Scene.js";
-import StartScene from "./StartScene.js";
+import CanvasUtil from './CanvasUtil.js';
+import Scene from './Scene.js';
+import StartScene from './StartScene.js';
 export default class Gameover extends Scene {
     continue;
     timeToContinue;

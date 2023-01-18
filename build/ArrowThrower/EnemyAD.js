@@ -1,4 +1,4 @@
-import Drawable from "../Drawable.js";
+import Drawable from '../Drawable.js';
 export default class EnemyAD extends Drawable {
     constructor(maxY) {
         super();
