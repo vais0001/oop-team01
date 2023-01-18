@@ -68,6 +68,12 @@ export default class Player extends Drawable {
             }
         }
     }
+    collideWithAntagonist(antagonist) {
+        return (this.posX < antagonist.getPosX() + antagonist.getWidth()
+            && this.posX + this.getWidth() > antagonist.getPosX()
+            && this.getPosY() < antagonist.getPosY() + antagonist.getHeight()
+            && this.getHeight() + this.posY > antagonist.getPosY());
+    }
     moveUp(elapsed) {
         this.posY -= elapsed * 0.5;
     }

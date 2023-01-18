@@ -1,5 +1,6 @@
 import Antagonist from '../Antagonist.js';
 import CanvasUtil from '../CanvasUtil.js';
+import Gameover from '../Gameover.js';
 import KeyListener from '../KeyListener.js';
 import LoadingSceneEnd from '../LoadingScenes/LoadingSceneEnd.js';
 import Player from '../Player.js';
@@ -126,10 +127,12 @@ export default class BossFight extends Scene {
             }
             return true;
         });
+        if (this.lives.length === 0) {
+            return new Gameover(0, 0);
+        }
         if (this.buttonsPressed === 0) {
             this.player.move(66, 150);
         }
-        this.levelTimer -= elapsed;
         if (this.lightsaberSide === 0) {
             this.lightsaber.changeImage('./assets/lightsaber.png');
             this.lightsaber.update(elapsed, this.player.getPosX(), this.player.getPosY() + 80);
@@ -175,6 +178,7 @@ export default class BossFight extends Scene {
             }
             return true;
         });
+        this.levelTimer -= elapsed;
         if (this.levelTimer > 0 && this.level === 0) {
             if (this.abilityShoot === false) {
                 setTimeout(() => {
@@ -191,7 +195,6 @@ export default class BossFight extends Scene {
         }
         if (this.levelTimer <= 0) {
             this.level = 1;
-            this.levelTimer = 0;
         }
         if (this.level === 1) {
             this.bulletsTimer -= elapsed;
@@ -254,17 +257,6 @@ export default class BossFight extends Scene {
             if (this.abilityCount === 5) {
                 if (this.levelTimer <= 0) {
                     this.abilityCount = 6;
-                    this.levelTimer = 15000;
-                }
-            }
-            if (this.abilityCount === 6) {
-                this.bulletsTimer -= elapsed;
-                if (this.bulletsTimer <= 0) {
-                    this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 2));
-                    this.bulletsTimer = 2000;
-                }
-                if (this.levelTimer <= 0) {
-                    this.level = 0;
                 }
             }
         }
