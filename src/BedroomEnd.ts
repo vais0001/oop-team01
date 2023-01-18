@@ -46,9 +46,12 @@ export default class BedroomEnd extends Scene {
 
   private moveLeft: boolean;
 
+  private circleRadius: number;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
+    this.circleRadius = 1400;
     if (level === 1) {
       this.antagonist = new Antagonist(250, 250);
       this.level1 = true;
@@ -57,7 +60,7 @@ export default class BedroomEnd extends Scene {
     }
     if (!this.level1 === true) this.scene = 0;
     if (!this.level1) {
-      this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 350);
+      this.player = new Player(this.dimensionsX + 80, this.dimensionsY + 230);
     } if (this.level1 === true) {
       this.player = new Player(this.dimensionsX + 1050, this.dimensionsY + 150);
     }
@@ -90,9 +93,9 @@ export default class BedroomEnd extends Scene {
     if (!this.level1 && this.nextText > 6) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 20
-      && !(this.player.collidingBed(this.bed))) {
+        && !(this.player.collidingBed(this.bed))) {
         if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
           this.player.move(0, 150);
           this.buttonsPressed += 1;
           this.moveLeft = true;
@@ -104,10 +107,10 @@ export default class BedroomEnd extends Scene {
       }
 
       if (this.player.getPosY() > this.dimensionsY + 120
-      && !(this.player.collidingComputer(this.computer))
-      && !(this.player.collidingBed(this.bed))) {
+        && !(this.player.collidingComputer(this.computer))
+        && !(this.player.collidingBed(this.bed))) {
         if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
           this.player.move(1, 150);
           this.buttonsPressed += 1;
           this.moveUp = true;
@@ -119,9 +122,9 @@ export default class BedroomEnd extends Scene {
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100
-      && !(this.player.collidingComputer(this.computer))) {
+        && !(this.player.collidingComputer(this.computer))) {
         if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
           this.player.move(2, 150);
           this.buttonsPressed += 1;
           this.moveRight = true;
@@ -134,7 +137,7 @@ export default class BedroomEnd extends Scene {
 
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
         if ((keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
           this.buttonsPressed += 1;
           this.player.move(3, 150);
           this.moveDown = true;
@@ -171,11 +174,24 @@ export default class BedroomEnd extends Scene {
     this.timeToText -= elapsed;
     if (this.scene === 3) return new CreditScene(this.maxX, this.maxY);
 
+    if (this.scene === 2) {
+      this.antagonist.moveToPlayer(this.player, 0.3);
+      if (this.player.collideWithAntagonist(this.antagonist)) {
+        return new CreditScene(0, 0);
+      }
+    }
+
     if (this.moveUp) this.player.moveUp(elapsed);
     if (this.moveDown) this.player.moveDown(elapsed);
     if (this.moveRight) this.player.moveRight(elapsed);
     if (this.moveLeft) this.player.moveLeft(elapsed);
 
+    if (this.circleRadius > 0) {
+      this.circleRadius -= elapsed * 0.6;
+    } else {
+      this.circleRadius = 0;
+
+    }
     return null;
   }
 
@@ -192,9 +208,6 @@ export default class BedroomEnd extends Scene {
     if (this.scene === 1 && this.timeToText <= 0) {
       this.bedroomEndText.textEight(canvas, this.image1, this.trojanHead);
       this.player.setNewPlayerImage('./assets/playerstandingleft.png');
-    }
-    if (this.scene === 2) {
-      this.antagonist.moveToPlayer(this.player, 2);
     }
 
     this.bed.render(canvas);
@@ -214,6 +227,7 @@ export default class BedroomEnd extends Scene {
       if (this.nextText === 4) this.bedroomEndText.textFive(canvas, this.image1, this.playerHead);
       if (this.nextText === 5) this.bedroomEndText.textSix(canvas, this.image1, this.playerHead);
       if (this.nextText === 6) this.bedroomEndText.textSeven(canvas, this.image1, this.playerHead);
+      CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
     }
   }
 }

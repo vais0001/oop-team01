@@ -27,9 +27,11 @@ export default class BedroomEnd extends Scene {
     moveRight;
     moveDown;
     moveLeft;
+    circleRadius;
     constructor(maxX, maxY, level) {
         super(maxX, maxY);
         this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
+        this.circleRadius = 1400;
         if (level === 1) {
             this.antagonist = new Antagonist(250, 250);
             this.level1 = true;
@@ -39,7 +41,7 @@ export default class BedroomEnd extends Scene {
         if (!this.level1 === true)
             this.scene = 0;
         if (!this.level1) {
-            this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 350);
+            this.player = new Player(this.dimensionsX + 80, this.dimensionsY + 230);
         }
         if (this.level1 === true) {
             this.player = new Player(this.dimensionsX + 1050, this.dimensionsY + 150);
@@ -152,6 +154,12 @@ export default class BedroomEnd extends Scene {
         this.timeToText -= elapsed;
         if (this.scene === 3)
             return new CreditScene(this.maxX, this.maxY);
+        if (this.scene === 2) {
+            this.antagonist.moveToPlayer(this.player, 0.3);
+            if (this.player.collideWithAntagonist(this.antagonist)) {
+                return new CreditScene(0, 0);
+            }
+        }
         if (this.moveUp)
             this.player.moveUp(elapsed);
         if (this.moveDown)
@@ -160,6 +168,12 @@ export default class BedroomEnd extends Scene {
             this.player.moveRight(elapsed);
         if (this.moveLeft)
             this.player.moveLeft(elapsed);
+        if (this.circleRadius > 0) {
+            this.circleRadius -= elapsed * 0.6;
+        }
+        else {
+            this.circleRadius = 0;
+        }
         return null;
     }
     render(canvas) {
@@ -170,9 +184,6 @@ export default class BedroomEnd extends Scene {
         if (this.scene === 1 && this.timeToText <= 0) {
             this.bedroomEndText.textEight(canvas, this.image1, this.trojanHead);
             this.player.setNewPlayerImage('./assets/playerstandingleft.png');
-        }
-        if (this.scene === 2) {
-            this.antagonist.moveToPlayer(this.player, 2);
         }
         this.bed.render(canvas);
         this.player.render(canvas);
@@ -199,6 +210,7 @@ export default class BedroomEnd extends Scene {
                 this.bedroomEndText.textSix(canvas, this.image1, this.playerHead);
             if (this.nextText === 6)
                 this.bedroomEndText.textSeven(canvas, this.image1, this.playerHead);
+            CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
         }
     }
 }
