@@ -127,7 +127,6 @@ export default class BossFight extends Scene {
         if (this.buttonsPressed === 0) {
             this.player.move(66, 150);
         }
-        console.log(this.buttonsPressed);
         this.levelTimer -= elapsed;
         if (this.lightsaberSide === 0) {
             this.lightsaber.changeImage('./assets/lightsaber.png');
@@ -190,7 +189,7 @@ export default class BossFight extends Scene {
         }
         if (this.levelTimer <= 0) {
             this.level = 1;
-            this.levelTimer = 100000000;
+            this.levelTimer = 0;
         }
         if (this.level === 1) {
             this.bulletsTimer -= elapsed;
@@ -243,11 +242,29 @@ export default class BossFight extends Scene {
                 if (this.bulletsTimer <= 0 && this.abilityCount === 4) {
                     this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
                     this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
-                    this.bulletsTimer = 600;
+                    this.bulletsTimer = 1200;
                 }
             }
-            if (this.abilityCount === 4 && this.antagonist.getPosY() <= 100)
+            if (this.abilityCount === 4 && this.antagonist.getPosY() <= 100) {
                 this.abilityCount = 5;
+                this.levelTimer = 5000;
+            }
+            if (this.abilityCount === 5) {
+                if (this.levelTimer <= 0) {
+                    this.abilityCount = 6;
+                    this.levelTimer = 15000;
+                }
+            }
+            if (this.abilityCount === 6) {
+                this.bulletsTimer -= elapsed;
+                if (this.bulletsTimer <= 0) {
+                    this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 2));
+                    this.bulletsTimer = 2000;
+                }
+                if (this.levelTimer <= 0) {
+                    this.level = 0;
+                }
+            }
         }
         if (this.hit === true
             && this.lightsaber.collidesWithAntagonist(this.antagonist)

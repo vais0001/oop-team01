@@ -173,7 +173,7 @@ export default class Bedroom extends Scene {
             return new ArrowThrower(window.innerWidth, window.innerHeight);
         }
         if (this.cheatLoadingScreen === true) {
-            return new LoadingSceneAT(window.innerWidth, window.innerHeight);
+            return new Webpage(window.innerWidth, window.innerHeight);
         }
         if (this.finalScene === true) {
             return new BedroomEnd(window.innerWidth, window.innerHeight, 0);

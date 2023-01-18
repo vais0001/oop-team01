@@ -82,5 +82,11 @@ export default class Player extends Drawable {
         this.lookingRight = true;
         this.posX += elapsed * 0.5;
     }
+    cutsceneMovement(elapsed) { }
+    isCollidingAD(ad) { return null; }
+    isCollidingHeart(heartpowerup) { return null; }
+    isCollidingBullet(bullet) { return null; }
+    moveAway(speedX, speedY) { }
+    changePositionX() { }
 }
 //# sourceMappingURL=Player.js.map

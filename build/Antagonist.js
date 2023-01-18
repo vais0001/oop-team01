@@ -23,12 +23,12 @@ export default class Antagonist extends Drawable {
             this.posX += elapsed * 0.5;
         }
     }
-    moveToPlayer(player) {
+    moveToPlayer(player, speed) {
         const distanceX = player.getPosX() - this.getPosX();
         const distanceY = player.getPosY() - this.getPosY();
         const slope = distanceY / distanceX;
-        this.posX += Math.cos(slope) * 0.8;
-        this.posY += Math.sin(slope) * 0.8;
+        this.posX += Math.cos(slope) * speed;
+        this.posY += Math.sin(slope) * speed;
     }
     cutsceneMovementAway(speedX, speedY) {
         this.posX += speedX;
