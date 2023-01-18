@@ -5,7 +5,7 @@ import EnemyAD from './EnemyAD.js';
 export default class ArrowThrowerComputer extends Drawable {
   public constructor() {
     super();
-    this.image = CanvasUtil.loadNewImage('../../placeholders/kompas.png');
+    this.image = CanvasUtil.loadNewImage('./placeholders/kompas.png');
     this.posX = this.dimensionsX + this.backgroundWidth - this.image.width - 20;
     this.posY = this.dimensionsY + this.backgroundHeight / 2 - this.image.height / 2;
   }

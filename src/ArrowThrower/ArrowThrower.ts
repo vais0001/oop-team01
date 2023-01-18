@@ -58,7 +58,7 @@ export default class ArrowThrower extends Scene {
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
 
-    this.image = CanvasUtil.loadNewImage('../assets/arrowthrower.png');
+    this.image = CanvasUtil.loadNewImage('./assets/arrowthrower.png');
 
     // 3000 or 1500
     this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
