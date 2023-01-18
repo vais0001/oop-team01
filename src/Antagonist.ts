@@ -33,14 +33,15 @@ export default class Antagonist extends Drawable {
   /**
    *
    * @param player is player
+   * @param speed is speed
    */
-  public moveToPlayer(player: Player) {
+  public moveToPlayer(player: Player, speed: number) {
     const distanceX: number = player.getPosX() - this.getPosX();
     const distanceY: number = player.getPosY() - this.getPosY();
     const slope: number = distanceY / distanceX;
 
-    this.posX += Math.cos(slope) * 0.8;
-    this.posY += Math.sin(slope) * 0.8;
+    this.posX += Math.cos(slope) * speed;
+    this.posY += Math.sin(slope) * speed;
   }
 
   /**

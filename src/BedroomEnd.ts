@@ -190,10 +190,12 @@ export default class BedroomEnd extends Scene {
 
     this.computer.render(canvas);
     if (this.scene === 1 && this.timeToText <= 0) {
-      this.bedroomEndText.textSix(canvas, this.image1, this.trojanHead);
+      this.bedroomEndText.textEight(canvas, this.image1, this.trojanHead);
       this.player.setNewPlayerImage('./assets/playerstandingleft.png');
     }
-    if (this.scene === 2) this.bedroomEndText.textSeven(canvas, this.image1, this.trojanHead);
+    if (this.scene === 2) {
+      this.antagonist.moveToPlayer(this.player, 2);
+    }
 
     this.bed.render(canvas);
     this.player.render(canvas);

@@ -3,6 +3,9 @@ import Drawable from './Drawable.js';
 import CanvasUtil from './CanvasUtil.js';
 import Computer from './Computer.js';
 import Bed from './Bed.js';
+import EnemyAD from './ArrowThrower/EnemyAD.js';
+import HeartPowerup from './ArrowThrower/HeartPowerup.js';
+import ADbullet from './ArrowThrower/ADbullet.js';
 
 export default class Player extends Drawable {
   private lookingRight: boolean;
@@ -39,9 +42,9 @@ export default class Player extends Drawable {
    */
   public collidingComputer(computer: Computer): boolean {
     return (this.posX < computer.getPosX() + computer.getWidth()
-    && this.posX + this.getWidth() > computer.getPosX()
-    && this.getPosY() < computer.getPosY() + computer.getHeight() - 200
-    && this.getHeight() + this.posY > computer.getPosY()
+      && this.posX + this.getWidth() > computer.getPosX()
+      && this.getPosY() < computer.getPosY() + computer.getHeight() - 200
+      && this.getHeight() + this.posY > computer.getPosY()
     );
   }
 
@@ -132,4 +135,11 @@ export default class Player extends Drawable {
     this.lookingRight = true;
     this.posX += elapsed * 0.5;
   }
+
+  public cutsceneMovement(elapsed: number): void { }
+  public isCollidingAD(ad: EnemyAD): boolean { return null }
+  public isCollidingHeart(heartpowerup: HeartPowerup): boolean { return null }
+  public isCollidingBullet(bullet: ADbullet): boolean { return null }
+  public moveAway(speedX: number, speedY: number): void { }
+  public changePositionX(): void { }
 }

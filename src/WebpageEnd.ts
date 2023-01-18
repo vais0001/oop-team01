@@ -48,7 +48,7 @@ export default class WebpageEnd extends Scene {
       }
     }
     if (this.newLevel === true) {
-      return new BedroomEnd(0, 0, 0);
+      return new BedroomEnd(0, 0, 1);
     }
     return null;
   }

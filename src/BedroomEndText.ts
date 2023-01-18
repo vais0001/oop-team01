@@ -53,9 +53,8 @@ export default class BedroomEndText extends Drawable {
    *
    * @param canvas is html canvas element
    * @param image is image
-   * @param talker is who talks image
    */
-  public textFour(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+  public textFour(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'Timmy checks his phone to see if', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'the game he wanted is really released.', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'DotGothic16', 20, 'black');
@@ -100,6 +99,21 @@ export default class BedroomEndText extends Drawable {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'If they say no, I will study', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, 'harder so they will reward me :)', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+  }
+
+  /**
+   *
+   * @param canvas is html canvas element
+   * @param image is image
+   * @param talker is the image of the talker
+   */
+  public textEight(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+    CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
+    CanvasUtil.writeTextToCanvas(canvas, 'HAHAHAHAHAHAHAHAHAHAHAHAHAHA', this.dimensionsX + 720, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'HAHAHAHAHAHAHAHAHAHAHAHAHAHA', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'HAHAHAHAHAHAHAHAHAHAHAHAHAHA', this.dimensionsX + 720, this.dimensionsY + 700, 'center', 'DotGothic16', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'DotGothic16', 16, 'black');
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
   }
