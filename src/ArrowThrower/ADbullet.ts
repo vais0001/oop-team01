@@ -5,7 +5,7 @@ import Player from './Player.js';
 export default class ADbullet extends Drawable {
   public constructor(startX: number, startY: number) {
     super();
-    this.image = CanvasUtil.loadNewImage('../../placeholders/cursor_00000.png');
+    this.image = CanvasUtil.loadNewImage('../../assets/cursor-bullet.png');
     this.posX = startX;
     this.posY = startY - this.image.height / 2;
   }

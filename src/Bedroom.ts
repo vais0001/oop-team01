@@ -121,7 +121,7 @@ export default class Bedroom extends Scene {
       }
 
       if (this.player.getPosY() > this.dimensionsY + 120) {
-        if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))){
+        if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
           this.player.move(1, 150);
           this.buttonsPressed += 1;
           this.moveUp = true;
