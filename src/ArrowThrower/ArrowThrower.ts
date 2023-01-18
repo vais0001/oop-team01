@@ -247,7 +247,7 @@ export default class ArrowThrower extends Scene {
     if (this.score === 200) {
       this.antagonist = new Antagonist(this.backgroundWidth - 800, this.backgroundHeight - 700);
     } else if (this.score >= 205) {
-      this.antagonist.moveToPlayer(this.player);
+      this.antagonist.moveToPlayer(this.player, 0.8);
     }
 
     if (this.antagonist.getPosX() > this.player.getPosX()) {
