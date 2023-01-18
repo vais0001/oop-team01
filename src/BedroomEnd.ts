@@ -69,7 +69,7 @@ export default class BedroomEnd extends Scene {
     this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png');
     this.webpageScene = false;
     this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
-    this.playerHead = CanvasUtil.loadNewImage('./assets/timmyHead.png');
+    this.playerHead = CanvasUtil.loadNewImage('./assets/TimmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     if (!this.level1) {
       this.timeToText = 1000;
