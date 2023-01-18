@@ -153,9 +153,8 @@ export default class BedroomEnd extends Scene {
     }
     if (this.timeToText <= 0) {
       if (this.scene === 1 && (keyListener.keyPressed(KeyListener.KEY_SPACE))) this.scene = 2;
-      if (this.scene === 2 && (keyListener.keyPressed(KeyListener.KEY_SPACE))) this.scene = 3;
     }
-    if (this.timeToText <= 0) {
+    if (this.timeToText <= 0 && this.circleRadius === 0) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
     }
   }
@@ -172,7 +171,6 @@ export default class BedroomEnd extends Scene {
 
     if (this.webpageScene === true) return new WebpageEnd(0, 0);
     this.timeToText -= elapsed;
-    if (this.scene === 3) return new CreditScene(this.maxX, this.maxY);
 
     if (this.scene === 2) {
       this.antagonist.moveToPlayer(this.player, 0.3);
@@ -190,7 +188,6 @@ export default class BedroomEnd extends Scene {
       this.circleRadius -= elapsed * 0.6;
     } else {
       this.circleRadius = 0;
-
     }
     return null;
   }
@@ -213,7 +210,7 @@ export default class BedroomEnd extends Scene {
     this.bed.render(canvas);
     this.player.render(canvas);
     if (this.level1) this.antagonist.render(canvas);
-    if (this.nextText > 6) {
+    if (this.nextText > 6 && !this.level1) {
       CanvasUtil.drawImage(canvas, this.popUp, this.dimensionsX + 1170, this.dimensionsY + 27);
     }
     if (this.player.collideWithitem(this.computer) && !this.level1) {
