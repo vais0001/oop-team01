@@ -3,7 +3,7 @@ import EnemyAD from './EnemyAD.js';
 export default class EnemyAD1 extends EnemyAD {
     constructor(maxY) {
         super(maxY);
-        this.image = CanvasUtil.loadNewImage('../../assets/enemyAD.jpg');
+        this.image = CanvasUtil.loadNewImage('./assets/enemyAD.jpg');
     }
     update(elapsed) {
         this.posX += elapsed * 0.2;
