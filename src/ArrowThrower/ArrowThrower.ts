@@ -1,19 +1,20 @@
-import CanvasUtil from "../CanvasUtil.js";
-import Gameover from "../Gameover.js";
-import KeyListener from "../KeyListener.js";
-import Scene from "../Scene.js";
-import Lives from "../Whackamole/Lives.js";
-import ADbullet from "./ADbullet.js";
-import CursorBullet from "./CursorBullet.js";
-import EnemyAD from "./EnemyAD.js";
-import EnemyAD1 from "./EnemyAD1.js";
-import EnemyAD2 from "./EnemyAD2.js";
-import Player from "./Player.js";
-import ThrowerText from "./ThrowerText.js";
-import LoadingSceneWM from "../LoadingScenes/LoadingSceneWM.js";
-import HeartPowerup from "./HeartPowerup.js";
-import Antagonist from "../Antagonist.js";
-import ArrowThrowerComputer from "./ArrowThrowerComputer.js";
+/* eslint-disable max-len */
+import CanvasUtil from '../CanvasUtil.js';
+import Gameover from '../Gameover.js';
+import KeyListener from '../KeyListener.js';
+import Scene from '../Scene.js';
+import Lives from '../Whackamole/Lives.js';
+import ADbullet from './ADbullet.js';
+import CursorBullet from './CursorBullet.js';
+import EnemyAD from './EnemyAD.js';
+import EnemyAD1 from './EnemyAD1.js';
+import EnemyAD2 from './EnemyAD2.js';
+import Player from './Player.js';
+import ThrowerText from './ThrowerText.js';
+import LoadingSceneWM from '../LoadingScenes/LoadingSceneWM.js';
+import HeartPowerup from './HeartPowerup.js';
+import Antagonist from '../Antagonist.js';
+import ArrowThrowerComputer from './ArrowThrowerComputer.js';
 
 export default class ArrowThrower extends Scene {
   private player: Player;
@@ -76,14 +77,19 @@ export default class ArrowThrower extends Scene {
     this.moveUp = false;
 
     for (let i = 0; i < 250; i += 50) {
-      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY))
+      this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
     }
   }
 
+  /**
+   *
+   * @param keyListener input key
+   * @returns nothing
+   */
   public processInput(keyListener: KeyListener): void {
     if (this.nextText > 3 && this.score < 205) {
       if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
-        this.moveUp = true
+        this.moveUp = true;
       } else {
         this.moveUp = false;
       }
@@ -109,6 +115,11 @@ export default class ArrowThrower extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param elapsed time
+   * @returns returns true or false
+   */
   public update(elapsed: number): Scene {
     if (this.nextText < 4) {
       if (this.player.getPosX() < this.dimensionsX + 1300) {
@@ -186,7 +197,7 @@ export default class ArrowThrower extends Scene {
           return false;
         }
         return true;
-      })
+      });
 
       this.adBullets.forEach((item: ADbullet) => {
         item.update(this.player);
@@ -263,6 +274,10 @@ export default class ArrowThrower extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param canvas html canvas
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');

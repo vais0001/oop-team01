@@ -1,4 +1,3 @@
-import Bedroom from './Bedroom.js';
 import BedroomEnd from './BedroomEnd.js';
 import CanvasUtil from './CanvasUtil.js';
 import KeyListener from './KeyListener.js';
@@ -22,12 +21,21 @@ export default class WebpageEnd extends Scene {
     this.downloadedTime = 1700;
   }
 
+  /**
+   *
+   * @param keyListener is an input
+   */
   public processInput(keyListener: KeyListener): void {
     if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
       this.downloading = true;
     }
   }
 
+  /**
+   *
+   * @param elapsed is time
+   * @returns true or false
+   */
   public update(elapsed: number): Scene {
     if (this.downloading) {
       this.loadingBar += elapsed * 0.5;
@@ -47,7 +55,7 @@ export default class WebpageEnd extends Scene {
 
   /**
    *
-   * @param canvas
+   * @param canvas is html canvas element
    */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);

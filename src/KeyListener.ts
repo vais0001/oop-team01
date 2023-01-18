@@ -170,6 +170,11 @@ export default class KeyListener {
     return this.keyDown[keyCode] === true;
   }
 
+  /**
+   *
+   * @param keyCode is keycode combination
+   * @returns true or false
+   */
   public keyPressed(keyCode: string): boolean {
     if (this.keyPressedQueried[keyCode] === true) return false;
     if (this.keyDown[keyCode] === true) {

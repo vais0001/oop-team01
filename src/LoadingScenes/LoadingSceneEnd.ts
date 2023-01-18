@@ -1,7 +1,7 @@
-import BedroomEnd from "../BedroomEnd.js";
-import CanvasUtil from "../CanvasUtil.js";
-import KeyListener from "../KeyListener.js";
-import Scene from "../Scene.js";
+import BedroomEnd from '../BedroomEnd.js';
+import CanvasUtil from '../CanvasUtil.js';
+import KeyListener from '../KeyListener.js';
+import Scene from '../Scene.js';
 
 export default class LoadingSceneEnd extends Scene {
   private loadingBar: number;
@@ -18,6 +18,11 @@ export default class LoadingSceneEnd extends Scene {
     this.continue = false;
   }
 
+  /**
+   *
+   * @param keyListener is an input
+   * @returns nothing
+   */
   public processInput(keyListener: KeyListener): void {
     if (this.loadingBar === 1100 && keyListener.keyPressed('Space')) {
       this.continue = true;
@@ -25,10 +30,15 @@ export default class LoadingSceneEnd extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param elapsed is time
+   * @returns true or false
+   */
   public update(elapsed: number): Scene {
     const randomPause: number = Math.floor(Math.random() * 1220) + 100;
     if (this.realisticPause === 50 || this.realisticPause < 0) {
-      this.loadingBar += elapsed * 8; //for final 0.3
+      this.loadingBar += elapsed * 8; // for final 0.3
     }
     if (this.loadingBar > randomPause) {
       this.realisticPause -= elapsed;
@@ -41,6 +51,10 @@ export default class LoadingSceneEnd extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);

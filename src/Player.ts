@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import Drawable from './Drawable.js';
 import CanvasUtil from './CanvasUtil.js';
 import Computer from './Computer.js';
@@ -14,6 +15,11 @@ export default class Player extends Drawable {
     this.lookingRight = true;
   }
 
+  /**
+   *
+   * @param item is the computer
+   * @returns true or false
+   */
   public collideWithitem(item: Computer): boolean {
     return (this.posX < item.getPosX() + item.getWidth()
       && this.posX + this.getWidth() > item.getPosX()
@@ -26,6 +32,11 @@ export default class Player extends Drawable {
     this.lookingRight = false;
   }
 
+  /**
+   *
+   * @param computer is a computer object
+   * @returns true or false
+   */
   public collidingComputer(computer: Computer): boolean {
     return (this.posX < computer.getPosX() + computer.getWidth()
     && this.posX + this.getWidth() > computer.getPosX()
@@ -34,6 +45,11 @@ export default class Player extends Drawable {
     );
   }
 
+  /**
+   *
+   * @param bed is bed object
+   * @returns true or false
+   */
   public collidingBed(bed: Bed): boolean {
     return (this.posX < bed.getPosX() + bed.getWidth()
       && this.posX + this.getWidth() > bed.getPosX()
@@ -42,6 +58,11 @@ export default class Player extends Drawable {
     );
   }
 
+  /**
+   *
+   * @param direction is direction
+   * @param speed is speed
+   */
   public move(direction: number, speed: number): void {
     const imageSources = ['http://127.0.0.1:5500/assets/playerstanding.png', 'http://127.0.0.1:5500/assets/timmywalkingright1.png', 'http://127.0.0.1:5500/assets/timmywalkingright2.png', 'http://127.0.0.1:5500/assets/timmywalkingleft1.png', 'http://127.0.0.1:5500/assets/timmywalkingleft2.png', 'http://127.0.0.1:5500/assets/playerstandingleft.png'];
     if (direction === 66) {
@@ -78,19 +99,37 @@ export default class Player extends Drawable {
     }
   }
 
+  /**
+   *
+   * @param elapsed is time
+   */
   public moveUp(elapsed: number): void {
     this.posY -= elapsed * 0.5;
   }
+
+  /**
+   *
+   * @param elapsed is time
+   */
   public moveDown(elapsed: number): void {
     this.posY += elapsed * 0.5;
   }
+
+  /**
+   *
+   * @param elapsed is time
+   */
   public moveLeft(elapsed: number): void {
     this.lookingRight = false;
     this.posX -= elapsed * 0.5;
   }
+
+  /**
+   *
+   * @param elapsed is time
+   */
   public moveRight(elapsed: number): void {
     this.lookingRight = true;
     this.posX += elapsed * 0.5;
   }
-
 }

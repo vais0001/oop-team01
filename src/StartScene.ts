@@ -1,4 +1,3 @@
-import Bedroom from './Bedroom.js';
 import CanvasUtil from './CanvasUtil.js';
 import KeyListener from './KeyListener.js';
 import LoadingScene from './LoadingScenes/LoadingScene.js';
@@ -12,29 +11,41 @@ export default class StartScene extends Scene {
 
   private button: HTMLImageElement;
 
-  public constructor(MaxX: number, MaxY: number) {
-    super(MaxX, MaxY);
+  public constructor(maxX: number, maxY: number) {
+    super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./placeholders/start800.png');
     this.starting = false;
     this.creditscene = false;
     this.button = CanvasUtil.loadNewImage('./placeholders/start_button.png');
   }
 
-  public processInput(KeyListener: KeyListener): void {
-    if (KeyListener.keyPressed('KeyS')) {
+  /**
+   *
+   * @param keyListener is an input
+   */
+  public processInput(keyListener: KeyListener): void {
+    if (keyListener.keyPressed('KeyS')) {
       this.starting = true;
     }
-    if (KeyListener.keyPressed('KeyC')) {
+    if (keyListener.keyPressed('KeyC')) {
       this.creditscene = true;
     }
   }
 
-  public update(elapsed: number): Scene {
+  /**
+   *
+   * @returns nothing
+   */
+  public update(): Scene {
     if (this.starting) return new LoadingScene(this.maxX, this.maxY);
     if (this.creditscene) return new CreditScene(this.maxX, this.maxY);
     return null;
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);

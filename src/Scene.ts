@@ -20,10 +20,8 @@ export default abstract class Scene {
   public constructor(maxX: number, maxY: number) {
     this.maxX = maxX;
     this.maxY = maxY;
-
     this.backgroundHeight = 800;
     this.backgroundWidth = 1422;
-
     this.dimensionsX = (window.innerWidth - this.backgroundWidth) / 2;
     this.dimensionsY = (window.innerHeight - this.backgroundHeight) / 2;
   }

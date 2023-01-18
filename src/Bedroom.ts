@@ -99,9 +99,12 @@ export default class Bedroom extends Scene {
     this.moveLeft = false;
     this.moveRight = false;
     this.moveUp = false;
-
   }
 
+  /**
+   *
+   * @param keyListener is an input
+   */
   public processInput(keyListener: KeyListener): void {
     if (!this.level1 && this.nextText > 4) {
       this.buttonsPressed = 0;
@@ -179,13 +182,18 @@ export default class Bedroom extends Scene {
     if (keyListener.keyPressed(KeyListener.KEY_5)) this.finalScene = true;
   }
 
+  /**
+   *
+   * @param elapsed is time
+   * @returns true or false
+   */
   public update(elapsed: number): Scene {
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
     }
-    //cheat code to whackamole
+    // cheat code to whackamole
     if (this.bossFightScene === true) {
-      return new BossFight(window.innerWidth, window.innerHeight, 0);
+      return new BossFight(window.innerWidth, window.innerHeight);
     }
     if (this.cheatWhackamole === true) {
       return new Whackamole(window.innerWidth, window.innerHeight);
@@ -214,6 +222,10 @@ export default class Bedroom extends Scene {
     return null;
   }
 
+  /**
+   *
+   * @param canvas is html canvas element
+   */
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
