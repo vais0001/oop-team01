@@ -29,7 +29,7 @@ export default class BossFight extends Scene {
     moveLeft;
     constructor(maxX, maxY, level) {
         super(maxX, maxY);
-        this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
+        this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
         this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
         this.antagonist = new Antagonist(1050, 90);
         this.abilityShoot = false;
@@ -117,6 +117,13 @@ export default class BossFight extends Scene {
         }
     }
     update(elapsed) {
+        this.bullets = this.bullets.filter((item) => {
+            if (this.player.collideWithitem(item)) {
+                this.lives.pop();
+                return false;
+            }
+            return true;
+        });
         if (this.buttonsPressed === 0) {
             this.player.move(66, 150);
         }
@@ -247,19 +254,15 @@ export default class BossFight extends Scene {
             && this.healthBar > 0) {
             this.healthBar -= 0.1;
         }
-        if (this.moveUp) {
+        if (this.moveUp)
             this.player.moveUp(elapsed);
-        }
-        if (this.moveDown) {
+        if (this.moveDown)
             this.player.moveDown(elapsed);
-        }
-        if (this.moveRight) {
+        if (this.moveRight)
             this.player.moveRight(elapsed);
-        }
-        if (this.moveLeft) {
+        if (this.moveLeft)
             this.player.moveLeft(elapsed);
-        }
-        if (this.healthBar < 600)
+        if (this.healthBar < 1)
             return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
         return null;
     }
