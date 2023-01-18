@@ -10,7 +10,7 @@ export default class EnemyAD2 extends EnemyAD {
 
   public constructor(maxY: number) {
     super(maxY);
-    this.image = CanvasUtil.loadNewImage('../../placeholders/adshooter_00000.png');
+    this.image = CanvasUtil.loadNewImage('../../assets/enemyAD2.png');
     this.nextFire = 0;
   }
 
