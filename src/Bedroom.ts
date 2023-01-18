@@ -195,7 +195,7 @@ export default class Bedroom extends Scene {
     }
 
     if (this.cheatLoadingScreen === true) {
-      return new LoadingSceneAT(window.innerWidth, window.innerHeight);
+      return new Webpage(window.innerWidth, window.innerHeight);
     }
 
     if (this.finalScene === true) {
