@@ -106,6 +106,16 @@ export default class Player extends Drawable {
    *
    * @param elapsed is time
    */
+  public collideWithAntagonist(antagonist: Antagonist): boolean {
+    return (this.posX < antagonist.getPosX() + antagonist.getWidth()
+      && this.posX + this.getWidth() > antagonist.getPosX()
+      && this.getPosY() < antagonist.getPosY() + antagonist.getHeight()
+      && this.getHeight() + this.posY > antagonist.getPosY());
+  }
+
+  /**
+   *@param elapsed is time
+   */
   public moveUp(elapsed: number): void {
     this.posY -= elapsed * 0.5;
   }

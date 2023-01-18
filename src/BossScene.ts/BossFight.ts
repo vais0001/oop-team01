@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import Antagonist from '../Antagonist.js';
 import CanvasUtil from '../CanvasUtil.js';
+import Gameover from '../Gameover.js';
 import KeyListener from '../KeyListener.js';
 import LoadingSceneEnd from '../LoadingScenes/LoadingSceneEnd.js';
 import Player from '../Player.js';
@@ -152,11 +153,15 @@ export default class BossFight extends Scene {
       return true;
     });
 
+    if (this.lives.length === 0) {
+      return new Gameover(0, 0);
+    }
+
     // functions for all levels
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
     }
-    this.levelTimer -= elapsed;
+
     if (this.lightsaberSide === 0) {
       this.lightsaber.changeImage('./assets/lightsaber.png');
       this.lightsaber.update(elapsed, this.player.getPosX(), this.player.getPosY() + 80);
@@ -203,6 +208,7 @@ export default class BossFight extends Scene {
       return true;
     });
 
+    this.levelTimer -= elapsed;
     // Level 0, shooting level;
     if (this.levelTimer > 0 && this.level === 0) {
       if (this.abilityShoot === false) {
@@ -220,7 +226,6 @@ export default class BossFight extends Scene {
     }
     if (this.levelTimer <= 0) {
       this.level = 1;
-      this.levelTimer = 0;
     }
 
     // level 1 mooving and shooting level
@@ -251,7 +256,7 @@ export default class BossFight extends Scene {
         this.levelTimer = 20000;
       }
     }
-    // level 2  ramming
+    // level 2
     if (this.level === 2) {
       this.bulletsTimer -= elapsed;
       if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
@@ -285,25 +290,13 @@ export default class BossFight extends Scene {
       if (this.abilityCount === 5) {
         if (this.levelTimer <= 0) {
           this.abilityCount = 6;
-          this.levelTimer = 15000;
-        }
-      }
-      if (this.abilityCount === 6) {
-        this.bulletsTimer -= elapsed;
-        if (this.bulletsTimer <= 0) {
-          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 2));
-          this.bulletsTimer = 2000;
-        }
-        if (this.levelTimer <= 0) {
-          this.level = 0;
         }
       }
     }
 
     if (this.hit === true
       && this.lightsaber.collidesWithAntagonist(this.antagonist)
-      && this.healthBar > 0
-    ) {
+      && this.healthBar > 0) {
       this.healthBar -= 0.1;
     }
 
