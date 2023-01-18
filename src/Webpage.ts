@@ -45,7 +45,7 @@ export default class Webpage extends Scene {
       this.flickeringTime = 0;
     }
     if (this.downloading) {
-      this.loadingBar += elapsed * 0.1;
+      this.loadingBar += elapsed * 5; // for final 0.1
     }
     if (this.loadingBar > 300) {
       this.loadingBar = 301;
