@@ -5,6 +5,7 @@ import Bed from './Bed.js';
 import EnemyAD from './ArrowThrower/EnemyAD.js';
 import HeartPowerup from './ArrowThrower/HeartPowerup.js';
 import ADbullet from './ArrowThrower/ADbullet.js';
+import Antagonist from './Antagonist.js';
 
 export default class Player extends Drawable {
   private lookingRight: boolean;
@@ -79,6 +80,13 @@ export default class Player extends Drawable {
         }, speed);
       }
     }
+  }
+
+  public collideWithAntagonist(antagonist: Antagonist): boolean {
+    return (this.posX < antagonist.getPosX() + antagonist.getWidth()
+      && this.posX + this.getWidth() > antagonist.getPosX()
+      && this.getPosY() < antagonist.getPosY() + antagonist.getHeight()
+      && this.getHeight() + this.posY > antagonist.getPosY());
   }
 
   public moveUp(elapsed: number): void {
