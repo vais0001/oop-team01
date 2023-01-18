@@ -5,9 +5,9 @@ import Computer from './Computer.js';
 import KeyListener from './KeyListener.js';
 import Player from './Player.js';
 import Scene from './Scene.js';
-import Webpage from './Webpage.js';
 import BedroomEndText from './BedroomEndText.js';
 import CreditScene from './CreditScene.js';
+import WebpageEnd from './WebpageEnd.js';
 
 export default class BedroomEnd extends Scene {
   private player: Player;
@@ -159,25 +159,14 @@ export default class BedroomEnd extends Scene {
       this.player.move(66, 150);
     }
 
-    if (this.webpageScene === true) return new Webpage(0, 0);
+    if (this.webpageScene === true) return new WebpageEnd(0, 0);
     this.timeToText -= elapsed;
     if (this.scene === 3) return new CreditScene(this.maxX, this.maxY);
 
-    if (this.moveUp) {
-      this.player.moveUp(elapsed);
-    }
-
-    if (this.moveDown) {
-      this.player.moveDown(elapsed);
-    }
-
-    if (this.moveRight) {
-      this.player.moveRight(elapsed);
-    }
-
-    if (this.moveLeft) {
-      this.player.moveLeft(elapsed);
-    }
+    if (this.moveUp) this.player.moveUp(elapsed);
+    if (this.moveDown) this.player.moveDown(elapsed);
+    if (this.moveRight) this.player.moveRight(elapsed);
+    if (this.moveLeft) this.player.moveLeft(elapsed);
 
     return null;
   }

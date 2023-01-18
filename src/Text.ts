@@ -23,18 +23,18 @@ export default class Text extends Drawable {
 
   public textThree(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, 'Timmy looks at his phone and sees that X game', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 20, 'black');
-    CanvasUtil.writeTextToCanvas(canvas, 'he really wants has finally been released. Due to', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 20, 'black');
-    CanvasUtil.writeTextToCanvas(canvas, 'inflation, the price of games has risen to very high amounts.', this.dimensionsX + 730, this.dimensionsY + 690, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Timmy looks at his phone.', this.dimensionsX + 720, this.dimensionsY + 650, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'His favourite game is out, but because of', this.dimensionsX + 720, this.dimensionsY + 670, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'inflation, the game is expensive', this.dimensionsX + 730, this.dimensionsY + 690, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
   }
 
   public textFour(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
     CanvasUtil.writeTextToCanvas(canvas, 'YES! Finally, it is released!', this.dimensionsX + 720, this.dimensionsY + 640, 'center', 'arial', 20, 'black');
-    CanvasUtil.writeTextToCanvas(canvas, 'But oh no, it is too expensive. My parents will not', this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
-    CanvasUtil.writeTextToCanvas(canvas, 'buy it for me unless I get high grades...', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'arial', 20, 'black');
-    CanvasUtil.writeTextToCanvas(canvas, 'I want it now, but how….', this.dimensionsX + 720, this.dimensionsY + 700, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'But oh no, the price is too high.', this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'My parents will not', this.dimensionsX + 720, this.dimensionsY + 680, 'center', 'arial', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'buy it for me unless I get high grades...', this.dimensionsX + 740, this.dimensionsY + 700, 'center', 'arial', 20, 'black');
     CanvasUtil.writeTextToCanvas(canvas, '[SPACE] next', this.dimensionsX + 870, this.dimensionsY + 730, 'center', 'arial', 16, 'black');
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 470, this.dimensionsY + 645);
   }
