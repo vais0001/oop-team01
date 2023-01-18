@@ -12,7 +12,7 @@ export default class Gameover extends Scene {
 
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
-    this.image = CanvasUtil.loadNewImage('./placeholders/gameover.png')
+    this.image = CanvasUtil.loadNewImage('./placeholders/gameover.png');
     this.continue = false;
     this.timeToContinue = 1000;
     this.timeToRemove = 700;
