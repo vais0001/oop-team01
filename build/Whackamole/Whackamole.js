@@ -29,7 +29,7 @@ export default class Whackamole extends Scene {
     constructor(maxX, maxY) {
         super(maxX, maxY);
         this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
-        this.trojanHead = CanvasUtil.loadNewImage('../assets/trojanicon.png');
+        this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
         this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
         this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
         this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg');
