@@ -2,12 +2,14 @@ import Drawable from './Drawable.js';
 import CanvasUtil from './CanvasUtil.js';
 export default class Player extends Drawable {
     lookingRight;
+    walkingBoolean;
     constructor(posX, posY) {
         super();
         this.image = CanvasUtil.loadNewImage('./assets/playerstanding.png');
         this.posX = posX;
         this.posY = posY;
         this.lookingRight = true;
+        this.walkingBoolean = false;
     }
     collideWithitem(item) {
         return (this.posX < item.getPosX() + item.getWidth()
@@ -32,38 +34,43 @@ export default class Player extends Drawable {
             && this.getHeight() + this.posY > bed.getPosY());
     }
     move(direction, speed) {
-        const imageSources = ['http://127.0.0.1:5500/assets/playerstanding.png', 'http://127.0.0.1:5500/assets/timmywalkingright1.png', 'http://127.0.0.1:5500/assets/timmywalkingright2.png', 'http://127.0.0.1:5500/assets/timmywalkingleft1.png', 'http://127.0.0.1:5500/assets/timmywalkingleft2.png', 'http://127.0.0.1:5500/assets/playerstandingleft.png'];
         if (direction === 66) {
             if (this.lookingRight) {
-                this.image.src = imageSources[0];
+                this.image = CanvasUtil.loadNewImage('./assets/playerstanding.png');
+                this.walkingBoolean = false;
             }
             else {
-                this.image.src = imageSources[5];
+                this.image = CanvasUtil.loadNewImage('./assets/playerstandingleft.png');
+                this.walkingBoolean = false;
             }
         }
         if (this.lookingRight && direction !== 66) {
             if (this.lookingRight) {
-                if (this.image.src === imageSources[2] || this.image.src === imageSources[5] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
+                if (this.walkingBoolean === false) {
                     setTimeout(() => {
-                        this.image = CanvasUtil.loadNewImage(imageSources[1]);
+                        this.image = CanvasUtil.loadNewImage('./assets/timmywalkingright1.png');
+                        this.walkingBoolean = true;
                     }, speed);
                 }
-                if (this.image.src === imageSources[1] || this.image.src === imageSources[5] || this.image.src === imageSources[0] || this.image.src === imageSources[4] || this.image.src === imageSources[3]) {
+                if (this.walkingBoolean === true) {
                     setTimeout(() => {
-                        this.image = CanvasUtil.loadNewImage(imageSources[2]);
+                        this.image = CanvasUtil.loadNewImage('./assets/timmywalkingright2.png');
+                        this.walkingBoolean = false;
                     }, speed);
                 }
             }
         }
         if (!(this.lookingRight) && direction !== 66) {
-            if (this.image.src === imageSources[2] || this.image.src === imageSources[5] || this.image.src === imageSources[0] || this.image.src === imageSources[4]) {
+            if (this.walkingBoolean === false) {
                 setTimeout(() => {
-                    this.image = CanvasUtil.loadNewImage(imageSources[3]);
+                    this.image = CanvasUtil.loadNewImage('./assets/timmywalkingleft1.png');
+                    this.walkingBoolean = true;
                 }, speed);
             }
-            if (this.image.src === imageSources[1] || this.image.src === imageSources[5] || this.image.src === imageSources[0] || this.image.src === imageSources[3]) {
+            if (this.walkingBoolean === true) {
                 setTimeout(() => {
-                    this.image = CanvasUtil.loadNewImage(imageSources[4]);
+                    this.image = CanvasUtil.loadNewImage('./assets/timmywalkingleft2.png');
+                    this.walkingBoolean = false;
                 }, speed);
             }
         }
