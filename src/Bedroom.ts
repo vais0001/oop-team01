@@ -198,21 +198,11 @@ export default class Bedroom extends Scene {
     this.timeToText -= elapsed;
     if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
 
-    if (this.moveUp) {
-      this.player.moveUp(elapsed);
-    }
+    if (this.moveUp) this.player.moveUp(elapsed);
+    if (this.moveDown) this.player.moveDown(elapsed);
+    if (this.moveRight) this.player.moveRight(elapsed);
+    if (this.moveLeft) this.player.moveLeft(elapsed);
 
-    if (this.moveDown) {
-      this.player.moveDown(elapsed);
-    }
-
-    if (this.moveRight) {
-      this.player.moveRight(elapsed);
-    }
-
-    if (this.moveLeft) {
-      this.player.moveLeft(elapsed);
-    }
     return null;
   }
 
