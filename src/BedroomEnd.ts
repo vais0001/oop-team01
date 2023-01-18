@@ -46,9 +46,12 @@ export default class BedroomEnd extends Scene {
 
   private moveLeft: boolean;
 
+  private circleRadius: number;
+
   public constructor(maxX: number, maxY: number, level: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
+    this.circleRadius = 1400;
     if (level === 1) {
       this.antagonist = new Antagonist(250, 250);
       this.level1 = true;
@@ -183,6 +186,12 @@ export default class BedroomEnd extends Scene {
     if (this.moveRight) this.player.moveRight(elapsed);
     if (this.moveLeft) this.player.moveLeft(elapsed);
 
+    if (this.circleRadius > 0) {
+      this.circleRadius -= elapsed * 0.6;
+    } else {
+      this.circleRadius = 0;
+
+    }
     return null;
   }
 
@@ -218,6 +227,7 @@ export default class BedroomEnd extends Scene {
       if (this.nextText === 4) this.bedroomEndText.textFive(canvas, this.image1, this.playerHead);
       if (this.nextText === 5) this.bedroomEndText.textSix(canvas, this.image1, this.playerHead);
       if (this.nextText === 6) this.bedroomEndText.textSeven(canvas, this.image1, this.playerHead);
+      CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
     }
   }
 }
