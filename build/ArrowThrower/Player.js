@@ -3,7 +3,7 @@ import Drawable from '../Drawable.js';
 export default class Player extends Drawable {
     constructor(maxX, maxY) {
         super();
-        this.image = CanvasUtil.loadNewImage('../../assets/playerstandingleft.png');
+        this.image = CanvasUtil.loadNewImage('./assets/playerstandingleft.png');
         this.posX = maxX - 50;
         this.posY = maxY - 200;
     }

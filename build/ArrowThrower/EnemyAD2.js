@@ -5,7 +5,7 @@ export default class EnemyAD2 extends EnemyAD {
     nextFire;
     constructor(maxY) {
         super(maxY);
-        this.image = CanvasUtil.loadNewImage('../../assets/enemyAD2.png');
+        this.image = CanvasUtil.loadNewImage('./assets/enemyAD2.png');
         this.nextFire = 0;
     }
     update(elapsed) {

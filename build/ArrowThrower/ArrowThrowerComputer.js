@@ -3,7 +3,7 @@ import Drawable from '../Drawable.js';
 export default class ArrowThrowerComputer extends Drawable {
     constructor() {
         super();
-        this.image = CanvasUtil.loadNewImage('../../placeholders/kompas.png');
+        this.image = CanvasUtil.loadNewImage('./placeholders/kompas.png');
         this.posX = this.dimensionsX + this.backgroundWidth - this.image.width - 20;
         this.posY = this.dimensionsY + this.backgroundHeight / 2 - this.image.height / 2;
     }

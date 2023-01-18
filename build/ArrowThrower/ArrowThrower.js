@@ -34,7 +34,7 @@ export default class ArrowThrower extends Scene {
     moveDown;
     constructor(maxX, maxY) {
         super(maxX, maxY);
-        this.image = CanvasUtil.loadNewImage('../assets/arrowthrower.png');
+        this.image = CanvasUtil.loadNewImage('./assets/arrowthrower.png');
         this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
         this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
         this.bullet = new CursorBullet(-100, -100);
