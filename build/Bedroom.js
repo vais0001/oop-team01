@@ -12,6 +12,7 @@ import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
 import BossFight from './BossScene.ts/BossFight.js';
 import BedroomEnd from './BedroomEnd.js';
+import WebpageEnd from './WebpageEnd.js';
 export default class Bedroom extends Scene {
     player;
     computer;
@@ -182,7 +183,7 @@ export default class Bedroom extends Scene {
             return new ArrowThrower(window.innerWidth, window.innerHeight, this.lang);
         }
         if (this.cheatLoadingScreen === true) {
-            return new Webpage(window.innerWidth, window.innerHeight, this.lang);
+            return new WebpageEnd(0, 0, this.lang);
         }
         if (this.finalScene === true) {
             return new BedroomEnd(window.innerWidth, window.innerHeight, 0, this.lang);
