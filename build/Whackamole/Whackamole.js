@@ -26,6 +26,7 @@ export default class Whackamole extends Scene {
     cutsceneTimer;
     lastValues = [];
     virusPushed;
+    pressedonetime;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -47,6 +48,7 @@ export default class Whackamole extends Scene {
         this.cutsceneTimer = 2000;
         this.lastValues = [];
         this.virusPushed = false;
+        this.pressedonetime = false;
     }
     wormSmash(value) {
         this.value = value;
@@ -84,16 +86,22 @@ export default class Whackamole extends Scene {
                 this.wormSmash(8);
             if (keyListener.keyPressed(KeyListener.KEY_105))
                 this.wormSmash(9);
-            this.holes.forEach((virus) => {
-                if (virus.mouseInRange(mouseListener.getMousePosition())
-                    && mouseListener.buttonPressed(0)) {
-                    this.wormSmash(virus.getValue());
-                }
-                else if (!(virus.mouseInRange(mouseListener.getMousePosition()))
-                    && mouseListener.buttonPressed(0)) {
+            this.pressedonetime = false;
+            if (mouseListener.buttonPressed()) {
+                this.holes = this.holes.filter((virus) => {
+                    if (virus.mouseInRange(mouseListener.getMousePosition())) {
+                        this.deadWormArray.push(new Viruses(virus.getValue()));
+                        this.enemiesLeft -= 1;
+                        this.pressedonetime = true;
+                        return false;
+                    }
+                    return true;
+                });
+                if (!(this.pressedonetime)) {
                     this.lives.pop();
                 }
-            });
+            }
+            console.log(this.pressedonetime);
         }
         if (this.nextText <= 2 && this.antagonist.getCutsceneMoveTimer() < 0) {
             if (keyListener.keyPressed(KeyListener.KEY_SPACE))
@@ -165,7 +173,7 @@ export default class Whackamole extends Scene {
                     }
                     if (this.virusPushed) {
                         this.holes.push(newVirus);
-                        if (this.lastValues.length === 3) {
+                        if (this.lastValues.length === 4) {
                             this.lastValues.pop();
                             this.lastValues.unshift(newVirus.getValue());
                         }
