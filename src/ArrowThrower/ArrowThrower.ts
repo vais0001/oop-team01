@@ -9,7 +9,7 @@ import CursorBullet from './CursorBullet.js';
 import EnemyAD from './EnemyAD.js';
 import EnemyAD1 from './EnemyAD1.js';
 import EnemyAD2 from './EnemyAD2.js';
-import Player from './Player.js';
+import Player from '../Player.js';
 import ThrowerText from './ThrowerText.js';
 import LoadingSceneWM from '../LoadingScenes/LoadingSceneWM.js';
 import HeartPowerup from './HeartPowerup.js';
@@ -61,7 +61,7 @@ export default class ArrowThrower extends Scene {
     this.image = CanvasUtil.loadNewImage('./assets/arrowthrower.png');
 
     // 3000 or 1500
-    this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
+    this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY - 100);
     this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
     this.bullet = new CursorBullet(-100, -100);
     this.timeToNextAD = 1700;
@@ -72,6 +72,7 @@ export default class ArrowThrower extends Scene {
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.nextText = 0;
     this.spawnComputer = false;
+    this.player.setImage('./assets/playerstandingleft.png');
 
     this.moveDown = false;
     this.moveUp = false;
