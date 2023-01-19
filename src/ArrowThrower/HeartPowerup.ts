@@ -7,7 +7,7 @@ export default class HeartPowerup extends Drawable {
     this.image = CanvasUtil.loadNewImage('./placeholders/heart.png');
     this.posX = this.dimensionsX;
     // eslint-disable-next-line max-len
-    this.posY = (Math.random() * ((this.backgroundHeight - 100) - this.dimensionsY) + this.dimensionsY);
+    this.posY = (Math.random() * ((this.dimensionsY + this.backgroundHeight - 350) - this.dimensionsY + 100) + this.dimensionsY + 100);
   }
 
   /**
