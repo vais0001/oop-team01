@@ -167,7 +167,7 @@ export default class BedroomEnd extends Scene {
         if (this.circleRadius > 0) {
             this.circleRadius -= elapsed * 0.6;
         }
-        else {
+        if (this.circleRadius < 0.01) {
             this.circleRadius = 0;
         }
         return null;
