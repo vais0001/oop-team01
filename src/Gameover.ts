@@ -17,7 +17,7 @@ export default class Gameover extends Scene {
 
   private restartScene: string;
 
-  public constructor(maxX: number, maxY: number, scene: string) {
+  public constructor(maxX: number, maxY: number, scene: string, lang: boolean) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/gameover.png');
     this.continue = false;
@@ -25,6 +25,7 @@ export default class Gameover extends Scene {
     this.timeToRemove = 700;
     this.restartLevel = false;
     this.restartScene = scene;
+    this.lang = lang;
   }
 
   /**
@@ -58,13 +59,13 @@ export default class Gameover extends Scene {
     }
     if (this.restartLevel) {
       if (this.restartScene === 'arrow') {
-        return new LoadingSceneAT(this.maxX, this.maxY);
+        return new LoadingSceneAT(this.maxX, this.maxY, this.lang);
       }
       if (this.restartScene === 'whack') {
-        return new LoadingSceneWM(window.innerWidth, window.innerHeight);
+        return new LoadingSceneWM(window.innerWidth, window.innerHeight, this.lang);
       }
       if (this.restartScene === 'boss') {
-        return new LoadingSceneBF(window.innerWidth, window.innerHeight);
+        return new LoadingSceneBF(window.innerWidth, window.innerHeight, this.lang);
       }
     }
     return null;

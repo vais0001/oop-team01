@@ -126,7 +126,7 @@ export default class Whackamole extends Scene {
                 this.deadWormArray[i].subtractPosX();
             }
             if (this.lives.length === 0) {
-                return new Gameover(0, 0, 'whack');
+                return new Gameover(0, 0, 'whack', this.lang);
             }
             this.holes = this.holes.filter((item) => {
                 if (this.value === item.getValue()) {

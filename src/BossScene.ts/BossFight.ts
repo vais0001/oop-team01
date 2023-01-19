@@ -143,16 +143,16 @@ export default class BossFight extends Scene {
       this.moveDown = false;
     }
 
-      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
-        if (this.abilityCount < 5) {
-          this.lightsaberSide = 2;
-          this.hit = true;
-        }
-        if (this.abilityCount > 4 && this.playerShoot < 0) {
-          this.xBullets.push(new Xbullets(this.player.getPosX(), this.player.getPosY()));
-          this.playerShoot = 500;
-        }
+    if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+      if (this.abilityCount < 5) {
+        this.lightsaberSide = 2;
+        this.hit = true;
       }
+      if (this.abilityCount > 4 && this.playerShoot < 0) {
+        this.xBullets.push(new Xbullets(this.player.getPosX(), this.player.getPosY()));
+        this.playerShoot = 500;
+      }
+    }
   }
 
   /**
@@ -177,7 +177,7 @@ export default class BossFight extends Scene {
     });
 
     if (this.lives.length === 0) {
-      return new Gameover(0, 0, 'boss');
+      return new Gameover(0, 0, 'boss', this.lang);
     }
 
     // functions for all levels
@@ -300,8 +300,8 @@ export default class BossFight extends Scene {
       }
       if (this.abilityCount === 5 && this.bulletsTimer < 0) {
         if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
-            this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 6, 0, 2));
-            this.bulletsTimer = 1000;
+          this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 6, 0, 2));
+          this.bulletsTimer = 1000;
         } else {
           this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 2));
           this.bulletsTimer = 1000;

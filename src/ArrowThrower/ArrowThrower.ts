@@ -271,7 +271,7 @@ export default class ArrowThrower extends Scene {
       });
 
       if (this.lives.length === 0) {
-        return new Gameover(0, 0, 'arrow');
+        return new Gameover(0, 0, 'arrow', this.lang);
       }
     }
 

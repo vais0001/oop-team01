@@ -147,7 +147,7 @@ export default class BossFight extends Scene {
             return true;
         });
         if (this.lives.length === 0) {
-            return new Gameover(0, 0, 'boss');
+            return new Gameover(0, 0, 'boss', this.lang);
         }
         if (this.buttonsPressed === 0) {
             this.player.move(66, 150);
@@ -301,7 +301,7 @@ export default class BossFight extends Scene {
         if (this.healthBar < 0) {
             this.circleRadius += elapsed * 0.6;
             if (this.circleRadius > 1400)
-                return new BedroomEnd(0, 0, 0);
+                return new BedroomEnd(0, 0, 0, this.lang);
         }
         if (this.moveUp)
             this.player.moveUp(elapsed);
@@ -311,11 +311,6 @@ export default class BossFight extends Scene {
             this.player.moveRight(elapsed);
         if (this.moveLeft)
             this.player.moveLeft(elapsed);
-        if (this.healthBar < 0) {
-            this.circleRadius += elapsed * 0.6;
-            if (this.circleRadius > 1400)
-                return new BedroomEnd(0, 0, 0, this.lang);
-        }
         return null;
     }
     render(canvas) {
