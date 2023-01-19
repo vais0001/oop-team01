@@ -40,5 +40,11 @@ export default class Antagonist extends Drawable {
     changeImage(source) {
         this.image = CanvasUtil.loadNewImage(source);
     }
+    collidesWithBullet(bullet) {
+        return (this.posX < bullet.getPosX() + bullet.getWidth()
+            && this.posX + this.getWidth() > bullet.getPosX()
+            && this.getPosY() < bullet.getPosY() + bullet.getHeight()
+            && this.getHeight() + this.posY > bullet.getPosY());
+    }
 }
 //# sourceMappingURL=Antagonist.js.map
