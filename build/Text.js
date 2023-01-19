@@ -9,7 +9,7 @@ export default class Text extends Drawable {
             this.locale = new Locale('nl');
         }
         else {
-            this.locale = new Locale('');
+            this.locale = new Locale('en-US');
         }
     }
     textOne(canvas, image, talker) {

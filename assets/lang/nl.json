@@ -22,6 +22,7 @@
   "I am scared…": "Ik ben bang...",
   "Welcome to trojan street.": "Welkom op trojan straat",
   "Have fun getting eaten by my ads!!": "Veel plezier met de advertenties!",
+  "Stop it!": "Stop daarmee!",
   "Having fun yet?": "Heb je het al naar je zin?",
   "I have had enough!": "Ik heb genoeg gehad!",
 
@@ -48,8 +49,12 @@
   "harder so they will reward me :)": "zodat ik beloond word met het spel :)",
 
 
-
+  "[S] to start": "[S] beginnen",
+  "[C] for Credits": "[C] credits",
   "[SPACE]": "[SPATIE]",
+  "Press         to continue": "druk         om verder te gaan",
+
+  "      [SPACE]            ": "[SPATIE]            ",
   "next": "volgende",
   "[SPACE] next": "[SPATIE] volgende",
   "Press": "Druk",

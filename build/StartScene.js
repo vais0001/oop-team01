@@ -3,18 +3,20 @@ import KeyListener from './KeyListener.js';
 import LoadingScene from './LoadingScenes/LoadingScene.js';
 import Scene from './Scene.js';
 import CreditScene from './CreditScene.js';
+import Locale from './Locale.js';
 export default class StartScene extends Scene {
     starting;
     creditscene;
     button;
+    locale;
     constructor(maxX, maxY) {
         super(maxX, maxY);
+        this.lang = false;
         this.image = CanvasUtil.loadNewImage('./placeholders/start800.png');
         this.starting = false;
         this.creditscene = false;
         this.button = CanvasUtil.loadNewImage('./placeholders/start_button.png');
-        this.lang = false;
-        console.log(this.lang);
+        this.locale = new Locale('en-US');
     }
     processInput(keyListener) {
         if (keyListener.keyPressed('KeyS')) {
@@ -25,7 +27,12 @@ export default class StartScene extends Scene {
         }
         if (keyListener.keyPressed(KeyListener.KEY_T)) {
             this.lang = !this.lang;
-            console.log(this.lang);
+            if (this.lang === true) {
+                this.locale = new Locale('nl');
+            }
+            else {
+                this.locale = new Locale('en-US');
+            }
         }
     }
     update() {
@@ -40,8 +47,8 @@ export default class StartScene extends Scene {
         CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
         CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 - 100);
         CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 + 30);
-        CanvasUtil.writeTextToCanvas(canvas, '[S] to start', canvas.width / 2, canvas.height / 2 - 35, 'center', 'Kongtext', 35, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, '[C] for Credits', canvas.width / 2, canvas.height / 2 + 95, 'center', 'Kongtext', 35, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[S] to start'), canvas.width / 2, canvas.height / 2 - 35, 'center', 'Kongtext', 35, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[C] for Credits'), canvas.width / 2, canvas.height / 2 + 95, 'center', 'Kongtext', 35, 'black');
     }
 }
 //# sourceMappingURL=StartScene.js.map

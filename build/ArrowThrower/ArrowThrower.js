@@ -37,7 +37,6 @@ export default class ArrowThrower extends Scene {
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
-        console.log(this.lang);
         this.arrowThrowerText = new ThrowerText(this.lang);
         this.image = CanvasUtil.loadNewImage('./assets/arrowthrower.png');
         this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY - 100);

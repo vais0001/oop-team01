@@ -11,7 +11,7 @@ export default class BedroomEndText extends Drawable {
     if (dutch === true) {
       this.locale = new Locale('nl');
     } else {
-      this.locale = new Locale('');
+      this.locale = new Locale('en-US');
     }
   }
 

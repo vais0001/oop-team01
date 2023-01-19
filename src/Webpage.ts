@@ -19,6 +19,7 @@ export default class Webpage extends Scene {
 
   public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
+    this.lang = lang;
     this.image = CanvasUtil.loadNewImage('./assets/internet_browser.png');
     this.newLevel = false;
     this.downloading = false;
@@ -28,7 +29,7 @@ export default class Webpage extends Scene {
     if (lang === true) {
       this.locale = new Locale('nl');
     } else {
-      this.locale = new Locale('');
+      this.locale = new Locale('en-US');
     }
   }
 
@@ -63,7 +64,7 @@ export default class Webpage extends Scene {
       }
     }
     if (this.newLevel === true) {
-      return new Bedroom(0, 0, 1, true);
+      return new Bedroom(0, 0, 1, this.lang);
     }
     return null;
   }

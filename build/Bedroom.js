@@ -36,7 +36,6 @@ export default class Bedroom extends Scene {
     moveRight;
     moveDown;
     moveLeft;
-    webPageLanguage;
     constructor(maxX, maxY, level, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -75,7 +74,6 @@ export default class Bedroom extends Scene {
         this.finalScene = false;
         this.nextText = 0;
         this.text = new Text(this.lang);
-        this.webPageLanguage = lang;
         this.buttonsPressed = 0;
         this.moveDown = false;
         this.moveLeft = false;
@@ -184,13 +182,13 @@ export default class Bedroom extends Scene {
             return new ArrowThrower(window.innerWidth, window.innerHeight, this.lang);
         }
         if (this.cheatLoadingScreen === true) {
-            return new Webpage(window.innerWidth, window.innerHeight, this.webPageLanguage);
+            return new Webpage(window.innerWidth, window.innerHeight, this.lang);
         }
         if (this.finalScene === true) {
             return new BedroomEnd(window.innerWidth, window.innerHeight, 0, this.lang);
         }
         if (this.webpageScene === true)
-            return new Webpage(0, 0, this.webPageLanguage);
+            return new Webpage(0, 0, this.lang);
         this.timeToText -= elapsed;
         if (this.scene === 3)
             return new LoadingSceneAT(this.maxX, this.maxY, this.lang);

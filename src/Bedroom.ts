@@ -60,11 +60,9 @@ export default class Bedroom extends Scene {
 
   private moveLeft: boolean;
 
-  private webPageLanguage: boolean;
-
   public constructor(maxX: number, maxY: number, level: number, lang: boolean) {
     super(maxX, maxY);
-    this.lang = lang
+    this.lang = lang;
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     this.bossFightScene = false;
     if (level === 1) {
@@ -97,7 +95,6 @@ export default class Bedroom extends Scene {
     this.finalScene = false;
     this.nextText = 0;
     this.text = new Text(this.lang);
-    this.webPageLanguage = lang;
     this.buttonsPressed = 0;
     this.moveDown = false;
     this.moveLeft = false;
@@ -207,14 +204,14 @@ export default class Bedroom extends Scene {
     }
 
     if (this.cheatLoadingScreen === true) {
-      return new Webpage(window.innerWidth, window.innerHeight, this.webPageLanguage);
+      return new Webpage(window.innerWidth, window.innerHeight, this.lang);
     }
 
     if (this.finalScene === true) {
       return new BedroomEnd(window.innerWidth, window.innerHeight, 0, this.lang);
     }
 
-    if (this.webpageScene === true) return new Webpage(0, 0, this.webPageLanguage);
+    if (this.webpageScene === true) return new Webpage(0, 0, this.lang);
     this.timeToText -= elapsed;
     if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY, this.lang);
 

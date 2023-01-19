@@ -12,6 +12,7 @@ export default class Webpage extends Scene {
     locale;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
+        this.lang = lang;
         this.image = CanvasUtil.loadNewImage('./assets/internet_browser.png');
         this.newLevel = false;
         this.downloading = false;
@@ -22,7 +23,7 @@ export default class Webpage extends Scene {
             this.locale = new Locale('nl');
         }
         else {
-            this.locale = new Locale('');
+            this.locale = new Locale('en-US');
         }
     }
     processInput(keyListener) {
@@ -46,7 +47,7 @@ export default class Webpage extends Scene {
             }
         }
         if (this.newLevel === true) {
-            return new Bedroom(0, 0, 1, true);
+            return new Bedroom(0, 0, 1, this.lang);
         }
         return null;
     }
