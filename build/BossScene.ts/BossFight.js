@@ -72,7 +72,7 @@ export default class BossFight extends Scene {
         else {
             this.moveLeft = false;
         }
-        if (this.player.getPosY() > this.dimensionsY + 110) {
+        if (this.player.getPosY() + this.player.getHeight() > this.dimensionsY + 220) {
             if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
                 this.player.move(1, 50);
                 this.buttonsPressed += 1;
@@ -101,7 +101,7 @@ export default class BossFight extends Scene {
         else {
             this.moveRight = false;
         }
-        if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
+        if (this.player.getPosY() + this.player.getHeight() < this.dimensionsY + this.backgroundHeight - 25) {
             if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
                 this.player.move(3, 50);
                 this.buttonsPressed += 1;
@@ -121,7 +121,7 @@ export default class BossFight extends Scene {
     }
     update(elapsed) {
         if (this.abilityCount > 3) {
-            if (this.player.getPosX() > 700) {
+            if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
                 this.antagonist.setImage('./assets/trojanfinalright.png');
             }
             else
@@ -180,7 +180,7 @@ export default class BossFight extends Scene {
             item.update(elapsed);
         });
         this.bullets = this.bullets.filter((item) => {
-            if (item.getPosX() > 1500 || item.getPosX() < 0 || item.getPosY() > 900 || item.getPosY() < 0) {
+            if (item.getPosX() > this.dimensionsX + 1500 || item.getPosX() < this.dimensionsX + 0 || item.getPosY() > this.dimensionsY + 900 || item.getPosY() < this.dimensionsY) {
                 return false;
             }
             return true;
@@ -205,14 +205,14 @@ export default class BossFight extends Scene {
         }
         if (this.level === 1) {
             this.bulletsTimer -= elapsed;
-            if (this.antagonist.getPosX() > 100 && this.abilityCount === 0) {
+            if (this.antagonist.getPosX() > this.dimensionsX && this.abilityCount === 0) {
                 this.antagonist.addOrSubPosX(0.2 * elapsed, 1);
                 if (this.bulletsTimer <= 0) {
                     this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 1, 0));
                     this.bulletsTimer = 800;
                 }
             }
-            if (this.antagonist.getPosX() < 101) {
+            if (this.antagonist.getPosX() < this.dimensionsX + 25) {
                 this.abilityCount = 1;
             }
             if (this.abilityCount === 1) {
@@ -223,7 +223,7 @@ export default class BossFight extends Scene {
                     this.bulletsTimer = 800;
                 }
             }
-            if (this.antagonist.getPosX() > this.dimensionsX + 1050 && this.abilityCount === 1) {
+            if (this.antagonist.getPosX() > this.dimensionsX + this.backgroundWidth - this.antagonist.getWidth() - 20 && this.abilityCount === 1) {
                 this.abilityCount = 2;
                 this.antagonist.changeImage('./assets/trojanfinal.png');
                 this.level = 2;
@@ -232,21 +232,21 @@ export default class BossFight extends Scene {
         }
         if (this.level === 2) {
             this.bulletsTimer -= elapsed;
-            if (this.abilityCount === 2 && this.antagonist.getPosY() <= 400) {
+            if (this.abilityCount === 2 && this.antagonist.getPosY() + this.antagonist.getHeight() <= this.dimensionsY + this.backgroundHeight - 25) {
                 this.antagonist.addOrSubPosY(0.2 * elapsed, 0);
                 if (this.bulletsTimer <= 0) {
                     this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
                     this.bulletsTimer = 1000;
                 }
             }
-            if (this.abilityCount === 2 && this.antagonist.getPosY() >= 395) {
+            if (this.abilityCount === 2 && this.antagonist.getPosY() + this.antagonist.getHeight() >= this.dimensionsY + this.backgroundHeight - 25) {
                 this.abilityCount = 3;
             }
             if (this.abilityCount === 3) {
                 this.antagonist.addOrSubPosY(0.2 * elapsed, 1);
-                this.antagonist.addOrSubPosX(0.4 * elapsed, 1);
+                this.antagonist.addOrSubPosX(0.5 * elapsed, 1);
             }
-            if (this.antagonist.getPosY() <= 180 && this.abilityCount === 3) {
+            if (this.antagonist.getPosY() + this.antagonist.getHeight() / 2 <= this.dimensionsY + this.backgroundHeight / 2 && this.abilityCount === 3) {
                 this.abilityCount = 4;
             }
         }
