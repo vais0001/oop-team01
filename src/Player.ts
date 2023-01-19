@@ -135,6 +135,13 @@ export default class Player extends Drawable {
   }
 
   /**
+   * changes the position the player is looking for ArrowThrower.ts
+   */
+  public changePlayerDirection() : void {
+    this.lookingRight = false;
+  }
+
+  /**
    * checks for collision with antagonist
    *
    * @param antagonist antagonist

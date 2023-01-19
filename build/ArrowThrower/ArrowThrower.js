@@ -54,17 +54,20 @@ export default class ArrowThrower extends Scene {
         for (let i = 0; i < 250; i += 50) {
             this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
         }
+        this.player.changePlayerDirection();
     }
     processInput(keyListener) {
         if (this.nextText > 3 && this.score < 205) {
             if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
                 this.moveUp = true;
+                this.player.move(0, 150);
             }
             else {
                 this.moveUp = false;
             }
             if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
                 this.moveDown = true;
+                this.player.move(0, 150);
             }
             else {
                 this.moveDown = false;

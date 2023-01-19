@@ -87,6 +87,9 @@ export default class Player extends Drawable {
             }
         }
     }
+    changePlayerDirection() {
+        this.lookingRight = false;
+    }
     collideWithAntagonist(antagonist) {
         return (this.posX < antagonist.getPosX() + antagonist.getWidth()
             && this.posX + this.getWidth() > antagonist.getPosX()
