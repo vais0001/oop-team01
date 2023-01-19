@@ -6,6 +6,10 @@ export default class ShootingAbility extends Drawable {
 
   private speed: number;
 
+  private ySpeed: number;
+
+  private xSpeed: number;
+
   // eslint-disable-next-line max-len
   public constructor(startX: number, startY: number, direction: number, speed: number, picture: number) {
     super();
@@ -14,6 +18,8 @@ export default class ShootingAbility extends Drawable {
     if (picture === 2) this.image = CanvasUtil.loadNewImage('./assets/digitalvirus.png');
     this.posX = startX;
     this.posY = startY;
+    this.ySpeed = Math.random() * 0.5 - 0.25;
+    this.xSpeed = Math.random() * 0.5;
     this.direction = direction;
     if (speed > 0) {
       this.speed = speed;
@@ -26,8 +32,12 @@ export default class ShootingAbility extends Drawable {
    */
   public update(elapsed: number) {
     if (this.direction === 5) {
-      this.posX -= Math.random() * elapsed;
-      this.posY += this.speed * elapsed;
+      this.posX -= this.xSpeed;
+      this.posY += this.ySpeed;
+    }
+    if (this.direction === 6) {
+      this.posX += this.xSpeed;
+      this.posY -= this.ySpeed;
     }
     if (this.direction === 0) {
       this.posX -= this.speed * elapsed;

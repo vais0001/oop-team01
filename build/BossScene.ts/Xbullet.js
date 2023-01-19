@@ -8,8 +8,8 @@ export default class Xbullets extends Drawable {
         this.image = CanvasUtil.loadNewImage('./assets/xbullet.png');
     }
     moveToAntagonist(antagonist, speed, side) {
-        const distanceX = antagonist.getPosX() - this.getPosX();
-        const distanceY = antagonist.getPosY() - this.getPosY();
+        const distanceX = antagonist.getPosX() + antagonist.getWidth() / 2 - this.getPosX();
+        const distanceY = antagonist.getPosY() + antagonist.getHeight() / 2 - this.getPosY();
         const slope = distanceY / distanceX;
         if (side === 0) {
             this.posX += Math.cos(slope) * speed;

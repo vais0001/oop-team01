@@ -17,8 +17,8 @@ export default class Xbullets extends Drawable {
    * @param side is the player on the left or right
    */
   public moveToAntagonist(antagonist: Antagonist, speed: number, side: number) {
-    const distanceX: number = antagonist.getPosX() - this.getPosX();
-    const distanceY: number = antagonist.getPosY() - this.getPosY();
+    const distanceX: number = antagonist.getPosX() + antagonist.getWidth() / 2 - this.getPosX();
+    const distanceY: number = antagonist.getPosY() + antagonist.getHeight() / 2 - this.getPosY();
     const slope: number = distanceY / distanceX;
 
     if (side === 0) {
