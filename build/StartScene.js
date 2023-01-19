@@ -12,10 +12,10 @@ export default class StartScene extends Scene {
     constructor(maxX, maxY) {
         super(maxX, maxY);
         this.lang = false;
-        this.image = CanvasUtil.loadNewImage('./placeholders/start800.png');
+        this.image = CanvasUtil.loadNewImage('./assets/start800.png');
         this.starting = false;
         this.creditscene = false;
-        this.button = CanvasUtil.loadNewImage('./placeholders/start_button.png');
+        this.button = CanvasUtil.loadNewImage('./assets/start_button.png');
         this.locale = new Locale('en-US');
     }
     processInput(keyListener) {
@@ -47,17 +47,17 @@ export default class StartScene extends Scene {
         CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
         CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 - 100);
         CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 + 30);
-        CanvasUtil.writeTextToCanvas(canvas, '[T]', this.dimensionsX + 1320, this.dimensionsY + 80, 'center', 'Kongtext', 20, 'white');
+        CanvasUtil.writeTextToCanvas(canvas, '[T]', this.dimensionsX + 1320, this.dimensionsY + 140, 'center', 'Kongtext', 40, 'white');
         if (!this.lang) {
-            CanvasUtil.writeTextToCanvas(canvas, 'EN', this.dimensionsX + 1350, this.dimensionsY + 50, 'center', 'Kongtext', 20, '#59CE8F');
-            CanvasUtil.writeTextToCanvas(canvas, 'NL', this.dimensionsX + 1290, this.dimensionsY + 50, 'center', 'Kongtext', 20, 'white');
+            CanvasUtil.writeTextToCanvas(canvas, 'EN', this.dimensionsX + 1360, this.dimensionsY + 90, 'center', 'Kongtext', 40, '#59CE8F');
+            CanvasUtil.writeTextToCanvas(canvas, 'NL', this.dimensionsX + 1280, this.dimensionsY + 90, 'center', 'Kongtext', 40, 'white');
         }
         else {
-            CanvasUtil.writeTextToCanvas(canvas, 'EN', this.dimensionsX + 1350, this.dimensionsY + 50, 'center', 'Kongtext', 20, 'white');
-            CanvasUtil.writeTextToCanvas(canvas, 'NL', this.dimensionsX + 1290, this.dimensionsY + 50, 'center', 'Kongtext', 20, '#59CE8F');
+            CanvasUtil.writeTextToCanvas(canvas, 'EN', this.dimensionsX + 1360, this.dimensionsY + 90, 'center', 'Kongtext', 40, 'white');
+            CanvasUtil.writeTextToCanvas(canvas, 'NL', this.dimensionsX + 1280, this.dimensionsY + 90, 'center', 'Kongtext', 40, '#59CE8F');
         }
-        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[S] to start'), canvas.width / 2, canvas.height / 2 - 35, 'center', 'Kongtext', 35, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[C] for Credits'), canvas.width / 2, canvas.height / 2 + 95, 'center', 'Kongtext', 35, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[S] Start'), canvas.width / 2, canvas.height / 2 - 35, 'center', 'Kongtext', 35, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[C] Credits'), canvas.width / 2, canvas.height / 2 + 95, 'center', 'Kongtext', 35, 'black');
     }
 }
 //# sourceMappingURL=StartScene.js.map

@@ -5,7 +5,7 @@ import Gameover from '../Gameover.js';
 import KeyListener from '../KeyListener.js';
 import Player from '../Player.js';
 import Scene from '../Scene.js';
-import Lives from '../Whackamole/Lives.js';
+import Lives from '../Lives.js';
 import Lightsaber from './Lightsaber.js';
 import ShootingAbility from './ShootingAbility.js';
 import Xbullets from './Xbullet.js';

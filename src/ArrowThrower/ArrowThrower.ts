@@ -3,7 +3,7 @@ import CanvasUtil from '../CanvasUtil.js';
 import Gameover from '../Gameover.js';
 import KeyListener from '../KeyListener.js';
 import Scene from '../Scene.js';
-import Lives from '../Whackamole/Lives.js';
+import Lives from '../Lives.js';
 import ADbullet from './ADbullet.js';
 import CursorBullet from './CursorBullet.js';
 import EnemyAD from './EnemyAD.js';
@@ -74,7 +74,7 @@ export default class ArrowThrower extends Scene {
     this.changingTime = 1000;
     this.playerHead = CanvasUtil.loadNewImage('./assets/TimmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
-    this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
+    this.bubble = CanvasUtil.loadNewImage('./assets/bubble.png');
     this.nextText = 0;
     this.nextHeart = 0;
     this.spawnComputer = false;
