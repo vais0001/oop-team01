@@ -28,6 +28,7 @@ export default class ArrowThrower extends Scene {
     trojanHead;
     bubble;
     nextText;
+    nextHeart;
     spawnComputer;
     computer;
     moveUp;
@@ -45,6 +46,7 @@ export default class ArrowThrower extends Scene {
         this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
         this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
         this.nextText = 0;
+        this.nextHeart = 0;
         this.spawnComputer = false;
         this.player.setImage('./assets/playerstandingleft.png');
         this.moveDown = false;
@@ -123,8 +125,10 @@ export default class ArrowThrower extends Scene {
                 this.changingTime = this.timeToNextAD;
             }
             if (this.lives.length < 5) {
-                if (Math.random() > 0.9999) {
+                this.nextHeart -= elapsed;
+                if (this.nextHeart < 0) {
                     this.heartPowerup.push(new HeartPowerup());
+                    this.nextHeart = 5000;
                 }
             }
             this.heartPowerup = this.heartPowerup.filter((heartPowerup) => {
