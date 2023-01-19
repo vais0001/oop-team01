@@ -21,7 +21,7 @@ export default class LoadingSceneWM extends Scene {
     update(elapsed) {
         const randomPause = Math.floor(Math.random() * 1220) + 100;
         if (this.realisticPause === 50 || this.realisticPause < 0) {
-            this.loadingBar += elapsed * 0.3;
+            this.loadingBar += elapsed * 8;
         }
         if (this.loadingBar > randomPause) {
             this.realisticPause -= elapsed;

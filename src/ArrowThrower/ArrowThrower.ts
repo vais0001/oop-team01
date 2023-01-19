@@ -57,6 +57,8 @@ export default class ArrowThrower extends Scene {
 
   private moveDown: boolean;
 
+  private buttonsPressed: number;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
 
@@ -76,7 +78,7 @@ export default class ArrowThrower extends Scene {
     this.nextHeart = 0;
     this.spawnComputer = false;
     this.player.setImage('./assets/playerstandingleft.png');
-
+    this.buttonsPressed = 0;
     this.moveDown = false;
     this.moveUp = false;
 
@@ -93,10 +95,12 @@ export default class ArrowThrower extends Scene {
    * @returns nothing
    */
   public processInput(keyListener: KeyListener): void {
+    this.buttonsPressed = 0;
     if (this.nextText > 3 && this.score < 205) {
       if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
         this.moveUp = true;
         this.player.move(0, 150);
+        this.buttonsPressed += 1;
       } else {
         this.moveUp = false;
       }
@@ -104,6 +108,7 @@ export default class ArrowThrower extends Scene {
       if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
         this.moveDown = true;
         this.player.move(0, 150);
+        this.buttonsPressed += 1;
       } else {
         this.moveDown = false;
       }
@@ -147,6 +152,9 @@ export default class ArrowThrower extends Scene {
     }
 
     if (this.nextText > 3 && this.score < 205) {
+      if (this.buttonsPressed === 0) {
+        this.player.move(66, 150);
+      }
       this.spawnComputer = true;
       this.computer = new ArrowThrowerComputer();
       this.player.changePositionX();
@@ -261,7 +269,7 @@ export default class ArrowThrower extends Scene {
       });
 
       if (this.lives.length === 0) {
-        return new Gameover(0, 0);
+        return new Gameover(0, 0, 'arrow');
       }
     }
 

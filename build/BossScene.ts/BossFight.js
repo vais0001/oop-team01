@@ -144,7 +144,7 @@ export default class BossFight extends Scene {
             return true;
         });
         if (this.lives.length === 0) {
-            return new Gameover(0, 0);
+            return new Gameover(0, 0, 'boss');
         }
         if (this.buttonsPressed === 0) {
             this.player.move(66, 150);
