@@ -84,7 +84,8 @@ export default class Bedroom extends Scene {
         if (!this.level1 && this.nextText > 4) {
             this.buttonsPressed = 0;
             if (this.player.getPosX() > this.dimensionsX + 20
-                && !(this.player.collidingBed(this.bed))) {
+                && !(this.player.getPosX() + this.player.getWidth() < this.bed.getPosX() + this.bed.getWidth() + 45
+                    && this.player.getPosY() + this.player.getHeight() < this.bed.getPosY() + this.bed.getHeight() - 10)) {
                 if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))
                     && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
                     this.player.move(0, 150);
@@ -100,7 +101,8 @@ export default class Bedroom extends Scene {
             }
             if (this.player.getPosY() > this.dimensionsY + 120
                 && !(this.player.collidingComputer(this.computer))
-                && !(this.player.collidingBed(this.bed))) {
+                && !(this.player.getPosX() + this.player.getWidth() < this.bed.getPosX() + this.bed.getWidth()
+                    && this.player.getPosY() + this.player.getHeight() < this.bed.getPosY() + this.bed.getHeight())) {
                 if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))
                     && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
                     this.player.move(1, 150);
@@ -115,7 +117,9 @@ export default class Bedroom extends Scene {
                 this.moveUp = false;
             }
             if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100
-                && !(this.player.collidingComputer(this.computer))) {
+                && !(this.player.collidingComputer(this.computer))
+                && !(this.player.getPosX() + this.player.getWidth() < this.bed.getPosX() + this.bed.getWidth()
+                    && this.player.getPosY() + this.player.getHeight() < this.bed.getPosY() + this.bed.getHeight() - 10)) {
                 if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))
                     && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
                     this.player.move(2, 150);
