@@ -322,7 +322,6 @@ export default class BossFight extends Scene {
         } else item.moveToAntagonist(this.antagonist, 0.7, 0);
       });
 
-
       // health bar mods
       this.xBullets = this.xBullets.filter((item: Xbullets) => {
         if (this.antagonist.collidesWithBullet(item)) {

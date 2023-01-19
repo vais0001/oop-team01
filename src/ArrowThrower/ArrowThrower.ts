@@ -62,7 +62,6 @@ export default class ArrowThrower extends Scene {
   public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
     this.lang = lang;
-    console.log(this.lang)
     this.arrowThrowerText = new ThrowerText(this.lang);
     this.image = CanvasUtil.loadNewImage('./assets/arrowthrower.png');
 

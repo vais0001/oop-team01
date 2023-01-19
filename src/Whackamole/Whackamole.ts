@@ -95,6 +95,7 @@ export default class Whackamole extends Scene {
   /**
    *
    * @param keyListener is an input
+   * @param mouseListener is a mouse input
    */
   public processInput(keyListener: KeyListener, mouseListener: MouseListener): void {
     if (this.nextText >= 2) {
