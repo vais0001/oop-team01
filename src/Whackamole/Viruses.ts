@@ -77,7 +77,7 @@ export default class Viruses extends Drawable {
     return (
       this.posX < mouseCoordinates.x
       && this.posX + this.getWidth() > mouseCoordinates.x
-      && this.getPosY() < mouseCoordinates.y + mouseCoordinates.y
+      && this.getPosY() < mouseCoordinates.y
       && this.getHeight() + this.posY > mouseCoordinates.y
     );
   }
