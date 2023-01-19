@@ -1,6 +1,6 @@
 import Drawable from './Drawable.js';
 import CanvasUtil from './CanvasUtil.js';
-import Player from './ArrowThrower/Player.js';
+import Player from './Player.js';
 
 export default class Antagonist extends Drawable {
   public cutsceneMoveTimer: number;
