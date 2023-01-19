@@ -1,6 +1,7 @@
 import Drawable from './Drawable.js';
 import CanvasUtil from './CanvasUtil.js';
 import Player from './Player.js';
+import Xbullets from './BossScene.ts/Xbullet.js';
 
 export default class Antagonist extends Drawable {
   public cutsceneMoveTimer: number;
@@ -64,5 +65,17 @@ export default class Antagonist extends Drawable {
    */
   public changeImage(source: string) {
     this.image = CanvasUtil.loadNewImage(source);
+  }
+
+  /**
+   *
+   * @param bullet is bullet
+   * @returns true or false
+   */
+  public collidesWithBullet(bullet: Xbullets): boolean {
+    return (this.posX < bullet.getPosX() + bullet.getWidth()
+      && this.posX + this.getWidth() > bullet.getPosX()
+      && this.getPosY() < bullet.getPosY() + bullet.getHeight()
+      && this.getHeight() + this.posY > bullet.getPosY());
   }
 }
