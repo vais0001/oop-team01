@@ -9,6 +9,7 @@ import Scene from '../Scene.js';
 import Lives from '../Whackamole/Lives.js';
 import Lightsaber from './Lightsaber.js';
 import ShootingAbility from './ShootingAbility.js';
+import Xbullets from './Xbullet.js';
 
 export default class BossFight extends Scene {
   private antagonist: Antagonist;
@@ -51,6 +52,10 @@ export default class BossFight extends Scene {
 
   private circleRadius: number;
 
+  private xBullets: Xbullets[] = [];
+
+  private playerShoot: boolean;
+
   public constructor(maxX: number, maxY: number) {
     super(maxX, maxY);
     this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
@@ -68,6 +73,7 @@ export default class BossFight extends Scene {
     this.healthBar = 650;
     this.circleRadius = 0;
     this.hit = false;
+    this.playerShoot = false;
     for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX + 40, 250 + i + this.dimensionsY));
     }
@@ -137,8 +143,13 @@ export default class BossFight extends Scene {
     }
 
     if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
-      this.lightsaberSide = 2;
-      this.hit = true;
+      if (this.abilityCount < 5) {
+        this.lightsaberSide = 2;
+        this.hit = true;
+      }
+      if (this.abilityCount > 4) {
+        this.playerShoot = true;
+      }
     }
   }
 
@@ -284,11 +295,29 @@ export default class BossFight extends Scene {
       if (this.antagonist.getPosY() + this.antagonist.getHeight() / 2 <= this.dimensionsY + this.backgroundHeight / 2 && this.abilityCount === 3) {
         this.abilityCount = 4;
       }
+      if (this.abilityCount === 4 && this.hit === true && this.lightsaber.collidesWithAntagonist(this.antagonist)) {
+        this.abilityCount = 5;
+      }
+      if (this.abilityCount === 5) {
+        if (this.playerShoot === true) {
+          this.xBullets.push(new Xbullets(this.player.getPosX(), this.player.getPosY()));
+          this.playerShoot = false;
+        }
+      }
     }
+
+    this.xBullets.forEach((item: Xbullets) => {
+      if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
+        item.moveToAntagonist(this.antagonist, 0.7, 1);
+      } else item.moveToAntagonist(this.antagonist, 0.7, 0);
+    });
+
+    
 
     if (this.hit === true
       && this.lightsaber.collidesWithAntagonist(this.antagonist)
-      && this.healthBar > 0) {
+      && this.healthBar > 0
+      && this.abilityCount < 5) {
       this.healthBar -= 0.1;
     }
 
@@ -316,11 +345,16 @@ export default class BossFight extends Scene {
     this.lives.forEach((lives: Lives) => lives.render(canvas));
     this.antagonist.render(canvas);
     this.player.render(canvas);
-    this.lightsaber.render(canvas);
+    if (this.abilityCount < 5) {
+      this.lightsaber.render(canvas);
+    }
     CanvasUtil.fillRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, this.healthBar, 40, 'red');
     CanvasUtil.drawRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, 650, 40, 'black');
     if (this.healthBar < 600) {
       CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
     }
+    this.xBullets.forEach((item: Xbullets) => {
+      item.render(canvas);
+    });
   }
 }
