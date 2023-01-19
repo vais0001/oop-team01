@@ -58,6 +58,7 @@ export default class KeyListener {
     static KEY_103 = 'Numpad7';
     static KEY_104 = 'Numpad8';
     static KEY_105 = 'Numpad9';
+    static KEY_27 = 'Escape';
     keyDown = {};
     keyPressedQueried = {};
     constructor() {
