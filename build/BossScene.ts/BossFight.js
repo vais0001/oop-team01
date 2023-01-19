@@ -47,7 +47,7 @@ export default class BossFight extends Scene {
         this.antagonist = new Antagonist(1050, 90);
         this.abilityShoot = false;
         this.talker = CanvasUtil.loadNewImage('./assets/trojanicon.png');
-        this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
+        this.bubble = CanvasUtil.loadNewImage('./assets/bubble.png');
         this.bulletsTimer = 200;
         this.antagonist.changeImage('./assets/trojanfinal.png');
         this.levelTimer = 10000;
