@@ -41,7 +41,7 @@ export default class BossFight extends Scene {
         this.abilityShoot = false;
         this.bulletsTimer = 200;
         this.antagonist.changeImage('./assets/trojanfinal.png');
-        this.levelTimer = 1000;
+        this.levelTimer = 10000;
         this.level = 0;
         this.abilityCount = 0;
         this.lightsaberSide = 0;
@@ -51,7 +51,7 @@ export default class BossFight extends Scene {
         this.circleRadius = 0;
         this.hit = false;
         for (let i = 0; i < 250; i += 50) {
-            this.lives.push(new Lives(this.dimensionsX + 40, 250 + i + this.dimensionsY));
+            this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
         }
         this.moveDown = false;
         this.moveLeft = false;
