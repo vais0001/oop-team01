@@ -7,14 +7,18 @@ export default class WebpageEnd extends Scene {
     downloading;
     loadingBar;
     downloadedTime;
+    randomColor;
+    nextColor;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
-        this.image = CanvasUtil.loadNewImage('./placeholders/internet_browser.png');
+        this.image = CanvasUtil.loadNewImage('./assets/internet_browser_end.png');
         this.newLevel = false;
         this.downloading = false;
         this.loadingBar = 0;
         this.downloadedTime = 1700;
+        this.nextColor = 200;
+        this.randomColor = '';
     }
     processInput(keyListener) {
         if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
@@ -22,6 +26,19 @@ export default class WebpageEnd extends Scene {
         }
     }
     update(elapsed) {
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        this.nextColor -= elapsed;
+        if (this.nextColor < -100) {
+            this.randomColor = getRandomColor();
+            this.nextColor = 200;
+        }
         if (this.downloading) {
             this.loadingBar += elapsed * 0.5;
         }
@@ -41,16 +58,21 @@ export default class WebpageEnd extends Scene {
         CanvasUtil.clearCanvas(canvas);
         CanvasUtil.fillCanvas(canvas, 'black');
         CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-        CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 650, 301, 30, 'white');
-        CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 650, this.loadingBar, 30, 'green');
+        CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 630, this.loadingBar, 30, 'green');
+        CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 630, 301, 30, 'black');
+        CanvasUtil.writeTextToCanvas(canvas, 'Congrats!', canvas.width / 2, this.dimensionsY + 280, 'center', 'Kongtext', 40, this.randomColor);
+        CanvasUtil.writeTextToCanvas(canvas, 'You escaped', canvas.width / 2, this.dimensionsY + 360, 'center', 'Kongtext', 46, '#13005A');
+        CanvasUtil.writeTextToCanvas(canvas, 'Trojan Street!', canvas.width / 2, this.dimensionsY + 420, 'center', 'Kongtext', 46, '#13005A');
+        CanvasUtil.writeTextToCanvas(canvas, 'You escaped', canvas.width / 2, this.dimensionsY + 360, 'center', 'Kongtext', 45, '#03C988');
+        CanvasUtil.writeTextToCanvas(canvas, 'Trojan Street!', canvas.width / 2, this.dimensionsY + 420, 'center', 'Kongtext', 45, '#03C988');
         if (!(this.downloading)) {
-            CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] To Download The Game', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'white');
+            CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] To Continue', canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'black');
         }
         if (this.downloading && this.loadingBar < 300) {
-            CanvasUtil.writeTextToCanvas(canvas, 'DOWNLOADING', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'white');
+            CanvasUtil.writeTextToCanvas(canvas, 'loading...', canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'black');
         }
         if (this.loadingBar > 300) {
-            CanvasUtil.writeTextToCanvas(canvas, 'DOWNLOADED', canvas.width / 2, this.dimensionsY + 600, 'center', 'arial', 40, 'red');
+            CanvasUtil.writeTextToCanvas(canvas, 'LOADED', canvas.width / 2 - 10, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'red');
         }
     }
 }
