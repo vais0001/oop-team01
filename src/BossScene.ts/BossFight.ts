@@ -65,7 +65,7 @@ export default class BossFight extends Scene {
     this.abilityShoot = false;
     this.bulletsTimer = 200;
     this.antagonist.changeImage('./assets/trojanfinal.png');
-    this.levelTimer = 1000;
+    this.levelTimer = 10000;
     this.level = 0;
     this.abilityCount = 0;
     this.lightsaberSide = 0;
@@ -280,7 +280,6 @@ export default class BossFight extends Scene {
       }
       // level 2
       if (this.level === 2) {
-
         if (this.abilityCount === 2) {
           this.antagonist.addOrSubPosY(0.2 * elapsed, 0);
           if (this.bulletsTimer <= 0) {

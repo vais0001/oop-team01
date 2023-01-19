@@ -41,7 +41,7 @@ export default class BossFight extends Scene {
         this.abilityShoot = false;
         this.bulletsTimer = 200;
         this.antagonist.changeImage('./assets/trojanfinal.png');
-        this.levelTimer = 1000;
+        this.levelTimer = 10000;
         this.level = 0;
         this.abilityCount = 0;
         this.lightsaberSide = 0;
