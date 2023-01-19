@@ -178,7 +178,7 @@ export default class BossFight extends Scene {
     });
 
     if (this.lives.length === 0) {
-      return new Gameover(0, 0);
+      return new Gameover(0, 0, 'boss');
     }
 
     // functions for all levels

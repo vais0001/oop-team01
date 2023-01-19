@@ -49,7 +49,8 @@ export default class Whackamole extends Scene {
     super(maxX, maxY);
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
-    this.player = new Player(this.dimensionsX + this.backgroundWidth - 1600, this.dimensionsY - 150);
+    this.player = new Player(this.dimensionsX
+    + this.backgroundWidth - 1600, this.dimensionsY - 150);
     this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
     this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg');
     this.timeToNextVirus = 1000;
@@ -124,6 +125,8 @@ export default class Whackamole extends Scene {
    * @returns true or false
    */
   public update(elapsed: number): Scene {
+    this.player.move(66, 150);
+    this.player.changePlayerDirection();
     if (this.nextText < 2) {
       if (this.player.getPosX() < this.dimensionsX + 1300) {
         this.player.cutsceneMovement(elapsed);
@@ -147,7 +150,7 @@ export default class Whackamole extends Scene {
         this.deadWormArray[i].subtractPosX();
       }
       if (this.lives.length === 0) {
-        return new Gameover(0, 0);
+        return new Gameover(0, 0, 'whack');
       }
 
       this.holes = this.holes.filter((item: Viruses) => {
