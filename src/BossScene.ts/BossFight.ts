@@ -249,7 +249,6 @@ export default class BossFight extends Scene {
     this.bulletsTimer -= elapsed;
     // level 1 mooving and shooting level
     if (this.level === 1) {
-
       if (this.antagonist.getPosX() > this.dimensionsX && this.abilityCount === 0) {
         this.antagonist.addOrSubPosX(0.2 * elapsed, 1);
         if (this.bulletsTimer <= 0) {

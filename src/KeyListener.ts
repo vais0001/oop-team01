@@ -135,6 +135,8 @@ export default class KeyListener {
 
   public static readonly KEY_105 = 'Numpad9';
 
+  public static readonly KEY_27 = 'Escape';
+
   /**
    * Record that holds a boolean for each keycode. The keycode is the index of
    * the array and the boolean is the state of that key (`true` means that
