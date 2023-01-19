@@ -72,6 +72,12 @@ export default class Viruses extends Drawable {
     setvalue(value) {
         this.value = value;
     }
+    mouseInRange(mouseCoordinates) {
+        return (this.posX < mouseCoordinates.x
+            && this.posX + this.getWidth() > mouseCoordinates.x
+            && this.getPosY() < mouseCoordinates.y + mouseCoordinates.y
+            && this.getHeight() + this.posY > mouseCoordinates.y);
+    }
     subtractPosX() {
         if (this.posX === 265 + this.dimensionsX) {
             this.posX = 225 + this.dimensionsX;

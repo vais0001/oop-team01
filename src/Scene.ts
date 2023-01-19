@@ -1,4 +1,5 @@
 import KeyListener from './KeyListener.js';
+import MouseListener from './MouseListener.js';
 
 export default abstract class Scene {
   protected maxX: number;
@@ -26,7 +27,7 @@ export default abstract class Scene {
     this.dimensionsY = (window.innerHeight - this.backgroundHeight) / 2;
   }
 
-  public abstract processInput(keyListener: KeyListener): void;
+  public abstract processInput(keyListener: KeyListener, mouseListener: MouseListener): void;
   public abstract update(elapsed: number): Scene;
   public abstract render(canvas: HTMLCanvasElement): void;
 }

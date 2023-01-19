@@ -8,6 +8,7 @@ import Antagonist from '../Antagonist.js';
 import Player from '../Player.js';
 import LoadingSceneBF from '../LoadingScenes/LoadingSceneBF.js';
 import WhackamoleText from './WhackamoleText.js';
+import MouseListener from '../MouseListener.js';
 
 export default class Whackamole extends Scene {
   private holes: Viruses[] = [];
@@ -48,7 +49,7 @@ export default class Whackamole extends Scene {
     super(maxX, maxY);
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
-    this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY + 50);
+    this.player = new Player(this.dimensionsX + this.backgroundWidth - 1600, this.dimensionsY - 150);
     this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
     this.image = CanvasUtil.loadNewImage('./assets/whackamole.jpg');
     this.timeToNextVirus = 1000;
@@ -89,7 +90,7 @@ export default class Whackamole extends Scene {
    *
    * @param keyListener is an input
    */
-  public processInput(keyListener: KeyListener): void {
+  public processInput(keyListener: KeyListener, mouseListener: MouseListener): void {
     if (this.nextText >= 2) {
       if (keyListener.keyPressed(KeyListener.KEY_97)) this.wormSmash(1);
       if (keyListener.keyPressed(KeyListener.KEY_98)) this.wormSmash(2);
@@ -100,6 +101,16 @@ export default class Whackamole extends Scene {
       if (keyListener.keyPressed(KeyListener.KEY_103)) this.wormSmash(7);
       if (keyListener.keyPressed(KeyListener.KEY_104)) this.wormSmash(8);
       if (keyListener.keyPressed(KeyListener.KEY_105)) this.wormSmash(9);
+
+      this.holes.forEach((virus: Viruses) => {
+        if (virus.mouseInRange(mouseListener.getMousePosition())
+          && mouseListener.buttonPressed(0)) {
+          this.wormSmash(virus.getValue());
+        } else if (!(virus.mouseInRange(mouseListener.getMousePosition()))
+          && mouseListener.buttonPressed(0)) {
+          this.lives.pop();
+        }
+      });
     }
 
     if (this.nextText <= 2 && this.antagonist.getCutsceneMoveTimer() < 0) {

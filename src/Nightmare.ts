@@ -3,11 +3,14 @@ import CanvasUtil from './CanvasUtil.js';
 import KeyListener from './KeyListener.js';
 import Scene from './Scene.js';
 import StartScene from './StartScene.js';
+import MouseListener from './MouseListener.js';
 
 export default class Nightmare extends Game {
   private canvas: HTMLCanvasElement;
 
   private keyListener: KeyListener;
+
+  private mouseListener: MouseListener;
 
   private currentScene: Scene;
 
@@ -17,6 +20,7 @@ export default class Nightmare extends Game {
     this.canvas.height = window.innerHeight;
     this.canvas.width = window.innerWidth;
     this.keyListener = new KeyListener();
+    this.mouseListener = new MouseListener(this.canvas, false);
 
     // Set the starting scene
     this.currentScene = new StartScene(this.canvas.width, this.canvas.height);
@@ -26,7 +30,7 @@ export default class Nightmare extends Game {
    * Process all input. Called from the GameLoop.
    */
   public processInput(): void {
-    this.currentScene.processInput(this.keyListener);
+    this.currentScene.processInput(this.keyListener, this.mouseListener);
   }
 
   /**

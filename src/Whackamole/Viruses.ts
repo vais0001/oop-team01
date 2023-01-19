@@ -1,5 +1,6 @@
 import CanvasUtil from '../CanvasUtil.js';
 import Drawable from '../Drawable.js';
+import { MouseCoordinates } from '../MouseListener.js';
 
 export default class Viruses extends Drawable {
   private value: number;
@@ -70,6 +71,15 @@ export default class Viruses extends Drawable {
 
   public setvalue(value: number) {
     this.value = value;
+  }
+
+  public mouseInRange(mouseCoordinates: MouseCoordinates): boolean {
+    return (
+      this.posX < mouseCoordinates.x
+      && this.posX + this.getWidth() > mouseCoordinates.x
+      && this.getPosY() < mouseCoordinates.y + mouseCoordinates.y
+      && this.getHeight() + this.posY > mouseCoordinates.y
+    );
   }
 
   /**
