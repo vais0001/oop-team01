@@ -147,7 +147,7 @@ export default class Whackamole extends Scene {
         this.deadWormArray[i].subtractPosX();
       }
       if (this.lives.length === 0) {
-        return new Gameover(0, 0);
+        return new Gameover(0, 0, 'whack');
       }
 
       this.holes = this.holes.filter((item: Viruses) => {
