@@ -275,11 +275,23 @@ export default class BossFight extends Scene {
             else
                 item.moveToAntagonist(this.antagonist, 0.7, 0);
         });
+        this.xBullets = this.xBullets.filter((item) => {
+            if (this.antagonist.collidesWithBullet(item)) {
+                this.healthBar -= 10;
+                return false;
+            }
+            return true;
+        });
         if (this.hit === true
             && this.lightsaber.collidesWithAntagonist(this.antagonist)
             && this.healthBar > 0
             && this.abilityCount < 5) {
             this.healthBar -= 0.1;
+        }
+        if (this.healthBar < 0) {
+            this.circleRadius += elapsed * 0.6;
+            if (this.circleRadius > 1400)
+                return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
         }
         if (this.moveUp)
             this.player.moveUp(elapsed);
@@ -289,11 +301,6 @@ export default class BossFight extends Scene {
             this.player.moveRight(elapsed);
         if (this.moveLeft)
             this.player.moveLeft(elapsed);
-        if (this.healthBar < 0) {
-            this.circleRadius += elapsed * 0.6;
-            if (this.circleRadius > 1400)
-                return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
-        }
         return null;
     }
     render(canvas) {

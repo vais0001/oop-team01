@@ -20,11 +20,5 @@ export default class Xbullets extends Drawable {
             this.posY -= Math.sin(slope) * speed;
         }
     }
-    collidesWithAntagonist(antagonist) {
-        return (this.posX < antagonist.getPosX() + antagonist.getWidth()
-            && this.posX + this.getWidth() > antagonist.getPosX()
-            && this.getPosY() < antagonist.getPosY() + antagonist.getHeight()
-            && this.getHeight() + this.posY > antagonist.getPosY());
-    }
 }
 //# sourceMappingURL=Xbullet.js.map

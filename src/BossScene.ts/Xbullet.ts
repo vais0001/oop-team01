@@ -35,10 +35,4 @@ export default class Xbullets extends Drawable {
    * @param antagonist is an enemy
    * @returns true or false
    */
-  public collidesWithAntagonist(antagonist: Antagonist): boolean {
-    return (this.posX < antagonist.getPosX() + antagonist.getWidth()
-      && this.posX + this.getWidth() > antagonist.getPosX()
-      && this.getPosY() < antagonist.getPosY() + antagonist.getHeight()
-      && this.getHeight() + this.posY > antagonist.getPosY());
-  }
 }
