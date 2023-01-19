@@ -6,6 +6,7 @@ import KeyListener from '../KeyListener.js';
 import Player from '../Player.js';
 import Scene from '../Scene.js';
 import Lives from '../Lives.js';
+import BossFightText from './BossFightText.js';
 import Lightsaber from './Lightsaber.js';
 import ShootingAbility from './ShootingAbility.js';
 import Xbullets from './Xbullet.js';
@@ -32,6 +33,12 @@ export default class BossFight extends Scene {
     circleRadius;
     xBullets = [];
     playerShoot;
+    startingCutscene;
+    bossFightText;
+    talker;
+    bubble;
+    nextText;
+    renderTextSix = false;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -39,6 +46,8 @@ export default class BossFight extends Scene {
         this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
         this.antagonist = new Antagonist(1050, 90);
         this.abilityShoot = false;
+        this.talker = CanvasUtil.loadNewImage('./assets/trojanicon.png');
+        this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
         this.bulletsTimer = 200;
         this.antagonist.changeImage('./assets/trojanfinal.png');
         this.levelTimer = 10000;
@@ -58,9 +67,12 @@ export default class BossFight extends Scene {
         this.moveRight = false;
         this.moveUp = false;
         this.playerShoot = 500;
+        this.startingCutscene = 1300;
+        this.nextText = 0;
+        this.bossFightText = new BossFightText(this.lang);
     }
     processInput(keyListener) {
-        if (this.healthBar > 0) {
+        if (this.healthBar > 0 && this.startingCutscene <= 0) {
             this.buttonsPressed = 0;
             if (this.player.getPosX() > this.dimensionsX + 25) {
                 if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
@@ -131,9 +143,11 @@ export default class BossFight extends Scene {
                 }
             }
         }
+        if (keyListener.keyPressed(KeyListener.KEY_SPACE))
+            this.nextText += 1;
     }
     update(elapsed) {
-        if (this.healthBar > 0) {
+        if (this.healthBar > 0 && this.startingCutscene <= 0) {
             this.playerShoot -= elapsed;
             if (this.abilityCount > 3) {
                 if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
@@ -262,6 +276,7 @@ export default class BossFight extends Scene {
                     this.abilityCount = 4;
                 }
                 if (this.abilityCount === 4 && this.hit === true && this.lightsaber.collidesWithAntagonist(this.antagonist)) {
+                    this.renderTextSix = true;
                     this.abilityCount = 5;
                 }
                 if (this.abilityCount === 5 && this.bulletsTimer < 0) {
@@ -310,6 +325,14 @@ export default class BossFight extends Scene {
             if (this.moveLeft)
                 this.player.moveLeft(elapsed);
         }
+        if (this.nextText >= 5) {
+            if (this.startingCutscene < 0) {
+                this.startingCutscene = 0;
+            }
+            else {
+                this.startingCutscene -= elapsed;
+            }
+        }
         if (this.healthBar < 0) {
             this.circleRadius += elapsed * 0.6;
             if (this.circleRadius > 1400)
@@ -338,6 +361,40 @@ export default class BossFight extends Scene {
         this.xBullets.forEach((item) => {
             item.render(canvas);
         });
+        if (this.startingCutscene > 0) {
+            CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.startingCutscene, 'black');
+            if (this.nextText === 0)
+                this.bossFightText.textOne(canvas, this.bubble, this.talker);
+            if (this.nextText === 1)
+                this.bossFightText.textTwo(canvas, this.bubble, this.talker);
+            if (this.nextText === 2)
+                this.bossFightText.textThree(canvas, this.bubble, this.talker);
+            if (this.nextText === 3)
+                this.bossFightText.textFour(canvas, this.bubble, this.talker);
+            if (this.nextText === 4)
+                this.bossFightText.textFive(canvas, this.bubble, this.talker);
+        }
+        if (this.healthBar < 0) {
+            this.bossFightText.textSeven(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 40 && this.healthBar < 80) {
+            this.bossFightText.textEight(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 120 && this.healthBar < 170) {
+            this.bossFightText.textNine(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 380 && this.healthBar < 420) {
+            this.bossFightText.textTen(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 540 && this.healthBar < 580) {
+            this.bossFightText.textEleven(canvas, this.bubble, this.talker);
+        }
+        if (this.renderTextSix) {
+            this.bossFightText.textSix(canvas, this.bubble, null);
+            setTimeout(() => {
+                this.renderTextSix = false;
+            }, 4500);
+        }
     }
 }
 //# sourceMappingURL=BossFight.js.map
