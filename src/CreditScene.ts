@@ -41,11 +41,11 @@ export default class CreditScene extends Scene {
   public render(canvas: HTMLCanvasElement): void {
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-    CanvasUtil.writeTextToCanvas(canvas, 'BRICK LAYERS', canvas.width / 2, canvas.height / 2 - 100, 'center', 'DotGothic16', 30, 'black')
-    CanvasUtil.writeTextToCanvas(canvas, 'Netas Neverauskas', canvas.width / 2, canvas.height / 2 - 50, 'center', 'DotGothic16', 30, 'black')
-    CanvasUtil.writeTextToCanvas(canvas, 'Ertugrul Aktas', canvas.width / 2, canvas.height / 2, 'center', 'DotGothic16', 30, 'black')
-    CanvasUtil.writeTextToCanvas(canvas, 'Dominykas Vaisnoras', canvas.width / 2, canvas.height / 2 + 50, 'center', 'DotGothic16', 30, 'black')
-    CanvasUtil.writeTextToCanvas(canvas, 'Tomas Tomkevicius', canvas.width / 2, canvas.height / 2 + 100, 'center', 'DotGothic16', 30, 'black')
-    CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to go back', canvas.width / 2, canvas.height / 2 + 270, 'center', 'DotGothic16', 30, 'black')
+    CanvasUtil.writeTextToCanvas(canvas, 'BRICK LAYERS', canvas.width / 2, canvas.height / 2 - 100, 'center', 'DotGothic16', 30, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Netas Neverauskas', canvas.width / 2, canvas.height / 2 - 50, 'center', 'DotGothic16', 30, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Ertugrul Aktas', canvas.width / 2, canvas.height / 2, 'center', 'DotGothic16', 30, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Dominykas Vaisnoras', canvas.width / 2, canvas.height / 2 + 50, 'center', 'DotGothic16', 30, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Tomas Tomkevicius', canvas.width / 2, canvas.height / 2 + 100, 'center', 'DotGothic16', 30, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] to go back', canvas.width / 2, canvas.height / 2 + 270, 'center', 'DotGothic16', 30, 'black');
   }
 }
