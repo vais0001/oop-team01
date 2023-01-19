@@ -80,9 +80,9 @@ export default class Bedroom extends Scene {
     }
     this.computer = new Computer();
     this.bed = new Bed();
-    this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png');
+    this.popUp = CanvasUtil.loadNewImage('./assets/exclamation_mark.png');
     this.webpageScene = false;
-    this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
+    this.image1 = CanvasUtil.loadNewImage('./assets/bubble.png');
     this.playerHead = CanvasUtil.loadNewImage('./assets/TimmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     if (!this.level1) {

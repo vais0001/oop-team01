@@ -2,7 +2,7 @@ import CanvasUtil from '../CanvasUtil.js';
 import Gameover from '../Gameover.js';
 import KeyListener from '../KeyListener.js';
 import Scene from '../Scene.js';
-import Lives from './Lives.js';
+import Lives from '../Lives.js';
 import Viruses from './Viruses.js';
 import Antagonist from '../Antagonist.js';
 import Player from '../Player.js';
@@ -51,7 +51,7 @@ export default class Whackamole extends Scene {
     super(maxX, maxY);
     this.lang = lang;
     this.whackamoleText = new WhackamoleText(this.lang);
-    this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
+    this.bubble = CanvasUtil.loadNewImage('./assets/bubble.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     this.player = new Player(this.dimensionsX
     + this.backgroundWidth - 1600, this.dimensionsY - 150);
