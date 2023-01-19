@@ -1,8 +1,8 @@
 import Antagonist from '../Antagonist.js';
+import BedroomEnd from '../BedroomEnd.js';
 import CanvasUtil from '../CanvasUtil.js';
 import Gameover from '../Gameover.js';
 import KeyListener from '../KeyListener.js';
-import LoadingSceneEnd from '../LoadingScenes/LoadingSceneEnd.js';
 import Player from '../Player.js';
 import Scene from '../Scene.js';
 import Lives from '../Whackamole/Lives.js';
@@ -266,7 +266,7 @@ export default class BossFight extends Scene {
         if (this.healthBar < 0) {
             this.circleRadius += elapsed * 0.6;
             if (this.circleRadius > 1400)
-                return new LoadingSceneEnd(this.backgroundWidth, this.backgroundHeight);
+                return new BedroomEnd(0, 0, 0);
         }
         return null;
     }
