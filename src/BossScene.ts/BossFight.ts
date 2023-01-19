@@ -67,7 +67,9 @@ export default class BossFight extends Scene {
 
   private nextText: number;
 
-  private renderTextSix: boolean = false;
+  private renderTextSix: boolean;
+
+  private endingScene: boolean;
 
   public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
@@ -99,6 +101,8 @@ export default class BossFight extends Scene {
     this.playerShoot = 500;
     this.startingCutscene = 1300;
     this.nextText = 0;
+    this.endingScene = false;
+    this.renderTextSix = false;
     this.bossFightText = new BossFightText(this.lang);
   }
 
@@ -106,7 +110,7 @@ export default class BossFight extends Scene {
    * @param keyListener input key
    */
   public processInput(keyListener: KeyListener): void {
-    if (this.healthBar > 0 && this.startingCutscene <= 0) {
+    if (!this.endingScene && this.startingCutscene <= 0) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 25) {
         if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
@@ -182,7 +186,7 @@ export default class BossFight extends Scene {
    * @returns true or false
    */
   public update(elapsed: number): Scene {
-    if (this.healthBar > 0 && this.startingCutscene <= 0) {
+    if (!this.endingScene && this.startingCutscene <= 0) {
       this.playerShoot -= elapsed;
       if (this.abilityCount > 3) {
         if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
@@ -374,9 +378,11 @@ export default class BossFight extends Scene {
     }
 
     if (this.healthBar < 0) {
+      this.endingScene = true;
       this.circleRadius += elapsed * 0.6;
       if (this.circleRadius > 1400) return new BedroomEnd(0, 0, 0, this.lang);
     }
+
     if (this.healthBar === 0) this.bullets = [];
     return null;
   }
@@ -423,6 +429,10 @@ export default class BossFight extends Scene {
       this.bossFightText.textTen(canvas, this.bubble, this.talker);
     } else if (this.healthBar > 540 && this.healthBar < 580) {
       this.bossFightText.textEleven(canvas, this.bubble, this.talker);
+    }
+
+    if (this.endingScene) {
+      // this.bossFightText.textTwelve(canvas, this.bubble, this.talker);
     }
 
     if (this.renderTextSix) {
