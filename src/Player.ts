@@ -188,45 +188,46 @@ export default class Player extends Drawable {
     this.posY += elapsed * 0.2;
     this.posX += elapsed * 0.5;
   }
- /**
+
+  /**
+    *
+    * @param heartpowerup is powerup to get extra heart
+    * @returns true or false
+    */
+  public isCollidingHeart(heartpowerup: HeartPowerup): boolean {
+    return (this.posX < heartpowerup.getPosX() + heartpowerup.getWidth()
+      && this.posX + this.getWidth() > heartpowerup.getPosX()
+      && this.getPosY() < heartpowerup.getPosY() + heartpowerup.getHeight()
+      && this.getHeight() + this.posY > heartpowerup.getPosY());
+  }
+
+  /**
    *
-   * @param heartpowerup is powerup to get extra heart
+   * @param bullet is a bullet from enemy
    * @returns true or false
    */
- public isCollidingHeart(heartpowerup: HeartPowerup): boolean {
-  return (this.posX < heartpowerup.getPosX() + heartpowerup.getWidth()
-    && this.posX + this.getWidth() > heartpowerup.getPosX()
-    && this.getPosY() < heartpowerup.getPosY() + heartpowerup.getHeight()
-    && this.getHeight() + this.posY > heartpowerup.getPosY());
-}
+  public isCollidingBullet(bullet: ADbullet): boolean {
+    return (this.posX < bullet.getPosX() + bullet.getWidth()
+      && this.posX + this.getWidth() > bullet.getPosX()
+      && this.getPosY() < bullet.getPosY() + bullet.getHeight()
+      && this.getHeight() + this.posY > bullet.getPosY());
+  }
 
-/**
- *
- * @param bullet is a bullet from enemy
- * @returns true or false
- */
-public isCollidingBullet(bullet: ADbullet): boolean {
-  return (this.posX < bullet.getPosX() + bullet.getWidth()
-    && this.posX + this.getWidth() > bullet.getPosX()
-    && this.getPosY() < bullet.getPosY() + bullet.getHeight()
-    && this.getHeight() + this.posY > bullet.getPosY());
-}
+  /**
+   *
+   * @param speedX speed going X
+   * @param speedY speed going Y
+   */
+  public moveAway(speedX: number, speedY: number): void {
+    this.posX += speedX;
+    this.posY += speedY;
+  }
 
-/**
- *
- * @param speedX speed going X
- * @param speedY speed going Y
- */
-public moveAway(speedX: number, speedY: number): void {
-  this.posX += speedX;
-  this.posY += speedY;
-}
-
-/**
- *
- */
-public changePositionX(): void {
-  this.posX = this.dimensionsX + this.backgroundWidth - 300;
-}
+  /**
+   *
+   */
+  public changePositionX(): void {
+    this.posX = this.dimensionsX + this.backgroundWidth - 300;
+  }
 }
 
