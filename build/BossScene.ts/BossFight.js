@@ -40,7 +40,7 @@ export default class BossFight extends Scene {
         this.abilityShoot = false;
         this.bulletsTimer = 200;
         this.antagonist.changeImage('./assets/trojanfinal.png');
-        this.levelTimer = 10000;
+        this.levelTimer = 1000;
         this.level = 0;
         this.abilityCount = 0;
         this.lightsaberSide = 0;
@@ -49,7 +49,6 @@ export default class BossFight extends Scene {
         this.healthBar = 650;
         this.circleRadius = 0;
         this.hit = false;
-        this.playerShoot = false;
         for (let i = 0; i < 250; i += 50) {
             this.lives.push(new Lives(this.dimensionsX + 40, 250 + i + this.dimensionsY));
         }
@@ -57,6 +56,7 @@ export default class BossFight extends Scene {
         this.moveLeft = false;
         this.moveRight = false;
         this.moveUp = false;
+        this.playerShoot = 300;
     }
     processInput(keyListener) {
         this.buttonsPressed = 0;
@@ -118,17 +118,21 @@ export default class BossFight extends Scene {
         else {
             this.moveDown = false;
         }
-        if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
-            if (this.abilityCount < 5) {
-                this.lightsaberSide = 2;
-                this.hit = true;
+        if (this.playerShoot < 0) {
+            if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+                if (this.abilityCount < 5) {
+                    this.lightsaberSide = 2;
+                    this.hit = true;
+                }
+                if (this.abilityCount > 4) {
+                    this.xBullets.push(new Xbullets(this.player.getPosX(), this.player.getPosY()));
+                }
             }
-            if (this.abilityCount > 4) {
-                this.xBullets.push(new Xbullets(this.player.getPosX(), this.player.getPosY()));
-            }
+            this.playerShoot = 300;
         }
     }
     update(elapsed) {
+        this.playerShoot -= elapsed;
         if (this.abilityCount > 3) {
             if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
                 this.antagonist.setImage('./assets/trojanfinalright.png');
@@ -194,25 +198,24 @@ export default class BossFight extends Scene {
             }
             return true;
         });
-        this.levelTimer -= elapsed;
+        this.bulletsTimer -= elapsed;
         if (this.levelTimer > 0 && this.level === 0) {
+            this.levelTimer -= elapsed;
             if (this.abilityShoot === false) {
                 setTimeout(() => {
                     this.abilityShoot = true;
                 }, 1000);
             }
-            this.bulletsTimer -= elapsed;
             if (this.abilityShoot === true) {
                 if (this.bulletsTimer <= 0) {
                     this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 0));
                     this.bulletsTimer = 500;
                 }
             }
+            if (this.levelTimer <= 0) {
+                this.level = 1;
+            }
         }
-        if (this.levelTimer <= 0) {
-            this.level = 1;
-        }
-        this.bulletsTimer -= elapsed;
         if (this.level === 1) {
             if (this.antagonist.getPosX() > this.dimensionsX && this.abilityCount === 0) {
                 this.antagonist.addOrSubPosX(0.2 * elapsed, 1);
@@ -233,14 +236,13 @@ export default class BossFight extends Scene {
                 }
             }
             if (this.antagonist.getPosX() > this.dimensionsX + this.backgroundWidth - this.antagonist.getWidth() - 20 && this.abilityCount === 1) {
-                this.abilityCount = 2;
                 this.antagonist.changeImage('./assets/trojanfinal.png');
                 this.level = 2;
-                this.levelTimer = 20000;
+                this.abilityCount = 2;
             }
         }
         if (this.level === 2) {
-            if (this.abilityCount === 2 && this.antagonist.getPosY() + this.antagonist.getHeight() <= this.dimensionsY + this.backgroundHeight - 25) {
+            if (this.abilityCount === 2) {
                 this.antagonist.addOrSubPosY(0.2 * elapsed, 0);
                 if (this.bulletsTimer <= 0) {
                     this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 0, 0.5, 1));
@@ -260,14 +262,20 @@ export default class BossFight extends Scene {
             if (this.abilityCount === 4 && this.hit === true && this.lightsaber.collidesWithAntagonist(this.antagonist)) {
                 this.abilityCount = 5;
             }
-            if (this.abilityCount === 5 && this.bulletsTimer <= 0) {
+            if (this.abilityCount === 5 && this.bulletsTimer < 0) {
                 if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
                     this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 6, 0, 2));
-                    this.bulletsTimer = 1500;
+                    this.bulletsTimer = 1000;
                 }
                 else {
                     this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 2));
-                    this.bulletsTimer = 1500;
+                    this.bulletsTimer = 1000;
+                }
+                if (Math.random() > 0.5) {
+                    this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 1, 0.5, 2));
+                }
+                else {
+                    this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 3, 0.5, 2));
                 }
             }
         }

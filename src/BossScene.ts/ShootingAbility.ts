@@ -43,7 +43,7 @@ export default class ShootingAbility extends Drawable {
       this.posX -= this.speed * elapsed;
     }
     if (this.direction === 1) {
-      this.posY -= this.speed * elapsed;
+     this.posY -= this.speed * elapsed;
     }
     if (this.direction === 2) {
       this.posX += this.speed * elapsed;
