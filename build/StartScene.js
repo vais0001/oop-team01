@@ -47,6 +47,15 @@ export default class StartScene extends Scene {
         CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
         CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 - 100);
         CanvasUtil.drawImage(canvas, this.button, canvas.width / 2 - 300, canvas.height / 2 + 30);
+        CanvasUtil.writeTextToCanvas(canvas, '[T]', this.dimensionsX + 1320, this.dimensionsY + 80, 'center', 'Kongtext', 20, 'white');
+        if (!this.lang) {
+            CanvasUtil.writeTextToCanvas(canvas, 'EN', this.dimensionsX + 1350, this.dimensionsY + 50, 'center', 'Kongtext', 20, '#59CE8F');
+            CanvasUtil.writeTextToCanvas(canvas, 'NL', this.dimensionsX + 1290, this.dimensionsY + 50, 'center', 'Kongtext', 20, 'white');
+        }
+        else {
+            CanvasUtil.writeTextToCanvas(canvas, 'EN', this.dimensionsX + 1350, this.dimensionsY + 50, 'center', 'Kongtext', 20, 'white');
+            CanvasUtil.writeTextToCanvas(canvas, 'NL', this.dimensionsX + 1290, this.dimensionsY + 50, 'center', 'Kongtext', 20, '#59CE8F');
+        }
         CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[S] to start'), canvas.width / 2, canvas.height / 2 - 35, 'center', 'Kongtext', 35, 'black');
         CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('[C] for Credits'), canvas.width / 2, canvas.height / 2 + 95, 'center', 'Kongtext', 35, 'black');
     }
