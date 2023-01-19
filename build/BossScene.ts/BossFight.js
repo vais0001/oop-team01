@@ -147,7 +147,7 @@ export default class BossFight extends Scene {
             this.nextText += 1;
     }
     update(elapsed) {
-        if (this.healthBar > 0 && this.startingCutscene < 0) {
+        if (this.healthBar > 0 && this.startingCutscene <= 0) {
             this.playerShoot -= elapsed;
             if (this.abilityCount > 3) {
                 if (this.player.getPosX() + this.player.getWidth() / 2 > this.dimensionsX + this.backgroundWidth / 2) {
@@ -373,6 +373,21 @@ export default class BossFight extends Scene {
                 this.bossFightText.textFour(canvas, this.bubble, this.talker);
             if (this.nextText === 4)
                 this.bossFightText.textFive(canvas, this.bubble, this.talker);
+        }
+        if (this.healthBar < 0) {
+            this.bossFightText.textSeven(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 40 && this.healthBar < 80) {
+            this.bossFightText.textEight(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 120 && this.healthBar < 170) {
+            this.bossFightText.textNine(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 380 && this.healthBar < 420) {
+            this.bossFightText.textTen(canvas, this.bubble, this.talker);
+        }
+        else if (this.healthBar > 540 && this.healthBar < 580) {
+            this.bossFightText.textEleven(canvas, this.bubble, this.talker);
         }
         if (this.renderTextSix) {
             this.bossFightText.textSix(canvas, this.bubble, null);

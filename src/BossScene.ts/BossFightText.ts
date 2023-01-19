@@ -102,9 +102,57 @@ export default class BossFightText extends Drawable {
    * @param image image is image
    * @param talker talker is image
    */
+  public textEleven(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+    CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
+    CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('those attacks are weak'), this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+  }
+
+  /**
+ *
+ * @param canvas is html canvas element
+ * @param image image is image
+ * @param talker talker is image
+ */
+  public textTen(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+    CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
+    CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('You think you are strong enough?'), this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+  }
+
+  /**
+ *
+ * @param canvas is html canvas element
+ * @param image image is image
+ * @param talker talker is image
+ */
+  public textNine(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+    CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
+    CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('Viruses do not go away that easily'), this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+  }
+
+  /**
+ *
+ * @param canvas is html canvas element
+ * @param image image is image
+ * @param talker talker is image
+ */
+  public textEight(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
+    CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
+    CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('I will not give up....'), this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
+  }
+
+  /**
+ *
+ * @param canvas is html canvas element
+ * @param image image is image
+ * @param talker talker is image
+ */
   public textSeven(canvas: HTMLCanvasElement, image: HTMLImageElement, talker: HTMLImageElement): void {
     CanvasUtil.drawImage(canvas, image, this.dimensionsX + 450, this.dimensionsY + 580);
-    CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('I have had enough!'), this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
+    CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('Enough!!!!!'), this.dimensionsX + 740, this.dimensionsY + 660, 'center', 'DotGothic16', 20, 'black');
     CanvasUtil.drawImage(canvas, talker, this.dimensionsX + 465, this.dimensionsY + 640);
   }
 }
