@@ -56,7 +56,7 @@ export default class BossFight extends Scene {
         this.moveLeft = false;
         this.moveRight = false;
         this.moveUp = false;
-        this.playerShoot = 300;
+        this.playerShoot = 500;
     }
     processInput(keyListener) {
         this.buttonsPressed = 0;
@@ -118,17 +118,15 @@ export default class BossFight extends Scene {
         else {
             this.moveDown = false;
         }
-        if (this.playerShoot < 0) {
-            if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
-                if (this.abilityCount < 5) {
-                    this.lightsaberSide = 2;
-                    this.hit = true;
-                }
-                if (this.abilityCount > 4) {
-                    this.xBullets.push(new Xbullets(this.player.getPosX(), this.player.getPosY()));
-                }
+        if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+            if (this.abilityCount < 5) {
+                this.lightsaberSide = 2;
+                this.hit = true;
             }
-            this.playerShoot = 300;
+            if (this.abilityCount > 4 && this.playerShoot < 0) {
+                this.xBullets.push(new Xbullets(this.player.getPosX(), this.player.getPosY()));
+                this.playerShoot = 500;
+            }
         }
     }
     update(elapsed) {
