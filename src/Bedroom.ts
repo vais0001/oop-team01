@@ -12,6 +12,7 @@ import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
 import BossFight from './BossScene.ts/BossFight.js';
 import BedroomEnd from './BedroomEnd.js';
+import Locale from './Locale.js';
 
 export default class Bedroom extends Scene {
   private player: Player;
@@ -60,8 +61,11 @@ export default class Bedroom extends Scene {
 
   private moveLeft: boolean;
 
-  public constructor(maxX: number, maxY: number, level: number) {
+  private webPageLanguage: boolean;
+
+  public constructor(maxX: number, maxY: number, level: number, lang: boolean) {
     super(maxX, maxY);
+    this.lang = lang
     this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
     this.bossFightScene = false;
     if (level === 1) {
@@ -93,7 +97,8 @@ export default class Bedroom extends Scene {
     this.cheatLoadingScreen = false;
     this.finalScene = false;
     this.nextText = 0;
-    this.text = new Text();
+    this.text = new Text(this.lang);
+    this.webPageLanguage = lang;
     this.buttonsPressed = 0;
     this.moveDown = false;
     this.moveLeft = false;
@@ -193,26 +198,26 @@ export default class Bedroom extends Scene {
     }
     // cheat code to whackamole
     if (this.bossFightScene === true) {
-      return new BossFight(window.innerWidth, window.innerHeight);
+      return new BossFight(window.innerWidth, window.innerHeight, this.lang);
     }
     if (this.cheatWhackamole === true) {
-      return new Whackamole(window.innerWidth, window.innerHeight);
+      return new Whackamole(window.innerWidth, window.innerHeight, this.lang);
     }
     if (this.cheatArrow === true) {
-      return new ArrowThrower(window.innerWidth, window.innerHeight);
+      return new ArrowThrower(window.innerWidth, window.innerHeight, this.lang);
     }
 
     if (this.cheatLoadingScreen === true) {
-      return new Webpage(window.innerWidth, window.innerHeight);
+      return new Webpage(window.innerWidth, window.innerHeight, this.webPageLanguage);
     }
 
     if (this.finalScene === true) {
-      return new BedroomEnd(window.innerWidth, window.innerHeight, 0);
+      return new BedroomEnd(window.innerWidth, window.innerHeight, 0, this.lang);
     }
 
-    if (this.webpageScene === true) return new Webpage(0, 0);
+    if (this.webpageScene === true) return new Webpage(0, 0, this.webPageLanguage);
     this.timeToText -= elapsed;
-    if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY);
+    if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY, this.lang);
 
     if (this.moveUp) this.player.moveUp(elapsed);
     if (this.moveDown) this.player.moveDown(elapsed);

@@ -7,8 +7,9 @@ export default class WebpageEnd extends Scene {
     downloading;
     loadingBar;
     downloadedTime;
-    constructor(maxX, maxY) {
+    constructor(maxX, maxY, lang) {
         super(maxX, maxY);
+        this.lang = lang;
         this.image = CanvasUtil.loadNewImage('./placeholders/internet_browser.png');
         this.newLevel = false;
         this.downloading = false;
@@ -32,7 +33,7 @@ export default class WebpageEnd extends Scene {
             }
         }
         if (this.newLevel === true) {
-            return new BedroomEnd(0, 0, 1);
+            return new BedroomEnd(0, 0, 1, this.lang);
         }
         return null;
     }

@@ -51,8 +51,9 @@ export default class BossFight extends Scene {
 
   private circleRadius: number;
 
-  public constructor(maxX: number, maxY: number) {
+  public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
+    this.lang = lang;
     this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
     this.antagonist = new Antagonist(1050, 90);
@@ -299,7 +300,7 @@ export default class BossFight extends Scene {
 
     if (this.healthBar < 0) {
       this.circleRadius += elapsed * 0.6;
-      if (this.circleRadius > 1400) return new BedroomEnd(0, 0, 0);
+      if (this.circleRadius > 1400) return new BedroomEnd(0, 0, 0, this.lang);
     }
 
     return null;

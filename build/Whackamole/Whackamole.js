@@ -20,14 +20,16 @@ export default class Whackamole extends Scene {
     wormSmashedTimer;
     deadWormArray = [];
     nextText;
-    whackamoleText = new WhackamoleText();
+    whackamoleText;
     trojanHead;
     bubble;
     cutsceneTimer;
     lastValues = [];
     virusPushed;
-    constructor(maxX, maxY) {
+    constructor(maxX, maxY, lang) {
         super(maxX, maxY);
+        this.lang = lang;
+        this.whackamoleText = new WhackamoleText(this.lang);
         this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
         this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
         this.player = new Player(this.dimensionsX + this.backgroundWidth - 1600, this.dimensionsY - 150);
@@ -194,7 +196,7 @@ export default class Whackamole extends Scene {
             }
         }
         if (this.player.getPosX() <= this.dimensionsX - 2000) {
-            return new LoadingSceneBF(window.innerWidth, window.innerHeight);
+            return new LoadingSceneBF(window.innerWidth, window.innerHeight, this.lang);
         }
         return null;
     }

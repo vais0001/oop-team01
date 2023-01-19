@@ -1,4 +1,5 @@
 import KeyListener from './KeyListener.js';
+import Locale from './Locale.js';
 import MouseListener from './MouseListener.js';
 
 export default abstract class Scene {
@@ -17,6 +18,8 @@ export default abstract class Scene {
   protected backgroundWidth: number;
 
   protected backgroundHeight: number;
+
+  protected lang: boolean;
 
   public constructor(maxX: number, maxY: number) {
     this.maxX = maxX;

@@ -17,6 +17,8 @@ export default class StartScene extends Scene {
     this.starting = false;
     this.creditscene = false;
     this.button = CanvasUtil.loadNewImage('./placeholders/start_button.png');
+    this.lang = false;
+    console.log(this.lang);
   }
 
   /**
@@ -30,6 +32,10 @@ export default class StartScene extends Scene {
     if (keyListener.keyPressed('KeyC')) {
       this.creditscene = true;
     }
+    if (keyListener.keyPressed(KeyListener.KEY_T)) {
+      this.lang = !this.lang;
+      console.log(this.lang);
+    }
   }
 
   /**
@@ -37,7 +43,7 @@ export default class StartScene extends Scene {
    * @returns nothing
    */
   public update(): Scene {
-    if (this.starting) return new LoadingScene(this.maxX, this.maxY);
+    if (this.starting) return new LoadingScene(this.maxX, this.maxY, this.lang);
     if (this.creditscene) return new CreditScene(this.maxX, this.maxY);
     return null;
   }

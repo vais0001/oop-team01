@@ -5,12 +5,14 @@ export default class LoadingScene extends Scene {
     loadingBar;
     realisticPause;
     continue;
-    constructor(maxX, maxY) {
+    constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.loadingBar = 0;
         this.image = CanvasUtil.loadNewImage('./assets/bedroomloading.png');
         this.realisticPause = 50;
         this.continue = false;
+        this.lang = lang;
+        console.log(this.lang);
     }
     processInput(keyListener) {
         if (this.loadingBar === 1100 && keyListener.keyPressed('Space')) {
@@ -30,7 +32,7 @@ export default class LoadingScene extends Scene {
             this.loadingBar = 1100;
         }
         if (this.continue)
-            return new Bedroom(this.maxX, this.maxY, 0);
+            return new Bedroom(this.maxX, this.maxY, 0, this.lang);
         return null;
     }
     render(canvas) {

@@ -28,8 +28,9 @@ export default class BedroomEnd extends Scene {
     moveDown;
     moveLeft;
     circleRadius;
-    constructor(maxX, maxY, level) {
+    constructor(maxX, maxY, level, lang) {
         super(maxX, maxY);
+        this.lang = lang;
         this.image = CanvasUtil.loadNewImage('./assets/timmyroom3.png');
         this.circleRadius = 1400;
         if (level === 1) {
@@ -60,7 +61,7 @@ export default class BedroomEnd extends Scene {
             this.timeToText = 1500;
         }
         this.nextText = 0;
-        this.bedroomEndText = new BedroomEndText();
+        this.bedroomEndText = new BedroomEndText(this.lang);
         this.buttonsPressed = 0;
         this.moveDown = false;
         this.moveLeft = false;
@@ -148,7 +149,7 @@ export default class BedroomEnd extends Scene {
             this.player.move(66, 150);
         }
         if (this.webpageScene === true)
-            return new WebpageEnd(0, 0);
+            return new WebpageEnd(0, 0, this.lang);
         this.timeToText -= elapsed;
         if (this.scene === 2) {
             this.antagonist.moveToPlayer(this.player, 0.3);

@@ -33,7 +33,7 @@ export default class Whackamole extends Scene {
 
   private nextText: number;
 
-  private whackamoleText: WhackamoleText = new WhackamoleText();
+  private whackamoleText: WhackamoleText;
 
   private trojanHead: HTMLImageElement;
 
@@ -45,8 +45,10 @@ export default class Whackamole extends Scene {
 
   private virusPushed: boolean;
 
-  public constructor(maxX: number, maxY: number) {
+  public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
+    this.lang = lang;
+    this.whackamoleText = new WhackamoleText(this.lang);
     this.bubble = CanvasUtil.loadNewImage('./placeholders/bubble.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     this.player = new Player(this.dimensionsX + this.backgroundWidth - 1600, this.dimensionsY - 150);
@@ -220,7 +222,7 @@ export default class Whackamole extends Scene {
       }
     }
     if (this.player.getPosX() <= this.dimensionsX - 2000) {
-      return new LoadingSceneBF(window.innerWidth, window.innerHeight);
+      return new LoadingSceneBF(window.innerWidth, window.innerHeight, this.lang);
     }
     return null;
   }

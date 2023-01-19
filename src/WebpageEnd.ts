@@ -12,8 +12,9 @@ export default class WebpageEnd extends Scene {
 
   private downloadedTime: number;
 
-  public constructor(maxX: number, maxY: number) {
+  public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
+    this.lang = lang;
     this.image = CanvasUtil.loadNewImage('./placeholders/internet_browser.png');
     this.newLevel = false;
     this.downloading = false;
@@ -48,7 +49,7 @@ export default class WebpageEnd extends Scene {
       }
     }
     if (this.newLevel === true) {
-      return new BedroomEnd(0, 0, 1);
+      return new BedroomEnd(0, 0, 1, this.lang);
     }
     return null;
   }

@@ -1,4 +1,5 @@
 import CanvasUtil from './CanvasUtil.js';
+import KeyListener from './KeyListener.js';
 import LoadingScene from './LoadingScenes/LoadingScene.js';
 import Scene from './Scene.js';
 import CreditScene from './CreditScene.js';
@@ -12,6 +13,8 @@ export default class StartScene extends Scene {
         this.starting = false;
         this.creditscene = false;
         this.button = CanvasUtil.loadNewImage('./placeholders/start_button.png');
+        this.lang = false;
+        console.log(this.lang);
     }
     processInput(keyListener) {
         if (keyListener.keyPressed('KeyS')) {
@@ -20,10 +23,14 @@ export default class StartScene extends Scene {
         if (keyListener.keyPressed('KeyC')) {
             this.creditscene = true;
         }
+        if (keyListener.keyPressed(KeyListener.KEY_T)) {
+            this.lang = !this.lang;
+            console.log(this.lang);
+        }
     }
     update() {
         if (this.starting)
-            return new LoadingScene(this.maxX, this.maxY);
+            return new LoadingScene(this.maxX, this.maxY, this.lang);
         if (this.creditscene)
             return new CreditScene(this.maxX, this.maxY);
         return null;

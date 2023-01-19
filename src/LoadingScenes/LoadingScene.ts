@@ -10,12 +10,14 @@ export default class LoadingScene extends Scene {
 
   private continue: boolean;
 
-  public constructor(maxX: number, maxY: number) {
+  public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
     this.loadingBar = 0;
     this.image = CanvasUtil.loadNewImage('./assets/bedroomloading.png');
     this.realisticPause = 50;
     this.continue = false;
+    this.lang = lang;
+    console.log(this.lang);
   }
 
   /**
@@ -47,7 +49,7 @@ export default class LoadingScene extends Scene {
       this.loadingBar = 1100;
     }
 
-    if (this.continue) return new Bedroom(this.maxX, this.maxY, 0);
+    if (this.continue) return new Bedroom(this.maxX, this.maxY, 0, this.lang);
     return null;
   }
 

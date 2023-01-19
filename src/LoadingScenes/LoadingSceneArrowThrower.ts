@@ -10,8 +10,9 @@ export default class LoadingSceneAT extends Scene {
 
   private continue: boolean;
 
-  public constructor(maxX: number, maxY: number) {
+  public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
+    this.lang = lang;
     this.loadingBar = 0;
     this.image = CanvasUtil.loadNewImage('./assets/level_loading_screen2.png');
     this.realisticPause = 50;
@@ -47,7 +48,7 @@ export default class LoadingSceneAT extends Scene {
       this.loadingBar = 1100;
     }
 
-    if (this.continue) return new ArrowThrower(window.innerWidth, window.innerHeight);
+    if (this.continue) return new ArrowThrower(window.innerWidth, window.innerHeight, this.lang);
     return null;
   }
 

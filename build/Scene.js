@@ -7,6 +7,7 @@ export default class Scene {
     dimensionsY;
     backgroundWidth;
     backgroundHeight;
+    lang;
     constructor(maxX, maxY) {
         this.maxX = maxX;
         this.maxY = maxY;

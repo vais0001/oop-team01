@@ -19,7 +19,7 @@ export default class ArrowThrower extends Scene {
     lives = [];
     adBullets = [];
     heartPowerup = [];
-    arrowThrowerText = new ThrowerText();
+    arrowThrowerText;
     bullet;
     timeToNextAD;
     changingTime;
@@ -33,8 +33,11 @@ export default class ArrowThrower extends Scene {
     computer;
     moveUp;
     moveDown;
-    constructor(maxX, maxY) {
+    constructor(maxX, maxY, lang) {
         super(maxX, maxY);
+        this.lang = lang;
+        console.log(this.lang);
+        this.arrowThrowerText = new ThrowerText(this.lang);
         this.image = CanvasUtil.loadNewImage('./assets/arrowthrower.png');
         this.player = new Player(this.dimensionsX + this.backgroundWidth - 1550, this.dimensionsY - 100);
         this.antagonist = new Antagonist(this.backgroundWidth - 1850, this.backgroundHeight - 1000);
@@ -220,7 +223,7 @@ export default class ArrowThrower extends Scene {
             this.player.moveAway(-2, 0);
         }
         if (this.player.getPosX() < this.backgroundWidth - 2000) {
-            return new LoadingSceneWM(window.innerWidth, window.innerHeight);
+            return new LoadingSceneWM(window.innerWidth, window.innerHeight, this.lang);
         }
         return null;
     }

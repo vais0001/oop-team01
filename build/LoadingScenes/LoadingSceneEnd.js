@@ -5,8 +5,9 @@ export default class LoadingSceneEnd extends Scene {
     loadingBar;
     realisticPause;
     continue;
-    constructor(maxX, maxY) {
+    constructor(maxX, maxY, lang) {
         super(maxX, maxY);
+        this.lang = lang;
         this.loadingBar = 0;
         this.image = CanvasUtil.loadNewImage('./assets/bedroomloading.png');
         this.realisticPause = 50;
@@ -30,7 +31,7 @@ export default class LoadingSceneEnd extends Scene {
             this.loadingBar = 1100;
         }
         if (this.continue)
-            return new BedroomEnd(this.maxX, this.maxY, 0);
+            return new BedroomEnd(this.maxX, this.maxY, 0, this.lang);
         return null;
     }
     render(canvas) {

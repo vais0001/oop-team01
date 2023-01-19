@@ -5,8 +5,9 @@ export default class LoadingSceneWM extends Scene {
     loadingBar;
     realisticPause;
     continue;
-    constructor(maxX, maxY) {
+    constructor(maxX, maxY, lang) {
         super(maxX, maxY);
+        this.lang = lang;
         this.loadingBar = 0;
         this.image = CanvasUtil.loadNewImage('./placeholders/loading_screen_controls.png');
         this.realisticPause = 50;
@@ -31,7 +32,7 @@ export default class LoadingSceneWM extends Scene {
             this.loadingBar = 1220;
         }
         if (this.continue)
-            return new Whackamole(window.innerWidth, window.innerHeight);
+            return new Whackamole(window.innerWidth, window.innerHeight, this.lang);
         return null;
     }
     render(canvas) {

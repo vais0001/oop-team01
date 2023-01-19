@@ -29,7 +29,7 @@ export default class ArrowThrower extends Scene {
 
   private heartPowerup: HeartPowerup[] = [];
 
-  private arrowThrowerText: ThrowerText = new ThrowerText();
+  private arrowThrowerText: ThrowerText;
 
   private bullet: CursorBullet;
 
@@ -57,9 +57,11 @@ export default class ArrowThrower extends Scene {
 
   private moveDown: boolean;
 
-  public constructor(maxX: number, maxY: number) {
+  public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
-
+    this.lang = lang;
+    console.log(this.lang)
+    this.arrowThrowerText = new ThrowerText(this.lang);
     this.image = CanvasUtil.loadNewImage('./assets/arrowthrower.png');
 
     // 3000 or 1500
@@ -278,7 +280,7 @@ export default class ArrowThrower extends Scene {
     }
 
     if (this.player.getPosX() < this.backgroundWidth - 2000) {
-      return new LoadingSceneWM(window.innerWidth, window.innerHeight);
+      return new LoadingSceneWM(window.innerWidth, window.innerHeight, this.lang);
     }
 
     return null;
