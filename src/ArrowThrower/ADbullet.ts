@@ -1,6 +1,6 @@
 import CanvasUtil from '../CanvasUtil.js';
 import Drawable from '../Drawable.js';
-import Player from './Player.js';
+import Player from '../Player.js';
 
 export default class ADbullet extends Drawable {
   public constructor(startX: number, startY: number) {

@@ -27,6 +27,12 @@ export default class Player extends Drawable {
             && this.getPosY() < computer.getPosY() + computer.getHeight() - 200
             && this.getHeight() + this.posY > computer.getPosY());
     }
+    isCollidingAD(ad) {
+        return (this.posX < ad.getPosX() + ad.getWidth()
+            && this.posX + this.getWidth() > ad.getPosX()
+            && this.getPosY() < ad.getPosY() + ad.getHeight()
+            && this.getHeight() + this.posY > ad.getPosY());
+    }
     collidingBed(bed) {
         return (this.posX < bed.getPosX() + bed.getWidth()
             && this.posX + this.getWidth() > bed.getPosX()
@@ -88,10 +94,14 @@ export default class Player extends Drawable {
             && this.getHeight() + this.posY > antagonist.getPosY());
     }
     moveUp(elapsed) {
-        this.posY -= elapsed * 0.5;
+        if (this.posY + this.image.height > this.dimensionsY + 220) {
+            this.posY -= elapsed * 0.5;
+        }
     }
     moveDown(elapsed) {
-        this.posY += elapsed * 0.5;
+        if (this.posY + this.image.height < this.dimensionsY + this.backgroundHeight - 25) {
+            this.posY += elapsed * 0.5;
+        }
     }
     moveLeft(elapsed) {
         this.lookingRight = false;
@@ -101,11 +111,28 @@ export default class Player extends Drawable {
         this.lookingRight = true;
         this.posX += elapsed * 0.5;
     }
-    cutsceneMovement(elapsed) { }
-    isCollidingAD(ad) { return null; }
-    isCollidingHeart(heartpowerup) { return null; }
-    isCollidingBullet(bullet) { return null; }
-    moveAway(speedX, speedY) { }
-    changePositionX() { }
+    cutsceneMovement(elapsed) {
+        this.posY += elapsed * 0.2;
+        this.posX += elapsed * 0.5;
+    }
+    isCollidingHeart(heartpowerup) {
+        return (this.posX < heartpowerup.getPosX() + heartpowerup.getWidth()
+            && this.posX + this.getWidth() > heartpowerup.getPosX()
+            && this.getPosY() < heartpowerup.getPosY() + heartpowerup.getHeight()
+            && this.getHeight() + this.posY > heartpowerup.getPosY());
+    }
+    isCollidingBullet(bullet) {
+        return (this.posX < bullet.getPosX() + bullet.getWidth()
+            && this.posX + this.getWidth() > bullet.getPosX()
+            && this.getPosY() < bullet.getPosY() + bullet.getHeight()
+            && this.getHeight() + this.posY > bullet.getPosY());
+    }
+    moveAway(speedX, speedY) {
+        this.posX += speedX;
+        this.posY += speedY;
+    }
+    changePositionX() {
+        this.posX = this.dimensionsX + this.backgroundWidth - 300;
+    }
 }
 //# sourceMappingURL=Player.js.map

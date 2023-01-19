@@ -54,6 +54,17 @@ export default class Player extends Drawable {
   }
 
   /**
+   *@param ad is a enemy object
+   *@returns true or false
+   */
+  public isCollidingAD(ad: EnemyAD): boolean {
+    return (this.posX < ad.getPosX() + ad.getWidth()
+      && this.posX + this.getWidth() > ad.getPosX()
+      && this.getPosY() < ad.getPosY() + ad.getHeight()
+      && this.getHeight() + this.posY > ad.getPosY());
+  }
+
+  /**
    *
    * @param bed is bed object
    * @returns true or false
@@ -140,7 +151,9 @@ export default class Player extends Drawable {
    *@param elapsed is time
    */
   public moveUp(elapsed: number): void {
-    this.posY -= elapsed * 0.5;
+    if (this.posY + this.image.height > this.dimensionsY + 220) {
+      this.posY -= elapsed * 0.5;
+    }
   }
 
   /**
@@ -148,7 +161,9 @@ export default class Player extends Drawable {
    * @param elapsed is time
    */
   public moveDown(elapsed: number): void {
-    this.posY += elapsed * 0.5;
+    if (this.posY + this.image.height < this.dimensionsY + this.backgroundHeight - 25) {
+      this.posY += elapsed * 0.5;
+    }
   }
 
   /**
@@ -169,10 +184,49 @@ export default class Player extends Drawable {
     this.posX += elapsed * 0.5;
   }
 
-  public cutsceneMovement(elapsed: number): void { }
-  public isCollidingAD(ad: EnemyAD): boolean { return null }
-  public isCollidingHeart(heartpowerup: HeartPowerup): boolean { return null }
-  public isCollidingBullet(bullet: ADbullet): boolean { return null }
-  public moveAway(speedX: number, speedY: number): void { }
-  public changePositionX(): void { }
+  public cutsceneMovement(elapsed: number): void {
+    this.posY += elapsed * 0.2;
+    this.posX += elapsed * 0.5;
+  }
+ /**
+   *
+   * @param heartpowerup is powerup to get extra heart
+   * @returns true or false
+   */
+ public isCollidingHeart(heartpowerup: HeartPowerup): boolean {
+  return (this.posX < heartpowerup.getPosX() + heartpowerup.getWidth()
+    && this.posX + this.getWidth() > heartpowerup.getPosX()
+    && this.getPosY() < heartpowerup.getPosY() + heartpowerup.getHeight()
+    && this.getHeight() + this.posY > heartpowerup.getPosY());
 }
+
+/**
+ *
+ * @param bullet is a bullet from enemy
+ * @returns true or false
+ */
+public isCollidingBullet(bullet: ADbullet): boolean {
+  return (this.posX < bullet.getPosX() + bullet.getWidth()
+    && this.posX + this.getWidth() > bullet.getPosX()
+    && this.getPosY() < bullet.getPosY() + bullet.getHeight()
+    && this.getHeight() + this.posY > bullet.getPosY());
+}
+
+/**
+ *
+ * @param speedX speed going X
+ * @param speedY speed going Y
+ */
+public moveAway(speedX: number, speedY: number): void {
+  this.posX += speedX;
+  this.posY += speedY;
+}
+
+/**
+ *
+ */
+public changePositionX(): void {
+  this.posX = this.dimensionsX + this.backgroundWidth - 300;
+}
+}
+

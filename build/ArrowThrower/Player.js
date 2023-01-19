@@ -8,12 +8,12 @@ export default class Player extends Drawable {
         this.posY = maxY - 200;
     }
     moveUp(elapsed) {
-        if (this.posY > this.dimensionsY - 130) {
+        if (this.posY + this.image.height > this.dimensionsY + 220) {
             this.posY -= elapsed * 0.5;
         }
     }
     moveDown(elapsed) {
-        if (this.posY < this.dimensionsY + this.backgroundHeight - 140) {
+        if (this.posY + this.image.height < this.dimensionsY + this.backgroundHeight - 25) {
             this.posY += elapsed * 0.5;
         }
     }
