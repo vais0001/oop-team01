@@ -12,7 +12,6 @@ import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
 import BossFight from './BossScene.ts/BossFight.js';
 import BedroomEnd from './BedroomEnd.js';
-import Locale from './Locale.js';
 
 export default class Bedroom extends Scene {
   private player: Player;
