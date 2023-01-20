@@ -6,7 +6,7 @@ export default class CreditScene extends Scene {
     page;
     constructor(MaxX, MaxY) {
         super(MaxX, MaxY);
-        this.image = CanvasUtil.loadNewImage('./placeholders/credits.png');
+        this.image = CanvasUtil.loadNewImage('./assets/credits.png');
         this.continue = false;
         this.page = 1;
     }

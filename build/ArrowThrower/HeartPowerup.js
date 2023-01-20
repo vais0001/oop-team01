@@ -3,7 +3,7 @@ import Drawable from '../Drawable.js';
 export default class HeartPowerup extends Drawable {
     constructor() {
         super();
-        this.image = CanvasUtil.loadNewImage('./placeholders/heart.png');
+        this.image = CanvasUtil.loadNewImage('./assets/heart.png');
         this.posX = this.dimensionsX;
         this.posY = (Math.random() * ((this.dimensionsY + this.backgroundHeight - 350) - this.dimensionsY + 100) + this.dimensionsY + 100);
     }

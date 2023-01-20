@@ -7,7 +7,7 @@ export default class CursorBullet extends Drawable {
     super();
     this.posX = startX;
     this.posY = startY;
-    this.image = CanvasUtil.loadNewImage('./placeholders/cursor.png');
+    this.image = CanvasUtil.loadNewImage('./assets/cursor.png');
   }
 
   /**

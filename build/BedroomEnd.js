@@ -28,6 +28,7 @@ export default class BedroomEnd extends Scene {
     moveDown;
     moveLeft;
     circleRadius;
+    blackScreen;
     constructor(maxX, maxY, level, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -49,9 +50,9 @@ export default class BedroomEnd extends Scene {
         }
         this.computer = new Computer();
         this.bed = new Bed();
-        this.popUp = CanvasUtil.loadNewImage('./placeholders/exclamation_mark.png');
+        this.popUp = CanvasUtil.loadNewImage('./assets/exclamation_mark.png');
         this.webpageScene = false;
-        this.image1 = CanvasUtil.loadNewImage('./placeholders/bubble.png');
+        this.image1 = CanvasUtil.loadNewImage('./assets/bubble.png');
         this.playerHead = CanvasUtil.loadNewImage('./assets/TimmyHead.png');
         this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
         if (!this.level1) {
@@ -67,6 +68,7 @@ export default class BedroomEnd extends Scene {
         this.moveLeft = false;
         this.moveRight = false;
         this.moveUp = false;
+        this.blackScreen = false;
     }
     processInput(keyListener) {
         if (!this.level1 && this.nextText > 6) {
@@ -154,6 +156,9 @@ export default class BedroomEnd extends Scene {
         if (this.scene === 2) {
             this.antagonist.moveToPlayer(this.player, 0.3);
             if (this.player.collideWithAntagonist(this.antagonist)) {
+                this.blackScreen = true;
+            }
+            if (this.antagonist.getPosX() > this.backgroundWidth + this.dimensionsX + 500) {
                 return new CreditScene(0, 0);
             }
         }
@@ -208,6 +213,9 @@ export default class BedroomEnd extends Scene {
             if (this.nextText === 6)
                 this.bedroomEndText.textSeven(canvas, this.image1, this.playerHead);
             CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
+        }
+        if (this.blackScreen) {
+            CanvasUtil.fillCanvas(canvas, 'black');
         }
     }
 }
