@@ -123,7 +123,6 @@ export default class Whackamole extends Scene {
           this.lives.pop();
         }
       }
-      console.log(this.pressedonetime);
     }
     if (this.nextText <= 2 && this.antagonist.getCutsceneMoveTimer() < 0) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
