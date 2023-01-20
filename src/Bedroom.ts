@@ -114,9 +114,12 @@ export default class Bedroom extends Scene {
     if (!this.level1 && this.nextText > 4) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 20
-      && !(this.player.collidingBed(this.bed))) {
+      // eslint-disable-next-line max-len
+      && !(this.player.getPosX() + this.player.getWidth() < this.bed.getPosX() + this.bed.getWidth() + 60
+      // eslint-disable-next-line max-len
+      && this.player.getPosY() + this.player.getHeight() < this.bed.getPosY() + this.bed.getHeight())) {
         if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
           this.player.move(0, 150);
           this.buttonsPressed += 1;
           this.moveLeft = true;
@@ -128,10 +131,15 @@ export default class Bedroom extends Scene {
       }
 
       if (this.player.getPosY() > this.dimensionsY + 120
-      && !(this.player.collidingComputer(this.computer))
-      && !(this.player.collidingBed(this.bed))) {
+        // eslint-disable-next-line max-len
+        && !(this.player.getPosX() + this.player.getWidth() < this.bed.getPosX() + this.bed.getWidth() + 30
+        // eslint-disable-next-line max-len
+        && this.player.getPosY() + this.player.getHeight() < this.bed.getPosY() + this.bed.getHeight() + 25)
+        && !(this.player.getPosX() + this.player.getWidth() > this.computer.getPosX()
+        // eslint-disable-next-line max-len
+        && this.player.getPosY() + this.player.getHeight() < this.computer.getPosY() + this.computer.getHeight() + 25)) {
         if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
           this.player.move(1, 150);
           this.buttonsPressed += 1;
           this.moveUp = true;
@@ -143,9 +151,15 @@ export default class Bedroom extends Scene {
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 100
-      && !(this.player.collidingComputer(this.computer))) {
+        // eslint-disable-next-line max-len
+        && !(this.player.getPosX() + this.player.getWidth() < this.bed.getPosX() + this.bed.getWidth()
+        // eslint-disable-next-line max-len
+        && this.player.getPosY() + this.player.getHeight() < this.bed.getPosY() + this.bed.getHeight() - 10)
+        && !(this.player.getPosX() + this.player.getWidth() > this.computer.getPosX() - 5
+        // eslint-disable-next-line max-len
+        && this.player.getPosY() + this.player.getHeight() < this.computer.getPosY() + this.computer.getHeight())) {
         if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
           this.player.move(2, 150);
           this.buttonsPressed += 1;
           this.moveRight = true;
@@ -158,7 +172,7 @@ export default class Bedroom extends Scene {
 
       if (this.player.getPosY() < this.dimensionsY + this.backgroundHeight - 300) {
         if ((keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))
-        && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
+          && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
           this.buttonsPressed += 1;
           this.player.move(3, 150);
           this.moveDown = true;

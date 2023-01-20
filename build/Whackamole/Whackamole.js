@@ -79,7 +79,7 @@ export default class Whackamole extends Scene {
         }
     }
     processInput(keyListener, mouseListener) {
-        if (this.nextText >= 2) {
+        if (this.nextText >= 2 && this.enemiesLeft > 0) {
             if (keyListener.keyPressed(KeyListener.KEY_97))
                 this.wormSmash(1);
             if (keyListener.keyPressed(KeyListener.KEY_98))

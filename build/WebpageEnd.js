@@ -1,6 +1,7 @@
 import BedroomEnd from './BedroomEnd.js';
 import CanvasUtil from './CanvasUtil.js';
 import KeyListener from './KeyListener.js';
+import Locale from './Locale.js';
 import Scene from './Scene.js';
 export default class WebpageEnd extends Scene {
     newLevel;
@@ -11,6 +12,7 @@ export default class WebpageEnd extends Scene {
     nextColor;
     winSound;
     firstWinSound;
+    locale;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -23,6 +25,12 @@ export default class WebpageEnd extends Scene {
         this.randomColor = '';
         this.winSound = new Audio('./assets/audio/winning.mp3');
         this.firstWinSound = new Audio('./assets/audio/instawin.mp3');
+        if (this.lang === true) {
+            this.locale = new Locale('nl');
+        }
+        else {
+            this.locale = new Locale('en-US');
+        }
     }
     processInput(keyListener) {
         if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
@@ -68,19 +76,19 @@ export default class WebpageEnd extends Scene {
         CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
         CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 630, this.loadingBar, 30, 'green');
         CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 160, this.dimensionsY + 630, 301, 30, 'black');
-        CanvasUtil.writeTextToCanvas(canvas, 'Congrats!', canvas.width / 2, this.dimensionsY + 280, 'center', 'Kongtext', 40, this.randomColor);
-        CanvasUtil.writeTextToCanvas(canvas, 'You escaped', canvas.width / 2, this.dimensionsY + 360, 'center', 'Kongtext', 46, '#13005A');
-        CanvasUtil.writeTextToCanvas(canvas, 'Trojan Street!', canvas.width / 2, this.dimensionsY + 420, 'center', 'Kongtext', 46, '#13005A');
-        CanvasUtil.writeTextToCanvas(canvas, 'You escaped', canvas.width / 2, this.dimensionsY + 360, 'center', 'Kongtext', 45, '#03C988');
-        CanvasUtil.writeTextToCanvas(canvas, 'Trojan Street!', canvas.width / 2, this.dimensionsY + 420, 'center', 'Kongtext', 45, '#03C988');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('Congrats!'), canvas.width / 2, this.dimensionsY + 280, 'center', 'Kongtext', 40, this.randomColor);
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('You escaped'), canvas.width / 2, this.dimensionsY + 360, 'center', 'Kongtext', 46, '#13005A');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('Trojan Street!'), canvas.width / 2, this.dimensionsY + 420, 'center', 'Kongtext', 46, '#13005A');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('You escaped'), canvas.width / 2, this.dimensionsY + 360, 'center', 'Kongtext', 45, '#03C988');
+        CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('Trojan Street!'), canvas.width / 2, this.dimensionsY + 420, 'center', 'Kongtext', 45, '#03C988');
         if (!(this.downloading)) {
-            CanvasUtil.writeTextToCanvas(canvas, 'Press [SPACE] To Continue', canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'black');
+            CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('Press [SPACE] To Continue'), canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'black');
         }
         if (this.downloading && this.loadingBar < 300) {
-            CanvasUtil.writeTextToCanvas(canvas, 'loading...', canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'black');
+            CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('loading...'), canvas.width / 2, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'black');
         }
         if (this.loadingBar > 300) {
-            CanvasUtil.writeTextToCanvas(canvas, 'LOADED', canvas.width / 2 - 10, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'red');
+            CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('LOADED'), canvas.width / 2 - 10, this.dimensionsY + 600, 'center', 'Kongtext', 30, 'red');
         }
     }
 }
