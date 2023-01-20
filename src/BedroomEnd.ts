@@ -50,6 +50,10 @@ export default class BedroomEnd extends Scene {
 
   private blackScreen: boolean;
 
+  private bedroomSounds: HTMLAudioElement;
+
+  private endSound: HTMLAudioElement;
+
   public constructor(maxX: number, maxY: number, level: number, lang: boolean) {
     super(maxX, maxY);
     this.lang = lang;
@@ -74,6 +78,8 @@ export default class BedroomEnd extends Scene {
     this.image1 = CanvasUtil.loadNewImage('./assets/bubble.png');
     this.playerHead = CanvasUtil.loadNewImage('./assets/TimmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
+    this.bedroomSounds = new Audio('./assets/audio/bedroom.mp3');
+    this.endSound = new Audio('./assets/audio/end.wav');
     if (!this.level1) {
       this.timeToText = 1000;
     } else {
@@ -186,16 +192,25 @@ export default class BedroomEnd extends Scene {
       this.player.move(66, 150);
     }
 
-    if (this.webpageScene === true) return new WebpageEnd(0, 0, this.lang);
+    if (this.webpageScene === true) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
+      return new WebpageEnd(0, 0, this.lang);
+    }
     this.timeToText -= elapsed;
 
     if (this.scene === 2) {
       this.antagonist.moveToPlayer(this.player, 0.3);
       if (this.player.collideWithAntagonist(this.antagonist)) {
+        this.endSound.play();
         this.blackScreen = true;
       }
 
       if (this.antagonist.getPosX() > this.backgroundWidth + this.dimensionsX + 500) {
+        this.bedroomSounds.pause();
+        this.bedroomSounds.currentTime = 0;
+        this.endSound.pause();
+        this.endSound.currentTime = 0;
         return new CreditScene(0, 0);
       }
     }
@@ -218,10 +233,10 @@ export default class BedroomEnd extends Scene {
    * @param canvas is html canvas element
    */
   public render(canvas: HTMLCanvasElement): void {
+    this.bedroomSounds.play();
     CanvasUtil.clearCanvas(canvas);
     CanvasUtil.fillCanvas(canvas, 'black');
     CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
-
     this.computer.render(canvas);
     if (this.scene === 1 && this.timeToText <= 0) {
       this.bedroomEndText.textEight(canvas, this.image1, this.trojanHead);
@@ -249,6 +264,8 @@ export default class BedroomEnd extends Scene {
     }
 
     if (this.blackScreen) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
       CanvasUtil.fillCanvas(canvas, 'black');
     }
   }

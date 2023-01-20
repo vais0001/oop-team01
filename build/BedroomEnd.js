@@ -29,6 +29,8 @@ export default class BedroomEnd extends Scene {
     moveLeft;
     circleRadius;
     blackScreen;
+    bedroomSounds;
+    endSound;
     constructor(maxX, maxY, level, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -55,6 +57,8 @@ export default class BedroomEnd extends Scene {
         this.image1 = CanvasUtil.loadNewImage('./assets/bubble.png');
         this.playerHead = CanvasUtil.loadNewImage('./assets/TimmyHead.png');
         this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
+        this.bedroomSounds = new Audio('./assets/audio/bedroom.mp3');
+        this.endSound = new Audio('./assets/audio/end.wav');
         if (!this.level1) {
             this.timeToText = 1000;
         }
@@ -156,15 +160,23 @@ export default class BedroomEnd extends Scene {
         if (this.buttonsPressed === 0) {
             this.player.move(66, 150);
         }
-        if (this.webpageScene === true)
+        if (this.webpageScene === true) {
+            this.bedroomSounds.pause();
+            this.bedroomSounds.currentTime = 0;
             return new WebpageEnd(0, 0, this.lang);
+        }
         this.timeToText -= elapsed;
         if (this.scene === 2) {
             this.antagonist.moveToPlayer(this.player, 0.3);
             if (this.player.collideWithAntagonist(this.antagonist)) {
+                this.endSound.play();
                 this.blackScreen = true;
             }
             if (this.antagonist.getPosX() > this.backgroundWidth + this.dimensionsX + 500) {
+                this.bedroomSounds.pause();
+                this.bedroomSounds.currentTime = 0;
+                this.endSound.pause();
+                this.endSound.currentTime = 0;
                 return new CreditScene(0, 0);
             }
         }
@@ -185,6 +197,7 @@ export default class BedroomEnd extends Scene {
         return null;
     }
     render(canvas) {
+        this.bedroomSounds.play();
         CanvasUtil.clearCanvas(canvas);
         CanvasUtil.fillCanvas(canvas, 'black');
         CanvasUtil.drawImage(canvas, this.image, this.dimensionsX, this.dimensionsY);
@@ -221,6 +234,8 @@ export default class BedroomEnd extends Scene {
             CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
         }
         if (this.blackScreen) {
+            this.bedroomSounds.pause();
+            this.bedroomSounds.currentTime = 0;
             CanvasUtil.fillCanvas(canvas, 'black');
         }
     }

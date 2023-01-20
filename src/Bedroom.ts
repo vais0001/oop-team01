@@ -61,6 +61,8 @@ export default class Bedroom extends Scene {
 
   private moveLeft: boolean;
 
+  private bedroomSounds: HTMLAudioElement;
+
   public constructor(maxX: number, maxY: number, level: number, lang: boolean) {
     super(maxX, maxY);
     this.lang = lang;
@@ -85,6 +87,7 @@ export default class Bedroom extends Scene {
     this.image1 = CanvasUtil.loadNewImage('./assets/bubble.png');
     this.playerHead = CanvasUtil.loadNewImage('./assets/TimmyHead.png');
     this.trojanHead = CanvasUtil.loadNewImage('./assets/trojanicon.png');
+    this.bedroomSounds = new Audio('./assets/audio/bedroom.mp3');
     if (!this.level1) {
       this.timeToText = 1000;
     } else {
@@ -204,29 +207,46 @@ export default class Bedroom extends Scene {
    * @returns true or false
    */
   public update(elapsed: number): Scene {
+    if (!this.level1) {
+      this.bedroomSounds.play();
+    }
     if (this.buttonsPressed === 0) {
       this.player.move(66, 150);
     }
     // cheat code to whackamole
     if (this.bossFightScene === true) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
       return new BossFight(window.innerWidth, window.innerHeight, this.lang);
     }
     if (this.cheatWhackamole === true) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
       return new Whackamole(window.innerWidth, window.innerHeight, this.lang);
     }
     if (this.cheatArrow === true) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
       return new ArrowThrower(window.innerWidth, window.innerHeight, this.lang);
     }
 
     if (this.cheatLoadingScreen === true) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
       return new WebpageEnd(0, 0, this.lang);
     }
 
     if (this.finalScene === true) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
       return new BedroomEnd(window.innerWidth, window.innerHeight, 0, this.lang);
     }
 
-    if (this.webpageScene === true) return new Webpage(0, 0, this.lang);
+    if (this.webpageScene === true) {
+      this.bedroomSounds.pause();
+      this.bedroomSounds.currentTime = 0;
+      return new Webpage(0, 0, this.lang);
+    }
     this.timeToText -= elapsed;
     if (this.scene === 3) return new LoadingSceneAT(this.maxX, this.maxY, this.lang);
 

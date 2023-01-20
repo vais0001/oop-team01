@@ -71,6 +71,14 @@ export default class BossFight extends Scene {
 
   private endingScene: boolean;
 
+  private backgroundSounds: HTMLAudioElement;
+
+  private bossHit: HTMLAudioElement;
+
+  private playerHit: HTMLAudioElement;
+
+  private spaceDown: boolean;
+
   public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
     this.lang = lang;
@@ -104,6 +112,10 @@ export default class BossFight extends Scene {
     this.endingScene = false;
     this.renderTextSix = false;
     this.bossFightText = new BossFightText(this.lang);
+    this.backgroundSounds = new Audio('./assets/audio/bossfight.mp3');
+    this.bossHit = new Audio('./assets/audio/bosshit.wav');
+    this.playerHit = new Audio('./assets/audio/timmyhit.mp3');
+    this.spaceDown = false;
   }
 
   /**
@@ -172,8 +184,9 @@ export default class BossFight extends Scene {
       } else {
         this.moveDown = false;
       }
-
+      this.spaceDown = false;
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+        this.spaceDown = true;
         if (this.abilityCount < 5) {
           this.lightsaberSide = 2;
           this.hit = true;
@@ -191,6 +204,7 @@ export default class BossFight extends Scene {
    * @returns true or false
    */
   public update(elapsed: number): Scene {
+    this.backgroundSounds.play();
     if (!this.endingScene && this.startingCutscene <= 0) {
       this.playerShoot -= elapsed;
       if (this.abilityCount > 3) {
@@ -202,6 +216,9 @@ export default class BossFight extends Scene {
       // colission for bullets
       this.bullets = this.bullets.filter((item: ShootingAbility) => {
         if (this.player.collideWithBullet(item)) {
+          this.playerHit.pause();
+          this.playerHit.currentTime = 0;
+          this.playerHit.play();
           this.lives.pop();
           return false;
         }
@@ -209,6 +226,8 @@ export default class BossFight extends Scene {
       });
 
       if (this.lives.length === 0) {
+        this.backgroundSounds.pause();
+        this.backgroundSounds.currentTime = 0;
         return new Gameover(0, 0, 'boss', this.lang);
       }
 
@@ -357,6 +376,9 @@ export default class BossFight extends Scene {
       this.xBullets = this.xBullets.filter((item: Xbullets) => {
         if (this.antagonist.collidesWithBullet(item)) {
           this.healthBar -= 10;
+          this.bossHit.pause();
+          this.bossHit.currentTime = 0;
+          this.bossHit.play();
           return false;
         } return true;
       });
@@ -365,6 +387,11 @@ export default class BossFight extends Scene {
         && this.lightsaber.collidesWithAntagonist(this.antagonist)
         && this.healthBar > 0
         && this.abilityCount < 5) {
+        if (this.spaceDown) {
+          this.bossHit.pause();
+          this.bossHit.currentTime = 0;
+          this.bossHit.play();
+        }
         this.healthBar -= 0.1;
       }
 
@@ -393,8 +420,19 @@ export default class BossFight extends Scene {
 
     if (this.nextText >= 1003) {
       this.circleRadius += elapsed * 0.6;
-      if (this.circleRadius > 1400) return new BedroomEnd(0, 0, 0, this.lang);
+      if (this.circleRadius > 1400) {
+        this.backgroundSounds.pause();
+        this.backgroundSounds.currentTime = 0;
+        return new BedroomEnd(0, 0, 0, this.lang);
+      }
     }
+    this.xBullets.forEach((item: Xbullets) => {
+      if (this.antagonist.collidesWithBullet(item) && this.spaceDown) {
+        this.bossHit.pause();
+        this.bossHit.currentTime = 0;
+        this.bossHit.play();
+      }
+    });
 
     if (this.healthBar === 0) this.bullets = [];
     return null;
