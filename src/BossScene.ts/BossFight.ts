@@ -414,7 +414,9 @@ export default class BossFight extends Scene {
       this.healthBar = 1;
       this.bullets = [];
       this.xBullets = [];
-      this.nextText = 1000;
+      setTimeout(() => {
+        this.nextText = 1000;
+      }, 700);
     }
 
     if (this.nextText >= 1003) {
