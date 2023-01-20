@@ -98,7 +98,7 @@ export default class Whackamole extends Scene {
    * @param mouseListener is a mouse input
    */
   public processInput(keyListener: KeyListener, mouseListener: MouseListener): void {
-    if (this.nextText >= 2) {
+    if (this.nextText >= 2 && this.enemiesLeft > 0) {
       if (keyListener.keyPressed(KeyListener.KEY_97)) this.wormSmash(1);
       if (keyListener.keyPressed(KeyListener.KEY_98)) this.wormSmash(2);
       if (keyListener.keyPressed(KeyListener.KEY_99)) this.wormSmash(3);
