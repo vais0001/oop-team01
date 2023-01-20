@@ -131,7 +131,8 @@ export default class BossFight extends Scene {
     if (!this.endingScene && this.startingCutscene <= 0) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 25) {
-        if (keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA')) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))
+          && !(keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))) {
           this.player.move(0, 50);
           this.buttonsPressed += 1;
           this.lightsaber.changeImage('./assets/lightsaber1.png');
@@ -146,7 +147,8 @@ export default class BossFight extends Scene {
       }
 
       if (this.player.getPosY() + this.player.getHeight() > this.dimensionsY + 220) {
-        if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))
+          && !(keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))) {
           this.player.move(1, 50);
           this.buttonsPressed += 1;
           this.moveUp = true;
@@ -158,7 +160,8 @@ export default class BossFight extends Scene {
       }
 
       if (this.player.getPosX() < this.dimensionsX + this.backgroundWidth - 105) {
-        if (keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD')) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_RIGHT) || keyListener.isKeyDown('KeyD'))
+          && !(keyListener.isKeyDown(KeyListener.KEY_LEFT) || keyListener.isKeyDown('KeyA'))) {
           this.player.move(2, 50);
           this.buttonsPressed += 1;
           this.lightsaber.changeImage('./assets/lightsaber.png');
@@ -173,7 +176,8 @@ export default class BossFight extends Scene {
       }
 
       if (this.player.getPosY() + this.player.getHeight() < this.dimensionsY + this.backgroundHeight - 25) {
-        if (keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS')) {
+        if ((keyListener.isKeyDown(KeyListener.KEY_DOWN) || keyListener.isKeyDown('KeyS'))
+          && !(keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW'))) {
           this.player.move(3, 50);
           this.buttonsPressed += 1;
           this.moveDown = true;
