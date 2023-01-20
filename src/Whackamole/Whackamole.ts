@@ -159,7 +159,7 @@ export default class Whackamole extends Scene {
     this.backgroundSounds.play();
     this.player.move(66, 150);
     this.player.changePlayerDirection();
-    if (this.nextText < 2) {
+    if (this.nextText < 2 && this.nextText >= 0) {
       if (this.player.getPosX() < this.dimensionsX + 1300) {
         this.player.cutsceneMovement(elapsed);
       }
@@ -252,7 +252,7 @@ export default class Whackamole extends Scene {
       this.enemiesLeft = -1;
       this.antagonist.moveToPlayer(this.player, 0.8);
       if (this.antagonist.getPosX() >= this.player.getPosX()) {
-        this.antagonist.cutsceneMovementAway(-2, 0);
+        this.antagonist.moveToPlayer(this.player, -3);
         this.player.moveAway(-2, 0);
       }
     }

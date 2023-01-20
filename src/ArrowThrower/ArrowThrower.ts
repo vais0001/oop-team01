@@ -160,12 +160,14 @@ export default class ArrowThrower extends Scene {
       this.antagonist.cutsceneMovementAway(0, -3);
     }
 
-    if (this.moveDown) {
-      this.player.moveDown(elapsed);
-    }
+    if (this.score < 205) {
+      if (this.moveDown) {
+        this.player.moveDown(elapsed);
+      }
 
-    if (this.moveUp) {
-      this.player.moveUp(elapsed);
+      if (this.moveUp) {
+        this.player.moveUp(elapsed);
+      }
     }
 
     if (this.nextText > 3 && this.score < 205) {
