@@ -54,7 +54,7 @@ export default class WebpageEnd extends Scene {
             this.nextColor = 200;
         }
         if (this.downloading) {
-            this.loadingBar += elapsed * 0.5;
+            this.loadingBar += elapsed * 0.1;
         }
         if (this.loadingBar > 300) {
             this.loadingBar = 301;
