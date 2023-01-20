@@ -59,6 +59,16 @@ export default class ArrowThrower extends Scene {
 
   private buttonsPressed: number;
 
+  private hitAd: HTMLAudioElement;
+
+  private shoot: HTMLAudioElement;
+
+  private backgroundSounds: HTMLAudioElement;
+
+  private powerup: HTMLAudioElement;
+
+  private playerHit: HTMLAudioElement;
+
   public constructor(maxX: number, maxY: number, lang: boolean) {
     super(maxX, maxY);
     this.lang = lang;
@@ -82,12 +92,16 @@ export default class ArrowThrower extends Scene {
     this.buttonsPressed = 0;
     this.moveDown = false;
     this.moveUp = false;
-
+    this.hitAd = new Audio('./assets/audio/adhit.mp3');
+    this.shoot = new Audio('./assets/audio/lasershoot.wav');
+    this.powerup = new Audio('./assets/audio/powerup.wav');
+    this.backgroundSounds = new Audio('./assets/audio/arrowthrower.mp3');
     for (let i = 0; i < 250; i += 50) {
       this.lives.push(new Lives(this.dimensionsX - 40, 250 + i + this.dimensionsY));
     }
 
     this.player.changePlayerDirection();
+    this.playerHit = new Audio('./assets/audio/timmyhit.mp3');
   }
 
   /**
@@ -96,6 +110,7 @@ export default class ArrowThrower extends Scene {
    * @returns nothing
    */
   public processInput(keyListener: KeyListener): void {
+    this.backgroundSounds.play();
     this.buttonsPressed = 0;
     if (this.nextText > 3 && this.score < 205) {
       if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
@@ -117,6 +132,7 @@ export default class ArrowThrower extends Scene {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
         if (this.bullet.getPosX() < this.dimensionsX) {
           this.bullet = new CursorBullet(this.player.getPosX(), this.player.getPosY() + (this.player.getHeight() / 2) - 5);
+          this.shoot.play();
         }
       }
     }
@@ -194,6 +210,7 @@ export default class ArrowThrower extends Scene {
 
       this.heartPowerup = this.heartPowerup.filter((heartPowerup: HeartPowerup) => {
         if (this.player.isCollidingHeart(heartPowerup)) {
+          this.powerup.play();
           if (this.lives.length === 5) this.lives.push(new Lives(this.dimensionsX - 40, 500 + this.dimensionsY));
           if (this.lives.length === 4) this.lives.push(new Lives(this.dimensionsX - 40, 450 + this.dimensionsY));
           if (this.lives.length === 3) this.lives.push(new Lives(this.dimensionsX - 40, 400 + this.dimensionsY));
@@ -226,17 +243,24 @@ export default class ArrowThrower extends Scene {
         if (this.bullet.isCollidingAD(item)) {
           this.bullet = new CursorBullet(0 - this.bullet.getWidth(), 0 - this.bullet.getHeight());
           this.score += 5;
+          this.hitAd.play();
           return false;
         }
 
         if (item.getPosX() <= this.player.getPosX()) {
           if (this.player.isCollidingAD(item)) {
+            this.playerHit.pause();
+            this.playerHit.currentTime = 0;
+            this.playerHit.play();
             this.lives.pop();
             return false;
           }
         }
 
         if (this.computer.isCollidingAD(item)) {
+          this.playerHit.pause();
+          this.playerHit.currentTime = 0;
+          this.playerHit.play();
           this.lives.pop();
           return false;
         }
@@ -246,6 +270,9 @@ export default class ArrowThrower extends Scene {
 
       this.adBullets = this.adBullets.filter((item: ADbullet) => {
         if (this.player.isCollidingBullet(item)) {
+          this.playerHit.pause();
+          this.playerHit.currentTime = 0;
+          this.playerHit.play();
           this.lives.pop();
           return false;
         }
@@ -270,6 +297,8 @@ export default class ArrowThrower extends Scene {
       });
 
       if (this.lives.length === 0) {
+        this.backgroundSounds.pause();
+        this.backgroundSounds.currentTime = 0;
         return new Gameover(0, 0, 'arrow', this.lang);
       }
     }
@@ -287,6 +316,8 @@ export default class ArrowThrower extends Scene {
     }
 
     if (this.player.getPosX() < this.backgroundWidth - 2000) {
+      this.backgroundSounds.pause();
+      this.backgroundSounds.currentTime = 0;
       return new LoadingSceneWM(window.innerWidth, window.innerHeight, this.lang);
     }
 

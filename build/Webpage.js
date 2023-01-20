@@ -10,6 +10,8 @@ export default class Webpage extends Scene {
     downloadedTime;
     flickeringTime;
     locale;
+    click;
+    virusDownloadSound;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -19,6 +21,8 @@ export default class Webpage extends Scene {
         this.loadingBar = 0;
         this.downloadedTime = 1700;
         this.flickeringTime = 0;
+        this.click = new Audio('./assets/audio/mouseclick.mp3');
+        this.virusDownloadSound = new Audio('./assets/audio/download.mp3');
         if (lang === true) {
             this.locale = new Locale('nl');
         }
@@ -28,6 +32,7 @@ export default class Webpage extends Scene {
     }
     processInput(keyListener) {
         if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+            this.click.play();
             this.downloading = true;
         }
     }
@@ -37,7 +42,7 @@ export default class Webpage extends Scene {
             this.flickeringTime = 0;
         }
         if (this.downloading) {
-            this.loadingBar += elapsed * 8;
+            this.loadingBar += elapsed * 0.1;
         }
         if (this.loadingBar > 300) {
             this.loadingBar = 301;
@@ -70,6 +75,7 @@ export default class Webpage extends Scene {
             CanvasUtil.drawRectangle(canvas, canvas.width / 2 - 150, this.dimensionsY + 550, 301, 30, 'black');
         }
         if (this.loadingBar > 300) {
+            this.virusDownloadSound.play();
             CanvasUtil.fillRectangle(canvas, this.dimensionsX + 580, this.dimensionsY + 500, 260, 150, 'white');
             CanvasUtil.writeTextToCanvas(canvas, this.locale.trans('DOWNLOADED'), canvas.width / 2, this.dimensionsY + 530, 'center', 'kongtext', 25, 'red');
             CanvasUtil.fillRectangle(canvas, canvas.width / 2 - 150, this.dimensionsY + 550, this.loadingBar, 30, 'green');

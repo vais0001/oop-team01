@@ -27,6 +27,9 @@ export default class Whackamole extends Scene {
     lastValues = [];
     virusPushed;
     pressedonetime;
+    backgroundSounds;
+    splatSound;
+    playerHit;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -49,6 +52,9 @@ export default class Whackamole extends Scene {
         this.lastValues = [];
         this.virusPushed = false;
         this.pressedonetime = false;
+        this.backgroundSounds = new Audio('./assets/audio/whackaworm.mp3');
+        this.splatSound = new Audio('./assets/audio/adhit.mp3');
+        this.playerHit = new Audio('./assets/audio/timmyhit.mp3');
     }
     wormSmash(value) {
         this.value = value;
@@ -59,9 +65,15 @@ export default class Whackamole extends Scene {
                 }
             });
             if (i === this.holes.length - 1 && this.checkIfCorrect === 0) {
+                this.playerHit.pause();
+                this.playerHit.currentTime = 0;
+                this.playerHit.play();
                 this.lives.pop();
             }
             if (i === this.holes.length - 1 && this.checkIfCorrect === 1) {
+                this.splatSound.pause();
+                this.splatSound.currentTime = 0;
+                this.splatSound.play();
                 this.checkIfCorrect = 0;
             }
         }
@@ -93,11 +105,17 @@ export default class Whackamole extends Scene {
                         this.deadWormArray.push(new Viruses(virus.getValue()));
                         this.enemiesLeft -= 1;
                         this.pressedonetime = true;
+                        this.splatSound.pause();
+                        this.splatSound.currentTime = 0;
+                        this.splatSound.play();
                         return false;
                     }
                     return true;
                 });
                 if (!(this.pressedonetime)) {
+                    this.playerHit.pause();
+                    this.playerHit.currentTime = 0;
+                    this.playerHit.play();
                     this.lives.pop();
                 }
             }
@@ -108,6 +126,7 @@ export default class Whackamole extends Scene {
         }
     }
     update(elapsed) {
+        this.backgroundSounds.play();
         this.player.move(66, 150);
         this.player.changePlayerDirection();
         if (this.nextText < 2) {
@@ -133,6 +152,8 @@ export default class Whackamole extends Scene {
                 this.deadWormArray[i].subtractPosX();
             }
             if (this.lives.length === 0) {
+                this.backgroundSounds.pause();
+                this.backgroundSounds.currentTime = 0;
                 return new Gameover(0, 0, 'whack', this.lang);
             }
             this.holes = this.holes.filter((item) => {
@@ -206,6 +227,8 @@ export default class Whackamole extends Scene {
             }
         }
         if (this.player.getPosX() <= this.dimensionsX - 2000) {
+            this.backgroundSounds.pause();
+            this.backgroundSounds.currentTime = 0;
             return new LoadingSceneBF(window.innerWidth, window.innerHeight, this.lang);
         }
         return null;

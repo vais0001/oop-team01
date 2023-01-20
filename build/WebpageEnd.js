@@ -9,6 +9,8 @@ export default class WebpageEnd extends Scene {
     downloadedTime;
     randomColor;
     nextColor;
+    winSound;
+    firstWinSound;
     constructor(maxX, maxY, lang) {
         super(maxX, maxY);
         this.lang = lang;
@@ -19,13 +21,17 @@ export default class WebpageEnd extends Scene {
         this.downloadedTime = 1700;
         this.nextColor = 200;
         this.randomColor = '';
+        this.winSound = new Audio('./assets/audio/winning.mp3');
+        this.firstWinSound = new Audio('./assets/audio/instawin.mp3');
     }
     processInput(keyListener) {
         if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+            this.winSound.play();
             this.downloading = true;
         }
     }
     update(elapsed) {
+        this.firstWinSound.play();
         function getRandomColor() {
             const letters = '0123456789ABCDEF';
             let color = '#';
@@ -50,6 +56,8 @@ export default class WebpageEnd extends Scene {
             }
         }
         if (this.newLevel === true) {
+            this.firstWinSound.pause();
+            this.firstWinSound.currentTime = 0;
             return new BedroomEnd(0, 0, 1, this.lang);
         }
         return null;
