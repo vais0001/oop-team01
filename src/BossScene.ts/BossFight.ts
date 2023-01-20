@@ -76,7 +76,7 @@ export default class BossFight extends Scene {
     this.lang = lang;
     this.image = CanvasUtil.loadNewImage('./assets/finalboss.png');
     this.player = new Player(this.dimensionsX + 200, this.dimensionsY + 500);
-    this.antagonist = new Antagonist(1050, 90);
+    this.antagonist = new Antagonist(1150, 90);
     this.abilityShoot = false;
     this.talker = CanvasUtil.loadNewImage('./assets/trojanicon.png');
     this.bubble = CanvasUtil.loadNewImage('./assets/bubble.png');
@@ -273,6 +273,7 @@ export default class BossFight extends Scene {
         if (this.abilityShoot === true) {
           if (this.bulletsTimer <= 0) {
             this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 5, 0, 0));
+            this.bullets.push(new ShootingAbility(this.antagonist.getPosX() + 100, this.antagonist.getPosY() + 100, 7, 0, 0));
             this.bulletsTimer = 500;
           }
         }
