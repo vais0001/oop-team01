@@ -110,6 +110,13 @@ export default class BossFight extends Scene {
    * @param keyListener input key
    */
   public processInput(keyListener: KeyListener): void {
+    if (this.endingScene || this.startingCutscene > 0) {
+      if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
+        this.nextText += 1;
+        console.log(this.nextText)
+      }
+    }
+
     if (!this.endingScene && this.startingCutscene <= 0) {
       this.buttonsPressed = 0;
       if (this.player.getPosX() > this.dimensionsX + 25) {
@@ -177,8 +184,6 @@ export default class BossFight extends Scene {
         }
       }
     }
-
-    if (keyListener.keyPressed(KeyListener.KEY_SPACE)) this.nextText += 1;
   }
 
   /**
@@ -377,8 +382,15 @@ export default class BossFight extends Scene {
       }
     }
 
-    if (this.healthBar < 0) {
+    if (this.healthBar <= 0) {
       this.endingScene = true;
+      this.healthBar = 1;
+      this.bullets = [];
+      this.xBullets = [];
+      this.nextText = 1000;
+    }
+
+    if (this.nextText >= 1003) {
       this.circleRadius += elapsed * 0.6;
       if (this.circleRadius > 1400) return new BedroomEnd(0, 0, 0, this.lang);
     }
@@ -403,12 +415,18 @@ export default class BossFight extends Scene {
     }
     CanvasUtil.fillRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, this.healthBar, 40, 'red');
     CanvasUtil.drawRectangle(canvas, this.dimensionsX + 390, this.dimensionsY + 80, 650, 40, 'black');
-    if (this.healthBar < 600) {
+    if (this.nextText >= 1003) {
       CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.circleRadius, 'black');
     }
     this.xBullets.forEach((item: Xbullets) => {
       item.render(canvas);
     });
+
+    if (this.endingScene) {
+      if (this.nextText === 1000) this.bossFightText.textTwelve(canvas, this.bubble, this.talker);
+      if (this.nextText === 1001) this.bossFightText.textThirteen(canvas, this.bubble, this.talker);
+      if (this.nextText === 1002) this.bossFightText.textFourteen(canvas, this.bubble, this.talker);
+    }
 
     if (this.startingCutscene > 0) {
       CanvasUtil.fillCircle(canvas, canvas.width / 2, canvas.height / 2, this.startingCutscene, 'black');
@@ -419,7 +437,7 @@ export default class BossFight extends Scene {
       if (this.nextText === 4) this.bossFightText.textFive(canvas, this.bubble, this.talker);
     }
 
-    if (this.healthBar < 0) {
+    if (this.healthBar > 3 && this.healthBar < 20) {
       this.bossFightText.textSeven(canvas, this.bubble, this.talker);
     } else if (this.healthBar > 40 && this.healthBar < 80) {
       this.bossFightText.textEight(canvas, this.bubble, this.talker);
@@ -429,10 +447,6 @@ export default class BossFight extends Scene {
       this.bossFightText.textTen(canvas, this.bubble, this.talker);
     } else if (this.healthBar > 540 && this.healthBar < 580) {
       this.bossFightText.textEleven(canvas, this.bubble, this.talker);
-    }
-
-    if (this.endingScene) {
-      // this.bossFightText.textTwelve(canvas, this.bubble, this.talker);
     }
 
     if (this.renderTextSix) {
