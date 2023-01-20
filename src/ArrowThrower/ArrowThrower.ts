@@ -151,7 +151,7 @@ export default class ArrowThrower extends Scene {
    * @returns returns true or false
    */
   public update(elapsed: number): Scene {
-    if (this.nextText < 4) {
+    if (this.nextText < 4 && this.nextText >= 0) {
       if (this.player.getPosX() < this.dimensionsX + 1300) {
         this.player.cutsceneMovement(elapsed);
       }
@@ -311,7 +311,7 @@ export default class ArrowThrower extends Scene {
 
     if (this.antagonist.getPosX() > this.player.getPosX()) {
       this.nextText = -10;
-      this.antagonist.cutsceneMovementAway(-2, 0);
+      this.antagonist.moveToPlayer(this.player, -4);
       this.player.moveAway(-2, 0);
     }
 
