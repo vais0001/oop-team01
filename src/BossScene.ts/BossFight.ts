@@ -113,7 +113,7 @@ export default class BossFight extends Scene {
     if (this.endingScene || this.startingCutscene > 0) {
       if (keyListener.keyPressed(KeyListener.KEY_SPACE)) {
         this.nextText += 1;
-        console.log(this.nextText)
+        console.log(this.nextText);
       }
     }
 
