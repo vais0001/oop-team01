@@ -222,9 +222,11 @@ export default class Whackamole extends Scene {
             this.enemiesLeft = -1;
             this.antagonist.moveToPlayer(this.player, 0.8);
             if (this.antagonist.getPosX() >= this.player.getPosX()) {
+                this.enemiesLeft = -2;
                 this.antagonist.moveToPlayer(this.player, -3);
-                this.player.moveAway(-2, 0);
             }
+            if (this.enemiesLeft === -2)
+                this.player.moveAway(-2, 0);
         }
         if (this.player.getPosX() <= this.dimensionsX - 2000) {
             this.backgroundSounds.pause();
