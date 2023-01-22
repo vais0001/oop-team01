@@ -6,13 +6,9 @@ import KeyListener from './KeyListener.js';
 import Player from './Player.js';
 import Scene from './Scene.js';
 import Webpage from './Webpage.js';
-import ArrowThrower from './ArrowThrower/ArrowThrower.js';
-import Whackamole from './Whackamole/Whackamole.js';
 import LoadingSceneAT from './LoadingScenes/LoadingSceneArrowThrower.js';
 import Text from './Text.js';
-import BossFight from './BossScene.ts/BossFight.js';
 import BedroomEnd from './BedroomEnd.js';
-import WebpageEnd from './WebpageEnd.js';
 export default class Bedroom extends Scene {
     player;
     computer;
@@ -23,10 +19,7 @@ export default class Bedroom extends Scene {
     antagonist;
     scene;
     timeToText;
-    cheatWhackamole;
     finalScene;
-    cheatArrow;
-    cheatLoadingScreen;
     nextText;
     playerHead;
     trojanHead;
@@ -71,9 +64,6 @@ export default class Bedroom extends Scene {
         else {
             this.timeToText = 1500;
         }
-        this.cheatWhackamole = false;
-        this.cheatArrow = false;
-        this.cheatLoadingScreen = false;
         this.finalScene = false;
         this.nextText = 0;
         this.text = new Text(this.lang);
@@ -166,16 +156,6 @@ export default class Bedroom extends Scene {
             if (keyListener.keyPressed(KeyListener.KEY_SPACE))
                 this.nextText += 1;
         }
-        if (keyListener.keyPressed(KeyListener.KEY_1))
-            this.cheatWhackamole = true;
-        if (keyListener.keyPressed(KeyListener.KEY_2))
-            this.cheatArrow = true;
-        if (keyListener.keyPressed(KeyListener.KEY_3))
-            this.bossFightScene = true;
-        if (keyListener.keyPressed(KeyListener.KEY_4))
-            this.cheatLoadingScreen = true;
-        if (keyListener.keyPressed(KeyListener.KEY_5))
-            this.finalScene = true;
     }
     update(elapsed) {
         if (!this.level1) {
@@ -183,26 +163,6 @@ export default class Bedroom extends Scene {
         }
         if (this.buttonsPressed === 0) {
             this.player.move(66, 150);
-        }
-        if (this.bossFightScene === true) {
-            this.bedroomSounds.pause();
-            this.bedroomSounds.currentTime = 0;
-            return new BossFight(window.innerWidth, window.innerHeight, this.lang);
-        }
-        if (this.cheatWhackamole === true) {
-            this.bedroomSounds.pause();
-            this.bedroomSounds.currentTime = 0;
-            return new Whackamole(window.innerWidth, window.innerHeight, this.lang);
-        }
-        if (this.cheatArrow === true) {
-            this.bedroomSounds.pause();
-            this.bedroomSounds.currentTime = 0;
-            return new ArrowThrower(window.innerWidth, window.innerHeight, this.lang);
-        }
-        if (this.cheatLoadingScreen === true) {
-            this.bedroomSounds.pause();
-            this.bedroomSounds.currentTime = 0;
-            return new WebpageEnd(0, 0, this.lang);
         }
         if (this.finalScene === true) {
             this.bedroomSounds.pause();
