@@ -73,7 +73,7 @@ export default class ArrowThrower extends Scene {
     processInput(keyListener) {
         this.backgroundSounds.play();
         this.buttonsPressed = 0;
-        if (this.nextText > 3 && this.score < 205) {
+        if (this.nextText > 3 && this.score < 155) {
             if (keyListener.isKeyDown(KeyListener.KEY_UP) || keyListener.isKeyDown('KeyW')) {
                 this.moveUp = true;
                 this.player.move(0, 150);
@@ -114,7 +114,7 @@ export default class ArrowThrower extends Scene {
         else if (this.score < 10) {
             this.antagonist.cutsceneMovementAway(0, -3);
         }
-        if (this.score < 205) {
+        if (this.score < 155) {
             if (this.moveDown) {
                 this.player.moveDown(elapsed);
             }
@@ -122,7 +122,7 @@ export default class ArrowThrower extends Scene {
                 this.player.moveUp(elapsed);
             }
         }
-        if (this.nextText > 3 && this.score < 205) {
+        if (this.nextText > 3 && this.score < 155) {
             if (this.buttonsPressed === 0) {
                 this.player.move(66, 150);
             }
@@ -245,10 +245,10 @@ export default class ArrowThrower extends Scene {
                 return new Gameover(0, 0, 'arrow', this.lang);
             }
         }
-        if (this.score === 200) {
+        if (this.score === 150) {
             this.antagonist = new Antagonist(this.backgroundWidth - 800, this.backgroundHeight - 700);
         }
-        else if (this.score === 205) {
+        else if (this.score === 155) {
             this.antagonist.moveToPlayer(this.player, 0.8);
         }
         if (this.antagonist.getPosX() >= this.player.getPosX()) {
@@ -294,7 +294,7 @@ export default class ArrowThrower extends Scene {
         else if (this.score >= 50 && this.score < 65) {
             this.arrowThrowerText.textSix(canvas, this.bubble, this.trojanHead);
         }
-        else if (this.score >= 200) {
+        else if (this.score >= 150) {
             this.arrowThrowerText.textSeven(canvas, this.bubble, this.trojanHead);
         }
     }
